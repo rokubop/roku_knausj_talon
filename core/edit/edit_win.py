@@ -80,10 +80,12 @@ class EditActions:
         actions.key("shift-up")
 
     def extend_word_left():
-        actions.key("ctrl-shift-left")
+        # actions.key("ctrl-shift-left")
+        actions.key("alt-shift-left")
 
     def extend_word_right():
-        actions.key("ctrl-shift-right")
+        # actions.key("ctrl-shift-right")
+        actions.key("alt-shift-right")
 
     def file_end():
         actions.key("ctrl-end")
@@ -176,10 +178,12 @@ class EditActions:
         actions.key("up")
 
     def word_left():
-        actions.key("ctrl-left")
+        # actions.key("ctrl-left")
+        actions.key("alt-left")
 
     def word_right():
-        actions.key("ctrl-right")
+        # actions.key("ctrl-right")
+        actions.key("alt-right")
 
     def zoom_in():
         actions.key("ctrl-+")

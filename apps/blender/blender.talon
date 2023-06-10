@@ -1,0 +1,23 @@
+app: blender
+mode: command
+-
+focus: key(keypad_decimal)
+timeline: key(shift-f12)
+dope sheet: key(shift-f12)
+shader: key(shift-f3)
+material: key(shift-f3)
+set camera: key(ctrl-alt-keypad_0)
+view cam: key(keypad_0)
+view top: key(keypad_7)
+view side: key(keypad_3)
+view front: key(keypad_1)
+object: key(ctrl-alt-o)
+graph: key(shift-f6)
+cam: key(keypad_0)
+(record | record) animation: key(ctrl-f12)
+record dog: key(ctrl-alt-r)
+start: key(shift-left)
+play: key(space)
+end: key(shift-right)
+stop: key(space)
+record: key(ctrl-alt-r)

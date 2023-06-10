@@ -1,0 +1,32 @@
+{
+    "dataclass": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "python"
+                    ]
+                },
+                "body": [
+                    "from dataclasses import dataclass",
+                    "@dataclass",
+                    "class $name:",
+                    "\t$body"
+                ]
+            }
+        ],
+        "description": "Python data class",
+        "variables": {
+            "name": {
+                "formatter": "pascalCase"
+            },
+            "body": {}
+        },
+        "insertionScopeTypes": [
+            "class",
+            "namedFunction",
+            "statement",
+            "line"
+        ]
+    }
+}
