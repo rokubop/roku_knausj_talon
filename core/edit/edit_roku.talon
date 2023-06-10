@@ -53,3 +53,10 @@ cut lefter:
 cut righter:
     edit.extend_word_right()
     edit.cut()
+
+# Other
+pour: edit.line_insert_down()
+drink: edit.line_insert_up()
+disk: edit.save()
+disk all: edit.save_all()
+nope: edit.undo()
