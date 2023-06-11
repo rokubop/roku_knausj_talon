@@ -1,6 +1,6 @@
 tag: browser
 -
-address bar | go address | go url: browser.focus_address()
+address bar | go address | go url | focus url: browser.focus_address()
 go page | page focus: browser.focus_page()
 address copy | url copy | copy address | copy url:
     browser.focus_address()
