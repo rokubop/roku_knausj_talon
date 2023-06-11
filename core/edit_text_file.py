@@ -24,11 +24,14 @@ _csvs = {
         "unix utilities": "unix_utilities.csv",
         "websites": "websites.csv",
         "words to replace": "words_to_replace.csv",
+        # roku additions
+        "paths": "system_paths.csv",
+        "words": "additional_words.csv",
+        "bookmarks": "websites.csv",
     }.items()
 }
 _csvs["homophones"] = os.path.join(REPO_DIR, "core", "homophones", "homophones.csv")
 ctx.lists["self.talon_settings_csv"] = _csvs
-
 
 @mod.action_class
 class ModuleActions:
@@ -49,7 +52,8 @@ class WinActions:
         # of file, 'edit' will fail, but 'open' always gives the user a
         # choice between applications.
         try:
-            os.startfile(path, "edit")
+            # os.startfile(path, "edit")
+            os.startfile(path, "code")
         except OSError:
             os.startfile(path, "open")
 

@@ -18,3 +18,9 @@ snap <user.running_applications> <user.window_snap_position>:
     user.snap_app(running_applications, window_snap_position)
 snap <user.running_applications> [screen] <number>:
     user.move_app_to_screen(running_applications, number)
+
+# roku additions
+window (max | maximize): user.window_maximize()
+maximize window: user.window_maximize()
+maximize: user.window_maximize()
+[window] restore: user.window_restore()
