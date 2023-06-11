@@ -289,121 +289,121 @@ fold six: user.vscode("editor.foldLevel6")
 fold seven: user.vscode("editor.foldLevel7")
 
 # Git / Github (not using verb-noun-adjective pattern, mirroring terminal commands.)
-git branch: user.vscode("git.branchFrom")
-git branch this: user.vscode("git.branch")
-<user.show_list> branch [<user.text>] [over]:
-    user.vscode("git.checkout")
-    sleep(50ms)
-    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-branch make [<user.text>] [over]:
-    user.vscode("git.checkout")
-    sleep(50ms)
-    "pokey/"
-    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-<user.teleport> branch {user.git_branch}:
-    user.vscode("git.checkout")
-    sleep(450ms)
-    "{git_branch}"
-    key(enter)
-    sleep(500ms)
-git rebase [<user.text>] [over]:
-    user.vscode("git.rebase")
-    sleep(50ms)
-    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-git rebase {user.git_branch}:
-    user.vscode("git.rebase")
-    sleep(50ms)
-    "{git_branch}"
-    key(enter)
-    sleep(250ms)
-git commit [<user.prose>]$: user.git_commit(prose or "")
-git commit [<user.prose>] over: user.git_commit(prose or "")
-git commit <user.prose> disclose:
-    user.git_commit(prose or "")
-    edit.save()
-    sleep(150ms)
-    app.tab_close()
-    sleep(250ms)
-disk git commit [<user.prose>]$:
-    key(esc:5)
-    edit.save()
-    sleep(1500ms)
-    user.git_commit(prose or "")
-disk git commit [<user.prose>] over:
-    key(esc:5)
-    edit.save()
-    sleep(1500ms)
-    user.git_commit(prose or "")
-disk git commit <user.prose> disclose:
-    key(esc:5)
-    edit.save()
-    sleep(1500ms)
-    user.git_commit(prose or "")
-    edit.save()
-    sleep(150ms)
-    app.tab_close()
-    sleep(250ms)
-git stash [<user.prose>] [over]:
-    user.vscode("git.stash")
-    sleep(100ms)
-    user.insert_formatted(prose or "", "CAPITALIZE_FIRST_WORD")
-git branches: user.vscode("gitlens.views.branches.focus")
-git commit undo: user.vscode("git.undoCommit")
-git diff: user.vscode("git.openChange")
-git fetch: user.vscode("git.fetch")
-git fetch all: user.vscode("git.fetchAll")
-git ignore: user.vscode("git.ignore")
-git merge: user.vscode("git.merge")
-git output: user.vscode("git.showOutput")
-git pull: user.vscode("git.pullRebase")
-git push:
-    sleep(100ms)
-    user.vscode("git.push")
-git push focus: user.vscode("git.pushForce")
-git rebase abort: user.vscode("git.rebaseAbort")
-git reveal: user.vscode("git.revealInExplorer")
-git revert: user.vscode("git.revertChange")
-git stash: user.vscode("git.stash")
-git stash pop: user.vscode("git.stashPop")
-git status: user.vscode("workbench.scm.focus")
-git stage: user.vscode("git.stage")
-git stage oliver: user.vscode("git.stageAll")
-git stage all merge: user.vscode("git.stageAllMerge")
-git unstage: user.vscode("git.unstage")
-git unstage all: user.vscode("git.unstageAll")
-git sync: user.vscode("git.sync")
-git a mend:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git amend")
-git reword:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git reword")
-git push force:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git push force")
-git update main:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git update main")
-git commit empty:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git commit empty")
-git continue:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git imerge continue")
-git full continue:
-    user.vscode("git.stageAllMerge")
-    user.git_commit(prose or "")
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git imerge continue")
+# git branch: user.vscode("git.branchFrom")
+# git branch this: user.vscode("git.branch")
+# <user.show_list> branch [<user.text>] [over]:
+#     user.vscode("git.checkout")
+#     sleep(50ms)
+#     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+# branch make [<user.text>] [over]:
+#     user.vscode("git.checkout")
+#     sleep(50ms)
+#     "pokey/"
+#     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+# <user.teleport> branch {user.git_branch}:
+#     user.vscode("git.checkout")
+#     sleep(450ms)
+#     "{git_branch}"
+#     key(enter)
+#     sleep(500ms)
+# git rebase [<user.text>] [over]:
+#     user.vscode("git.rebase")
+#     sleep(50ms)
+#     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+# git rebase {user.git_branch}:
+#     user.vscode("git.rebase")
+#     sleep(50ms)
+#     "{git_branch}"
+#     key(enter)
+#     sleep(250ms)
+# git commit [<user.prose>]$: user.git_commit(prose or "")
+# git commit [<user.prose>] over: user.git_commit(prose or "")
+# git commit <user.prose> disclose:
+#     user.git_commit(prose or "")
+#     edit.save()
+#     sleep(150ms)
+#     app.tab_close()
+#     sleep(250ms)
+# disk git commit [<user.prose>]$:
+#     key(esc:5)
+#     edit.save()
+#     sleep(1500ms)
+#     user.git_commit(prose or "")
+# disk git commit [<user.prose>] over:
+#     key(esc:5)
+#     edit.save()
+#     sleep(1500ms)
+#     user.git_commit(prose or "")
+# disk git commit <user.prose> disclose:
+#     key(esc:5)
+#     edit.save()
+#     sleep(1500ms)
+#     user.git_commit(prose or "")
+#     edit.save()
+#     sleep(150ms)
+#     app.tab_close()
+#     sleep(250ms)
+# git stash [<user.prose>] [over]:
+#     user.vscode("git.stash")
+#     sleep(100ms)
+#     user.insert_formatted(prose or "", "CAPITALIZE_FIRST_WORD")
+# git branches: user.vscode("gitlens.views.branches.focus")
+# git commit undo: user.vscode("git.undoCommit")
+# git diff: user.vscode("git.openChange")
+# git fetch: user.vscode("git.fetch")
+# git fetch all: user.vscode("git.fetchAll")
+# git ignore: user.vscode("git.ignore")
+# git merge: user.vscode("git.merge")
+# git output: user.vscode("git.showOutput")
+# git pull: user.vscode("git.pullRebase")
+# git push:
+#     sleep(100ms)
+#     user.vscode("git.push")
+# git push focus: user.vscode("git.pushForce")
+# git rebase abort: user.vscode("git.rebaseAbort")
+# git reveal: user.vscode("git.revealInExplorer")
+# git revert: user.vscode("git.revertChange")
+# git stash: user.vscode("git.stash")
+# git stash pop: user.vscode("git.stashPop")
+# git status: user.vscode("workbench.scm.focus")
+# git stage: user.vscode("git.stage")
+# git stage oliver: user.vscode("git.stageAll")
+# git stage all merge: user.vscode("git.stageAllMerge")
+# git unstage: user.vscode("git.unstage")
+# git unstage all: user.vscode("git.unstageAll")
+# git sync: user.vscode("git.sync")
+# git a mend:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git amend")
+# git reword:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git reword")
+# git push force:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git push force")
+# git update main:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git update main")
+# git commit empty:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git commit empty")
+# git continue:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git imerge continue")
+# git full continue:
+#     user.vscode("git.stageAllMerge")
+#     user.git_commit(prose or "")
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git imerge continue")
 
-# Commands for use with git-branchless
-^git push stack head$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git push current stack")
-^git shadow parent$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git shadow parent")
-^branch make this <user.text>$:
-    commit = edit.selected_text()
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Git branch commit")
-    sleep(350ms)
-    insert("pokey/")
-    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-    key(enter)
-    sleep(100ms)
-    insert(commit)
-    key(enter)
+# # Commands for use with git-branchless
+# ^git push stack head$:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git push current stack")
+# ^git shadow parent$:
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git shadow parent")
+# ^branch make this <user.text>$:
+#     commit = edit.selected_text()
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git branch commit")
+#     sleep(350ms)
+#     insert("pokey/")
+#     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+#     key(enter)
+#     sleep(100ms)
+#     insert(commit)
+#     key(enter)
 pop patch last [<user.repetition_count>]:
     user.vscode_with_plugin("workbench.action.tasks.runTask", "Git previous")
     sleep(500ms)
@@ -642,25 +642,7 @@ elm wrap <user.cursorless_target>:
     user.vscode("editor.emmet.action.wrapWithAbbreviation")
     sleep(250ms)
 
-^tag version$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Tag version")
-^install sandbox$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Install into cursorless sandbox")
-^extension publish$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Publish extension")
-^{user.cursorless_homophone} local split$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Cursorless local split")
-^tunnel start$:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Start tunnel")
-^tunnel stop$:
-    user.vscode("workbench.action.tasks.terminate")
-    insert("Start tunnel")
-    key(enter)
 line edit: key(ctrl-q e)
-^move recording [<user.text>] [over]:
-    user.vscode_with_plugin("workbench.action.tasks.runTask", "Move recorded video")
-    sleep(650ms)
-    user.insert_formatted(text or "", "DASH_SEPARATED")
 
 copy command: user.copy_command_id()
 copy command <number_small>:

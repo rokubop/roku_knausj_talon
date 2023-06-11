@@ -8,3 +8,6 @@ tab (reopen | restore): app.tab_reopen()
 go tab <number>: user.tab_jump(number)
 go tab final: user.tab_final()
 tab duplicate: user.tab_duplicate()
+
+# roku additions
+tab <number>: user.tab_jump(number)

@@ -15,6 +15,10 @@ class Actions:
         # actions.key("x");
         actions.key("win-up")
 
+    def window_minimize():
+        """Minimize window"""
+        actions.key("win-down")
+
     def window_restore():
         """Restore window"""
         # actions.key("alt-space");

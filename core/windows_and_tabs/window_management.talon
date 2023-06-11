@@ -22,5 +22,24 @@ snap <user.running_applications> [screen] <number>:
 # roku additions
 window (max | maximize): user.window_maximize()
 maximize window: user.window_maximize()
-maximize: user.window_maximize()
+maximize: user.window_maximizer()
+window (min | minimize): user.window_minimize()
+minimize window: user.window_minimize()
 [window] restore: user.window_restore()
+restore window: user.window_restore()
+portal [<phrase>]$:
+    user.switcher_focus("Google Chrome")
+    sleep(200ms)
+    user.parse_phrase(phrase or "")
+coder [<phrase>]$:
+    user.switcher_focus("Code")
+    sleep(300ms)
+    user.parse_phrase(phrase or "")
+slacker [<phrase>]$:
+    user.switcher_focus("Slack")
+    sleep(200ms)
+    user.parse_phrase(phrase or "")
+(folk | focus) voice meter [<phrase>]$:
+    user.switcher_focus("VB-AUDIO Virtual Audio Device Mixing Console Application")
+    sleep(200ms)
+    user.parse_phrase(phrase or "") 
