@@ -1,6 +1,6 @@
 # #custom vscode commands go here
-# app: vscode
-# -
+app: vscode
+-
 # tag(): user.find_and_replace
 # tag(): user.line_commands
 # tag(): user.multiple_cursors
@@ -8,6 +8,15 @@
 # tag(): user.splits
 # tag(): user.tabs
 
+(focus | show) term: user.vscode("workbench.action.terminal.focus")
+(focus | show) files: user.vscode("workbench.view.explorer")
+(focus | show) extensions: user.vscode("workbench.view.extensions")
+(focus | show) outline: user.vscode("outline.focus")
+(focus | show) run: user.vscode("workbench.view.debug")
+(focus | show) search: user.vscode("workbench.view.search")
+(focus | show) changes: user.vscode("workbench.view.scm")
+(focus | show) test: user.vscode("workbench.view.testing.focus")
+(focus | show | hide | toggle) (bar | sidebar): user.vscode("workbench.action.toggleSidebarVisibility")
 # settings():
 #     key_wait = 2
 

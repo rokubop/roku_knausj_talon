@@ -1,5 +1,7 @@
 tag: terminal
 and tag: user.git
+not tag: terminal
+and app: vscode
 -
 git {user.git_command} [<user.git_arguments>]:
     args = git_arguments or ""
@@ -22,7 +24,7 @@ git diff$: "git diff\n"
 git diff (cached | cashed)$: "git diff --cached\n"
 
 # Convenience
-git clone clipboard:
+git clone (clipboard | paste):
     insert("git clone ")
     edit.paste()
     key(enter)
@@ -31,7 +33,7 @@ git diff highlighted:
     insert("git diff ")
     edit.paste()
     key(enter)
-git diff clipboard:
+git diff (clipboard | paste):
     insert("git diff ")
     edit.paste()
     key(enter)
@@ -40,7 +42,7 @@ git add highlighted:
     insert("git add ")
     edit.paste()
     key(enter)
-git add clipboard:
+git add (clipboard | paste):
     insert("git add ")
     edit.paste()
     key(enter)

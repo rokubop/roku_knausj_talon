@@ -128,6 +128,13 @@ modifier_keys = {
     "shift": "shift",  #'sky':     'shift',
     "super": "super",
 }
+
+# roku additions
+modifier_keys.update({
+    "troll": "ctrl", 
+    "ship": "shift"
+})
+
 if app.platform == "mac":
     modifier_keys["command"] = "cmd"
     modifier_keys["option"] = "alt"
@@ -219,8 +226,40 @@ symbol_key_words = {
     "double quote": '"',
     # Currencies
     "dollar": "$",
-    "pound": "£",
+    # "pound": "£",
 }
+# roku additions
+symbol_key_words.update({
+    "brick": "`",
+    "stroke": "/",
+    "backstroke": "\\",
+    "equal": "=",
+    "plus": "+",
+    "tilde": "~",
+    "bang": "!",
+    "score": "_",
+    "quest": "?",
+    "single": "'",
+    "double": '"',
+    "leper": "(",
+    "repper": ")",
+    "lacker": "[",
+    "racker": "]",
+    "lacer": "{",
+    "racer": "}",
+    "langle": "<",
+    "wrangle": ">",
+    "snow": "*",
+    "pound": "#",
+    "percy": "%",
+    "tangle": "^",
+    "amper": "&",
+    "pipe": "|",
+    "dollar": "$",
+    "semi": ";",
+    "stack": ":",
+    "drip": ",",
+})
 
 # make punctuation words also included in {user.symbol_keys}
 symbol_key_words.update(punctuation_words)
@@ -254,6 +293,18 @@ alternate_keys = {
     "page up": "pageup",
     "page down": "pagedown",
 }
+
+# roku additions
+alternate_keys.update({
+    "slap": "enter",
+    "drill": "delete",
+    "scratch": "backspace",
+    "scrape": "escape",
+    "void": "space",
+    "page up": "pageup",
+    "page down": "pagedown",
+})
+
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
     alternate_keys["menu key"] = "menu"

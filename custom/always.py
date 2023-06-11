@@ -4,10 +4,6 @@ mod = Module()
 
 @mod.action_class
 class Actions:
-    def toggle_serenade():
-        """Toggle Serenade on or off."""
-        actions.key("alt-z")
-
     def talon_sleep():
         """Stop listening for Talon commands."""
         actions.user.sleep_all()
@@ -18,10 +14,7 @@ class Actions:
 
     def talon_toggle():
         """Toggle Talon on or off."""
-        if actions.speech.enabled():
-            actions.user.talon_sleep()
-        else:
-            actions.user.talon_wake()
+        actions.speech.toggle()
 
     def toggle_voice():
         """Toggle between Serenade and Talon."""
