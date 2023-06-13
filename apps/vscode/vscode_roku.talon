@@ -535,7 +535,7 @@ replace smart:
     key(S)
     key(/)
 
-swap this: user.vscode("extension.swap")
+# swap this: user.vscode("extension.swap")
 
 reload window: user.vscode("workbench.action.reloadWindow")
 close window: user.vscode("workbench.action.closeWindow")

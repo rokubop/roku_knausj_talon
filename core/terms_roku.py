@@ -6,12 +6,12 @@ from talon import Module
 mod = Module()
 
 SELECT = "take"
-TELEPORT = "jump"
+TELEPORT = "pop"
 OPERATOR = "make"
 DELETE = "chuck"
 FIND = "scout"
 SHOW_LIST = "list"
-
+CLIP = "clip"
 
 @mod.capture(rule=SELECT)
 def select(m) -> str:
@@ -47,4 +47,9 @@ def find(m) -> str:
 @mod.capture(rule=SHOW_LIST)
 def show_list(m) -> str:
     """Verb to use for commands that show lists"""
+    return str(m)
+
+@mod.capture(rule=CLIP)
+def clip(m) -> str:
+    """Name of the clipboard"""
     return str(m)

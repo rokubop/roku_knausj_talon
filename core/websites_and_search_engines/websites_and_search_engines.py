@@ -1,7 +1,7 @@
 import webbrowser
 from urllib.parse import quote_plus
 
-from talon import Context, Module
+from talon import Context, Module, actions
 
 from ..user_settings import get_list_from_csv
 
@@ -66,3 +66,11 @@ class Actions:
         """Search a search engine for given text"""
         url = search_template.replace("%s", quote_plus(search_text))
         webbrowser.open(url)
+
+    # roku additions
+    def search_with_chat_gpt(search_text: str):
+        """Search with chat GPT"""
+        webbrowser.open("https://chat.openai.com/?model=gpt-4")
+        actions.sleep("2000ms")
+        actions.insert(search_text)
+        actions.key("enter")
