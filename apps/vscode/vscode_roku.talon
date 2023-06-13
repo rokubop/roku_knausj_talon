@@ -1,4 +1,3 @@
-# #custom vscode commands go here
 app: vscode
 -
 tag(): user.find_and_replace
@@ -103,7 +102,7 @@ show settings folder json:
 show settings workspace: user.vscode("workbench.action.openWorkspaceSettings")
 show settings workspace json:
     user.vscode("workbench.action.openWorkspaceSettingsFile")
-show shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
+show [keyboard] shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
 show shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
 show snippets: user.vscode("workbench.action.openSnippets")
 
@@ -229,7 +228,7 @@ spring forward: user.vscode("workbench.action.navigateForward")
 <user.teleport> type: user.vscode("editor.action.goToTypeDefinition")
 <user.teleport> usage: user.vscode("references-view.find")
 
-# Bookmarks. Requires Bookmarks plugin
+(open | switch | change | show) workspace: user.vscode("workbench.action.openRecent")
 <user.show_list> sesh [<user.text>] [over]:
     user.vscode("workbench.action.openRecent")
     sleep(250ms)

@@ -21,8 +21,7 @@ snap <user.running_applications> [screen] <number>:
 
 # roku additions
 window (max | maximize): user.window_maximize()
-maximize window: user.window_maximize()
-maximize: user.window_maximizer()
+maximize [window]: user.window_maximize()
 window (min | minimize): user.window_minimize()
 minimize window: user.window_minimize()
 [window] restore: user.window_restore()
