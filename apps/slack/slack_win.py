@@ -44,3 +44,4 @@ class UserActions:
     # Files and Snippets
     def messaging_upload_file():
         actions.key("ctrl-u")
+

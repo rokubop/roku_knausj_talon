@@ -697,7 +697,10 @@ pilot cancel: user.vscode("editor.action.inlineSuggest.hide")
 
 typescript restart: user.vscode("typescript.restartTsServer")
 (close all editors | tab close all): user.vscode("workbench.action.closeAllGroups")
-
+tab close other: 
+    user.vscode("workbench.action.closeOtherEditors")
+    user.vscode("workbench.action.closeEditorsInOtherGroups")
+    
 hay Github <user.text>$:
     user.vscode("agent-chat-panel.focus")
     sleep(100ms)

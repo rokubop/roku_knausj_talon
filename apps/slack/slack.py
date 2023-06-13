@@ -28,3 +28,12 @@ class EditActions:
     def line_insert_down():
         actions.edit.line_end()
         actions.key("shift-enter")
+
+@mod.action_class
+class UserActions:
+    def slack_open_search_result(search: str):
+        """Opens the given search result on slack"""
+        actions.key("ctrl-k")
+        actions.insert(search)
+        actions.sleep("400ms")
+        actions.key("enter")
