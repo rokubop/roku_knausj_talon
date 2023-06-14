@@ -15,8 +15,9 @@ go drafts:                  user.slack_open_search_result("Drafts")
 scout channel [<user.text>]:
     key(ctrl-k)
     "{text or ''}"
-pop channel <user.text>:
+<user.teleport> channel <user.text>:
     user.slack_open_search_result(text)
+<user.teleport> server <number_small>: key(ctrl-{number_small})
 
 please [<user.text>]$:
     key(ctrl-k)

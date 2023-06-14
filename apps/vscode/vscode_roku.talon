@@ -679,7 +679,7 @@ pilot nope: user.vscode("editor.action.inlineSuggest.undo")
 pilot cancel: user.vscode("editor.action.inlineSuggest.hide")
 
 typescript restart: user.vscode("typescript.restartTsServer")
-(close all editors | tab close all): user.vscode("workbench.action.closeAllGroups")
+(close all editors | tab close (all | oliver)): user.vscode("workbench.action.closeAllGroups")
 tab close other: 
     user.vscode("workbench.action.closeOtherEditors")
     user.vscode("workbench.action.closeEditorsInOtherGroups")
