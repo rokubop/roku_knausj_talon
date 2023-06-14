@@ -12,3 +12,7 @@ tab search <user.text>$:
     sleep(200ms)
     insert("{text}")
     key(down)
+
+# roku
+
+(light | dark) mode: key(alt-shift-d)

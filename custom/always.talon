@@ -1,6 +1,6 @@
 mode: all
 -
-serenade [sleep | wake | toggle]: key(alt-z)
+serenade (sleep | wake | toggle): key(alt-z)
 talon wake: user.talon_wake()
 talon sleep: user.talon_sleep()
 toggle voice: user.toggle_voice()
