@@ -220,3 +220,14 @@ def number_signed_small(m) -> int:
     """Parses an integer between -99 and 99."""
     number = m[-1]
     return -number if (m[0] in ["negative", "minus"]) else number
+
+# roku
+@mod.capture(rule="twice | thrice | <number_small> times")
+def repetition_count(m) -> int:
+    """Corresponds to a repetition count, eg 'twice', 'thrice', 'five times', etc"""
+    if m[0] == "twice":
+        return 2
+    elif m[0] == "thrice":
+        return 3
+    else:
+        return m["number_small"]

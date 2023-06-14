@@ -1,0 +1,1 @@
+for d in ../*/ ; do echo -e "\e[32m$d\e[0m"; (cd "$d" && git pull); done

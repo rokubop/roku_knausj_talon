@@ -144,7 +144,7 @@ split dock <user.text> [{user.file_extension}] [over]:
     insert(file_extension or "")
     sleep(300ms)
     key(alt-right)
-    sleep(150ms)10
+    sleep(150ms)
     key(escape)
     user.split_next()
 <user.teleport> dock:
@@ -423,18 +423,18 @@ pop branch next [<user.repetition_count>]:
     sleep(500ms)
     insert("{repetition_count or 1}")
     key(enter)
-^{user.branchless_command}$:
-    commit = edit.selected_text()
-    user.vscode_with_plugin("workbench.action.tasks.runTask", branchless_command)
-    sleep(500ms)
-    insert(commit)
-    key(enter)
+# ^{user.branchless_command}$:
+#     commit = edit.selected_text()
+#     user.vscode_with_plugin("workbench.action.tasks.runTask", branchless_command)
+#     sleep(500ms)
+#     insert(commit)
+#     key(enter)
 
 dock open: user.vscode("gitlens.openWorkingFile")
-wreck make: user.vscode("pr.create")
-wreck show: user.vscode("prStatus:github.focus")
-dock viewed: user.vscode("pr.markFileAsViewed")
-wreck web: user.vscode("pr.openPullRequestOnGitHub")
+# wreck make: user.vscode("pr.create")
+# wreck show: user.vscode("prStatus:github.focus")
+# dock viewed: user.vscode("pr.markFileAsViewed")
+# wreck web: user.vscode("pr.openPullRequestOnGitHub")
 # Use keyboard shortcuts because VSCode relies on when clause contexts to choose the appropriate
 # action: https://code.visualstudio.com/api/references/when-clause-contexts
 change next: key(alt-f5)
@@ -518,35 +518,19 @@ edit add: user.vscode("editsHistory.createEditAtCursor")
 edit last here: user.vscode("editsHistory.moveCursorToPreviousEditInSameFile")
 edit next here: user.vscode("editsHistory.moveCursorToNextEditInSameFile")
 
-commode:
-    user.vscode_and_wait("vscode-neovim.enable")
-    user.vscode("vscode-neovim.escape")
-    sleep(25ms)
-
-voice mode:
-    user.vscode_and_wait("vscode-neovim.disable")
-    key(i)
-    sleep(25ms)
-
-replace smart:
-    key(:)
-    sleep(50ms)
-    key(S)
-    key(/)
-
 # swap this: user.vscode("extension.swap")
 
 reload window: user.vscode("workbench.action.reloadWindow")
 close window: user.vscode("workbench.action.closeWindow")
 
-stage on:
-    user.vscode_and_wait("git.stage")
-    key(ctrl-w)
-    user.vscode_and_wait("workbench.scm.focus")
-    key(shift-tab)
-    key(down:100)
-    sleep(100ms)
-    key(enter)
+# stage on:
+#     user.vscode_and_wait("git.stage")
+#     key(ctrl-w)
+#     user.vscode_and_wait("workbench.scm.focus")
+#     key(shift-tab)
+#     key(down:100)
+#     sleep(100ms)
+#     key(enter)
 #breadcrumb
 select breadcrumb: user.vscode("breadcrumbs.focusAndSelect")
 # Use `alt-left` and `alt-right` to navigate the bread crumb
@@ -583,16 +567,16 @@ zoom (talk | demo | big): user.set_zoom_level(4)
 
 zoom (normal | regular): user.set_zoom_level(1)
 
-make executable: user.vscode("chmod.plusX")
+# make executable: user.vscode("chmod.plusX")
 
-add dock string: user.vscode("autoDocstring.generateDocstring")
+# add dock string: user.vscode("autoDocstring.generateDocstring")
 
-issue make [<user.text>]$:
-    user.vscode("issue.createIssue")
-    sleep(250ms)
-    edit.delete_line()
-    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
-issue (submit | save): user.vscode("issue.createIssueFromFile")
+# issue make [<user.text>]$:
+#     user.vscode("issue.createIssue")
+#     sleep(250ms)
+#     edit.delete_line()
+#     user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+# issue (submit | save): user.vscode("issue.createIssueFromFile")
 
 draft (save | submit): user.draft_editor_save()
 draft discard: user.draft_editor_discard()
@@ -615,8 +599,8 @@ han solo: user.vscode("workbench.action.joinAllGroups")
 
 reflow: user.vscode("rewrap.rewrapComment")
 
-mode {user.language_id}:
-    user.vscode_with_plugin("commands.setEditorLanguage", language_id)
+# mode {user.language_id}:
+#     user.vscode_with_plugin("commands.setEditorLanguage", language_id)
 
 break <user.cursorless_target>:
     user.cursorless_command("setSelectionBefore", cursorless_target)
