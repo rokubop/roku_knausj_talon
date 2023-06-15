@@ -9,6 +9,7 @@ class module_actions:
         """Insert `before + after`, leaving cursor between `before` and `after`. Not entirely reliable if `after` contains newlines."""
         actions.insert(before + after)
         for _ in after:
+            actions.sleep("50ms")
             actions.edit.left()
 
     # This is deprecated, please use insert_between instead.
