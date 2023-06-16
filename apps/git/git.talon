@@ -17,6 +17,8 @@ git stash [push] [<user.git_arguments>] message [<user.prose>]:
 
 # Optimistic execution for frequently used commands that are harmless (don't
 # change repository or index state).
+cd up$: "cd ..\n"
+<user.teleport> <user.text>: "z {text}\n"
 git status$: "git status\n"
 git add patch$: "git add --patch\n"
 git show head$: "git show HEAD\n"
