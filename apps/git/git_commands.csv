@@ -58,7 +58,6 @@ submodule init, submodule in it
 submodule status
 submodule update
 switch
-tag
 worktree
 worktree add
 worktree list

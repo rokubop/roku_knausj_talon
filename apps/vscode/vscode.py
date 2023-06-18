@@ -1,6 +1,7 @@
 from talon import Context, Module, actions, app
 
 is_mac = app.platform == "mac"
+vscode = actions.user.vscode
 
 ctx = Context()
 mac_ctx = Context()
@@ -267,11 +268,23 @@ class UserActions:
                 "workbench.action.openEditorAtIndex", number
             )
 
+    def tab_back():
+        vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+
     def tab_final():
         if is_mac:
             actions.user.vscode("workbench.action.lastEditorInGroup")
         else:
             actions.key("alt-0")
+
+    def tab_close_all():
+        actions.user.vscode("workbench.action.closeAll")
+
+    def tab_close_others():
+        actions.user.vscode("workbench.action.closeOtherEditors")
+
+    def tab_close_all_others():
+        actions.user.vscode("workbench.action.closeEditorsInOtherGroups")
 
     # splits.py support begin
     def split_number(index: int):
@@ -319,6 +332,12 @@ class UserActions:
         else:
             actions.key("alt-c")
 
+    def find_file(text: str = None):
+        vscode("workbench.action.quickOpen")
+        if text:
+            actions.sleep("50ms")
+            actions.insert(text)
+
     def find_toggle_match_by_word():
         """Toggles find match by whole words"""
         if is_mac:
@@ -332,6 +351,15 @@ class UserActions:
             actions.key("cmd-alt-r")
         else:
             actions.key("alt-r")
+
+    def find_replace_toggle_preserve_case():
+        actions.key("alt-p")
+
+    def find_replace_confirm():
+        actions.key("enter")
+
+    def find_replace_confirm_all():
+        actions.key("ctrl-alt-enter")
 
     def replace(text: str):
         """Search and replaces in the active editor"""

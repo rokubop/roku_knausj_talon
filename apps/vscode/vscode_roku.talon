@@ -1,6 +1,6 @@
 app: vscode
 -
-tag(): user.find_and_replace
+tag(): user.find
 tag(): user.line_commands
 tag(): user.multiple_cursors
 tag(): user.snippets
@@ -20,9 +20,6 @@ tag(): user.tabs
 settings():
     key_wait = 2
 
-tab close other:            user.vscode("workbench.action.closeOtherEditors")
-
-
 #talon app actions
 <user.teleport> last:
     user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
@@ -38,6 +35,10 @@ tab close other:            user.vscode("workbench.action.closeOtherEditors")
     sleep(150ms)
 <user.teleport> dock:
     user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+<user.teleport> sibling:
+    user.find_sibling_file()
+    sleep(150ms)
+    key(enter)
 
 # Language features
 jest:                       code.complete()
@@ -134,10 +135,6 @@ file rename [<user.filename>]:
 file clone [<user.filename>]:
     user.vscode("andreas.duplicateFile", filename or "")
 
-pop sibling:
-    user.find_sibling_file()
-    sleep(150ms)
-    key(enter)
 
 okay:                       user.vscode("editor.action.insertLineAfter")
 
