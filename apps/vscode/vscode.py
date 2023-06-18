@@ -155,6 +155,20 @@ class Actions:
         """Show command palette"""
         actions.key("ctrl-shift-p")
 
+    def find_sibling_file():
+        """Find sibling file based on file name"""
+        full_name = actions.user.vscode_get("andreas.getFilename")
+        index = full_name.rfind(".")
+        if index < 0:
+            return
+        short_name = full_name[:index]
+        extension = full_name[index + 1 :]
+        sibling_extension = actions.user.get_extension_sibling(extension)
+        if not sibling_extension:
+            return
+        sibling_full_name = f"{short_name}.{sibling_extension}"
+        actions.user.find_file(sibling_full_name)
+
 
 @mac_ctx.action_class("user")
 class MacUserActions:
@@ -278,7 +292,7 @@ class UserActions:
             actions.key("alt-0")
 
     def tab_close_all():
-        actions.user.vscode("workbench.action.closeAll")
+        actions.user.vscode("workbench.action.closeAllEditors")
 
     def tab_close_others():
         actions.user.vscode("workbench.action.closeOtherEditors")

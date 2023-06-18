@@ -39,6 +39,8 @@ settings():
     user.find_sibling_file()
     sleep(150ms)
     key(enter)
+<user.show_list> sibling:
+    user.find_sibling_file()
 
 # Language features
 jest:                       code.complete()
@@ -108,7 +110,7 @@ panel debug:                user.vscode("workbench.debug.action.toggleRepl")
 panel clear:                user.vscode("workbench.debug.panel.action.clearReplAction")
 
 # Hide sidebar and panel
-hide all:
+zen mode:
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closePanel")
     user.vscode("closeFindWidget")
