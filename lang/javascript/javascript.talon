@@ -25,29 +25,26 @@ settings():
     user.code_protected_variable_formatter = "PRIVATE_CAMEL_CASE"
     user.code_public_variable_formatter = "PRIVATE_CAMEL_CASE"
 
-(op | is) strict equal: " === "
-(op | is) strict not equal: " !== "
-op null else: " ?? "
+is strict equal:            " === "
+is strict not equal:        " !== "
+op null else:               " ?? "
 
-state const: "const "
+<user.operator> or quest:   " ?? "
+<user.operator> quote var:  user.insert_between("${", "}")
+<user.operator> spread:     "..."
 
-state let: "let "
-
-state var: "var "
-
-state export: "export "
-
-state async: "async "
-
-state await: "await "
+<user.operator> const:      "const "
+<user.operator> let:        "let "
+<user.operator> var:        "var "
+<user.operator> export:     "export "
+<user.operator> async:      "async "
+<user.operator> await:      "await "
 
 dot {user.code_common_member_function}:
     user.insert_between(".{code_common_member_function}(", ")")
 
-state map: app.notify('ERROR: Command deprecated; please use "dot map"')
-state filter: app.notify('ERROR: Command deprecated; please use "dot filter"')
-state reduce: app.notify('ERROR: Command deprecated; please use "dot reduce"')
+<user.operator> map:        app.notify('ERROR: Command deprecated; please use "dot map"')
+<user.operator> filter:     app.notify('ERROR: Command deprecated; please use "dot filter"')
+<user.operator> reduce:     app.notify('ERROR: Command deprecated; please use "dot reduce"')
 
-state spread: "..."
-
-from import: user.insert_between(' from  "', '"')
+from import:                user.insert_between(' from  "', '"')

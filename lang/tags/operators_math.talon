@@ -2,28 +2,28 @@ tag: user.code_operators_math
 -
 
 # math operators
-op (minus | subtract): user.code_operator_subtraction()
-op (plus | add): user.code_operator_addition()
-op (times | multiply): user.code_operator_multiplication()
-op divide: user.code_operator_division()
-op mod: user.code_operator_modulo()
-(op (power | exponent) | to the power [of]): user.code_operator_exponent()
+<user.operator> (minus | subtract): user.code_operator_subtraction()
+<user.operator> (plus | add): user.code_operator_addition()
+<user.operator> (times | multiply): user.code_operator_multiplication()
+<user.operator> divide:     user.code_operator_division()
+<user.operator> mod:        user.code_operator_modulo()
+(<user.operator> (power | exponent) | to the power [of]): user.code_operator_exponent()
 
 # comparison operators
-(op | is) equal: user.code_operator_equal()
-(op | is) not equal: user.code_operator_not_equal()
-(op | is) (greater | more): user.code_operator_greater_than()
-(op | is) (less | below) [than]: user.code_operator_less_than()
-(op | is) greater [than] or equal: user.code_operator_greater_than_or_equal_to()
-(op | is) less [than] or equal: user.code_operator_less_than_or_equal_to()
+is equal:                   user.code_operator_equal()
+is not equal:               user.code_operator_not_equal()
+is greater:                 user.code_operator_greater_than()
+is lesser:                  user.code_operator_less_than()
+(is | <user.operator>) great equal: user.code_operator_greater_than_or_equal_to()
+(is | <user.operator>) less equal: user.code_operator_less_than_or_equal_to()
 
 # logical operators
-(op | logical) and: user.code_operator_and()
-(op | logical) or: user.code_operator_or()
+(<user.operator> | logical) and: user.code_operator_and()
+(<user.operator> | logical) or: user.code_operator_or()
 
 # set operators
-(op | is) in: user.code_operator_in()
-(op | is) not in: user.code_operator_not_in()
+(op | is) in:               user.code_operator_in()
+(op | is) not in:           user.code_operator_not_in()
 
 # TODO: This operator should either be abstracted into a function or removed.
-(op | pad) colon: " : "
+(<user.operator> | pad) colon: " : "
