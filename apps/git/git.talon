@@ -3,6 +3,9 @@ and tag: user.git
 not tag: terminal
 and app: vscode
 -
+z <user.text>:
+    "z {text}\n"
+
 git {user.git_command} [<user.git_arguments>]:
     args = git_arguments or ""
     "git {git_command}{args} "
