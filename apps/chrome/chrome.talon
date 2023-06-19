@@ -3,7 +3,7 @@ app: chrome
 tag(): browser
 tag(): user.tabs
 
-profile switch: 
+profile switch:
     user.chrome_mod("ctrl-shift-m")
     sleep(200ms)
     key(enter)
@@ -21,6 +21,9 @@ tab <user.teleport> <user.text>$:
     insert("{text}")
     key(enter)
 
+tab split:                  user.rango_command_without_target("moveCurrentTabToNewWindow")
+
+
 # roku
 
-(light | dark) mode: key(alt-shift-d)
+(light | dark) mode:        key(alt-shift-d)

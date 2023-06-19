@@ -13,7 +13,6 @@ def fibonacci(n: str):
 
 
 @mod.action_class
-
 class Actions:
     def test_one(whatever: str):
         """test"""

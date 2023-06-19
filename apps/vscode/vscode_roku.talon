@@ -292,3 +292,5 @@ change language [<user.text>]:
 please [<user.text>]$:
     user.vscode("workbench.action.showCommands")
     "{user.text or ''}"
+
+wrap dog:                   user.vscode("editor.action.toggleWordWrap")

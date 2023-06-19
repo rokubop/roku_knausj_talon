@@ -300,6 +300,10 @@ class UserActions:
     def tab_close_all_others():
         actions.user.vscode("workbench.action.closeEditorsInOtherGroups")
 
+    def tab_duplicate():
+        actions.user.vscode("workbench.action.splitEditor")
+
+
     # splits.py support begin
     def split_number(index: int):
         """Navigates to a the specified split"""
