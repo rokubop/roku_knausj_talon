@@ -3,20 +3,25 @@
 app: slack
 #todo: some sort of plugin, consolidate with teams or something?
 -
-sidebar (show | hide):      key(ctrl-shift-d)
-panel (show | hide):        key(ctrl-.)
 
-go unreads:                 key(ctrl-shift-a)
-go threads:                 user.slack_open_search_result("Threads")
-go [direct] messages:       key(ctrl-shift-k)
-go (mentions | reactions):  key(ctrl-shift-m)
-go drafts:                  user.slack_open_search_result("Drafts")
+show help: key(ctrl-/)
 
-scout channel [<user.text>]:
+bar (show | hide) | (show | hide) bar:      key(ctrl-shift-d)
+rack (show | hide) | (show | hide) rack:    key(ctrl-.)
+
+<user.teleport> unreads:                 key(ctrl-shift-a)
+<user.teleport> threads:                 user.slack_open_search_result("Threads")
+<user.teleport> [direct] messages:       key(ctrl-shift-k)
+<user.teleport> (mentions | reactions):  key(ctrl-shift-m)
+<user.teleport> drafts:                  user.slack_open_search_result("Drafts")
+
+<user.find> [channel] [<user.text>]:
     key(ctrl-k)
     "{text or ''}"
-<user.teleport> channel <user.text>:
-    user.slack_open_search_result(text)
+    
+<user.teleport> [channel] [<user.text>]:
+    user.slack_open_search_result(text or "")
+    
 <user.teleport> server <number_small>: key(ctrl-{number_small})
 
 please [<user.text>]$:
