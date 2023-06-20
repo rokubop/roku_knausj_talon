@@ -51,10 +51,7 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     key(enter)
     sleep(150ms)
 
-<user.teleport> dock:
-    user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
-
-(<user.find> dock | dock <user.find>):
+(<user.teleport> dock | <user.find> dock | dock <user.find>):
     user.vscode("workbench.action.quickOpen")
 
 <user.find> dock [<user.text>] [{user.file_extension}] [halt]:
@@ -129,14 +126,15 @@ ref last:                   user.vscode("references-view.prev")
 ref next:                   user.vscode("references-view.next")
 
 # Terminal
-term (show | hide | dog ):  user.vscode("workbench.action.togglePanel")
-term (large | small):       user.vscode("workbench.action.toggleMaximizedPanel")
-term control:               user.vscode("workbench.panel.repl.view.focus")
-term output:                user.vscode("workbench.panel.output.focus")
-term problems:              user.vscode("workbench.panel.markers.view.focus")
-(term terminal | focus term): user.vscode("workbench.action.terminal.focus")
-term debug:                 user.vscode("workbench.debug.action.toggleRepl")
-term clear:                 user.vscode("workbench.debug.panel.action.clearReplAction")
+(show | hide) (term | base):         user.vscode("workbench.action.togglePanel")
+(term | base) (show | hide | dog ):  user.vscode("workbench.action.togglePanel")
+(term | base) (large | small):       user.vscode("workbench.action.toggleMaximizedPanel")
+(term | base) control:               user.vscode("workbench.panel.repl.view.focus")
+(term | base) output:                user.vscode("workbench.panel.output.focus")
+(term | base) problems:              user.vscode("workbench.panel.markers.view.focus")
+((term | base) terminal | focus (term | base)): user.vscode("workbench.action.terminal.focus")
+(term | base) debug:                 user.vscode("workbench.debug.action.toggleRepl")
+(term | base) clear:                 user.vscode("workbench.debug.panel.action.clearReplAction")
 (<user.teleport> term | term <user.teleport>) <user.text>: "z {text}\n"
 (<user.show_list> term | term <user.show_list>) <user.text>: "z -l {text}\n"
 (<user.teleport> term | term <user.teleport>) (last | switch): "z -\n"
