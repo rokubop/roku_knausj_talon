@@ -1,4 +1,7 @@
 from talon import Context, Module, actions, app
+import re
+
+PATTERN_RE = re.compile(r"Untitled-\d$")
 
 is_mac = app.platform == "mac"
 vscode = actions.user.vscode
@@ -83,6 +86,15 @@ class CodeActions:
     def toggle_comment():
         actions.user.vscode("editor.action.commentLine")
 
+    def complete():
+        vscode("editor.action.triggerSuggest")
+
+    def language() -> str:
+        # New untitled files are markdown in vscode
+        if is_untitled(actions.win.filename()):
+            return "markdown"
+        return actions.next()
+
 
 @ctx.action_class("edit")
 class EditActions:
@@ -159,6 +171,7 @@ class Actions:
         """Find sibling file based on file name"""
         full_name = actions.user.vscode_get("andreas.getFilename")
         index = full_name.rfind(".")
+        print("full_name", full_name)
         if index < 0:
             return
         short_name = full_name[:index]
@@ -422,3 +435,6 @@ class UserActions:
         actions.edit.find(text)
         actions.sleep("100ms")
         actions.key("esc")
+
+def is_untitled(filename: str):
+    return PATTERN_RE.search(filename) is not None

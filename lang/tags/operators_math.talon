@@ -18,12 +18,13 @@ is lesser:                  user.code_operator_less_than()
 (is | <user.operator>) less equal: user.code_operator_less_than_or_equal_to()
 
 # logical operators
-(<user.operator> | logical) and: user.code_operator_and()
-(<user.operator> | logical) or: user.code_operator_or()
+<user.operator> and:        user.code_operator_and()
+<user.operator> or:         user.code_operator_or()
 
 # set operators
 (op | is) in:               user.code_operator_in()
 (op | is) not in:           user.code_operator_not_in()
 
 # TODO: This operator should either be abstracted into a function or removed.
-(<user.operator> | pad) colon: " : "
+<user.operator> colon:      " : "
+<user.operator> pipe:       " | "

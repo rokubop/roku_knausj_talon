@@ -20,7 +20,7 @@ drill:                      user.delete_right()
 scratcher:
     edit.extend_word_left()
     edit.delete()
-swallow:
+driller:
     edit.extend_word_right()
     edit.delete()
 
