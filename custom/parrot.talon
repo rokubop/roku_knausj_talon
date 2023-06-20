@@ -1,82 +1,83 @@
-# parrot(cluck):
-# 	print("cluck")
+parrot(cluck):
+				print("cluck")
 
 # parrot(tut):
-# 	print("tut")
+# 				print("tut")
+# 				user.on_tut()
 
 parrot(palate_click):
-	user.palate_click()
-	print("palate_click")
+				user.palate_click()
+				print("palate_click")
 
 parrot(pop):
-	user.click()
-	print("pop")
+				user.click()
+				print("pop")
 
 # parrot(gluck):
-# 	print("gluck")
+# 				print("gluck")
 
 # parrot(finger_snap):
-# 	print("finger_snap")
+# 				print("finger_snap")
 
 # parrot(ch):
-# 	print("ch")
+# 				print("ch")
 
 # parrot(ah):
-# 	print("ah")
+# 				print("ah")
 
 # parrot(oh):
-# 	print("oh")
+# 				print("oh")
 
-# parrot(ee):
-# 	print("ee")
+parrot(ee):
+# 				print("ee")
 
 # parrot(ue):
-# 	print("ue")
+# 				print("ue")
 
 # parrot(ae):
-# 	print("ae")
+# 				print("ae")
 
 # parrot(horse):
-# 	print("horse")
+# 				print("horse")
 
 # parrot(whistle):
-# 	print("whistle")
+# 				print("whistle")
 
 # parrot(chopper):
-# 	print("chopper")
+# 				print("chopper")
 
 # parrot(hurr):
-# 	print("hurr")
+# 				print("hurr")
 
 # parrot(hmm):
-# 	print("hmm")
+# 				print("hmm")
 
 # parrot(oo):
-# 	print("oo")
+# 				print("oo")
 
 # parrot(lll):
-# 	print("lll")
+# 				print("lll")
 
 # parrot(yee):
-# 	print("yee")
+# 				print("yee")
 
 # parrot(uh):
-# 	print("uh")
+# 				print("uh")
 
 # parrot(fff):
-# 	print("fff")
+# 				print("fff")
 
 # parrot(buzz):
-# 	print("buzz")
+# 				print("buzz")
 
 # parrot(generator):
-# 	print("generator")
+# 				print("generator")
 
 # parrot(hiss):
-# 	print("hiss")
+# 				print("hiss")
 
 # parrot(shush):
-# 	print("shush")
+# 				print("shush")
 
 # parrot(x):
-# 	print("x")
+# 				print("x")

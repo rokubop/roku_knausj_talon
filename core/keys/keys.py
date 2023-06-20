@@ -131,7 +131,7 @@ modifier_keys = {
 
 # roku additions
 modifier_keys.update({
-    "troll": "ctrl", 
+    "troll": "ctrl",
     "ship": "shift"
 })
 

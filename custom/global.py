@@ -1,9 +1,4 @@
-# from talon import Module, actions, noise, scope
-import os
-
-from talon import Module, actions, app, clip, cron, ctrl, imgui, noise, ui, Context
-from talon_plugins import eye_mouse, eye_zoom_mouse
-from talon_plugins.eye_mouse import config, toggle_camera_overlay, toggle_control
+from talon import Module, actions, ctrl
 
 mod = Module()
 
@@ -11,12 +6,10 @@ mod = Module()
 class Actions:
     def palate_click():
         """Repeat or wake up."""
-        # if (actions.speech.enabled()):
-        actions.core.repeat_command()
-        # else:
-        #     actions.user.wake_all()
+        if (actions.speech.enabled()):
+            actions.core.repeat_command()
 
-    def repeat(): 
+    def repeat():
         """Repeat the last command."""
         if (actions.speech.enabled()):
             actions.core.repeat_command()
