@@ -16,26 +16,25 @@ class Actions:
     def talon_sleep():
         """Stop listening for Talon commands."""
         actions.speech.disable()
-        # actions.user.sleep_all()
 
     def talon_wake():
         """Start listening for Talon commands."""
         actions.speech.enable()
-        # actions.user.wake_all()
 
     def talon_toggle():
         """Toggle Talon on or off."""
         if actions.speech.enabled():
             actions.user.talon_sleep()
+            actions.sound.set_microphone("None")
         else:
             actions.user.talon_wake()
-        # actions.speech.toggle()
+            actions.sound.set_microphone("Microphone (Yeti X)")
 
     def toggle_voice():
         """Toggle between Serenade and Talon."""
         actions.key("alt-z")
         actions.speech.toggle()
-    
+
     # def serenade_toggle(self):
     #     """Toggle Serenade on or off."""
     #     actions.key("alt-z")

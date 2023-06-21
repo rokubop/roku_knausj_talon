@@ -14,6 +14,10 @@ tail:                       edit.line_end()
 take head:                  edit.extend_line_start()
 take tail:                  edit.extend_line_end()
 
+slapper:
+    edit.line_insert_down()
+    edit.line_insert_down()
+
 # Delete
 scratch:                    edit.delete()
 drill:                      user.delete_right()
