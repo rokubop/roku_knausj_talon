@@ -1,7 +1,5 @@
-# os: windows
-# os: linux
+os: windows
 app: slack
-#todo: some sort of plugin, consolidate with teams or something?
 -
 
 show help: key(ctrl-/)
@@ -14,6 +12,8 @@ rack (show | hide) | (show | hide) rack:    key(ctrl-.)
 <user.teleport> [direct] messages:       key(ctrl-shift-k)
 <user.teleport> (mentions | reactions):  key(ctrl-shift-m)
 <user.teleport> drafts:                  user.slack_open_search_result("Drafts")
+[<user.teleport>] (server | workspace) next: key(ctrl-tab)
+[<user.teleport>] (server | workspace) last: key(ctrl-shift-tab)
 
 <user.find> [channel] [<user.text>]:
     key(ctrl-k)
@@ -22,7 +22,7 @@ rack (show | hide) | (show | hide) rack:    key(ctrl-.)
 <user.teleport> [channel] [<user.text>]:
     user.slack_open_search_result(text or "")
     
-<user.teleport> server <number_small>: key(ctrl-{number_small})
+[<user.teleport>] server <number_small>: key("ctrl-{number_small}")
 
 please [<user.text>]$:
     key(ctrl-k)

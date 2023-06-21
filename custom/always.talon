@@ -1,6 +1,6 @@
 mode: all
 -
-key(ctrl-f1): user.talon_toggle()
+key(ctrl-f1): speech.toggle()
 # serenade (toggle | dog): user.serenade_toggle()
 # serenade (sleep | off): user.serenade_sleep()
 # serenade (wake | on): user.serenade_wake()
