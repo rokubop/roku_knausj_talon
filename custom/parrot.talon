@@ -28,7 +28,7 @@ parrot(pop):
 # parrot(oh):
 # 				print("oh")
 
-parrot(ee):
+# parrot(ee):
 # 				print("ee")
 
 # parrot(ue):

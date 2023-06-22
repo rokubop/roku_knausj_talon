@@ -5,27 +5,27 @@ tag(): user.find
 tag(): user.line_commands
 tag(): user.splits
 
-<user.teleport> daily note: 
+<user.teleport> daily note:
     key(ctrl-p)
-    insert('daily note')
+    insert('today daily note')
     key(enter)
 
-<user.teleport> dock: 
+<user.teleport> dock:
     key(ctrl-o)
     edit.delete_line()
 
-<user.teleport> dock <user.text>: 
+<user.teleport> dock <user.text>:
     key(ctrl-o)
     edit.delete_line()
     insert(text)
     key(enter)
 
-<user.find> dock <user.text>: 
+<user.find> dock <user.text>:
     key(ctrl-o)
     edit.delete_line()
     insert(text)
 
-please [<user.text>]: 
+please [<user.text>]:
     key(ctrl-p)
     edit.delete_line()
     insert(text or "")
@@ -35,4 +35,3 @@ bar (show | hide | dog) | (show | hide) bar:
 
 rack (show | hide | dog) | (show | hide) rack:
     key(alt-c)
-    

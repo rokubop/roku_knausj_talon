@@ -51,7 +51,9 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     key(enter)
     sleep(150ms)
 
-(<user.teleport> dock | <user.find> dock | dock <user.find>):
+<user.teleport> dock: user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+
+(<user.find> dock | dock <user.find>):
     user.vscode("workbench.action.quickOpen")
 
 <user.find> dock [<user.text>] [{user.file_extension}] [halt]:
@@ -61,6 +63,32 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     insert(file_extension or "")
     sleep(300ms)
 
+<user.find> (sesh | session | workspace) [<user.text>] [halt]:
+    user.vscode("workbench.action.openRecent")
+    sleep(250ms)
+    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+    sleep(250ms)
+
+<user.teleport> (sesh | session | workspace) [<user.text>] [halt]:
+    user.vscode("workbench.action.openRecent")
+    sleep(250ms)
+    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+    key(enter)
+    sleep(250ms)
+
+<user.find> (win | window) [<user.text>]:
+    user.vscode("workbench.action.switchWindow")
+    sleep(250ms)
+    insert(text or "")
+    sleep(250ms)
+
+<user.teleport> (win | window) [<user.text>]:
+    user.vscode("workbench.action.switchWindow")
+    sleep(50ms)
+    insert(text or "")
+    key(enter)
+    sleep(250ms)
+
 <user.teleport> sibling:
     user.find_sibling_file()
     sleep(150ms)
@@ -68,6 +96,8 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
 
 <user.find> sibling:
     user.find_sibling_file()
+
+doc split:                 user.vscode("workbench.action.splitEditor")
 
 # Language features
 jest:                       code.complete()
