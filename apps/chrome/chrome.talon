@@ -2,6 +2,7 @@ app: chrome
 -
 tag(): browser
 tag(): user.tabs
+tag(): user.find
 
 profile switch:
     user.chrome_mod("ctrl-shift-m")

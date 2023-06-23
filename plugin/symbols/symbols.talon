@@ -12,7 +12,7 @@ pipe gap:                   " | "
 boom:                       ". "
 small arrow:                "-> "
 arrow:                      "=> "
-new line:                   "\\n"
+# new line:                   "\n"
 carriage return:            "\\r"
 line feed:                  "\\r\\n"
 empty round:                "()"
@@ -81,7 +81,7 @@ end gap:
     edit.line_end()
     key(space)
 
-slider:
+dripper:
     edit.line_end()
     insert(",")
     key(enter)
@@ -95,6 +95,10 @@ chronic:
     edit.line_end()
     insert(":")
     key(enter)
+
+stacker:
+    edit.line_end()
+    insert(": ")
 
 endure:
     edit.line_end()

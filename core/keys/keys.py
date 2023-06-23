@@ -296,6 +296,7 @@ alternate_keys = {
 
 # roku additions
 alternate_keys.update({
+    "clap": "enter",
     "slap": "enter",
     "drill": "delete",
     "scratch": "backspace",

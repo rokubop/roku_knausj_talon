@@ -1,9 +1,9 @@
 parrot(cluck):
 				print("cluck")
 
-# parrot(tut):
-# 				print("tut")
-# 				user.on_tut()
+parrot(tut):
+				print("tut")
+				user.on_tut()
 
 parrot(palate_click):
 				user.palate_click()
