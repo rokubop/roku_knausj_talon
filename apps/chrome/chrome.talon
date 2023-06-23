@@ -39,4 +39,11 @@ please [<user.text>]:
     key(escape ctrl-shift-p)
     insert(text or "")
 
+go <number>:
+    key(ctrl-g)
+    "{number}"
+    key(enter)
+
+[breakpoint | breakpoints] (toggle | dog): key(ctrl-f8)
+
 (light | dark) mode:        key(alt-shift-d)

@@ -283,10 +283,10 @@ class UserActions:
     # snippet.py support end
 
     def tab_jump(number: int):
-        actions.user.vscode_with_plugin("workbench.action.openEditorAtIndex", number)
+        actions.user.vscode(f"workbench.action.openEditorAtIndex{number}")
 
     def tab_back():
-        vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+        actions.user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
     def tab_final():
         if is_mac:
