@@ -3,6 +3,17 @@ from talon import Module, actions, cron
 
 mod = Module()
 
+opp = [
+    ("north", "south"),
+    ("up", "down"),
+    ("left", "right"),
+    ("push", "tug"),
+    ("drain", "step"),
+    ("undo", "redo"),
+    ("last", "next"),
+    ("forward", "back"),
+]
+
 opposites = {
     "north": "south",
     "south": "north",
@@ -18,6 +29,8 @@ opposites = {
     "step": "drain",
     "last": "next",
     "next": "last",
+    "forward": "back",
+    "back": "forward",
 }
 
 last_tut = ""
