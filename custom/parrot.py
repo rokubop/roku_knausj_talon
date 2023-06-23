@@ -80,7 +80,10 @@ class Actions:
             else:
                 actions.core.repeat_command()
 
-        stateReverse.activate_reverse()
+            stateReverse.activate_reverse()
+        # else:
+        #     actions.speech.enable()
+
 
 
     def on_tut():
