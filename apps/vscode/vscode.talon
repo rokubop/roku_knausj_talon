@@ -156,15 +156,15 @@ ref last:                   user.vscode("references-view.prev")
 ref next:                   user.vscode("references-view.next")
 
 # Terminal
-(show | hide) (term | base):         user.vscode("workbench.action.togglePanel")
-(term | base) (show | hide | dog ):  user.vscode("workbench.action.togglePanel")
-(term | base) (large | small):       user.vscode("workbench.action.toggleMaximizedPanel")
-(term | base) control:               user.vscode("workbench.panel.repl.view.focus")
-(term | base) output:                user.vscode("workbench.panel.output.focus")
-(term | base) problems:              user.vscode("workbench.panel.markers.view.focus")
+(show | hide) (term | base): user.vscode("workbench.action.togglePanel")
+(term | base) (show | hide | dog ): user.vscode("workbench.action.togglePanel")
+(term | base) (large | small): user.vscode("workbench.action.toggleMaximizedPanel")
+(term | base) control:      user.vscode("workbench.panel.repl.view.focus")
+(term | base) output:       user.vscode("workbench.panel.output.focus")
+(term | base) problems:     user.vscode("workbench.panel.markers.view.focus")
 ((term | base) terminal | focus (term | base)): user.vscode("workbench.action.terminal.focus")
-(term | base) debug:                 user.vscode("workbench.debug.action.toggleRepl")
-(term | base) clear:                 user.vscode("workbench.debug.panel.action.clearReplAction")
+(term | base) debug:        user.vscode("workbench.debug.action.toggleRepl")
+(term | base) clear:        user.vscode("workbench.debug.panel.action.clearReplAction")
 (<user.teleport> term | term <user.teleport>) <user.text>: "z {text}\n"
 (<user.show_list> term | term <user.show_list>) <user.text>: "z -l {text}\n"
 (<user.teleport> term | term <user.teleport>) (last | switch): "z -\n"
@@ -337,7 +337,7 @@ disclose:
     edit.save()
     sleep(150ms)
     key(ctrl-w)
-revert everything:          user.vscode("workbench.action.files.revert")
+
 copy command id:            user.copy_command_id()
 <user.find> again:          user.vscode("rerunSearchEditorSearch")
 generate range [from <number_small>]:
@@ -363,7 +363,7 @@ wrap dog:                   user.vscode("editor.action.toggleWordWrap")
 pilot jest:                 user.vscode("editor.action.inlineSuggest.trigger")
 pilot next:                 user.vscode("editor.action.inlineSuggest.showNext")
 pilot last:                 user.vscode("editor.action.inlineSuggest.showPrevious")
-pilot yes:                  user.vscode("editor.action.inlineSuggest.commit")
+[pilot] yes:                user.vscode("editor.action.inlineSuggest.commit")
 pilot word:                 user.vscode("editor.action.inlineSuggest.acceptNextWord")
 pilot nope:                 user.vscode("editor.action.inlineSuggest.undo")
 pilot cancel:               user.vscode("editor.action.inlineSuggest.hide")
