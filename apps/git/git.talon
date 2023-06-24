@@ -34,8 +34,8 @@ git checkout branch <user.text>: "git checkout -b {text}\n"
 # git checkout <%text%>:          "git checkout <%text%>\n"
 # git checkout paste:             "git checkout <paste>\n"
 git add all:                "git add .\n"
-# git add all and commit:         user.insert_between("git add . && git commit -m '{message}", "'")
-git add all and commit <user.text>: 'git add . && git commit -m "{text}"\n'
+git add [all] [and] commit: user.insert_between("git add . && git commit -m '", "'")
+git add [all] [and] commit <user.text>: 'git add . && git commit -m "{text}"\n'
 git log:                    "git log\n"
 git status:                 "git status\n"
 git push:                   "git push\n"

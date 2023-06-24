@@ -4,7 +4,7 @@ from datetime import datetime
 
 mod = Module()
 
-opp = [
+two_way_opposites = [
     ("north", "south"),
     ("up", "down"),
     ("left", "right"),
@@ -15,28 +15,14 @@ opp = [
     ("forward", "back"),
 ]
 
-opposites = {
-    "north": "south",
-    "south": "north",
-    "up": "down",
-    "down": "up",
-    "left": "right",
-    "right": "left",
-    "push": "tug",
-    "tug": "push",
-    "undo": "redo",
-    "redo": "undo",
-    "drain": "step",
-    "step": "drain",
-    "last": "next",
-    "next": "last",
-    "forward": "back",
-    "back": "forward",
-}
+opposites = {}
+
+for key, value in two_way_opposites:
+    opposites[key] = value
+    opposites[value] = key
 
 last_tut = ""
 last_palete = ""
-
 
 class StateReverse:
     def __init__(self):
