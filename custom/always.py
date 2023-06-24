@@ -4,14 +4,14 @@ mod = Module()
 
 @mod.action_class
 class Actions:
-    # def serenade_wake():
-    #     """Serenade on."""
-    #     actions.key("alt-z")
-    #     actions.user.talon_sleep()
+    def serenade_wake():
+        """Serenade on."""
+        actions.key("alt-z")
+        actions.user.talon_sleep()
 
-    # def serenade_sleep():
-    #     """Serenade off."""
-    #     actions.key("alt-z")
+    def serenade_sleep():
+        """Serenade off."""
+        actions.key("alt-z")
 
     def talon_sleep():
         """Stop listening for Talon commands."""

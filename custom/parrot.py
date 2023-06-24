@@ -1,5 +1,6 @@
 
 from talon import Module, actions, cron
+from datetime import datetime
 
 mod = Module()
 
@@ -36,6 +37,7 @@ opposites = {
 last_tut = ""
 last_palete = ""
 
+
 class StateReverse:
     def __init__(self):
         self.is_reverse_active = False
@@ -56,11 +58,17 @@ class StateReverse:
 
 stateReverse = StateReverse()
 
+def write_it(text: str):
+    with open('parrot.log', 'a') as file:
+        file.write(f'{datetime.now()}{text}\n')
+
 @mod.action_class
 class Actions:
-    def palate_click():
+    def on_palate():
         """Repeat or wake up."""
         global last_palete, last_tut
+
+        write_it('palate')
 
         if (actions.speech.enabled()):
             if (stateReverse.is_active() and last_tut):
@@ -90,6 +98,7 @@ class Actions:
         """Reverse the last command"""
         global last_tut, last_palete
 
+        write_it('tut')
         if (actions.speech.enabled() and stateReverse.is_active()):
             last_command = actions.user.history_get(0)
             stateReverse.activate_reverse()
@@ -105,3 +114,7 @@ class Actions:
                         last_palete = ""
                     return
             last_tut = ""
+
+    def on_pop():
+        """Do pop"""
+        write_it('pop')

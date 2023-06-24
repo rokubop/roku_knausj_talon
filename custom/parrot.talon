@@ -6,11 +6,11 @@ parrot(tut):
 				user.on_tut()
 
 parrot(palate_click):
-				user.palate_click()
-				print("palate_click")
+				user.on_palate()
+				print("on_palate")
 
 parrot(pop):
-				user.click()
+				user.on_pop()
 				print("pop")
 
 # parrot(gluck):

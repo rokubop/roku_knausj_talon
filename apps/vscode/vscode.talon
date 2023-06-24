@@ -51,7 +51,7 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     key(enter)
     sleep(150ms)
 
-<user.teleport> dock: user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+<user.teleport> dock:       user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
 (<user.find> dock | dock <user.find>):
     user.vscode("workbench.action.quickOpen")
@@ -97,7 +97,7 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
 <user.find> sibling:
     user.find_sibling_file()
 
-doc split:                 user.vscode("workbench.action.splitEditor")
+doc split:                  user.vscode("workbench.action.splitEditor")
 
 # Language features
 jest:                       code.complete()
@@ -168,16 +168,16 @@ ref next:                   user.vscode("references-view.next")
 (<user.teleport> term | term <user.teleport>) <user.text>: "z {text}\n"
 (<user.show_list> term | term <user.show_list>) <user.text>: "z -l {text}\n"
 (<user.teleport> term | term <user.teleport>) (last | switch): "z -\n"
-term external: user.vscode("workbench.action.terminal.openNativeConsole")
-term new: user.vscode("workbench.action.terminal.new")
-term next: user.vscode("workbench.action.terminal.focusNext")
-term last: user.vscode("workbench.action.terminal.focusPrevious")
-term split: user.vscode("workbench.action.terminal.split")
-term zoom: user.vscode("workbench.action.toggleMaximizedPanel")
-term trash: user.vscode("workbench.action.terminal.kill")
-term scroll up: user.vscode("workbench.action.terminal.scrollUp")
-term scroll down: user.vscode("workbench.action.terminal.scrollDown")
-term <number_small>: user.vscode_terminal(number_small)
+term external:              user.vscode("workbench.action.terminal.openNativeConsole")
+term new:                   user.vscode("workbench.action.terminal.new")
+term next:                  user.vscode("workbench.action.terminal.focusNext")
+term last:                  user.vscode("workbench.action.terminal.focusPrevious")
+term split:                 user.vscode("workbench.action.terminal.split")
+term zoom:                  user.vscode("workbench.action.toggleMaximizedPanel")
+term trash:                 user.vscode("workbench.action.terminal.kill")
+term scroll up:             user.vscode("workbench.action.terminal.scrollUp")
+term scroll down:           user.vscode("workbench.action.terminal.scrollDown")
+term <number_small>:        user.vscode_terminal(number_small)
 katie:                      "cd "
 katie up:                   "cd ..\n"
 katie <user.text>:          "cd {text}\n"
