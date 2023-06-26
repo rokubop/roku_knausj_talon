@@ -50,6 +50,39 @@ go <number>:
     "{number}"
     key(enter)
 
-[breakpoint | breakpoints] (toggle | dog): key(ctrl-f8)
+(breakpoint | break) [toggle | dog]: key(ctrl-f8)
+break (pause | resume): key(ctrl-f8)
+break (step | step over): key(f10)
+break (step in | step into): key(f11)
+break (step out | step outside): key(shift-f11)
+break (continue | run | play): key(f8)
 
 (light | dark) mode:        key(alt-shift-d)
+(hide | show) rack | rack (hide | show | dog | toggle): key(ctrl-shift-h)
+(hide | show) bar | bar (hide | show | dog | toggle): key(ctrl-shift-y)
+(hide | show) base | base (hide | show | dog | toggle): key(f12)
+zen mode: key(ctrl-shift-y ctrl-shift-h)
+
+<user.teleport> (sources | source):
+    key(escape ctrl-shift-p)
+    insert("sources")
+    sleep(100ms)
+    key(enter)
+
+<user.teleport> network:
+    key(escape ctrl-shift-p)
+    insert("network")
+    sleep(100ms)
+    key(enter)
+
+<user.teleport> elements:
+    key(escape ctrl-shift-p)
+    insert("elements")
+    sleep(100ms)
+    key(enter)
+
+<user.teleport> (console | counsel):
+    key(escape ctrl-shift-p)
+    insert("console")
+    sleep(100ms)
+    key(enter)

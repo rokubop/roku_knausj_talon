@@ -76,6 +76,13 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     key(enter)
     sleep(250ms)
 
+<user.teleport> new (sesh | session | workspace) [<user.text>] [halt]:
+    user.vscode("workbench.action.openRecent")
+    sleep(250ms)
+    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+    key(ctrl-enter)
+    sleep(250ms)
+
 <user.show_list> (win | window) [<user.text>]:
     user.vscode("workbench.action.switchWindow")
     sleep(250ms)
