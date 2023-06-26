@@ -77,6 +77,10 @@ slicer:
     key(enter)
     insert("- ")
 
+sliced:
+    edit.line_end()
+    insert(" - ")
+
 end gap:
     edit.line_end()
     key(space)
@@ -91,15 +95,15 @@ breaker:
     insert(" {")
     key(enter)
 
-chronic:
+stacker:
     edit.line_end()
     insert(":")
     key(enter)
 
-stacker:
+stackade:
     edit.line_end()
     insert(": ")
 
-endure:
+equate:
     edit.line_end()
     insert(" = ")

@@ -9,6 +9,7 @@ not mode: sleep
 ^command mode$:
     mode.disable("sleep")
     mode.disable("dictation")
+    mode.disable("user.game")
     mode.enable("command")
 
 # ziemus_talon
@@ -16,4 +17,13 @@ not mode: sleep
     mode.disable("sleep")
     mode.disable("command")
     mode.disable("dictation")
-    user.enable_game_mode()
+    # user.game_sprint_state_reset()
+    user.game_movement_state_reset()
+    user.release_held_game_keys()
+    # user.game_noise_control_reset()
+    # _nullify_current_movement_direction_key()
+
+    # user.release_held_game_keys()
+    # user.game_sprint_state_reset()
+    # user.game_movement_state_reset()
+    mode.enable("user.game")

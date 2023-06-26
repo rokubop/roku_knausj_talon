@@ -3,7 +3,6 @@
 Community-maintained [Talon](https://talonvoice.com/) command grammar.
 
 Can be used on its own, but shines when combined with:
- 
 - [Cursorless](https://www.cursorless.org/) for programming and text editing
 - [Rango](https://github.com/david-tejada/rango) for browser navigation
 - [gaze-ocr](https://github.com/wolfmanstout/talon-gaze-ocr) for advanced cursor control using eye tracking and text recognition (OCR)

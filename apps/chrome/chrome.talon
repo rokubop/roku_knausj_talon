@@ -4,34 +4,40 @@ tag(): browser
 tag(): user.tabs
 tag(): user.find
 
-profile switch:
-    user.chrome_mod("ctrl-shift-m")
+<user.teleport> (profile | user):
+    user.chrome_mod("shift-m")
     sleep(200ms)
     key(enter)
 
-tab (recent | <user.show_list>): user.chrome_mod("ctrl-shift-a")
-
-tab (recent | <user.show_list>) <user.text>$:
-    user.chrome_mod("ctrl-shift-a")
+<user.teleport> tab:
+    user.chrome_mod("shift-a")
     sleep(200ms)
-    insert("{text}")
+    key(enter)
 
-tab <user.teleport> <user.text>$:
-    user.chrome_mod("ctrl-shift-a")
+<user.teleport> [tab] <user.text>$:
+    user.chrome_mod("shift-a")
     sleep(200ms)
     user.insert_formatted("{text}", "NO_SPACES")
     key(enter)
 
+<user.find> tab:            user.chrome_mod("shift-a")
+tab (recent | <user.show_list>): user.chrome_mod("shift-a")
+
+tab (recent | <user.show_list>) <user.text>$:
+    user.chrome_mod("shift-a")
+    sleep(200ms)
+    insert("{text}")
+
 tab split:                  user.rango_command_without_target("moveCurrentTabToNewWindow")
 
-<user.teleport> [dock] <user.text>$:
-    user.chrome_mod("ctrl-o")
+<user.teleport> dock <user.text>$:
+    user.chrome_mod("o")
     sleep(200ms)
     user.insert_formatted("{text}", "NO_SPACES")
     key(enter)
 
 <user.find> dock <user.text>$:
-    user.chrome_mod("ctrl-o")
+    user.chrome_mod("o")
     sleep(200ms)
     user.insert_formatted("{text}", "NO_SPACES")
 

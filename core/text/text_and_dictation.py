@@ -24,9 +24,13 @@ ctx.lists["user.prose_modifiers"] = {
     "no space": "no_space",
 }
 ctx.lists["user.prose_snippets"] = {
+    "boom": ". ",
+    "spam": ", ",
     "spacebar": " ",
+    "void": " ",
     "new line": "\n",
     "new paragraph": "\n\n",
+    "new graph": "\n\n",
     # Curly quotes are used to obtain proper spacing for left and right quotes, but will later be straightened.
     "open quote": "“",
     "close quote": "”",
@@ -34,7 +38,6 @@ ctx.lists["user.prose_snippets"] = {
     "winky": ";-)",
     "frowny": ":-(",
 }
-
 
 @mod.capture(rule="{user.prose_modifiers}")
 def prose_modifier(m) -> Callable:

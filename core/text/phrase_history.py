@@ -48,7 +48,7 @@ class Actions:
         """Moves left before the last phrase"""
         try:
             for _ in phrase_history.pop(0):
-                actions.edit.left()
+                actions.edit.left
         except IndexError:
             logging.warning("before_last_phrase(): No last phrase to move before!")
 

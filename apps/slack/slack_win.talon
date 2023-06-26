@@ -1,21 +1,22 @@
 os: windows
 app: slack
 -
+tag(): user.messaging
+tag(): user.emoji
+show help:                  key(ctrl-/)
 
-show help: key(ctrl-/)
+bar (show | hide) | (show | hide) bar: key(ctrl-shift-d)
+rack (show | hide) | (show | hide) rack: key(ctrl-.)
 
-bar (show | hide) | (show | hide) bar:      key(ctrl-shift-d)
-rack (show | hide) | (show | hide) rack:    key(ctrl-.)
-
-<user.teleport> unreads:                 key(ctrl-shift-a)
-<user.teleport> threads:                 user.slack_open_search_result("Threads")
-<user.teleport> [direct] messages:       key(ctrl-shift-k)
-<user.teleport> (mentions | reactions):  key(ctrl-shift-m)
-<user.teleport> drafts:                  user.slack_open_search_result("Drafts")
+<user.teleport> unreads:    key(ctrl-shift-a)
+<user.teleport> threads:    user.slack_open_search_result("Threads")
+<user.teleport> [direct] messages: key(ctrl-shift-k)
+<user.teleport> (mentions | reactions): key(ctrl-shift-m)
+<user.teleport> drafts:     user.slack_open_search_result("Drafts")
 <user.teleport> (server | workspace) [next]: key(ctrl-tab)
 <user.teleport> (server | workspace) last: key(ctrl-shift-tab)
-<user.teleport> last: key(alt-left)
-<user.teleport> next: key(alt-right)
+<user.teleport> last:       key(alt-left)
+<user.teleport> next:       key(alt-right)
 
 <user.find> [channel] [<user.text>]:
     key(ctrl-k)
@@ -25,6 +26,9 @@ rack (show | hide) | (show | hide) rack:    key(ctrl-.)
     user.slack_open_search_result(text or "")
 
 [<user.teleport>] server <number_small>: key("ctrl-{number_small}")
+
+focus next:                 key(f6)
+focus last:                 key(shift-f6)
 
 please [<user.text>]$:
     key(ctrl-k)

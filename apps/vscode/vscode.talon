@@ -42,9 +42,9 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
 <user.teleport> next:
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-<user.teleport> dock <user.text> [{user.file_extension}] [halt]:
+<user.teleport> [dock] <user.text> [{user.file_extension}] [halt]:
     user.vscode("workbench.action.quickOpen")
-    sleep(400ms)
+    sleep(100ms)
     insert(text or "")
     insert(file_extension or "")
     sleep(300ms)
@@ -53,17 +53,17 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
 
 <user.teleport> dock:       user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
-(<user.find> dock | dock <user.find>):
+(<user.show_list> dock | dock <user.show_list>):
     user.vscode("workbench.action.quickOpen")
 
-<user.find> dock [<user.text>] [{user.file_extension}] [halt]:
+<user.show_list> [dock] [<user.text>] [{user.file_extension}] [halt]:
     user.vscode("workbench.action.quickOpen")
-    sleep(400ms)
+    sleep(100ms)
     insert(text or "")
     insert(file_extension or "")
     sleep(300ms)
 
-<user.find> (sesh | session | workspace) [<user.text>] [halt]:
+<user.show_list> (sesh | session | workspace) [<user.text>] [halt]:
     user.vscode("workbench.action.openRecent")
     sleep(250ms)
     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
@@ -76,7 +76,7 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     key(enter)
     sleep(250ms)
 
-<user.find> (win | window) [<user.text>]:
+<user.show_list> (win | window) [<user.text>]:
     user.vscode("workbench.action.switchWindow")
     sleep(250ms)
     insert(text or "")
@@ -94,7 +94,7 @@ show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsF
     sleep(150ms)
     key(enter)
 
-<user.find> sibling:
+<user.show_list> sibling:
     user.find_sibling_file()
 
 doc split:                  user.vscode("workbench.action.splitEditor")

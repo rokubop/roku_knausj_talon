@@ -14,7 +14,7 @@ tail:                       edit.line_end()
 take head:                  edit.extend_line_start()
 take tail:                  edit.extend_line_end()
 
-slapper:
+slapper | new graph:
     edit.line_insert_down()
     edit.line_insert_down()
 
@@ -64,3 +64,10 @@ drink:                      edit.line_insert_up()
 disk:                       edit.save()
 disk all:                   edit.save_all()
 nope:                       edit.undo()
+
+<user.operator> item:       "- "
+<user.operator> task:       "- [ ] "
+<user.operator> code:
+    "``"
+    edit.left()
+<user.operator> code block: "```\n"

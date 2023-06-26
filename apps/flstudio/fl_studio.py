@@ -1,4 +1,4 @@
-from talon import Module, Context
+from talon import Module, Context, actions
 
 mod = Module()
 mod.list("fl_instrument", desc="Instruments")
@@ -75,15 +75,16 @@ ctx.lists["self.fl_plugin"] = {
   'wider': "wider",
 }
 
-# ctx.lists["self.timing"] = {
-#   "one": 1000,
-#   "two": 2000,
-#   "three": 3000,
-#   "four": 4000,
-#   "five": 5000,
-#   "six": 6000,
-#   "seven": 7000,
-#   "eight": 8000,
-#   "nine": 9000,
-#   "ten": 10000,
-# }
+@mod.action_class
+class Actions:
+    def normalize():
+      """"normalized plus preferred settings"""
+      actions.mouse_click(0)
+  #     await normalize(api);
+  # // distance from normalize to declicking mode
+  # const pos = await api.getMouseLocation();
+  # await api.setMouseLocation(pos.x - 142, pos.y - 13);
+  # await setDeclickingMode(api);
+  # // distance from mode to normalize
+  # await api.setMouseLocation(pos.x + 156, pos.y - 110);
+  # await setResampleMode(api);

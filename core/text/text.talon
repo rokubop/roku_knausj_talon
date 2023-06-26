@@ -19,6 +19,11 @@ phrase <user.text> over:
 word <user.word>:
     user.add_phrase_to_history(word)
     insert(word)
+try <user.word>:
+    user.add_phrase_to_history(word)
+    insert(word)
+    sleep(200ms)
+    key(tab)
 proud <user.word>:          user.insert_formatted(word, "CAPITALIZE_FIRST_WORD")
 recent list:                user.toggle_phrase_history()
 recent close:               user.phrase_history_hide()
