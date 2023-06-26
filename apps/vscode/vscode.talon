@@ -164,7 +164,8 @@ ref next:                   user.vscode("references-view.next")
 (term | base) problems:     user.vscode("workbench.panel.markers.view.focus")
 ((term | base) terminal | focus (term | base)): user.vscode("workbench.action.terminal.focus")
 (term | base) debug:        user.vscode("workbench.debug.action.toggleRepl")
-(term | base) clear:        user.vscode("workbench.debug.panel.action.clearReplAction")
+# (term | base) clear:        user.vscode("workbench.debug.panel.action.clearReplAction")
+term clear:                 key(ctrl-l)
 (<user.teleport> term | term <user.teleport>) <user.text>: "z {text}\n"
 (<user.show_list> term | term <user.show_list>) <user.text>: "z -l {text}\n"
 (<user.teleport> term | term <user.teleport>) (last | switch): "z -\n"

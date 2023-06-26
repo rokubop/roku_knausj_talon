@@ -4,6 +4,7 @@ tag(): user.tabs
 tag(): user.find
 tag(): user.line_commands
 tag(): user.splits
+tag(): user.emoji
 
 <user.teleport> daily note:
     key(ctrl-p)
