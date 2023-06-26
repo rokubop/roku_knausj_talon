@@ -1,15 +1,21 @@
-from talon import Module
+from talon import Module, Context, actions
 
 mod = Module()
+ctx = Context()
 
-def fibonacci(n: str):
-    if n == 'world':
-        print('yo')
+ctx.matches = """
+app: chrome
+"""
 
-
+# @mod.action_class
 @mod.action_class
-class Actions:
-    def test_one(whatever: str):
+class Actidsfosdffefewwefefws:
+    def test_one():
         """test"""
-        if whatever == 'world':
-            print('yo')
+        actions.insert('yo')
+
+@ctx.action_class("user")
+class Totorsfwefewfewfewfewo:
+    def test_one():
+        """test"""
+        actions.insert('helloa')
