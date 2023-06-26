@@ -44,7 +44,8 @@ class StateReverse:
 
 stateReverse = StateReverse()
 
-def write_it(text: str):
+def log_parrot(text: str):
+    """Log parrot for stream with Serenade"""
     with open('parrot.log', 'a') as file:
         file.write(f'{datetime.now()}{text}\n')
 
@@ -54,7 +55,7 @@ class Actions:
         """Repeat or wake up."""
         global last_palete, last_tut
 
-        write_it('palate')
+        log_parrot('palate')
 
         if (actions.speech.enabled()):
             if (stateReverse.is_active() and last_tut):
@@ -84,7 +85,7 @@ class Actions:
         """Reverse the last command"""
         global last_tut, last_palete
 
-        write_it('tut')
+        log_parrot('tut')
         if (actions.speech.enabled() and stateReverse.is_active()):
             last_command = actions.user.history_get(0)
             stateReverse.activate_reverse()
@@ -103,4 +104,4 @@ class Actions:
 
     def on_pop():
         """Do pop"""
-        write_it('pop')
+        log_parrot('pop')
