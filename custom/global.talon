@@ -2,5 +2,5 @@
 swap:                       key(alt-tab)
 again:                      user.repeat()
 confetti:                   user.vscode('cursorless.toggleDecorations')
-mouse mid:                  user.mouse_move_center_active_window()
+mouse (mid | five):         user.mouse_move_center_active_window()
 smart paste:                key(win-v)

@@ -36,3 +36,6 @@ bar (show | hide | dog) | (show | hide) bar:
 
 rack (show | hide | dog) | (show | hide) rack:
     key(alt-c)
+
+task (dog | check | uncheck | complete):
+    key(ctrl-l)
