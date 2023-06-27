@@ -10,7 +10,7 @@ TELEPORT = "pop"
 OPERATOR = "make"
 DELETE = "chuck"
 FIND = "scout"
-SHOW_LIST = ("show" | "list")
+SHOW_LIST = "list"
 CLIP = "clip"
 
 @mod.capture(rule=SELECT)
