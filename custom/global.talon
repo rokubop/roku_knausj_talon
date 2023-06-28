@@ -1,5 +1,5 @@
 -
-swap$:                       key(alt-tab)
+swap$:                      key(alt-tab)
 again:                      user.repeat()
 confetti:                   user.vscode('cursorless.toggleDecorations')
 mouse (mid | five):         user.mouse_move_center_active_window()

@@ -1,3 +1,5 @@
+mode: not sleep
+-
 parrot(cluck):
 				print("cluck")
 
@@ -12,6 +14,9 @@ parrot(palate_click):
 parrot(pop):
 				user.on_pop()
 				print("pop")
+
+# parrot(hiss):
+# 				print("hiss")
 
 # parrot(gluck):
 # 				print("gluck")
@@ -72,9 +77,6 @@ parrot(pop):
 
 # parrot(generator):
 # 				print("generator")
-
-# parrot(hiss):
-# 				print("hiss")
 
 # parrot(shush):
 # 				print("shush")
