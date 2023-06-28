@@ -167,7 +167,8 @@ class Actions:
         """Show command palette"""
         actions.key("ctrl-shift-p")
 
-    def find_sibling_file():
+    # argument for passing a file type is not working
+    def find_sibling_file(file_type: str = None):
         """Find sibling file based on file name"""
         full_name = actions.user.vscode_get("andreas.getFilename")
         index = full_name.rfind(".")
@@ -175,10 +176,16 @@ class Actions:
         if index < 0:
             return
         short_name = full_name[:index]
-        extension = full_name[index + 1 :]
-        sibling_extension = actions.user.get_extension_sibling(extension)
-        if not sibling_extension:
-            return
+
+        # not working
+        if file_type:
+            sibling_extension = file_type
+        else:
+            extension = full_name[index + 1 :]
+            sibling_extension = actions.user.get_extension_sibling(extension)
+            if not sibling_extension:
+                return
+
         sibling_full_name = f"{short_name}.{sibling_extension}"
         actions.user.find_file(sibling_full_name)
 

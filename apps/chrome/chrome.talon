@@ -3,6 +3,8 @@ app: chrome
 tag(): browser
 tag(): user.tabs
 tag(): user.find
+tag(): user.emoji
+
 
 <user.teleport> (profile | user):
     user.chrome_mod("shift-m")
@@ -50,12 +52,19 @@ go <number>:
     "{number}"
     key(enter)
 
-(breakpoint | break) [toggle | dog]: key(ctrl-f8)
-break (pause | resume): key(ctrl-f8)
-break (step | step over): key(f10)
-break (step in | step into): key(f11)
-break (step out | step outside): key(shift-f11)
-break (continue | run | play): key(f8)
+(break | bug) [toggle | dog]: key(ctrl-f8)
+(break | bug) (pause | resume): key(ctrl-f8)
+(break | bug) (step | step over): key(f10)
+(break | bug) (step in | step into): key(f11)
+(break | bug) (step out | step outside): key(shift-f11)
+(break | bug) (continue | run | play): key(f8)
+break <number>:
+    key(ctrl-g)
+    "{number}"
+    key(enter)
+    sleep(100ms)
+    key(ctrl-b)
+
 
 (light | dark) mode:        key(alt-shift-d)
 (hide | show) rack | rack (hide | show | dog | toggle): key(ctrl-shift-h)

@@ -103,13 +103,14 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
     key(enter)
     sleep(250ms)
 
-<user.teleport> sibling:
-    user.find_sibling_file()
+# custom text not working
+<user.teleport> sibling [<user.text>]:
+    user.find_sibling_file(text or "")
     sleep(150ms)
     key(enter)
 
-<user.show_list> sibling:
-    user.find_sibling_file()
+<user.show_list> sibling [<user.text>]:
+    user.find_sibling_file(text or "")
 
 doc split:                  user.vscode("workbench.action.splitEditor")
 
@@ -392,6 +393,11 @@ pilot (dog | toggle | off | on):
     sleep(300ms)
     mouse_click(0)
 
+# cursorless
+also <user.prose>:
+    prev_command = user.history_get(1)
+    mimic("pre {prose}")
+    mimic(prev_command)
 dismiss:
     user.vscode("notifications.hideList")
     user.vscode("notifications.hideToasts")
