@@ -29,13 +29,3 @@ replace confirm all:        user.find_replace_confirm_all()
 <user.find> file clip:      user.find_file(clip.text())
 <user.find> file [<user.filename>]$:
     user.find_file(filename or "")
-
-# TODO:
-# pop <user.text>$:
-#     edit.find(text)
-#     key(enter)
-
-pop file <user.filename>$:
-    user.find_file(filename)
-    sleep(300ms)
-    key(enter)

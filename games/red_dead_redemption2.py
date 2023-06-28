@@ -42,7 +42,7 @@ class RedDeadRedemptionActions:
         global horse_run
         if horse_run:
             return
-        horse_run = cron.interval("500ms", actions.user.rdr_horse_kick)
+        horse_run = cron.interval("200ms", actions.user.rdr_horse_kick)
 
     def rdr_horse_stop():
         """"""
