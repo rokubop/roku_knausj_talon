@@ -30,6 +30,9 @@ class GameActions:
             actions.user.release_game_key(key)
         actions.user.rdr_horse_stop()
 
+    def game_camera_first_person():
+        actions.key("v")
+
 
 @mod.action_class
 class RedDeadRedemptionActions:

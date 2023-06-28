@@ -14,6 +14,13 @@ settings():
 tag(): user.game_action_rpg
 
 <user.key>:                 key(key)
+[go] (fast | faster) | run:
+    user.switch_game_movement(0)
+    key(w)
+    user.switch_game_movement(1)
+[go] (slow | slower) | walk:
+    user.switch_game_movement(0)
+    user.switch_game_movement(1)
 long (<user.key>):          user.hold_game_key(key, "700ms")
 hold (<user.key>):          user.hold_game_key(key)
 horse go:                   user.rdr_horse_run()
