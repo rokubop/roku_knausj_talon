@@ -29,8 +29,8 @@ show settings <user.text>:
     user.vscode("workbench.action.openSettings2")
     sleep(200ms)
     "{text}"
-show shortcuts:             user.vscode("workbench.action.openGlobalKeybindings")
-show shortcuts json:        user.vscode("workbench.action.openGlobalKeybindingsFile")
+show [keyboard] shortcuts:  user.vscode("workbench.action.openGlobalKeybindings")
+show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
 
 # Teleport / Scout
 <user.teleport> back:       user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
@@ -384,3 +384,16 @@ pilot (dog | toggle | off | on):
     mouse_move(1683, 954)
     sleep(300ms)
     mouse_click(0)
+
+dismiss:
+    user.vscode("notifications.hideList")
+    user.vscode("notifications.hideToasts")
+    user.vscode("workbench.action.terminal.hideSuggestWidget")
+    user.vscode("hideSuggestWidget")
+
+# row <user.prose_number>:    mimic("pre row {user.prose_number}")
+# row <user.prose_number> tail:
+#     mimic("pre row {user.prose_number}")
+#     edit.line_end()
+
+tab keep:                   user.vscode("workbench.action.keepEditor")
