@@ -53,11 +53,18 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
 
 <user.teleport> dock:       user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
-(<user.show_list> dock | dock <user.show_list>):
+(<user.show_list> (dock | stock) | dock <user.show_list>):
     user.vscode("workbench.action.quickOpen")
 
-<user.show_list> [dock] [<user.text>] [{user.file_extension}] [halt]:
+<user.show_list> [dock | stock] [<user.text>] [{user.file_extension}] [halt]:
     user.vscode("workbench.action.quickOpen")
+    sleep(100ms)
+    insert(text or "")
+    insert(file_extension or "")
+    sleep(300ms)
+
+<user.find> doc [<user.text>]:
+    user.vscode("list.find")
     sleep(100ms)
     insert(text or "")
     insert(file_extension or "")
