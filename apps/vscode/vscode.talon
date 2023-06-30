@@ -11,7 +11,7 @@ settings():
     key_wait = 2
 
 (focus | show) term:        user.vscode("workbench.action.terminal.focus")
-(focus | show) files:       user.vscode("workbench.view.explorer")
+(focus | show) (files | folders):       user.vscode("workbench.explorer.fileView.focus")
 (focus | show) extensions:  user.vscode("workbench.view.extensions")
 (focus | show) outline:     user.vscode("outline.focus")
 (focus | show) run:         user.vscode("workbench.view.debug")
@@ -63,7 +63,7 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
     insert(file_extension or "")
     sleep(300ms)
 
-<user.find> doc [<user.text>]:
+<user.find> (doc | folder | file) [<user.text>]:
     user.vscode("list.find")
     sleep(100ms)
     insert(text or "")
@@ -158,7 +158,7 @@ maximize:                   user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
 # Sidebar
-bar (show | hide):          user.vscode("workbench.action.toggleSidebarVisibility")
+bar (show | hide | close | open):          user.vscode("workbench.action.toggleSidebarVisibility")
 bar explore:                user.vscode("workbench.view.explorer")
 bar extensions:             user.vscode("workbench.view.extensions")
 bar outline:                user.vscode("outline.focus")
@@ -269,6 +269,8 @@ git checkout branch [<user.text>]:
     sleep(50ms)
     text = user.format_text(text or '', "SNAKE_CASE")
     "{text}"
+git checkout clip:
+    "git checkout {clip.text()}\n"
 git commit [<user.text>]:
     user.vscode("git.commit")
     sleep(300ms)
@@ -394,10 +396,16 @@ pilot (dog | toggle | off | on):
     mouse_click(0)
 
 # cursorless
-also <user.prose>:
+# also <user.prose>:
+#     prev_command = user.history_get(1)
+#     mimic("pre {prose}")
+#     mimic(prev_command)
+
+also <user.cursorless_target>:
     prev_command = user.history_get(1)
-    mimic("pre {prose}")
+    user.cursorless_single_target_command("setSelectionBefore", cursorless_target)
     mimic(prev_command)
+
 dismiss:
     user.vscode("notifications.hideList")
     user.vscode("notifications.hideToasts")

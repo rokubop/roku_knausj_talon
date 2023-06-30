@@ -9,6 +9,7 @@ parrot(palate_click):
 				user.on_palate()
 				print("on_palate")
 parrot(pop):
+# 	user.repeat()
 				user.on_pop()
 				print("pop")
 # parrot(shush):              user.noise_debounce("shush", true)
