@@ -96,3 +96,9 @@ zen mode: key(ctrl-shift-y ctrl-shift-h)
     insert("console")
     sleep(100ms)
     key(enter)
+
+inspect this:
+    mouse_click(1)
+    sleep(100ms)
+    key(up)
+    key(enter)

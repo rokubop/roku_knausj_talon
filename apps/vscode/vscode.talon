@@ -103,6 +103,11 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
     key(enter)
     sleep(250ms)
 
+<user.teleport> form:
+    user.find_sibling_form()
+    sleep(150ms)
+    key(enter)
+
 # custom text not working
 <user.teleport> sibling [<user.text>]:
     user.find_sibling_file(text or "")

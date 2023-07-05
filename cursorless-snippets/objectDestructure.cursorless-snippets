@@ -1,0 +1,22 @@
+{
+  "objectDestructure": {
+    "definitions": [
+      {
+        "scope": {
+          "langIds": [
+            "javascript"
+          ]
+        },
+        "body": [
+          "{",
+          "\t...$objectName,",
+          "}"
+        ]
+      }
+    ],
+    "description": "Destructure an object",
+    "variables": {
+      "objectName": {}
+    }
+  }
+}

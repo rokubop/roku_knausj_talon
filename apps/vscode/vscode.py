@@ -189,6 +189,23 @@ class Actions:
         sibling_full_name = f"{short_name}.{sibling_extension}"
         actions.user.find_file(sibling_full_name)
 
+    def find_sibling_form():
+        """Find sibling file based on file name"""
+        full_name = actions.user.vscode_get("andreas.getFilename")
+        index = full_name.rfind(".")
+        print("full_name", full_name)
+        if index < 0:
+            return
+        short_name = full_name[:index]
+        extension = full_name[index + 1 :]
+        print("extension", extension)
+        print("short_name", short_name)
+        # print("full_name", full_name)
+        sibling_extension = actions.user.get_extension_sibling(extension)
+
+        sibling_full_name = f"{short_name}.{sibling_extension}"
+        actions.user.find_file(sibling_full_name)
+
 
 @mac_ctx.action_class("user")
 class MacUserActions:
@@ -309,6 +326,7 @@ class UserActions:
 
     def tab_close_all_others():
         actions.user.vscode("workbench.action.closeEditorsInOtherGroups")
+        actions.user.vscode("workbench.action.closeOtherEditors")
 
     def tab_duplicate():
         actions.user.vscode("workbench.action.splitEditor")
