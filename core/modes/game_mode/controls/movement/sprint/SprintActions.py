@@ -1,6 +1,6 @@
 from threading import Lock
 from talon import actions, Module
-from ..GameModeHelper import GameModeHelper
+from ....GameModeHelper import GameModeHelper
 
 game_sprint_module = Module()
 

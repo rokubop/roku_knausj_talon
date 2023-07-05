@@ -56,7 +56,6 @@ ctx.lists["user.game_camera_direction"] = {
 }
 
 def _mouse_move(dx: int, dy: int):
-    print("mouse move", dx, dy)
     import platform
     os = platform.system().lower()
     if os.startswith("windows"):
@@ -65,7 +64,7 @@ def _mouse_move(dx: int, dy: int):
         # I couldn't get the usual ctrl.mouse_move call to work with most first/third person games on windows
         # winAPI does not produce the most reproducible results but it works well enough
     else:
-        # todo find out what API best integrates with games for each platform
+        #todo find out what API best integrates with games for each platform
         from talon import ctrl
         (x, y) = ctrl.mouse_pos()
         x += dx

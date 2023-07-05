@@ -112,6 +112,9 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
 <user.show_list> sibling [<user.text>]:
     user.find_sibling_file(text or "")
 
+search next:                user.vscode("search.action.focusNextSearchResult")
+search last:                user.vscode("search.action.focusPreviousSearchResult")
+
 doc split:                  user.vscode("workbench.action.splitEditor")
 
 # Language features

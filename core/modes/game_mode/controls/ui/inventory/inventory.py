@@ -19,3 +19,7 @@ class Actions:
     def game_inventory_tab_previous():
         """Go to the previous inventory tab."""
         return 0
+
+    def game_inventory_show():
+        """Show or had inventory"""
+        actions.key("i")

@@ -4,12 +4,12 @@ tag(): user.game_basic_movement_arrows
 tag(): user.game_arrow_keys_toggle_wsad_movement
 
 # go up: key(w:down)
-up stop: key(w:up)
+up stop:                    key(w:up)
 # go down: key(s:down)
 # down stop: key(s:up)
-stop: key(w:up s:up a:up d:up)
+stop:                       key(w:up s:up a:up d:up)
 
-# [user.game_directions]: 
+# [user.game_directions]:
 go up:
     user.game_movement_toggle_direction_switch("w")
 go down:

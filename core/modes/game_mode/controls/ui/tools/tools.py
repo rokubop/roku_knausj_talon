@@ -1,6 +1,7 @@
 from talon import Module, actions, Context
 
 mod = Module()
+mod.tag("game_tools")
 mod.list("game_tool_keyword")
 ctx = Context()
 ctx.lists["user.game_tool_keyword"] = {"tool", "trap"}

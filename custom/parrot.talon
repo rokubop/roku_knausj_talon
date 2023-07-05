@@ -8,10 +8,10 @@ parrot(tut):
 parrot(palate_click):
 				user.on_palate()
 				print("on_palate")
-parrot(pop):
-# 	user.repeat()
-				user.on_pop()
-				print("pop")
+# parrot(pop):
+# 				user.repeat()
+# 				user.on_pop()
+# 				print("pop")
 # parrot(shush):              user.noise_debounce("shush", true)
 # parrot(shush:stop):         user.noise_debounce("shush", false)
 

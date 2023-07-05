@@ -1,6 +1,8 @@
 from talon import Module, actions, Context
 
 mod = Module()
+
+mod.tag("game_character_sheet")
 mod.tag("game_skills")
 
 mod.list(
@@ -13,7 +15,9 @@ mod.list(
     desc=
     "All keywords for a magic spell. May be overridden to suite a games setting or personal preferences."
 )
+
 ctx = Context()
+
 ctx.lists["user.game_skill_keyword"] = {"ability", "perk", "skill", "kill"}
 ctx.lists["user.game_spell_keyword"] = {"power", "spell", "pell", "cast"}
 

@@ -1,6 +1,6 @@
 from talon import actions, ui
-from .BasicMovementActions import _nullify_current_movement_direction_key
-from ..GameModeHelper import GameModeHelper
+from .controls.movement.BasicMovementActions import _nullify_current_movement_direction_key
+from .GameModeHelper import GameModeHelper
 
 
 def _on_app_launch_close(app):
