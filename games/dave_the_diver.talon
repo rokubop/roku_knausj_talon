@@ -3,12 +3,12 @@ and mode: user.game
 and not mode: sleep
 -
 settings():
-    # user.mouse_enable_pop_click = 0
-    # user.mouse_hide_mouse_gui = 1
     key_hold = 64.0
     key_wait = 16.0
-    # user.mouse_hold = 64000
-    # user.mouse_wait = 0
+    user.mouse_hold = 64000
+    user.mouse_wait = 0
+    # user.mouse_enable_pop_click = 0
+    # user.mouse_hide_mouse_gui = 1
     # user.game_noise_pop_binding_default = "move"
     # user.game_noise_hiss_binding_default = "long click"
     # user.game_turn_around_mouse_delta = 2850
@@ -58,12 +58,38 @@ tag(): user.game_mouse_enabled
 
 # parrot.pop():               mouse_click(0)
 
-parrot.pop():               user.game_click()
+# parrot(pop):                user.game_click(0)
+# hello:                      user.game_click(0)
+parrot(pop):                user.dave_mouse_click(0)
+parrot(palete_click):       user.dave_mouse_click(0)
+hello:                      user.dave_mouse_click(0)
 # test:                       mouse_click(0)
-# test:                       user.dave_mouse_click(0)
-test:                       user.dave_test()
+test:                       user.dave_mouse_click(0)
+# test:                       user.dave_test()
 
 <user.key>:                 key(key)
+harp:
+    user.mouse_drag(1)
+
+swim | slow | slower:       user.game_start_walking()
+fast | faster | phelps:
+    user.game_start_running()
+
+shot:
+    user.dave_mouse_click(0)
+    user.mouse_drag_end()
+
+swap$:
+    print("command mode")
+    mode.disable("sleep")
+    mode.disable("dictation")
+    mode.disable("user.game")
+    mode.enable("command")
+    key(alt:down)
+    key(tab)
+    sleep(50ms)
+    key(alt:up)
+
 # [go] (fast | faster) | run:
 #     user.switch_game_movement(0)
 #     key(w)

@@ -1,0 +1,25 @@
+{
+    "filter": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "typescript",
+                        "javascript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "$array.filter(item => $condition)"
+                ]
+            }
+        ],
+        "description": "",
+        "variables": {
+            "array": {},
+            "item": {},
+            "condition": {}
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "some": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "typescript",
+                        "javascript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "$array.some(value => $condition)"
+                ]
+            }
+        ],
+        "description": "filter based on some",
+        "variables": {
+            "array": {},
+            "condition": {}
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "console": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "typescript",
+                        "javascript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "console.log($expression)"
+                ]
+            },
+            {
+                "scope": {
+                    "langIds": [
+                        "python"
+                    ]
+                },
+                "body": [
+                    "print($expression)"
+                ]
+            }
+        ],
+        "description": "Simple console statement",
+        "variables": {
+            "expression": {
+                "description": "The expression to print"
+            }
+        },
+        "insertionScopeTypes": [
+            "statement"
+        ]
+    }
+}

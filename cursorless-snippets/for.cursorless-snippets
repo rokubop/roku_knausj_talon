@@ -1,0 +1,26 @@
+{
+    "for": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "typescript",
+                        "javascript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "for (let i = 0; i < $array.length; i++) {",
+                    "\t$statement",
+                    "}"
+                ]
+            }
+        ],
+        "description": "Basic for loop",
+        "variables": {
+            "array": {},
+            "statement": {}
+        }
+    }
+}

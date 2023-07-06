@@ -1,0 +1,25 @@
+{
+    "reduce": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "typescript",
+                        "javascript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "$array.reduce((prev, cur) => $returnStatement, $initialValue)"
+                ]
+            }
+        ],
+        "description": "Reduce an array to value",
+        "variables": {
+            "array": {},
+            "returnStatement": {},
+            "initialValue": {}
+        }
+    }
+}

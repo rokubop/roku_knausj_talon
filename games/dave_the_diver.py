@@ -2,7 +2,8 @@ from talon import Module, Context, actions, ctrl, cron
 
 mod = Module()
 mod.apps.dave_the_diver = """
-app.name: DaveTheDived
+title: DAVE THE DIVER
+app.exe: DaveTheDiver.exe
 """
 
 ctx = Context()
@@ -36,10 +37,15 @@ class GameActions:
 
 @mod.action_class
 class DaveTheDiverActions:
+
     def dave_mouse_click(button: int = 0):
+        """Click the mouse button"""
         ctrl.mouse_click(button=button, hold=64000)
 
+
     def dave_test():
+        """Click the mouse button"""
+        print("test")
         ctrl.key_press("a", hold=64000)
 
     # def rdr_horse_kick():

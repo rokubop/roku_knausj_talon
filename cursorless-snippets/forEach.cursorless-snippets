@@ -1,0 +1,24 @@
+{
+    "forEach": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "typescript",
+                        "javascript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "$array.forEach(value => $condition)"
+                ]
+            }
+        ],
+        "description": "a for each loop",
+        "variables": {
+            "array": {},
+            "condition": {}
+        }
+    }
+}
