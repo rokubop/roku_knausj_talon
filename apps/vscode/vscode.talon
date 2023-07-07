@@ -124,7 +124,8 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
 (focus | show ) results:    user.vscode("search.action.focusSearchList")
 search next:                user.vscode("search.action.focusNextSearchResult")
 search last:                user.vscode("search.action.focusPreviousSearchResult")
-
+next change:                user.vscode("workbench.action.compareEditor.nextChange")
+last change:                user.vscode("workbench.action.compareEditor.previousChange")
 doc split:                  user.vscode("workbench.action.splitEditor")
 
 # Language features
