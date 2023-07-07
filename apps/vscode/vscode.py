@@ -1,4 +1,5 @@
-from talon import Context, Module, actions, app
+import json
+from talon import Context, Module, actions, app, clip
 import re
 
 PATTERN_RE = re.compile(r"Untitled-\d$")
@@ -188,6 +189,15 @@ class Actions:
 
         sibling_full_name = f"{short_name}.{sibling_extension}"
         actions.user.find_file(sibling_full_name)
+
+    def copy_command_id():
+        """Copy the command id of the focused menu item"""
+        actions.key("tab:2 enter")
+        actions.sleep("750ms")
+        json_text = actions.edit.selected_text()
+        command_id = json.loads(json_text)["command"]
+        actions.app.tab_close()
+        clip.set_text(command_id)
 
     def find_sibling_form():
         """Find sibling file based on file name"""

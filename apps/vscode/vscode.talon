@@ -6,16 +6,20 @@ tag(): user.multiple_cursors
 tag(): user.snippets
 tag(): user.splits
 tag(): user.tabs
+tag(): user.tabs
 
 settings():
     key_wait = 2
 
 (focus | show) term:        user.vscode("workbench.action.terminal.focus")
-(focus | show) (files | folders):       user.vscode("workbench.explorer.fileView.focus")
+(focus | show) (files | folders): user.vscode("workbench.explorer.fileView.focus")
 (focus | show) extensions:  user.vscode("workbench.view.extensions")
 (focus | show) outline:     user.vscode("outline.focus")
 (focus | show) run:         user.vscode("workbench.view.debug")
-(focus | show) search:      user.vscode("workbench.view.search")
+focus search:               user.vscode("workbench.action.findInFiles")
+focus exclude:              user.vscode("workbench.action.focusFilesToExclude")
+focus include:              user.vscode("search.action.focusFilesToInclude")
+show search:                user.vscode("workbench.view.search")
 (focus | show) changes:     user.vscode("workbench.view.scm")
 (focus | show) test:        user.vscode("workbench.view.testing.focus")
 (focus | show | hide | toggle) (bar | sidebar): user.vscode("workbench.action.toggleSidebarVisibility")
@@ -117,6 +121,7 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
 <user.show_list> sibling [<user.text>]:
     user.find_sibling_file(text or "")
 
+(focus | show ) results:    user.vscode("search.action.focusSearchList")
 search next:                user.vscode("search.action.focusNextSearchResult")
 search last:                user.vscode("search.action.focusPreviousSearchResult")
 
@@ -166,7 +171,7 @@ maximize:                   user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
 # Sidebar
-bar (show | hide | close | open):          user.vscode("workbench.action.toggleSidebarVisibility")
+bar (show | hide | close | open): user.vscode("workbench.action.toggleSidebarVisibility")
 bar explore:                user.vscode("workbench.view.explorer")
 bar extensions:             user.vscode("workbench.view.extensions")
 bar outline:                user.vscode("outline.focus")
@@ -177,6 +182,13 @@ bar file:                   user.vscode("workbench.files.action.showActiveFileIn
 bar collapse:               user.vscode("workbench.files.action.collapseExplorerFolders")
 ref last:                   user.vscode("references-view.prev")
 ref next:                   user.vscode("references-view.next")
+
+definition peek:            user.vscode("editor.action.peekDefinition")
+definition side:            user.vscode("editor.action.revealDefinitionAside")
+references show:            user.vscode("editor.action.goToReferences")
+suggest show:               user.vscode("editor.action.triggerSuggest")
+hint show:                  user.vscode("editor.action.triggerParameterHints")
+def show:                   user.vscode("editor.action.revealDefinition")
 
 # Terminal
 (show | hide) (term | base): user.vscode("workbench.action.togglePanel")
@@ -201,6 +213,8 @@ term zoom:                  user.vscode("workbench.action.toggleMaximizedPanel")
 term trash:                 user.vscode("workbench.action.terminal.kill")
 term scroll up:             user.vscode("workbench.action.terminal.scrollUp")
 term scroll down:           user.vscode("workbench.action.terminal.scrollDown")
+term grow:                  user.vscode("workbench.action.terminal.resizePaneUp")
+term shrink:                user.vscode("workbench.action.terminal.resizePaneDown")
 term <number_small>:        user.vscode_terminal(number_small)
 katie:                      "cd "
 katie up:                   "cd ..\n"
