@@ -1,0 +1,51 @@
+Spoken form, Cursorless identifier
+bottom, scrollToBottom
+break point, toggleLineBreakpoint
+bring, replaceWithTarget
+call, callAsFunction
+carve, cutToClipboard
+center, scrollToCenter
+clear|change, clearAndSetSelection
+chuck, remove
+clone, insertCopyAfter
+clone up, insertCopyBefore
+comment, toggleLineComment
+copy, copyToClipboard
+crown, scrollToTop
+dedent, outdentLine
+define, revealDefinition
+drink, editNewLineBefore
+drop|spike, insertEmptyLineBefore
+extract, extractVariable
+float, insertEmptyLineAfter
+fold, foldRegion
+follow, followLink
+form, applyFormatter
+give, deselect
+highlight, highlight
+hover, showHover
+indent, indentLine
+inspect, showDebugHover
+move, moveToTarget
+paste, pasteFromClipboard
+phones, nextHomophone
+post, setSelectionAfter
+pour, editNewLineAfter
+pre, setSelectionBefore
+puff, insertEmptyLinesAround
+quick fix | refactor, showQuickFix
+reference, showReferences
+rename, rename
+repack|switch, rewrap
+reverse, reverseTargets
+scout, findInDocument
+scout all, findInWorkspace
+shuffle, randomizeTargets
+snip, insertSnippet
+snip make, generateSnippet
+sort, sortTargets
+trade, swapTargets
+take, setSelection
+type deaf, revealTypeDefinition
+unfold, unfoldRegion
+wrap, wrapWithPairedDelimiter

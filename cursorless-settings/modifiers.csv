@@ -1,0 +1,19 @@
+Spoken form, Cursorless identifier
+backward, backward
+bounds | bounding, excludeInterior
+content, keepContentFilter
+empty, keepEmptyFilter
+every, every
+first, first
+forward, forward
+head, extendThroughStartOf
+inside | core, interiorOnly
+its, inferPreviousMark
+just, toRawSelection
+last, last
+leading, leading
+next, next
+previous, previous
+slice, verticalRange
+tail, extendThroughEndOf
+trailing, trailing

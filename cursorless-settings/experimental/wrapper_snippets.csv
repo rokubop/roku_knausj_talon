@@ -1,0 +1,34 @@
+Spoken form, Cursorless identifier
+binder, bindClassFunction.name
+class, classDeclaration.body
+con, constantDeclaration.value
+con type, constantDeclarationWithType.value
+condition, ifStatement.condition
+else, ifElseStatement.alternative
+funk, functionDeclaration.body
+funk type, functionDeclarationWithType.body
+if else, ifElseStatement.consequence
+if, ifStatement.consequence
+let, letDeclaration.value
+let type, letDeclarationWithType.value
+link, link.text
+map, map.value
+nest, nestedMap.items
+number, number.body
+try, tryCatchStatement.body
+with, withStatement.body
+while, whileStatement.body
+switch, switchStatement.caseBody
+lambda, lambdaExpression.expression
+lambda block, lambdaBlock.body
+foreign, forEachStatement.body
+object, objectDestructure.objectName
+on ready, talonOnReady.body
+print, print.expression
+string, toString.body
+use effect, useEffect.body
+div, div.body
+turn, ternaryExpression.value
+turn else, ternaryExpression.alternative
+turn dish, ternaryExpression.condition
+bold, bold.text

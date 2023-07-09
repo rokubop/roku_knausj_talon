@@ -1,0 +1,26 @@
+Spoken form, Cursorless identifier
+binder, bindClassFunction.name
+class, classDeclaration.name
+class name, className.classes
+command, vscodeCommand.spokenForm
+con, constantDeclaration.name
+con lamb, constLambdaBlock.name
+con type, constantDeclarationWithType.name
+data class, dataclass.name
+face, interface.name
+forEach, forEach.array
+funk, functionDeclaration.name
+funk type, functionDeclarationWithType.name
+capture, talonCapture.name
+let, letDeclaration.name
+let type, letDeclarationWithType.name
+filter, filter.array
+foreign, forEachStatement.name
+link, link.text
+list comp, listComprehension.element
+lambda, lambdaExpression.parameters
+lambda block, lambdaBlock.parameters
+reduce, reduce.array
+some, some.array
+talon list, talonList.name
+talon tag, talonTag.name
