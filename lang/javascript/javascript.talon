@@ -40,11 +40,33 @@ op null else:               " ?? "
 <user.operator> async:      "async "
 <user.operator> await:      "await "
 
+
+chain length:               ".length"
+chain {user.code_common_member_function}:
+    user.insert_between(".{code_common_member_function}(", ")")
+chain {user.code_common_member_function_with_lambda}:
+    user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(($args) => ($value))")
+chain {user.code_common_member_function_with_lambda} block:
+    user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(($args) => {{\n\t$body\n}})")
+chain {user.code_common_member_function_with_lambda} short:
+    user.insert_between(".{code_common_member_function_with_lambda}(", ")")
+chain {user.code_common_member_function_with_lambda} <phrase>:
+    name = user.formatted_text(phrase, "PRIVATE_CAMEL_CASE")
+    user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(({name}) => ($value))")
+chain {user.code_common_member_function_with_lambda} block <phrase>:
+    name = user.formatted_text(phrase, "PRIVATE_CAMEL_CASE")
+    user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(({name}) => {{\n\t$body\n}})")
+
+chain sort:
+    user.cursorless_insert_snippet(".sort((a, b) => $value)")
+chain reduce:
+    user.cursorless_insert_snippet(".reduce((prev, cur) => $cur, $initialValue)")
+chain reduce block:
+    user.cursorless_insert_snippet(".reduce((prev, cur) => {{\n\t\t$body\n\t}},\n\t$initialValue\n)")
+chain reduce short:
+    user.cursorless_insert_snippet(".reduce($function, $initialValue)")
+
 dot {user.code_common_member_function}:
     user.insert_between(".{code_common_member_function}(", ")")
-
-<user.operator> map:        app.notify('ERROR: Command deprecated; please use "dot map"')
-<user.operator> filter:     app.notify('ERROR: Command deprecated; please use "dot filter"')
-<user.operator> reduce:     app.notify('ERROR: Command deprecated; please use "dot reduce"')
 
 from import:                user.insert_between(' from  "', '"')

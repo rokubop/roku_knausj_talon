@@ -48,3 +48,8 @@ slacker [<phrase>]$:
     user.switcher_focus("VB-AUDIO Virtual Audio Device Mixing Console Application")
     sleep(200ms)
     user.parse_phrase(phrase or "")
+swap$:
+    key(alt:down)
+    key(tab)
+    sleep(50ms)
+    key(alt:up)

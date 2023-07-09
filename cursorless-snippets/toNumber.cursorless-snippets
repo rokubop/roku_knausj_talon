@@ -1,0 +1,23 @@
+{
+    "number": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascript",
+                        "typescript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "Number($body)"
+                ]
+            }
+        ],
+        "description": "",
+        "variables": {
+            "inside": {}
+        }
+    }
+}

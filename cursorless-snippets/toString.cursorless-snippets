@@ -1,0 +1,23 @@
+{
+    "toString": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascript",
+                        "typescript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "String($body)"
+                ]
+            }
+        ],
+        "description": "",
+        "variables": {
+            "inside": {}
+        }
+    }
+}

@@ -12,12 +12,15 @@ ctx.lists["user.code_common_function"] = {
     "fetch": "fetch",
     "floor": "Math.floor",
     "from entries": "Object.fromEntries",
+    "is array": "Array.isArray",
     "keys": "Object.keys",
     "log": "console.log",
     "max": "Math.max",
     "min": "Math.min",
+    "number": "Number",
     "print": "console.log",
     "round": "Math.round",
+    "string": "String",
     "values": "Object.values",
 }
 
@@ -26,21 +29,29 @@ mod.list("code_common_member_function", "Function to use in a dotted chain, eg .
 ctx.lists["user.code_common_member_function"] = {
     "catch": "catch",
     "concat": "concat",
-    "filter": "filter",
     "finally": "finally",
+    "join": "join",
+    "includes": "includes",
+    "pop": "pop",
+    "push": "push",
+    "reverse": "reverse",
+    "slice": "slice",
+    "split": "split",
+    "substring": "substring",
+}
+
+mod.list(
+    "code_common_member_function_with_lambda",
+    "Function to use in a dotted chain that expects a lambda, eg .foo(() => ())",
+)
+
+ctx.lists["user.code_common_member_function_with_lambda"] = {
+    "filter": "filter",
     "find": "find",
     "flat map": "flatMap",
     "for each": "forEach",
-    "join": "join",
-    "includes": "includes",
     "map": "map",
-    "pop": "pop",
-    "push": "push",
-    "reduce": "reduce",
-    "slice": "slice",
     "some": "some",
-    "split": "split",
-    "substring": "substring",
     "then": "then",
 }
 
@@ -66,6 +77,7 @@ ctx.lists["user.code_keyword"] = {
     "throw": "throw ",
     "true": "true",
     "try": "try ",
+    "type of": "typeof ",
     "undefined": "undefined",
     "yield": "yield ",
 }
@@ -78,6 +90,9 @@ class UserActions:
 
     def code_insert_is_null():
         actions.auto_insert(" === null")
+
+    def code_type_dictionary():
+        actions.user.insert_between("{", "}")
 
     def code_state_if():
         actions.user.insert_between("if (", ")")

@@ -27,4 +27,3 @@ is lesser:                  user.code_operator_less_than()
 
 # TODO: This operator should either be abstracted into a function or removed.
 <user.operator> colon:      " : "
-<user.operator> pipe:       " | "

@@ -1,9 +1,4 @@
 -
-swap$:
-    key(alt:down)
-    key(tab)
-    sleep(50ms)
-    key(alt:up)
 again:                      user.repeat()
 confetti:                   user.vscode('cursorless.toggleDecorations')
 mouse (mid | five):         user.mouse_move_center_active_window()
@@ -17,3 +12,8 @@ open (in | with) paint:
     sleep(500ms)
     key(ctrl-v)
     key(ctrl-shift-x)
+
+desktop {user.system_paths}:
+    key(win-e)
+    sleep(500ms)
+    user.file_manager_open_directory(system_paths)

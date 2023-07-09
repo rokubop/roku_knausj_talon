@@ -1,0 +1,27 @@
+{
+    "constLambdaBlock": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascript",
+                        "typescript",
+                        "typescriptreact",
+                        "javascriptreact"
+                    ]
+                },
+                "body": [
+                    "const $variable = ($arg) => {",
+                    "\t$body",
+                    "};"
+                ]
+            }
+        ],
+        "description": "",
+        "variables": {
+            "variable": {},
+            "arg": {},
+            "body": {}
+        }
+    }
+}
