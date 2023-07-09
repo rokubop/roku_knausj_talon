@@ -246,6 +246,14 @@ file copy relative:         user.vscode("copyRelativeFilePath")
 file copy name:             user.vscode("andreas.copyFilename")
 file remove:                user.vscode("andreas.removeFile")
 file move:                  user.vscode("andreas.moveFile")
+file next:
+    user.vscode("workbench.explorer.fileView.focus")
+    key("down")
+    key("space")
+file last:
+    user.vscode("workbench.explorer.fileView.focus")
+    key("up")
+    key("space")
 file sibling [<user.filename>]:
     user.vscode("andreas.newFile", filename or "")
 file rename [<user.filename>]:
