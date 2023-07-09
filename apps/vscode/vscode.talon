@@ -239,7 +239,7 @@ file open:                  user.vscode("workbench.action.files.openFile")
 file new [<user.filename>]:
     user.vscode("explorer.newFile")
     "{filename or ''}"
-file open folder:           user.vscode("revealFileInOS")
+file (show | open) desktop: user.vscode("revealFileInOS")
 file reveal:                user.vscode("workbench.files.action.showActiveFileInExplorer")
 file copy path:             user.vscode("copyFilePath")
 file copy relative:         user.vscode("copyRelativeFilePath")
