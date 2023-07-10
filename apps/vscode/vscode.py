@@ -158,6 +158,8 @@ class WinActions:
         return ""
 
 
+vscode_view = "files"
+
 @mod.action_class
 class Actions:
     def vscode_terminal(number: int):
@@ -167,6 +169,34 @@ class Actions:
     def command_palette():
         """Show command palette"""
         actions.key("ctrl-shift-p")
+
+    def vscode_focus_files():
+        """Focus files"""
+        global vscode_view
+        vscode_view = "files"
+        actions.user.vscode("workbench.explorer.fileView.focus")
+
+    def vscode_focus_changes():
+        """Focus changes"""
+        global vscode_view
+        vscode_view = "scm"
+        actions.user.vscode("workbench.view.scm")
+
+    def vscode_file_next():
+        """Go to next file"""
+        if vscode_view == "scm":
+            actions.user.vscode("workbench.scm.focus")
+        else:
+            actions.user.vscode("workbench.files.action.focusFilesExplorer")
+        actions.key("down space")
+
+    def vscode_file_last():
+        """Go to last file"""
+        if vscode_view == "scm":
+            actions.user.vscode("workbench.scm.focus")
+        else:
+            actions.user.vscode("workbench.files.action.focusFilesExplorer")
+        actions.key("up space")
 
     # argument for passing a file type is not working
     def find_sibling_file(file_type: str = None):

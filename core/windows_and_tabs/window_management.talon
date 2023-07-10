@@ -32,18 +32,6 @@ snap <user.running_applications> [screen] left:
     user.move_app_to_screen(running_applications, 1)
 snap <user.running_applications> [screen] right:
     user.move_app_to_screen(running_applications, 2)
-portal [<phrase>]$:
-    user.switcher_focus("Google Chrome")
-    sleep(200ms)
-    user.parse_phrase(phrase or "")
-coder [<phrase>]$:
-    user.switcher_focus("Code")
-    sleep(300ms)
-    user.parse_phrase(phrase or "")
-slacker [<phrase>]$:
-    user.switcher_focus("Slack")
-    sleep(200ms)
-    user.parse_phrase(phrase or "")
 (folk | focus) voice meter [<phrase>]$:
     user.switcher_focus("VB-AUDIO Virtual Audio Device Mixing Console Application")
     sleep(200ms)

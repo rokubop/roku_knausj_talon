@@ -6,13 +6,12 @@ tag(): user.multiple_cursors
 tag(): user.snippets
 tag(): user.splits
 tag(): user.tabs
-tag(): user.tabs
 
 settings():
-    key_wait = 2
+    key_wait = 4
 
 (focus | show) term:        user.vscode("workbench.action.terminal.focus")
-(focus | show) (files | folders): user.vscode("workbench.explorer.fileView.focus")
+(focus | show) (files | folders): user.vscode_focus_files()
 (focus | show) extensions:  user.vscode("workbench.view.extensions")
 (focus | show) outline:     user.vscode("outline.focus")
 (focus | show) run:         user.vscode("workbench.view.debug")
@@ -20,7 +19,7 @@ focus search:               user.vscode("workbench.action.findInFiles")
 focus exclude:              user.vscode("workbench.action.focusFilesToExclude")
 focus include:              user.vscode("search.action.focusFilesToInclude")
 show search:                user.vscode("workbench.view.search")
-(focus | show) changes:     user.vscode("workbench.view.scm")
+(focus | show) changes:     user.vscode_focus_changes()
 (focus | show) test:        user.vscode("workbench.view.testing.focus")
 (focus | show | hide | toggle) (bar | sidebar): user.vscode("workbench.action.toggleSidebarVisibility")
 
@@ -33,12 +32,14 @@ show settings <user.text>:
     user.vscode("workbench.action.openSettings2")
     sleep(200ms)
     "{text}"
-show [keyboard] shortcuts:  user.vscode("workbench.action.openGlobalKeybindings")
-show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
+show [key board] shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
+show [key board] shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
 
 # Teleport / Scout
 <user.teleport> back:       user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
 <user.teleport> forward:    user.vscode("workbench.action.openNextRecentlyUsedEditor")
+spring back:                user.vscode("workbench.action.navigateBack")
+spring forward:             user.vscode("workbench.action.navigateForward")
 
 <user.teleport> last:
     user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
@@ -124,8 +125,8 @@ show [keyboard] shortcuts json: user.vscode("workbench.action.openGlobalKeybindi
 (focus | show ) results:    user.vscode("search.action.focusSearchList")
 search next:                user.vscode("search.action.focusNextSearchResult")
 search last:                user.vscode("search.action.focusPreviousSearchResult")
-next change:                user.vscode("workbench.action.compareEditor.nextChange")
-last change:                user.vscode("workbench.action.compareEditor.previousChange")
+change next:                user.vscode("workbench.action.compareEditor.nextChange")
+change last:                user.vscode("workbench.action.compareEditor.previousChange")
 doc split:                  user.vscode("workbench.action.splitEditor")
 
 # Language features
@@ -157,18 +158,18 @@ split up:                   user.vscode("workbench.action.moveEditorToAboveGroup
 split down:                 user.vscode("workbench.action.moveEditorToBelowGroup")
 split left:                 user.vscode("workbench.action.moveEditorToLeftGroup")
 split right:                user.vscode("workbench.action.moveEditorToRightGroup")
-focus up:                   user.vscode("workbench.action.focusAboveGroup")
-focus down:                 user.vscode("workbench.action.focusBelowGroup")
-focus left:                 user.vscode("workbench.action.focusLeftGroup")
-focus right:                user.vscode("workbench.action.focusRightGroup")
-shrink width:               user.vscode("workbench.action.decreaseViewWidth")
-shrink height:              user.vscode("workbench.action.decreaseViewHeight")
-expand width:               user.vscode("workbench.action.increaseViewWidth")
-expand height:              user.vscode("workbench.action.increaseViewHeight")
+(folk | focus) up:          user.vscode("workbench.action.focusAboveGroup")
+(folk | focus) down:        user.vscode("workbench.action.focusBelowGroup")
+(folk | focus) left:        user.vscode("workbench.action.focusLeftGroup")
+(folk | focus) right:       user.vscode("workbench.action.focusRightGroup")
+shrink x:                   user.vscode("workbench.action.decreaseViewWidth")
+shrink y | grow term | term grow: user.vscode("workbench.action.decreaseViewHeight")
+(grow | expand) x:          user.vscode("workbench.action.increaseViewWidth")
+(grow | expand) y | shrink term | term shrink: user.vscode("workbench.action.increaseViewHeight")
 split flip:                 user.vscode("workbench.action.toggleEditorGroupLayout")
 split clear:                user.vscode("workbench.action.joinTwoGroups")
 split solo:                 user.vscode("workbench.action.editorLayoutSingle")
-maximize:                   user.vscode("workbench.action.toggleEditorWidths")
+maximize | grow:            user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
 # Sidebar
@@ -192,9 +193,11 @@ hint show:                  user.vscode("editor.action.triggerParameterHints")
 def show:                   user.vscode("editor.action.revealDefinition")
 
 # Terminal
-(show | hide) (term | base): user.vscode("workbench.action.togglePanel")
+(folk | show | hide) (term | base): user.vscode("workbench.action.togglePanel")
 (term | base) (show | hide | dog ): user.vscode("workbench.action.togglePanel")
-(term | base) (large | small): user.vscode("workbench.action.toggleMaximizedPanel")
+(term | base) (max | min | zen | zen mode):
+    user.vscode("workbench.action.alignPanelCenter")
+    user.vscode("workbench.action.toggleMaximizedPanel")
 (term | base) control:      user.vscode("workbench.panel.repl.view.focus")
 (term | base) output:       user.vscode("workbench.panel.output.focus")
 (term | base) problems:     user.vscode("workbench.panel.markers.view.focus")
@@ -223,7 +226,6 @@ katie <user.text>:          "cd {text}\n"
 try katie <user.text>:      "cd {text}\t\n"
 katie try <user.text>:      "cd {text}\t\n"
 lisa:                       "ls\n"
-printer:                    "pwd\n"
 
 # Hide sidebar and panel
 zen mode:
@@ -246,14 +248,8 @@ file copy relative:         user.vscode("copyRelativeFilePath")
 file copy name:             user.vscode("andreas.copyFilename")
 file remove:                user.vscode("andreas.removeFile")
 file move:                  user.vscode("andreas.moveFile")
-file next:
-    user.vscode("workbench.explorer.fileView.focus")
-    key("down")
-    key("space")
-file last:
-    user.vscode("workbench.explorer.fileView.focus")
-    key("up")
-    key("space")
+file next:                  user.vscode_file_next()
+file last:                  user.vscode_file_last()
 file sibling [<user.filename>]:
     user.vscode("andreas.newFile", filename or "")
 file rename [<user.filename>]:
@@ -385,6 +381,13 @@ trim trailing:              user.vscode("editor.action.trimTrailingWhitespace")
 inspect scope:              user.vscode("editor.action.inspectTMScopes")
 disk raw:                   user.save_without_formatting()
 disk files:                 user.vscode("workbench.action.files.saveFiles")
+diswap:
+    edit.save()
+    key(alt:down)
+    key(tab)
+    sleep(50ms)
+    key(alt:up)
+
 disclose:
     key(esc:5)
     edit.save()

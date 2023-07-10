@@ -8,7 +8,8 @@ parrot(tut):
 parrot(palate_click):
 				user.on_palate()
 				print("on_palate")
-# parrot(pop):
+parrot(pop):
+				user.on_palate()
 # 				user.repeat()
 # 				user.on_pop()
 # 				print("pop")
