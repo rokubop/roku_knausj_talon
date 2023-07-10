@@ -241,7 +241,7 @@ file open:                  user.vscode("workbench.action.files.openFile")
 file new [<user.filename>]:
     user.vscode("explorer.newFile")
     "{filename or ''}"
-file (show | open) desktop: user.vscode("revealFileInOS")
+[file | folder] (show | reveal) in desktop: user.vscode("revealFileInOS")
 file reveal:                user.vscode("workbench.files.action.showActiveFileInExplorer")
 file copy path:             user.vscode("copyFilePath")
 file copy relative:         user.vscode("copyRelativeFilePath")
@@ -289,20 +289,26 @@ git merge {user.git_branch}:
     user.vscode("git.merge")
     sleep(50ms)
     "{git_branch}"
-git checkout {user.git_branch}: user.git_find_branch(git_branch)
-git checkout [<user.text>]: user.git_find_branch(text or "")
-git checkout branch [<user.text>]:
-    user.vscode("git.branch")
-    sleep(50ms)
-    text = user.format_text(text or '', "SNAKE_CASE")
-    "{text}"
+# git checkout {user.git_branch}: user.git_find_branch(git_branch)
+# git checkout [<user.text>]: user.git_find_branch(text or "")
+# git checkout branch [<user.text>]:
+#     user.vscode("git.branch")
+#     sleep(50ms)
+#     text = user.format_text(text or '', "SNAKE_CASE")
+#     "{text}"
+
 git checkout clip:
     "git checkout {clip.text()}\n"
+
+git cherry pick clip:
+    "git cherry-pick {clip.text()}\n"
+
 git commit [<user.text>]:
     user.vscode("git.commit")
     sleep(300ms)
     text = user.format_text(text or "", "CAPITALIZE_FIRST_WORD")
     "{text}"
+
 
 # Folding
 fold recursive:             user.vscode("editor.foldRecursively")

@@ -30,6 +30,9 @@ git switch:                 "git switch -\n"
 git checkout:               "git checkout "
 git checkout branch:        "git checkout -b "
 git checkout branch <user.text>: "git checkout -b {text}\n"
+git checkout master: "git checkout master\n"
+git checkout main: "git checkout main\n"
+git checkout <user.text>: "git checkout {text}"
 # git checkout branch paste:      "git checkout -b <paste>\n"
 # git checkout <%text%>:          "git checkout <%text%>\n"
 # git checkout paste:             "git checkout <paste>\n"
@@ -60,7 +63,7 @@ git config list:            "git config --list\n"
 git config list global:     "git config --list --global\n"
 gh repo:                    "gh repo\n"
 gh repo create:             "gh repo create\n"
-# git rebase interactive head <%num%>: "git rebase -i HEAD~<%num%>\n"
+git rebase interactive head <number_small>: "git rebase -i HEAD~{number_small}\n"
 
 yarn build:                 "yarn build\n"
 git status$:                "git status\n"
@@ -70,7 +73,7 @@ git diff$:                  "git diff\n"
 git diff (cached | cashed)$: "git diff --cached\n"
 
 # Convenience
-git clone (clipboard | paste):
+git clone (clip | paste):
     insert("git clone ")
     edit.paste()
     key(enter)
@@ -79,7 +82,7 @@ git diff highlighted:
     insert("git diff ")
     edit.paste()
     key(enter)
-git diff (clipboard | paste):
+git diff (clip | paste):
     insert("git diff ")
     edit.paste()
     key(enter)
@@ -88,7 +91,7 @@ git add highlighted:
     insert("git add ")
     edit.paste()
     key(enter)
-git add (clipboard | paste):
+git add (clip | paste):
     insert("git add ")
     edit.paste()
     key(enter)

@@ -9,6 +9,9 @@ ctx = Context()
 
 mod.list("git_command", desc="Git commands.")
 mod.list("git_argument", desc="Command-line git options and arguments.")
+mod.list("git_branch", desc="Git branch")
+
+ctx.lists["self.git_branch"] = ["main", "master", "dev"]
 
 dirpath = Path(__file__).parent
 arguments_csv_path = str(dirpath / "git_arguments.csv")
