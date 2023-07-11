@@ -15,7 +15,7 @@ crown, scrollToTop
 dedent, outdentLine
 define, revealDefinition
 drink, editNewLineBefore
-drop|spike, insertEmptyLineBefore
+spike, insertEmptyLineBefore
 extract, extractVariable
 float, insertEmptyLineAfter
 fold, foldRegion

@@ -20,7 +20,6 @@ focus exclude:              user.vscode("workbench.action.focusFilesToExclude")
 focus include:              user.vscode("search.action.focusFilesToInclude")
 show search:                user.vscode("workbench.view.search")
 (focus | show) changes:     user.vscode_focus_changes()
-(focus | show) test:        user.vscode("workbench.view.testing.focus")
 (focus | show | hide | toggle) (bar | sidebar): user.vscode("workbench.action.toggleSidebarVisibility")
 
 # Settings
