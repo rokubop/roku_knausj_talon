@@ -42,29 +42,29 @@ op null else:               " ?? "
 <user.operator> comment [<user.text>]: '// {text or ""}'
 
 
-chain length:               ".length"
-chain {user.code_common_member_function}:
+(add | chain) length:       ".length"
+(add | chain) {user.code_common_member_function}:
     user.insert_between(".{code_common_member_function}(", ")")
-chain {user.code_common_member_function_with_lambda}:
+(add | chain) {user.code_common_member_function_with_lambda}:
     user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(($args) => ($value))")
-chain {user.code_common_member_function_with_lambda} block:
+(add | chain) {user.code_common_member_function_with_lambda} block:
     user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(($args) => {{\n\t$body\n}})")
-chain {user.code_common_member_function_with_lambda} short:
+(add | chain) {user.code_common_member_function_with_lambda} short:
     user.insert_between(".{code_common_member_function_with_lambda}(", ")")
-chain {user.code_common_member_function_with_lambda} <phrase>:
+(add | chain) {user.code_common_member_function_with_lambda} <phrase>:
     name = user.formatted_text(phrase, "PRIVATE_CAMEL_CASE")
     user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(({name}) => ($value))")
-chain {user.code_common_member_function_with_lambda} block <phrase>:
+(add | chain) {user.code_common_member_function_with_lambda} block <phrase>:
     name = user.formatted_text(phrase, "PRIVATE_CAMEL_CASE")
     user.cursorless_insert_snippet(".{code_common_member_function_with_lambda}(({name}) => {{\n\t$body\n}})")
 
-chain sort:
+(add | chain) sort:
     user.cursorless_insert_snippet(".sort((a, b) => $value)")
-chain reduce:
+(add | chain) reduce:
     user.cursorless_insert_snippet(".reduce((prev, cur) => $cur, $initialValue)")
-chain reduce block:
+(add | chain) reduce block:
     user.cursorless_insert_snippet(".reduce((prev, cur) => {{\n\t\t$body\n\t}},\n\t$initialValue\n)")
-chain reduce short:
+(add | chain) reduce short:
     user.cursorless_insert_snippet(".reduce($function, $initialValue)")
 
 dot {user.code_common_member_function}:
