@@ -30,15 +30,16 @@ is strict not equal:        " !== "
 op null else:               " ?? "
 
 <user.operator> or quest:   " ?? "
-<user.operator> quote var:  user.insert_between("${", "}")
+<user.operator> (string | quote) var: user.insert_between("${", "}")
 <user.operator> spread:     "..."
 
 <user.operator> const:      "const "
 <user.operator> let:        "let "
 <user.operator> var:        "var "
 <user.operator> export:     "export "
-<user.operator> async:      "async "
+<user.operator> async:      'async '
 <user.operator> await:      "await "
+<user.operator> comment [<user.text>]: '// {text or ""}'
 
 
 chain length:               ".length"
