@@ -108,18 +108,28 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     sleep(250ms)
 
 <user.teleport> form:
-    user.find_sibling_form()
+    user.find_sibling_file("form", 7, 2)
+    sleep(150ms)
+    key(enter)
+
+<user.teleport> manifest:
+    user.find_sibling_file("manifest", 7, 2)
+    sleep(150ms)
+    key(enter)
+
+<user.teleport> intro:
+    user.find_sibling_file("intro", 7, 2)
     sleep(150ms)
     key(enter)
 
 # custom text not working
 <user.teleport> sibling [<user.text>]:
-    user.find_sibling_file(text or "")
+    user.find_sibling_file(text or "", 7)
     sleep(150ms)
     key(enter)
 
 <user.show_list> sibling [<user.text>]:
-    user.find_sibling_file(text or "")
+    user.find_sibling_file(text or "", 7)
 
 (focus | show ) results:    user.vscode("search.action.focusSearchList")
 search next:                user.vscode("search.action.focusNextSearchResult")
@@ -135,6 +145,9 @@ jest first:
     code.complete()
     key(tab)
 jest param:                 user.vscode("editor.action.triggerParameterHints")
+jest <user.cursorless_target>:
+    user.cursorless_single_target_command("setSelectionAfter", cursorless_target)
+    code.complete()
 format document:            user.format_document()
 refactor this:              user.vscode("editor.action.refactor")
 open preview:               user.vscode("markdown.showPreviewToSide")

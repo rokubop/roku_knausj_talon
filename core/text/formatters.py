@@ -132,6 +132,8 @@ formatters_dict = {
         if i == 0 or word not in words_to_keep_lowercase
         else word,
     ),
+    "SPACE_FIRST_WORD": (SEP, first_vs_rest(lambda w: " " + w)),
+    "SPACE_CAPITALIZE_FIRST_WORD": (SEP, first_vs_rest(lambda w: " " + w[:1].upper() + w[1:])),
 }
 
 # This is the mapping from spoken phrases to formatters
@@ -297,4 +299,6 @@ ctx.lists["self.prose_formatter"] = {
     "say": "NOOP",
     "speak": "NOOP",
     "sentence": "CAPITALIZE_FIRST_WORD",
+    "more": "SPACE_FIRST_WORD",
+    "trench": "SPACE_CAPITALIZE_FIRST_WORD",
 }

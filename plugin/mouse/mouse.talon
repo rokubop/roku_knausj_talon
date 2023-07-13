@@ -59,7 +59,7 @@ right drag | righty drag:
     # close the mouse grid
     user.grid_close()
 end drag | drag (end | stop): user.mouse_drag_end()
-wheel down:                 user.mouse_scroll_down()
+wheel down | downer:                 user.mouse_scroll_down(6)
 wheel down here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down()
@@ -71,7 +71,7 @@ wheel downer:               user.mouse_scroll_down_continuous()
 wheel downer here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down_continuous()
-wheel up:                   user.mouse_scroll_up()
+wheel up | upper:                   user.mouse_scroll_up(6)
 wheel up here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up()

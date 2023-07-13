@@ -1,4 +1,5 @@
 import json
+import os
 from talon import Context, Module, actions, app, clip
 import re
 
@@ -199,26 +200,26 @@ class Actions:
         actions.key("up space")
 
     # argument for passing a file type is not working
-    def find_sibling_file(file_type: str = None):
-        """Find sibling file based on file name"""
-        full_name = actions.user.vscode_get("andreas.getFilename")
-        index = full_name.rfind(".")
-        print("full_name", full_name)
-        if index < 0:
-            return
-        short_name = full_name[:index]
+    # def find_sibling_file(file_type: str = None):
+    #     """Find sibling file based on file name"""
+    #     full_name = actions.user.vscode_get("andreas.getFilename")
+    #     index = full_name.rfind(".")
+    #     print("full_name", full_name)
+    #     if index < 0:
+    #         return
+    #     short_name = full_name[:index]
 
-        # not working
-        if file_type:
-            sibling_extension = file_type
-        else:
-            extension = full_name[index + 1 :]
-            sibling_extension = actions.user.get_extension_sibling(extension)
-            if not sibling_extension:
-                return
+    #     # not working
+    #     if file_type:
+    #         sibling_extension = file_type
+    #     else:
+    #         extension = full_name[index + 1 :]
+    #         sibling_extension = actions.user.get_extension_sibling(extension)
+    #         if not sibling_extension:
+    #             return
 
-        sibling_full_name = f"{short_name}.{sibling_extension}"
-        actions.user.find_file(sibling_full_name)
+    #     sibling_full_name = f"{short_name}.{sibling_extension}"
+    #     actions.user.find_file(sibling_full_name)
 
     def copy_command_id():
         """Copy the command id of the focused menu item"""
@@ -229,23 +230,24 @@ class Actions:
         actions.app.tab_close()
         clip.set_text(command_id)
 
-    def find_sibling_form():
+    def transform_path_for_search(path: str, first_x: int, last_y: int, append_word: str):
+        """Transform a path for searching"""
+        components = path.replace("\\","/").split("/")
+
+        if len(components) < first_x + last_y:
+            raise ValueError('Not enough components in the path to remove')
+
+        components = components[first_x:-last_y]
+        components.append(append_word)
+        modified_path = os.sep.join(components)
+
+        return modified_path
+
+    def find_sibling_file(text: str = None, first_x: int = 0, last_y: int = 1):
         """Find sibling file based on file name"""
-        full_name = actions.user.vscode_get("andreas.getFilename")
-        index = full_name.rfind(".")
-        print("full_name", full_name)
-        if index < 0:
-            return
-        short_name = full_name[:index]
-        extension = full_name[index + 1 :]
-        print("extension", extension)
-        print("short_name", short_name)
-        # print("full_name", full_name)
-        sibling_extension = actions.user.get_extension_sibling(extension)
-
-        sibling_full_name = f"{short_name}.{sibling_extension}"
-        actions.user.find_file(sibling_full_name)
-
+        actions.user.vscode("copyFilePath")
+        new_path = actions.user.transform_path_for_search(clip.text(), first_x, last_y, text or "")
+        actions.user.find_file(new_path)
 
 @mac_ctx.action_class("user")
 class MacUserActions:
@@ -490,6 +492,13 @@ class UserActions:
         actions.edit.find(text)
         actions.sleep("100ms")
         actions.key("esc")
+
+    def vscode_add_missing_imports():
+        """Add all missing imports"""
+        actions.user.vscode_with_plugin(
+            "editor.action.sourceAction",
+            {"kind": "source.addMissingImports", "apply": "first"},
+        )
 
 def is_untitled(filename: str):
     return PATTERN_RE.search(filename) is not None

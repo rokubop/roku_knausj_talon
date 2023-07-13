@@ -6,6 +6,7 @@ phrase <user.text> over:
     user.add_phrase_to_history(text)
     insert(text)
 {user.prose_formatter} <user.prose>$: user.insert_formatted(prose, prose_formatter)
+# {user.prose_formatter} <user.prose>$: user.dictation_insert(prose)
 {user.prose_formatter} <user.prose> over: user.insert_formatted(prose, prose_formatter)
 
 # original
