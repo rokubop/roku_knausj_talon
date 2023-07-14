@@ -6,7 +6,7 @@ from talon import Module
 mod = Module()
 
 SELECT = "take"
-TELEPORT = "pop"
+TELEPORT = "pop | jump | go to"
 OPERATOR = "make | add"
 DELETE = "chuck"
 FIND = "scout"

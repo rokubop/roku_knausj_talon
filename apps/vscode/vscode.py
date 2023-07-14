@@ -171,6 +171,10 @@ class Actions:
         """Show command palette"""
         actions.key("ctrl-shift-p")
 
+    def tab_force_close():
+        """Forces the current tab to close"""
+        actions.user.vscode("workbench.action.revertAndCloseActiveEditor")
+
     def vscode_focus_files():
         """Focus files"""
         global vscode_view
@@ -365,6 +369,7 @@ class UserActions:
 
     def tab_close_others():
         actions.user.vscode("workbench.action.closeOtherEditors")
+
 
     def tab_close_all_others():
         actions.user.vscode("workbench.action.closeEditorsInOtherGroups")

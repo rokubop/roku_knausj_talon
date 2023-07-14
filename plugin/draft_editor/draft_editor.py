@@ -110,7 +110,8 @@ def close_editor(submit_draft: bool):
     actions.edit.select_all()
     selected_text = actions.edit.selected_text()
     actions.edit.delete()
-    actions.app.tab_close()
+    # actions.app.tab_close()
+    actions.user.tab_force_close()
     actions.user.switcher_focus_window(original_window)
     actions.sleep("300ms")
     if submit_draft:
