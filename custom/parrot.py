@@ -55,7 +55,7 @@ class Actions:
         """Repeat or wake up."""
         global last_palete, last_tut
 
-        log_parrot('palate')
+        # log_parrot('palate')
 
         if (actions.speech.enabled()):
             if (stateReverse.is_active() and last_tut):
@@ -85,7 +85,7 @@ class Actions:
         """Reverse the last command"""
         global last_tut, last_palete
 
-        log_parrot('tut')
+        # log_parrot('tut')
         if (actions.speech.enabled() and stateReverse.is_active()):
             last_command = actions.user.history_get(0)
             stateReverse.activate_reverse()
@@ -104,4 +104,5 @@ class Actions:
 
     def on_pop():
         """Do pop"""
-        log_parrot('pop')
+        # log_parrot('pop')
+        actions.user.click()

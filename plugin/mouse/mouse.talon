@@ -1,7 +1,7 @@
-control mouse:              tracking.control_toggle()
+track [on | off]:           tracking.control_toggle()
 zoom mouse:                 tracking.control_zoom_toggle()
-camera overlay:             tracking.control_debug_toggle()
-run calibration:            tracking.calibrate()
+track debug:                tracking.control_debug_toggle()
+track calibration:          tracking.calibrate()
 touch:
     mouse_click(0)
     # close the mouse grid if open
@@ -59,7 +59,7 @@ right drag | righty drag:
     # close the mouse grid
     user.grid_close()
 end drag | drag (end | stop): user.mouse_drag_end()
-wheel down | downer:                 user.mouse_scroll_down(6)
+wheel down | downer:        user.mouse_scroll_down(6)
 wheel down here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down()
@@ -71,7 +71,7 @@ wheel downer:               user.mouse_scroll_down_continuous()
 wheel downer here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down_continuous()
-wheel up | upper:                   user.mouse_scroll_up(6)
+wheel up | upper:           user.mouse_scroll_up(6)
 wheel up here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up()
@@ -83,15 +83,15 @@ wheel upper:                user.mouse_scroll_up_continuous()
 wheel upper here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up_continuous()
-wheel gaze:                 user.mouse_gaze_scroll()
-wheel gaze here:
+mouse gaze:                 user.mouse_gaze_scroll()
+mouse gaze here:
     user.mouse_move_center_active_window()
     user.mouse_gaze_scroll()
-wheel stop:                 user.mouse_scroll_stop()
-wheel stop here:
+mouse stop:                 user.mouse_scroll_stop()
+mouse stop here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_stop()
-wheel left:                 user.mouse_scroll_left()
+wheel left:                 user.mouse_scroll_left().
 wheel left here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_left()

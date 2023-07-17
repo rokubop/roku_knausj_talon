@@ -11,6 +11,7 @@ _file_extensions_defaults = {
     "dot mark down": ".md",
     "dot shell": ".sh",
     "dot vim": ".vim",
+    "dot log": ".log",
     "dot see": ".c",
     "dot see sharp": ".cs",
     "dot com": ".com",

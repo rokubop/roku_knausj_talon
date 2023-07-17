@@ -32,6 +32,22 @@ default_cursor = {
     "IBeam": "",
 }
 
+mod.list("mouse_click", desc="Available mouse clicks")
+ctx.lists["self.mouse_click"] = {
+    "left": "left",
+    "right": "right",
+    "middle": "middle",
+    "mid": "middle",
+    "double": "double",
+    "dub": "double",
+    "triple": "triple",
+    "trip": "triple",
+    "control": "control",
+    "troll": "control",
+    "shift": "shift",
+    "center": "center",
+}
+
 # todo figure out why notepad++ still shows the cursor sometimes.
 hidden_cursor = os.path.join(
     os.path.dirname(os.path.realpath(__file__)), r"Resources\HiddenCursor.cur"

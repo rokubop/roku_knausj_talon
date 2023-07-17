@@ -17,7 +17,11 @@ dictate [<phrase>]$:
     mode.disable("dictation")
     mode.disable("user.game")
     mode.enable("command")
-
+^mixed mode$:
+    mode.disable("user.game")
+    mode.disable("sleep")
+    mode.enable("dictation")
+    mode.enable("command")
 # ziemus_talon
 ^game mode$:
     print("game mode")

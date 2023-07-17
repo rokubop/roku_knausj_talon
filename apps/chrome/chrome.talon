@@ -71,7 +71,7 @@ break <number>:
 (hide | show) rack | rack (hide | show | dog | toggle): key(ctrl-shift-h)
 (hide | show) bar | bar (hide | show | dog | toggle): key(ctrl-shift-y)
 (hide | show) base | base (hide | show | dog | toggle): key(f12)
-zen mode: key(ctrl-shift-y ctrl-shift-h)
+zen mode:                   key(ctrl-shift-y ctrl-shift-h)
 
 <user.teleport> (sources | source):
     key(escape ctrl-shift-p)
@@ -101,4 +101,28 @@ inspect this:
     mouse_click(1)
     sleep(100ms)
     key(up)
+    key(enter)
+
+image save:
+    mouse_click(1)
+    sleep(100ms)
+    key(down down)
+    key(enter)
+
+image copy:
+    mouse_click(1)
+    sleep(100ms)
+    key(down down down)
+    key(enter)
+
+image copy url:
+    mouse_click(1)
+    sleep(100ms)
+    key(down down down down)
+    key(enter)
+
+image (open | blank | stash):
+    mouse_click(1)
+    sleep(100ms)
+    key(down)
     key(enter)
