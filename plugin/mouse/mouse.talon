@@ -1,7 +1,7 @@
 track [on | off]:           tracking.control_toggle()
 zoom mouse:                 tracking.control_zoom_toggle()
 track debug:                tracking.control_debug_toggle()
-track calibration:          tracking.calibrate()
+track (calibration | calibrate): tracking.calibrate()
 touch:
     mouse_click(0)
     # close the mouse grid if open
