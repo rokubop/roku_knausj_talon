@@ -187,6 +187,22 @@ class Actions:
         vscode_view = "scm"
         actions.user.vscode("workbench.view.scm")
 
+    def get_teleport_destination(text: str):
+        """Get teleport destination"""
+        # title = actions.win.title()
+        title = actions.user.vscode("copyFilePath")
+        if re.search("roku_knausj_talon", title):
+            print("I got it")
+
+        # actions.user.vscode("workbench.action.quickOpen")
+        # actions.sleep("100ms")
+        # actions.insert(",")
+        # actions.insert(text or "")
+        # # actions.insert(file_extension or "")
+        # actions.sleep("400ms")
+        # actions.key("enter")
+        # actions.sleep("150ms")
+
     def vscode_file_next():
         """Go to next file"""
         if vscode_view == "scm":

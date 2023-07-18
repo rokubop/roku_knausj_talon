@@ -61,6 +61,7 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     user.vscode("workbench.action.quickOpen")
 
 <user.show_list> [dock | stock] [<user.text>] [{user.file_extension}] [halt]:
+    # user.get_teleport_destination("{text}{file_extension or ''}")
     user.vscode("workbench.action.quickOpen")
     sleep(100ms)
     insert(text or "")
@@ -431,6 +432,17 @@ change language [<user.text>]:
 please [<user.text>]$:
     user.vscode("workbench.action.showCommands")
     "{user.text or ''}"
+
+slice <user.text>:
+    mimic("pre this slice {text}")
+
+break <user.cursorless_target>:
+    user.cursorless_command("setSelectionBefore", cursorless_target)
+    user.vscode("hideSuggestWidget")
+    key("enter")
+break:
+    user.vscode("hideSuggestWidget")
+    key("enter")
 
 wrap dog:                   user.vscode("editor.action.toggleWordWrap")
 
