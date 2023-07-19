@@ -105,4 +105,9 @@ class Actions:
     def on_pop():
         """Do pop"""
         # log_parrot('pop')
-        actions.user.click()
+        if actions.user.mouse_is_dragging():
+            print("case one")
+            actions.user.mouse_drag_end()
+        else:
+            print("case two")
+            actions.user.click()

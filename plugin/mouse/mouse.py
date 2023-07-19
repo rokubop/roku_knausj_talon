@@ -116,6 +116,8 @@ def gui_wheel(gui: imgui.GUI):
         actions.user.mouse_scroll_stop()
 
 
+is_dragging = True
+
 @mod.action_class
 class Actions:
     def mouse_show_cursor():
@@ -135,17 +137,26 @@ class Actions:
 
     def mouse_drag(button: int):
         """Press and hold/release a specific mouse button for dragging"""
+        global is_dragging
         # Clear any existing drags
         self.mouse_drag_end()
 
         # Start drag
+        is_dragging = True
         ctrl.mouse_click(button=button, down=True)
 
     def mouse_drag_end():
         """Releases any held mouse buttons"""
+        global is_dragging
+        is_dragging = False
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
             ctrl.mouse_click(button=button, up=True)
+
+    def mouse_is_dragging():
+        """Check if the mouse is being held down"""
+        global is_dragging
+        return is_dragging
 
     def mouse_sleep():
         """Disables control mouse, zoom mouse, and re-enables cursor"""
