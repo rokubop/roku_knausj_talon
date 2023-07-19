@@ -3,6 +3,8 @@ app: discord
 tag(): user.messaging
 tag(): user.emoji
 
+show (help | settings | shortcuts | keyboard shortcuts): key(ctrl-/)
+react:                      key(+)
 # Navigation: QuickSwitcher
 <user.teleport> [{user.discord_destination}] [<user.text>]:
     user.discord_quick_switcher(user.discord_destination or "", user.text or "")
