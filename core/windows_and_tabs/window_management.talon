@@ -20,6 +20,7 @@ snap <user.running_applications> [screen] <number>:
     user.move_app_to_screen(running_applications, number)
 
 # roku additions
+window list:                key(win-tab)
 window (max | maximize):    user.window_maximize()
 maximize [window]:          user.window_maximize()
 window (min | minimize):    user.window_minimize()

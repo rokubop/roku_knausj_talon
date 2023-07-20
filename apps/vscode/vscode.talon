@@ -9,6 +9,7 @@ tag(): user.tabs
 
 settings():
     key_wait = 4
+    insert_wait = 7
 
 (focus | show) term:        user.vscode("workbench.action.terminal.focus")
 (focus | show) (files | folders): user.vscode_focus_files()
@@ -264,6 +265,7 @@ file remove:                user.vscode("andreas.removeFile")
 file move:                  user.vscode("andreas.moveFile")
 file next:                  user.vscode_file_next()
 file last:                  user.vscode_file_last()
+file revert:                user.vscode("git.clean")
 file sibling [<user.filename>]:
     user.vscode("andreas.newFile", filename or "")
 file rename [<user.filename>]:

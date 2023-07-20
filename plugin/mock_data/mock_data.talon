@@ -16,3 +16,10 @@ mock address:
     "1234 Main St\t\t\tCity\t"
     key(down tab)
     "12345"
+
+mock date <number>:
+    key(down tab)
+    key(down tab)
+    insert(number)
+    key(tab)
+
