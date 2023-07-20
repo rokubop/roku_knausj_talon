@@ -234,6 +234,7 @@ term scroll up:             user.vscode("workbench.action.terminal.scrollUp")
 term scroll down:           user.vscode("workbench.action.terminal.scrollDown")
 term grow:                  user.vscode("workbench.action.terminal.resizePaneUp")
 term shrink:                user.vscode("workbench.action.terminal.resizePaneDown")
+term bridge:                user.vscode("workbench.action.terminal.focusNextPane")
 term <number_small>:        user.vscode_terminal(number_small)
 katie:                      "cd "
 katie up:                   "cd ..\n"
