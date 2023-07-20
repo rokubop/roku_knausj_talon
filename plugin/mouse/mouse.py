@@ -120,6 +120,34 @@ is_dragging = True
 
 @mod.action_class
 class Actions:
+    def mouse_click(action: str):
+        """Click mouse button"""
+        # actions.user.mouse_scroll_stop_for_click()
+        if action == "left":
+            actions.mouse_click()
+        elif action == "right":
+            actions.mouse_click(1)
+        elif action == "middle":
+            actions.mouse_click(2)
+        elif action == "double":
+            actions.mouse_click()
+            actions.mouse_click()
+        elif action == "triple":
+            actions.mouse_click()
+            actions.mouse_click()
+            actions.mouse_click()
+        elif action == "control":
+            actions.key("ctrl:down")
+            actions.mouse_click()
+            actions.key("ctrl:up")
+        elif action == "shift":
+            actions.key("shift:down")
+            actions.mouse_click()
+            actions.key("shift:up")
+        elif action == "center":
+            # actions.user.mouse_center_window()
+            actions.mouse_click()
+
     def mouse_show_cursor():
         """Shows the cursor"""
         show_cursor_helper(True)

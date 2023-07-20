@@ -18,28 +18,34 @@ bar collapse:               key(ctrl-up)
 cleanup | hide all | close all | high doll: key(f12 f5 f9)
 layout (one | set | default | reset): user.fl_set_normalized_layout()
 
-track delete:
+track color:
     mouse_click(1)
-    key(e enter enter)
+    key(r)
+    mouse_click(0)
 track clone:
     mouse_click(1)
     key(o o)
     key(enter enter)
+track delete:
+    mouse_click(1)
+    key(e enter enter)
+track (make | new | insert):
+    mouse_click(1)
+    key(i)
+
 
 copy midi:                  key(f6 ctrl-c)
 paste midi:                 key(f6 ctrl-v)
 octave up:                  key(f7 ctrl-up escape)
 octave down:                key(f7 ctrl-down escape)
-(insert | add) track:
-    mouse_click(1)
-    key(i)
+
 group above:
     mouse_click(1)
     key(g)
 make unique:
     mouse_click(0)
     key(m)
-change color:
+color:
     mouse_click(0)
     key(r)
     mouse_click(0)
@@ -68,10 +74,11 @@ key | keys | keyboard:      user.fl_toggle_keys()
 
 tempo:                      key(ctrl-f5)
 take:                       key(e)
+take (nothing | none):      key(ctrl-d)
+take time:                  key(ctrl-enter)
 pen:                        key(p)
 cut:                        key(c)
 mute:                       key(t)
-take (nothing | none):      key(ctrl-d)
 norm | normal | normalize:  user.normalize()
 # preview one:
 #     key(alt:down)
@@ -91,10 +98,21 @@ play | pause:               key(space)
 
 playlist | range:           key(f5)
 channels | inst:            key(f6)
-drag:                       mouse_down(middle)
+# drag:                       mouse_drag(2)
 (stop drag | drag up | drag stop): mouse_up(middle)
+wrap:
+    user.mouse_click("control")
+    key(ctrl-enter)
+
+clone (bar | time):         key(ctrl-b)
+
+box:
+    key("ctrl:down")
+    mouse_drag()
+    key("ctrl:up")
 
 # mixer
+mix:                        key(f9)
 (base | mix) (show | hide | dog): key(f9)
 mix start | pre mix:        user.fl_go_to_mixer_start()
 mix {user.fl_mixer_x_position}: user.fl_click_mixer(fl_mixer_x_position)
