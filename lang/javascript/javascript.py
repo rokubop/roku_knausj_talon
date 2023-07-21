@@ -30,7 +30,7 @@ ctx.lists["user.code_common_member_function"] = {
     "catch": "catch",
     "concat": "concat",
     "finally": "finally",
-    "join": "join",
+    # "join": "join", needs to be disabled so join lines can work
     "includes": "includes",
     "pop": "pop",
     "push": "push",
