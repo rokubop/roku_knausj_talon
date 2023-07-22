@@ -125,18 +125,18 @@ class Actions:
       """ """
       ctrl.mouse_move(156, 19)
       ctrl.mouse_click(0)
-      actions.key("up up up up up up up up right up up")
+      actions.key("up:8 right up:2")
       actions.key("enter")
 
     def fl_set_declicking_mode():
       """ """
       ctrl.mouse_click(0)
-      actions.key("down down enter")
+      actions.key("down:2 enter")
 
     def fl_set_resample_mode():
       """ """
       ctrl.mouse_click(0)
-      actions.key("down down enter")
+      actions.key("down:2 enter")
 
     def fl_toggle_keys():
       """toggle keyboard"""

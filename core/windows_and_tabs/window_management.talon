@@ -1,3 +1,5 @@
+not mode: sleep
+-
 window (new | open):        app.window_open()
 window next:                app.window_next()
 window last:                app.window_previous()

@@ -4,29 +4,17 @@ track debug:                tracking.control_debug_toggle()
 calibrate:                  tracking.calibrate()
 touch:
     mouse_click(0)
-    # close the mouse grid if open
     user.grid_close()
-    # End any open drags
-    # Touch automatically ends left drags so this is for right drags specifically
     user.mouse_drag_end()
 
-righty:
+righty | right click:
     mouse_click(1)
-    # close the mouse grid if open
     user.grid_close()
 
-mid click | mick:
+mid click:
     mouse_click(2)
-    # close the mouse grid
     user.grid_close()
 
-#see keys.py for modifiers.
-#defaults
-#command
-#control
-#option = alt
-#shift
-#super = windows key
 <user.modifiers> touch:
     key("{modifiers}:down")
     mouse_click(0)
@@ -48,15 +36,15 @@ mid click | mick:
     mouse_click()
     mouse_click()
     mouse_click()
-    # close the mouse grid
     user.grid_close()
-left drag | drag:
+drag:
     user.mouse_drag(0)
-    # close the mouse grid
     user.grid_close()
-right drag | righty drag:
+drag right:
     user.mouse_drag(1)
-    # close the mouse grid
+    user.grid_close()
+drag mid:
+    user.mouse_drag(2)
     user.grid_close()
 end drag | drag (end | stop): user.mouse_drag_end()
 wheel down | downer:        user.mouse_scroll_down(6)

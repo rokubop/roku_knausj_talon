@@ -1,3 +1,5 @@
+not mode: sleep
+-
 talon check updates:        menu.check_for_updates()
 talon [open] log:           menu.open_log()
 talon [open] rebel:         menu.open_repl()
@@ -46,7 +48,7 @@ talon dump context:
     print("**** Dumping active application **** ")
     print(result)
     print("***********************")
-^talon copy (active) app$:
+^talon copy [active] app$:
     result = user.talon_get_active_application_info()
     clip.set_text(result)
 

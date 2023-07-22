@@ -13,6 +13,7 @@ two_way_opposites = [
     ("undo", "redo"),
     ("last", "next"),
     ("forward", "back"),
+    ("out", "in"),
 ]
 
 opposites = {}
