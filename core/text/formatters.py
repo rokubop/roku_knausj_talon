@@ -304,3 +304,21 @@ ctx.lists["self.prose_formatter"] = {
     "more": "SPACE_FIRST_WORD",
     "trench": "SPACE_CAPITALIZE_FIRST_WORD",
 }
+
+# This is the mapping from spoken phrases to formatters
+mod.list("formatter_code", desc="List of code formatters")
+ctx.lists["self.formatter_code"] = {
+    # "string": "DOUBLE_QUOTED_STRING",
+    # "twin": "SINGLE_QUOTED_STRING",
+    # Splitting formatters
+    "camel": "CAMEL_CASE",
+    "pascal": "PASCAL_CASE",
+    "snake": "SNAKE_CASE",
+    "constant": "ALL_CAPS_SNAKE_CASE",
+    "kebab": "DASH_SEPARATED",
+    "dotted": "DOT_SEPARATED",
+    "slasher": "SLASH_SEPARATED",
+    "dunder": "DOUBLE_UNDERSCORE",
+    "packed": "DOUBLE_COLON_SEPARATED",
+    "smash": "NO_SPACES",
+}

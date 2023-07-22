@@ -91,7 +91,7 @@ mouse stop:                 user.mouse_scroll_stop()
 mouse stop here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_stop()
-wheel left:                 user.mouse_scroll_left().
+wheel left:                 user.mouse_scroll_left()
 wheel left here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_left()
@@ -108,6 +108,11 @@ wheel tiny right here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_right(0.5)
 copy mouse position:        user.copy_mouse_position()
+
 curse no:
     # Command added 2021-12-13, can remove after 2022-06-01
     app.notify("Please activate the user.mouse_cursor_commands_enable tag to enable this command")
+curse stay:
+    user.mouse_stay_in_place(1)
+curse come:
+    user.mouse_stay_in_place(0)

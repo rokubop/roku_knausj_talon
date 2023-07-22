@@ -79,16 +79,16 @@ shot:
     user.dave_mouse_click(0)
     user.mouse_drag_end()
 
-swap$:
-    print("command mode")
-    mode.disable("sleep")
-    mode.disable("dictation")
-    mode.disable("user.game")
-    mode.enable("command")
-    key(alt:down)
-    key(tab)
-    sleep(50ms)
-    key(alt:up)
+# swap$:
+#     print("command mode")
+#     mode.disable("sleep")
+#     mode.disable("dictation")
+#     mode.disable("user.game")
+#     mode.enable("command")
+#     key(alt:down)
+#     key(tab)
+#     sleep(50ms)
+#     key(alt:up)
 
 # [go] (fast | faster) | run:
 #     user.switch_game_movement(0)

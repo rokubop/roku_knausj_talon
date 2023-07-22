@@ -425,9 +425,9 @@ generate range [from <number_small>]:
 snip last:                  user.vscode("jumpToPrevSnippetPlaceholder")
 [snip] next:                user.vscode("jumpToNextSnippetPlaceholder")
 
-change language {user.code_language}:
-    user.change_language(code_language)
-    key(enter)
+# change language {user.code_language}:
+#     user.change_language(code_language)
+#     key(enter)
 
 change language [<user.text>]:
     user.change_language(text or "")

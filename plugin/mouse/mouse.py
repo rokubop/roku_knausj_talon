@@ -9,6 +9,9 @@ scroll_amount = 0
 click_job = None
 scroll_job = None
 gaze_job = None
+_stay_job = None
+_stay_x = 0
+_stay_y = 0
 cancel_scroll_on_pop = True
 control_mouse_forced = False
 
@@ -268,6 +271,16 @@ class Actions:
         rect = ui.active_window().rect
         ctrl.mouse_move(rect.left + (rect.width / 2), rect.top + (rect.height / 2))
 
+    def mouse_stay_in_place(is_stay: bool):
+        """stay in place so that for example
+        content that is not hoverable
+        but activates on hover
+        can be read without turning the eye tracker off only for a couple of seconds
+        which in theory may damage it if done too frequently"""
+        if is_stay:
+            _start_stay_job()
+        else:
+            _stop_stay_job()
 
 def show_cursor_helper(show):
     """Show/hide the cursor"""
@@ -410,3 +423,23 @@ def start_cursor_scrolling():
     global scroll_job, gaze_job
     stop_scroll()
     gaze_job = cron.interval("60ms", gaze_scroll)
+
+
+def _mouse_stay():
+    ctrl.mouse_move(_stay_x, _stay_y, dx=0, dy=0)
+
+
+def _start_stay_job():
+    global _stay_job, _stay_x, _stay_y
+    if _stay_job:
+        return
+    _stay_x, _stay_y = ctrl.mouse_pos()
+    _stay_job = cron.interval("1ms", _mouse_stay)
+
+
+def _stop_stay_job():
+    global _stay_job
+    if not _stay_job:
+        return
+    cron.cancel(_stay_job)
+    _stay_job = None

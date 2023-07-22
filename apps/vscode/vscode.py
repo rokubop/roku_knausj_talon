@@ -269,6 +269,13 @@ class Actions:
         new_path = actions.user.transform_path_for_search(clip.text(), first_x, last_y, text or "")
         actions.user.find_file(new_path)
 
+    def vscode_add_missing_imports():
+        """Add all missing imports"""
+        actions.user.vscode_with_plugin(
+            "editor.action.sourceAction",
+            {"kind": "source.addMissingImports", "apply": "first"},
+        )
+
 @mac_ctx.action_class("user")
 class MacUserActions:
     def command_palette():
@@ -513,13 +520,6 @@ class UserActions:
         actions.edit.find(text)
         actions.sleep("100ms")
         actions.key("esc")
-
-    def vscode_add_missing_imports():
-        """Add all missing imports"""
-        actions.user.vscode_with_plugin(
-            "editor.action.sourceAction",
-            {"kind": "source.addMissingImports", "apply": "first"},
-        )
 
 def is_untitled(filename: str):
     return PATTERN_RE.search(filename) is not None
