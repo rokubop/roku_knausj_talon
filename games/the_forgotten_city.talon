@@ -24,6 +24,7 @@ exam | examine:
     mouse_drag(1)
 exam stop:
     mouse_release(1)
+quest | inventory:          key(tab)
 file save:                  key(f5)
 file load:                  key(f9)
 # track:                      tracking.control_toggle()
