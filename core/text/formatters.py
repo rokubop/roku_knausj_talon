@@ -295,12 +295,12 @@ def unformat_text(text: str) -> str:
     # TODO: Separate out studleycase vars
     return unformatted.lower()
 
-
 ctx.lists["self.formatters"] = formatters_words.keys()
 ctx.lists["self.prose_formatter"] = {
     "say": "NOOP",
     "speak": "NOOP",
     "sentence": "CAPITALIZE_FIRST_WORD",
+    "state": "CAPITALIZE_FIRST_WORD",
     "more": "SPACE_FIRST_WORD",
     "trench": "SPACE_CAPITALIZE_FIRST_WORD",
 }
