@@ -3,6 +3,7 @@ mock text:                  "Lorem ipsum dolor sit amet"
 mock phone:                 "345-345-3455"
 mock email:                 "person.name@testmail.com"
 mock social:                "454-54-4545"
+mock VA [file] [number]:    "111223333"
 mock first:                 "Person"
 mock middle:                "Middle"
 mock last:                  "LastName"
@@ -17,9 +18,9 @@ mock address:
     key(down tab)
     "12345"
 
-mock date <number>:
+mock date [<number>]:
     key(down tab)
     key(down tab)
-    insert(number)
+    insert(number or "1999")
     key(tab)
 

@@ -38,11 +38,15 @@ please [<user.text>]$:
     sleep(100ms)
     "{text or ''}"
 
+section next:               key(f6)
+section last:               key(shift-f6)
 channel last:               key(alt-up)
 channel next:               key(alt-down)
 channel unread last:        key(alt-shift-up)
 channel unread next:        key(alt-shift-down)
 next unread:                key(alt-shift-down)
+mark [as] read:             key(esc)
+mark all [as] read:         key(shift-esc)
 
 edit last:                  key(ctrl-up)
 edit:                       key(e)
