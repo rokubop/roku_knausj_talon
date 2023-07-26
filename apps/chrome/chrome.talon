@@ -74,25 +74,25 @@ break <number>:
 (hide | show) base | base (hide | show | dog | toggle): key(f12)
 zen mode:                   key(ctrl-shift-y ctrl-shift-h)
 
-<user.teleport> (sources | source):
+(<user.teleport> | show) (sources | source):
     key(escape ctrl-shift-p)
     insert("sources")
     sleep(100ms)
     key(enter)
 
-<user.teleport> network:
+(<user.teleport> | show) network:
     key(escape ctrl-shift-p)
     insert("network")
     sleep(100ms)
     key(enter)
 
-<user.teleport> elements:
+(<user.teleport> | show) elements:
     key(escape ctrl-shift-p)
     insert("elements")
     sleep(100ms)
     key(enter)
 
-<user.teleport> (console | counsel):
+(<user.teleport> | show) (console | counsel):
     key(escape ctrl-shift-p)
     insert("console")
     sleep(100ms)
@@ -127,3 +127,5 @@ image (open | blank | stash):
     sleep(100ms)
     key(down)
     key(enter)
+
+mobile (toggle | dog | show | hide | view): key(ctrl-shift-m)
