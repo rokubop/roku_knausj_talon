@@ -4,6 +4,8 @@ mod = Module()
 
 game_list = [
     "The Forgotten City",
+    "Unity playback engine.",
+    "Planet of Lana"
 ]
 
 def game_reset_actions():

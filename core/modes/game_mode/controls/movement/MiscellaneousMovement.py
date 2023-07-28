@@ -26,11 +26,3 @@ class MiscellaneousMovement():
     def game_long_dodge():
         """Long dodge roll. Defaults to pressing the ctrl key for 650 milliseconds."""
         actions.user.press_game_key("ctrl", 1, 650000)
-
-    def game_dive_start():
-        """Start diving"""
-        actions.key("ctrl:down")
-
-    def game_dive_stop():
-        """Stop diving"""
-        actions.key("ctrl:up")
