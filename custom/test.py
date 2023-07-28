@@ -1,21 +1,21 @@
-from talon import Module, Context, actions
+# from talon import Module, Context, actions
 
-mod = Module()
-ctx = Context()
+# mod = Module()
+# ctx = Context()
 
-ctx.matches = """
-app: chrome
-"""
+# ctx.matches = """
+# app: /code/
+# """
 
+# # @mod.action_class
 # @mod.action_class
-@mod.action_class
-class Actidsfosdffefewwefefws:
-    def test_one():
-        """test"""
-        actions.insert('yo')
+# class Actions:
+#     def test_one():
+#         """test"""
+#         actions.insert('yo')
 
-@ctx.action_class("user")
-class Totorsfwefewfewfewfewo:
-    def test_one():
-        """test"""
-        actions.insert('helloa')
+# @ctx.action_class("user")
+# class UserActions:
+# #     def test_one():
+# #         """test"""
+# #         actions.insert('helloa')

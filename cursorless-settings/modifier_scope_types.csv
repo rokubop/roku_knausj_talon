@@ -26,7 +26,7 @@ funk, namedFunction
 funk name, functionName
 identifier | alpha, identifier
 if state, ifStatement
-instance, instance
+instance|view, instance
 item, collectionItem
 key, collectionKey
 lambda, anonymousFunction

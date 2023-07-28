@@ -11,6 +11,11 @@ parrot(palate_click):
 parrot(pop):
 				user.on_pop()
 				# print("pop")
+parrot(shush):              user.noise_debounce("shush", true)
+parrot(shush:stop):         user.noise_debounce("shush", false)
+
+parrot(hiss):               user.noise_debounce("hiss", true)
+parrot(hiss:stop):          user.noise_debounce("hiss", false)
 # parrot(shush):              user.noise_debounce("shush", true)
 # parrot(shush:stop):         user.noise_debounce("shush", false)
 
