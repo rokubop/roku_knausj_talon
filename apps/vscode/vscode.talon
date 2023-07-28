@@ -52,7 +52,7 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     sleep(100ms)
     insert(text or "")
     insert(file_extension or "")
-    sleep(300ms)
+    sleep(600ms)
     key(enter)
     sleep(150ms)
 

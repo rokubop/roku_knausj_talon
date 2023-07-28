@@ -128,12 +128,6 @@ class Actions:
 
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
-        if name not in state:
-            state[name] = active
-            cron_jobs[name] = cron.after("150ms", lambda: callback(name))
-        elif state[name] != active:
-            cron.cancel(cron_jobs[name])
-            state.pop(name)
 
     def noise_shush_start():
         """Noise shush started"""
@@ -170,3 +164,19 @@ def on_hiss(active: bool):
 
 callbacks["shush"] = on_shush
 callbacks["hiss"] = on_hiss
+
+chrome_ctx = Context()
+ctx.matches = """
+app: Chrome
+"""
+
+@ctx.action_class("user")
+class ChromeActions:
+    def noise_debounce(name: str, active: bool):
+        """Start or stop continuous noise using debounce"""
+        if name not in state:
+            state[name] = active
+            cron_jobs[name] = cron.after("80ms", lambda: callback(name))
+        elif state[name] != active:
+            cron.cancel(cron_jobs[name])
+            state.pop(name)
