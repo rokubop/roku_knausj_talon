@@ -2,24 +2,49 @@ win.title: Planet of Lana
 and mode: user.game
 -
 settings():
-    # user.game_noise_hiss_binding_default = "jump"
+    key_hold = 64.0
+    key_wait = 16.0
+    user.mouse_hold = 16000
+    user.mouse_wait = 0
 
 tag(): user.game_side_scroller
+# adds noise "pop" to go/stop
+# adds noise "shush" for left
+# adds noise "hiss" for right
+# adds noise "palate" for jump
 
-# user alphabet
-fine:                       key(f)
-each:                       key(e)
+# eye tracking doesn't work for this game
+
+# generic
+north:                      key(w)
+south:                      key(s)
+tug:                        key(a)
+push:                       key(d)
 scrape:                     key(escape)
-air:                        key(a)
-drum:                       key(d)
+touch:                      mouse_click()
+each | use:                 key(e)
 
-# custom commands
-parrot(shush):              key(left)
-parrot(hiss):               key(right)
-parrot(pop):
-    # this needs to be able to start or go
-    key(right:up)
-    key(left:up)
-right:                      key(right)
-left:                       key(left)
-up | down:                  user.game_crouch()
+# game
+right:                      user.game_side_scroller_right()
+left:                       user.game_side_scroller_left()
+up:                         user.game_side_scroller_up()
+down:                       user.game_crouch()
+jump:                       user.game_jump()
+go | stop:                  user.game_side_scroller_start_stop()
+down:                       user.game_crouch()
+(grab | move):
+    mouse_release()
+    mouse_drag()
+(grab | move) no:           mouse_release()
+[cat] stay:                 key(q)
+[cat] come:
+    key(q:down)
+    sleep(1000ms)
+    key(q:up)
+cat (go | send | move):
+    mouse_drag(1)
+cat cancel:
+    mouse_release(1)
+cat yes:
+    mouse_click(0)
+    mouse_release(1)

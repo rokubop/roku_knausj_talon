@@ -10,13 +10,3 @@ ctx.matches = """
 mode: user.game
 and app: planet_of_lana
 """
-
-is_crouched = False
-
-@ctx.action_class("user")
-class GameActions:
-    def game_crouch():
-        if is_crouched:
-            actions.key("s:up")
-        else:
-            actions.key("s:down")

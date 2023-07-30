@@ -51,25 +51,6 @@ class StateReverse:
 
 stateReverse = StateReverse()
 
-@ctx.action_class("user")
-class UserActions:
-    def noise_shush_start():
-        global shush_start
-        shush_start = time.perf_counter()
-        actions.user.mouse_scrolling("up")
-
-    def noise_shush_stop():
-        actions.user.abort_specific_phrases(
-            ["hash", "ssh"], shush_start, time.perf_counter()
-        )
-        actions.user.mouse_scroll_stop()
-
-    def noise_hiss_start():
-        actions.user.mouse_scrolling("down")
-
-    def noise_hiss_stop():
-        actions.user.mouse_scroll_stop()
-
 @mod.action_class
 class Actions:
     def on_palate():
@@ -128,18 +109,28 @@ class Actions:
 
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
+        if name not in state:
+            state[name] = active
+            cron_jobs[name] = cron.after("80ms", lambda: callback(name))
+        elif state[name] != active:
+            cron.cancel(cron_jobs[name])
+            state.pop(name)
 
     def noise_shush_start():
         """Noise shush started"""
+        print("shush:start")
 
     def noise_shush_stop():
         """Noise shush stopped"""
+        print("shush:stop")
 
     def noise_hiss_start():
         """Noise hiss started"""
+        print("hiss:start")
 
     def noise_hiss_stop():
         """Noise hiss stopped"""
+        print("hiss:stop")
 
 def callback(name: str):
     active = state.pop(name)
@@ -147,19 +138,15 @@ def callback(name: str):
 
 def on_shush(active: bool):
     if active:
-        # actions.user.debug("shush:start")
         actions.user.noise_shush_start()
     else:
-        # actions.user.debug("shush:stop")
         actions.user.noise_shush_stop()
 
 
 def on_hiss(active: bool):
     if active:
-        # actions.user.debug("hiss:start")
         actions.user.noise_hiss_start()
     else:
-        # actions.user.debug("hiss:stop")
         actions.user.noise_hiss_stop()
 
 callbacks["shush"] = on_shush
@@ -172,11 +159,19 @@ app: Chrome
 
 @ctx.action_class("user")
 class ChromeActions:
-    def noise_debounce(name: str, active: bool):
-        """Start or stop continuous noise using debounce"""
-        if name not in state:
-            state[name] = active
-            cron_jobs[name] = cron.after("80ms", lambda: callback(name))
-        elif state[name] != active:
-            cron.cancel(cron_jobs[name])
-            state.pop(name)
+    def noise_shush_start():
+        global shush_start
+        shush_start = time.perf_counter()
+        actions.user.mouse_scrolling("up")
+
+    def noise_shush_stop():
+        actions.user.abort_specific_phrases(
+            ["hash", "ssh"], shush_start, time.perf_counter()
+        )
+        actions.user.mouse_scroll_stop()
+
+    def noise_hiss_start():
+        actions.user.mouse_scrolling("down")
+
+    def noise_hiss_stop():
+        actions.user.mouse_scroll_stop()

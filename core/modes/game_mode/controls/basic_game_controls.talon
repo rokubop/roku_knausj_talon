@@ -15,5 +15,5 @@ and not mode: sleep
 				key(backspace)
 ^game console show$:
 				key(`)
-^track$:
+^track (yes | no)$:
 				tracking.control_toggle()
