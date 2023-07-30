@@ -24,7 +24,7 @@ scrape:                     key(escape)
 touch:                      mouse_click()
 each | use:                 key(e)
 
-# game
+# movement
 right:                      user.game_side_scroller_right()
 left:                       user.game_side_scroller_left()
 up:                         user.game_side_scroller_up()
@@ -36,6 +36,8 @@ down:                       user.game_crouch()
     mouse_release()
     mouse_drag()
 (grab | move) no:           mouse_release()
+
+# cat commands
 [cat] stay:                 key(q)
 [cat] come:
     key(q:down)
@@ -43,7 +45,7 @@ down:                       user.game_crouch()
     key(q:up)
 cat (go | send | move):
     mouse_drag(1)
-cat cancel:
+[cat] cancel:
     mouse_release(1)
 cat yes:
     mouse_click(0)
