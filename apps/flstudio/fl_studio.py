@@ -111,7 +111,7 @@ slot_light_toggle_x_pos = 491
 
 @mod.action_class
 class Actions:
-    def normalize():
+    def fl_normalize():
       """normalized plus preferred settings"""
       x, y = ctrl.mouse_pos()
       actions.mouse_click(0)

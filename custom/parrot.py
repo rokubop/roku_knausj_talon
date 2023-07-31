@@ -8,6 +8,7 @@ ctx = Context()
 
 two_way_opposites = [
     ("north", "south"),
+    ("upper", "downer"),
     ("up", "down"),
     ("left", "right"),
     ("push", "tug"),
@@ -101,10 +102,10 @@ class Actions:
     def on_pop():
         """Do pop"""
         if actions.user.mouse_is_dragging():
-            print("case one")
+            print("pop as drag end")
             actions.user.mouse_drag_end()
         else:
-            print("case two")
+            print("pop as click")
             actions.user.click()
 
     def noise_debounce(name: str, active: bool):

@@ -22,15 +22,11 @@ parrot(hiss:stop):          user.noise_debounce("hiss", false)
 # parrot(hiss):               user.noise_debounce("hiss", true)
 # parrot(hiss:stop):          user.noise_debounce("hiss", false)
 # parrot(ue):
-# 	print("ue")
+# 				print("ue")
 # parrot(lll):
 # 				print("lll")
 # parrot(buzz):
 # 				print("buzz")
-# parrot(shush):
-# 				print("shush")
-# parrot(hiss):
-# 				print("hiss")
 # parrot(gluck):
 # 				print("gluck")
 # parrot(finger_snap):

@@ -32,7 +32,6 @@ class Actions:
         """start or stop moving"""
         global is_moving
         global current_movement
-        print("yo")
         if is_moving:
             is_moving = False
             for key in ["w", "a", "d"]:

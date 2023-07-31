@@ -67,6 +67,11 @@ cleanup | hide all | close all | high doll: key(f12 f5 f9)
 layout (one | set | default | reset): user.fl_set_normalized_layout()
 zen mode:                   key(enter)
 
+(pat | pattern) clone:
+    key(shift:down)
+    mouse_drag()
+    key(shift:up)
+
 # tracks
 track clone:
     mouse_click(1)
@@ -133,7 +138,8 @@ set <number>:
     key(t)
     insert(number)
     key(enter)
-norm | normal | normalize:  user.normalize() | keys | keyboard:      user.fl_toggle_keys()
+norm | normal | normalize:  user.fl_normalize()
+keys | keyboard:            user.fl_toggle_keys()
 resample only:
     mouse_click(0)
     key(down down enter)
