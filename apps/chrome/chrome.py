@@ -29,6 +29,25 @@ ctx.matches = r"""
 app: chrome
 """
 
+mod.list("chrome_dev_tabs", desc="List of tabs in Chrome")
+ctx.lists["user.chrome_dev_tabs"] = (
+    "elements",
+    "network",
+    "console",
+    "sources",
+    "performance",
+    "memory",
+    "application",
+    "security",
+    "audits",
+    "media",
+    "recorder",
+    "lighthouse",
+    "components",
+    "profiler",
+    "redux",
+    "axe",
+)
 
 @mod.action_class
 class Actions:
@@ -39,6 +58,12 @@ class Actions:
         else:
             actions.key(f"ctrl-{key}")
 
+    def chrome_please(text: str):
+        """Press the specified key with the correct modifier key for the OS"""
+        actions.key("escape ctrl-shift-p")
+        actions.insert(text)
+        actions.sleep("200ms")
+        actions.key("enter")
 
 @ctx.action_class("user")
 class UserActions:

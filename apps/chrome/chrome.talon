@@ -54,7 +54,7 @@ go <number>:
     "{number}"
     key(enter)
 
-(break | bug) [toggle | dog]: key(ctrl-f8)
+(break | bug) (toggle | dog | yes | no | this): key(ctrl-f8)
 (break | bug) (pause | resume): key(ctrl-f8)
 (break | bug) (step | step over): key(f10)
 (break | bug) (step in | step into): key(f11)
@@ -72,31 +72,14 @@ break <number>:
 (hide | show) rack | rack (hide | show | dog | toggle): key(ctrl-shift-h)
 (hide | show) bar | bar (hide | show | dog | toggle): key(ctrl-shift-y)
 (hide | show) base | base (hide | show | dog | toggle): key(f12)
+
+base next:                 key("ctrl-]")
+base last:                 key("ctrl-[")
+
 zen mode:                   key(ctrl-shift-y ctrl-shift-h)
 
-(<user.teleport> | show) (sources | source):
-    key(escape ctrl-shift-p)
-    insert("sources")
-    sleep(100ms)
-    key(enter)
-
-(<user.teleport> | show) network:
-    key(escape ctrl-shift-p)
-    insert("network")
-    sleep(100ms)
-    key(enter)
-
-(<user.teleport> | show) elements:
-    key(escape ctrl-shift-p)
-    insert("elements")
-    sleep(100ms)
-    key(enter)
-
-(<user.teleport> | show) (console | counsel):
-    key(escape ctrl-shift-p)
-    insert("console")
-    sleep(100ms)
-    key(enter)
+(<user.teleport> | show) {user.chrome_dev_tabs}:
+    user.chrome_please(chrome_dev_tabs)
 
 inspect this:
     mouse_click(1)
