@@ -3,6 +3,6 @@ join, editor.action.joinLines
 increment, andreas.increment
 decrement, andreas.decrement
 update tag, editor.emmet.action.updateTag
-split tag | join tag, editor.emmet.action.splitJoinTag
+split tag | join tag | join tags, editor.emmet.action.splitJoinTag
 bubble, editor.action.moveLinesUpAction
 sink, editor.action.moveLinesDownAction
