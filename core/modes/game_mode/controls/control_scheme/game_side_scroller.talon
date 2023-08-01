@@ -3,7 +3,9 @@ and mode: user.game
 and not mode: sleep
 -
 game | menu:                user.game_side_scroller_toggle_menu_mode()
-# settings():
+
+settings():
+    speech.timeout = 0.05
 #     user.game_noise_pop_binding_default = "move"
 #     user.game_noise_hiss_binding_default = "long click"
 

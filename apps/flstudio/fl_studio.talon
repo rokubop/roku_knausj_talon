@@ -1,6 +1,9 @@
 app: fl studio
 -
 
+settings():
+    speech.timeout = 0.05
+
 # adding instruments (tracks) and plugins (mixer)
 add {user.fl_instrument}:
     mouse_click(1)

@@ -59,7 +59,7 @@ cut righter:
     edit.cut()
 
 # Other
-pour:                       edit.line_insert_down()
+pour | lap:                 edit.line_insert_down()
 drink:                      edit.line_insert_up()
 disk:                       edit.save()
 disk all:                   edit.save_all()
@@ -71,3 +71,5 @@ nope:                       edit.undo()
     "``"
     edit.left()
 <user.operator> code block: "```\n"
+
+fast mode:                  mode.enable("user.fast")

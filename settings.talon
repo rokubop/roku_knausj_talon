@@ -1,5 +1,9 @@
 -
 settings():
+    # The default timeout for speech recognition
+    speech.timeout = 0.3
+    # speech.timeout = 0.05
+
     # Adjust the scale of the imgui to my liking
     imgui.scale = 1.3
 

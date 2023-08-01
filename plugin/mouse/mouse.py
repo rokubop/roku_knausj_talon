@@ -147,6 +147,10 @@ class Actions:
             actions.key("shift:down")
             actions.mouse_click()
             actions.key("shift:up")
+        elif action == "alt":
+            actions.key("alt:down")
+            actions.mouse_click()
+            actions.key("alt:up")
         elif action == "center":
             # actions.user.mouse_center_window()
             actions.mouse_click()

@@ -71,6 +71,10 @@ class UserActions:
         actions.sleep("180ms")
         actions.app.tab_close()
 
+@ctx.action_class("edit")
+class EditActions:
+    def line_insert_down():
+        actions.key("end shift-enter")
 
 @ctx.action_class("browser")
 class BrowserActions:

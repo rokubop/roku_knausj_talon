@@ -4,8 +4,8 @@
 # zoom reset:                 edit.zoom_reset()
 
 # Searching
-find it:                    edit.find()
-next one:                   edit.find_next()
+# find it:                    edit.find()
+# next one:                   edit.find_next()
 
 # Navigation
 
@@ -13,29 +13,29 @@ next one:                   edit.find_next()
 scroll up:                  edit.page_up()
 scroll down:                edit.page_down()
 
-go word left:               edit.word_left()
-go word right:              edit.word_right()
+# go word left:               edit.word_left()
+# go word right:              edit.word_right()
 
 go left:                    edit.left()
 go right:                   edit.right()
 go up:                      edit.up()
 go down:                    edit.down()
 
-go line start:              edit.line_start()
-go line end:                edit.line_end()
+# go line start:              edit.line_start()
+# go line end:                edit.line_end()
 
-go way left:
-    edit.line_start()
-    edit.line_start()
-go way right:               edit.line_end()
-go way up:                  edit.file_start()
-go way down:                edit.file_end()
+# go way left:
+#     edit.line_start()
+#     edit.line_start()
+# go way right:               edit.line_end()
+# go way up:                  edit.file_start()
+# go way down:                edit.file_end()
 
 go top:                     edit.file_start()
 go bottom:                  edit.file_end()
 
-go page up:                 edit.page_up()
-go page down:               edit.page_down()
+# go page up:                 edit.page_up()
+# go page down:               edit.page_down()
 
 # Selecting
 select all:                 edit.select_all()

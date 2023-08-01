@@ -2,7 +2,7 @@ track (on | off | yes | no | dog): tracking.control_toggle()
 zoom mouse:                 tracking.control_zoom_toggle()
 track debug:                tracking.control_debug_toggle()
 calibrate:                  tracking.calibrate()
-touch:
+touch | click it:
     mouse_click(0)
     user.grid_close()
     user.mouse_drag_end()
@@ -15,11 +15,17 @@ mid click:
     mouse_click(2)
     user.grid_close()
 
+ship it:                    user.mouse_click("shift")
+dub it:                     user.mouse_click("double")
+troll it:                   user.mouse_click("ctrl")
+trip it:                    user.mouse_click("ctrl")
+alt it:                     user.mouse_click("alt")
+
 <user.modifiers> touch:
     key("{modifiers}:down")
     mouse_click(0)
     key("{modifiers}:up")
-    # close the mouse grid
+    # close the mouse grid"
     user.grid_close()
 <user.modifiers> righty:
     key("{modifiers}:down")
@@ -37,7 +43,7 @@ mid click:
     mouse_click()
     mouse_click()
     user.grid_close()
-drag:
+drag [it]:
     user.mouse_drag(0)
     user.grid_close()
 drag right:
