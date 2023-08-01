@@ -75,6 +75,10 @@ break <number>:
 
 base next:                 key("ctrl-]")
 base last:                 key("ctrl-[")
+(base | rack) switch:                key("ctrl-shift-d")
+
+term (show | hide | dog):                  key(escape)
+term clear:                 key(ctrl-l)
 
 zen mode:                   key(ctrl-shift-y ctrl-shift-h)
 

@@ -24,19 +24,20 @@ ctx.lists["user.prose_modifiers"] = {
     "no space": "no_space",
 }
 ctx.lists["user.prose_snippets"] = {
+    "word boom": "boom",
+    "word space": "space",
     "boom": ". ",
     "spam": ", ",
-    "spacebar": " ",
+    "space": " ",
     "void": " ",
-    "new line": "\n",
-    "new paragraph": "\n\n",
+    "yep": "\n",
     "new graph": "\n\n",
     # Curly quotes are used to obtain proper spacing for left and right quotes, but will later be straightened.
     "open quote": "“",
     "close quote": "”",
-    "smiley": ":-)",
-    "winky": ";-)",
-    "frowny": ":-(",
+    "smiley": ":)",
+    "quest": "?",
+    "stack": ":",
 }
 
 @mod.capture(rule="{user.prose_modifiers}")
