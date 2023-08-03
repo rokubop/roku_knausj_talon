@@ -2,23 +2,23 @@ track (on | off | yes | no | dog): tracking.control_toggle()
 zoom mouse:                 tracking.control_zoom_toggle()
 track debug:                tracking.control_debug_toggle()
 calibrate:                  tracking.calibrate()
-touch | click it:
+touch | click it | ticket:
     mouse_click(0)
     user.grid_close()
     user.mouse_drag_end()
 
-righty | right click:
+righty | right click | rick it:
     mouse_click(1)
     user.grid_close()
 
-mid click:
+mid click | mick it:
     mouse_click(2)
     user.grid_close()
 
 ship it:                    user.mouse_click("shift")
 dub it:                     user.mouse_click("double")
 troll it:                   user.mouse_click("ctrl")
-trip it:                    user.mouse_click("ctrl")
+trip it:                    user.mouse_click("triple")
 alt it:                     user.mouse_click("alt")
 
 <user.modifiers> touch:
@@ -33,15 +33,6 @@ alt it:                     user.mouse_click("alt")
     key("{modifiers}:up")
     # close the mouse grid
     user.grid_close()
-(dub click | duke):
-    mouse_click()
-    mouse_click()
-    # close the mouse grid
-    user.grid_close()
-(trip click | trip lick):
-    mouse_click()
-    mouse_click()
-    mouse_click()
     user.grid_close()
 drag [it]:
     user.mouse_drag(0)
