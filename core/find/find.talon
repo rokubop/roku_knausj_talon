@@ -4,11 +4,11 @@ tag: user.find
 <user.find> clip:           edit.find(clip.text())
 <user.find> [<user.text>]$: edit.find(text or "")
 
-<user.find> all clip:       user.find_everywhere(clip.text())
-<user.find> all [<user.text>]$: user.find_everywhere(text or "")
+<user.find> (all | ale) clip: user.find_everywhere(clip.text())
+<user.find> (all | ale) [<user.text>]$: user.find_everywhere(text or "")
 
 replace [<user.text>]$:     user.find_replace(text or "")
-replace all [<user.text>]$: user.find_replace_everywhere(text or "")
+replace (all | ale) [<user.text>]$: user.find_replace_everywhere(text or "")
 
 <user.find> case:           user.find_toggle_match_by_case()
 <user.find> whole:          user.find_toggle_match_by_word()
@@ -24,7 +24,7 @@ replace case:               user.find_replace_toggle_preserve_case()
     key(escape)
 
 replace confirm:            user.find_replace_confirm()
-replace confirm all:        user.find_replace_confirm_all()
+replace confirm (all | ale): user.find_replace_confirm_all()
 
 <user.find> file clip:      user.find_file(clip.text())
 <user.find> file [<user.filename>]$:

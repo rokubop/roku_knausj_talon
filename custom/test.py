@@ -12,7 +12,7 @@ ctx = Context()
 class Actions:
     def test_one():
         """test"""
-        print(ui.active_window().id)
+        print(ui.active_window())
 
     def test_two():
         """test"""

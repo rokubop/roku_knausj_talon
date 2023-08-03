@@ -1,3 +1,4 @@
 # -
-water:                      user.test_one()
-flour:                      user.test_two()
+# water:                      user.test_one()
+# flour:                      user.test_two()
+# test <user.text>:           insert(user.text)

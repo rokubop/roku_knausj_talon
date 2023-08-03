@@ -1,7 +1,7 @@
 double dash:                "--"
-triple quote:               "'''"
-triple quad:                '"""'
-triple ski:                 '```'
+trip (quote | single):      "'''"
+trip (quad | double):       '"""'
+trip (ski | brick):         '```'
 pebbles:                    "..."
 # Add symbol at end of line and then insert line below
 # From https://github.com/AndreasArvidsson/andreas-talon/blob/master/misc/keys/keys.talon#L28
