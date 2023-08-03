@@ -21,8 +21,13 @@ south:                      key(s)
 tug:                        key(a)
 push:                       key(d)
 scrape:                     key(escape)
+yep:                        key(enter)
 touch:                      mouse_click()
 each | use:                 key(e)
+long each:
+    key(e:down)
+    sleep(1000ms)
+    key(e:up)
 
 # movement
 right:                      user.game_side_scroller_right()

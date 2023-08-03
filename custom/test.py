@@ -1,21 +1,25 @@
-# from talon import Module, Context, actions
+from talon import Module, Context, actions, ui
 
-# mod = Module()
-# ctx = Context()
+mod = Module()
+ctx = Context()
 
 # ctx.matches = """
-# app: /code/
+# app: /steam/
 # """
 
-# # @mod.action_class
 # @mod.action_class
-# class Actions:
-#     def test_one():
-#         """test"""
-#         actions.insert('yo')
+@mod.action_class
+class Actions:
+    def test_one():
+        """test"""
+        print(ui.active_window().id)
+
+    def test_two():
+        """test"""
+        actions.key('down')
 
 # @ctx.action_class("user")
 # class UserActions:
-# #     def test_one():
-# #         """test"""
-# #         actions.insert('helloa')
+#     def test_one():
+#         """test"""
+#         actions.insert('helloa')
