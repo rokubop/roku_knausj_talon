@@ -29,8 +29,12 @@ window (min | minimize):    user.window_minimize()
 minimize window:            user.window_minimize()
 [window] restore:           user.window_restore()
 restore window:             user.window_restore()
-[snap] screen left:         user.move_window_to_screen(1)
-[snap] screen right:        user.move_window_to_screen(2)
+[snap] screen left:
+    key(win-shift-left)
+    # user.move_window_to_screen(1)
+[snap] screen right:
+    key(win-shift-right)
+    # user.move_window_to_screen(2)
 snap <user.running_applications> [screen] left:
     user.move_app_to_screen(running_applications, 1)
 snap <user.running_applications> [screen] right:

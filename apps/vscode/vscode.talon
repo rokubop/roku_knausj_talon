@@ -279,8 +279,6 @@ file clone [<user.filename>]:
 okay:                       user.vscode("editor.action.insertLineAfter")
 
 # Git
-git switch:                 "git switch -\n"
-git log:                    "git log\n"
 get rebase head <number_small>: "git rebase -i HEAD~{number_small}\n"
 git difftool head <number_small>: "git difftool HEAD~{number_small}\n"
 git open file:              user.git_open_remote_file_url(false, false)
