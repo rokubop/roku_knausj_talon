@@ -50,7 +50,7 @@ settings():
     # "command history more" to display all of them, "command history less" to restore
     user.command_history_size = 50
 
-    user.cursorless_settings_directory = "roku_knausj_talon/cursorless-settings"
+    user.cursorless_settings_directory = "roku_talon/cursorless-settings"
 
     # Uncomment the below to insert text longer than 10 characters (customizable) by
     # pasting from the clipboard. This is often faster than typing.
