@@ -2,7 +2,7 @@ from os import path
 import csv
 from talon import actions, scope, ui, resource, settings
 from talon.ui import App
-from user.roku_knausj_talon.core.user_settings import SETTINGS_DIR
+from user.roku_talon.core.user_settings import SETTINGS_DIR
 from .BaseGame import BaseGame
 
 DEFAULT_ICON_DIRECTORY = path.dirname(path.abspath(__file__)) + "/game_icons"

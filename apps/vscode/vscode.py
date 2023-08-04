@@ -191,7 +191,7 @@ class Actions:
         """Get teleport destination"""
         # title = actions.win.title()
         title = actions.user.vscode("copyFilePath")
-        if re.search("roku_knausj_talon", title):
+        if re.search("roku_talon", title):
             print("I got it")
 
         # actions.user.vscode("workbench.action.quickOpen")

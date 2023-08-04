@@ -1,5 +1,5 @@
 from threading import Lock
-from user.roku_knausj_talon.core.modes.game_mode.GameModeHelper import GameModeHelper
+from user.roku_talon.core.modes.game_mode.GameModeHelper import GameModeHelper
 from talon import Module, Context, actions, noise, settings
 
 mod = Module()
