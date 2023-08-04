@@ -87,14 +87,14 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     user.vscode("workbench.action.openRecent")
     sleep(250ms)
     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-    key(enter)
+    key(ctrl-enter)
     sleep(250ms)
 
-<user.teleport> new (sesh | session | workspace) [<user.text>] [halt]:
+<user.teleport> same (sesh | session | workspace) [<user.text>] [halt]:
     user.vscode("workbench.action.openRecent")
     sleep(250ms)
     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-    key(ctrl-enter)
+    key(enter)
     sleep(250ms)
 
 <user.show_list> (win | window) [<user.text>]:

@@ -17,6 +17,7 @@ two_way_opposites = [
     ("last", "next"),
     ("forward", "back"),
     ("out", "in"),
+    # tab and shift tab
 ]
 
 state = {}
