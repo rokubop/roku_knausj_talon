@@ -1,4 +1,4 @@
-# roku_knausj_talon
+# roku_talon
 
 Fork of [talonhub/community](https://github.com/talonhub/community) for my personal Talon commands
 
