@@ -87,6 +87,9 @@ class EditActions:
         # actions.key("ctrl-shift-right")
         actions.key("alt-shift-right")
 
+    # def delete_word_left():
+    #     actions.key("alt-right")
+
     def file_end():
         actions.key("ctrl-end")
 

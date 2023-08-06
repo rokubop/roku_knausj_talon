@@ -35,7 +35,7 @@ play | pause:               key(space)
 tempo:                      key(ctrl-f5)
 
 # selection
-take box:
+take box | box:
     key("ctrl:down")
     mouse_drag()
     key("ctrl:up")
@@ -116,6 +116,9 @@ make unique:
 (stretch | toggle stretch): key(shift-m)
 (fade | toggle fade):       key(shift-f)
 clone (bar | time):         key(ctrl-b)
+browse:
+    key(down)
+    key(enter)
 
 # global actions
 automate:

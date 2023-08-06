@@ -16,6 +16,9 @@ class EditActions:
         except clip.NoChange:
             return ""
 
+    # def delete_word_left():
+    #     actions.key("alt-backspace")
+
     def line_insert_down():
         actions.edit.line_end()
         actions.key("enter")
@@ -147,6 +150,10 @@ class Actions:
         """Delete all text in the current document"""
         actions.edit.select_all()
         actions.edit.delete()
+
+    # def delete_word_left():
+    #     """Delete word left"""
+    #     actions.edit.delete_word_left()
 
     def cut_line():
         """Cut current line"""

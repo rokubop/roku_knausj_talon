@@ -7,7 +7,7 @@ touch | click it | ticket:
     user.grid_close()
     user.mouse_drag_end()
 
-righty | right click | rick it:
+right click | rick it | risk:
     mouse_click(1)
     user.grid_close()
 
@@ -37,10 +37,11 @@ alt it:                     user.mouse_click("alt")
 drag [it]:
     user.mouse_drag(0)
     user.grid_close()
-drag right:
+drag right | right drag | risk drag | drag risk:
     user.mouse_drag(1)
     user.grid_close()
-drag mid:
+
+drag mid | mid drag:
     user.mouse_drag(2)
     user.grid_close()
 end drag | drag (end | stop): user.mouse_drag_end()
