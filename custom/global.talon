@@ -17,3 +17,5 @@ desktop {user.system_paths}:
     key(win-e)
     sleep(500ms)
     user.file_manager_open_directory(system_paths)
+
+then: skip()
