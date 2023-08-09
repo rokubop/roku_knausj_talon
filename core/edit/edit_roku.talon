@@ -77,6 +77,7 @@ pour | lap:                 edit.line_insert_down()
 drink:                      edit.line_insert_up()
 disk:                       edit.save()
 disk all:                   edit.save_all()
+new disk | disk new | new diss: user.save_as()
 nope:                       edit.undo()
 
 <user.operator> item:       "- "

@@ -4,6 +4,7 @@
             {
                 "scope": {
                     "langIds": [
+                        "javascriptreact",
                         "typescriptreact",
                         "html"
                     ]

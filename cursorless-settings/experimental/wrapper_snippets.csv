@@ -4,6 +4,7 @@ class, classDeclaration.body
 con, constantDeclaration.value
 con type, constantDeclarationWithType.value
 condition, ifStatement.condition
+div, div.body
 else, ifElseStatement.alternative
 funk, functionDeclaration.body
 funk type, functionDeclarationWithType.body

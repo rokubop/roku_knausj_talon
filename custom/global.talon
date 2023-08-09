@@ -3,6 +3,7 @@ again:                      user.repeat()
 confetti:                   user.vscode('cursorless.toggleDecorations')
 mouse (mid | five):         user.mouse_move_center_active_window()
 smart paste | show clip:    key(win-v)
+copy paste:                 key(ctrl-c ctrl-v)
 <user.operator> stack:      ": "
 <user.operator> dash:       " - "
 screenshot:                 key(f3)
@@ -19,3 +20,6 @@ desktop {user.system_paths}:
     user.file_manager_open_directory(system_paths)
 
 then: skip()
+tab yep:
+    key(tab)
+    key(enter)

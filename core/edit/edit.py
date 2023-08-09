@@ -222,3 +222,7 @@ class Actions:
         """Delete to end of current line"""
         actions.user.select_line_end()
         actions.edit.delete()
+
+    def save_as():
+        """Save file as"""
+        actions.key("ctrl-shift-s")
