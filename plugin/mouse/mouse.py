@@ -54,6 +54,7 @@ ctx.lists["self.mouse_click"] = {
     "triple": "triple",
     "trip": "triple",
     "control": "control",
+    "ctrl": "control",
     "troll": "control",
     "shift": "shift",
     "center": "center",
@@ -139,7 +140,7 @@ class Actions:
             actions.mouse_click()
             actions.mouse_click()
             actions.mouse_click()
-        elif action == "control":
+        elif action == "control" or action == "ctrl":
             actions.key("ctrl:down")
             actions.mouse_click()
             actions.key("ctrl:up")

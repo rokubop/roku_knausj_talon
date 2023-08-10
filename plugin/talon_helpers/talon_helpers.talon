@@ -54,6 +54,7 @@ talon dump context:
 
 talon (bug report | report bug):
     user.open_url("https://github.com/knausj85/knausj_talon/issues")
+^talon create [app] context$: user.talon_create_app_context()
 
 ^talon restart$:            user.talon_restart()
 ^talon quit$:               user.talon_quit()
