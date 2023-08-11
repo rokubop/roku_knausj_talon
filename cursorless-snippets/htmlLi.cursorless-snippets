@@ -1,0 +1,26 @@
+{
+    "li": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascriptreact",
+                        "typescriptreact",
+                        "html"
+                    ]
+                },
+                "body": [
+                    "<li $attributes>",
+                    "\t$body",
+                    "</li>"
+                ]
+            }
+        ],
+        "description": "li",
+        "variables": {
+            "body": {
+                "wrapperScopeType": "xmlElement"
+            }
+        }
+    }
+}

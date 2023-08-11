@@ -1,0 +1,26 @@
+{
+    "ul": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascriptreact",
+                        "typescriptreact",
+                        "html"
+                    ]
+                },
+                "body": [
+                    "<ul $attributes>",
+                    "\t$body",
+                    "</ul>"
+                ]
+            }
+        ],
+        "description": "ul",
+        "variables": {
+            "body": {
+                "wrapperScopeType": "xmlElement"
+            }
+        }
+    }
+}

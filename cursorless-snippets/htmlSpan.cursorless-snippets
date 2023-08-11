@@ -1,0 +1,26 @@
+{
+    "span": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascriptreact",
+                        "typescriptreact",
+                        "html"
+                    ]
+                },
+                "body": [
+                    "<span $attributes>",
+                    "\t$body",
+                    "</span>"
+                ]
+            }
+        ],
+        "description": "span",
+        "variables": {
+            "body": {
+                "wrapperScopeType": "xmlElement"
+            }
+        }
+    }
+}

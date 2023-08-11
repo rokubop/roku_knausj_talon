@@ -28,6 +28,9 @@ print, print.expression
 string, toString.body
 use effect, useEffect.body
 div, div.body
+span, span.body
+tag, tag.body
+elm, htmlGeneric.body
 turn, ternaryExpression.value
 turn else, ternaryExpression.alternative
 turn dish, ternaryExpression.condition

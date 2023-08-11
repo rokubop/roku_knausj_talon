@@ -1,0 +1,26 @@
+{
+    "htmlGeneric": {
+        "definitions": [
+            {
+                "scope": {
+                    "langIds": [
+                        "javascriptreact",
+                        "typescriptreact",
+                        "html"
+                    ]
+                },
+                "body": [
+                    "<$tag $attributes>",
+                    "\t$body",
+                    "</$tag>"
+                ]
+            }
+        ],
+        "description": "htmlGeneric",
+        "variables": {
+            "body": {
+                "wrapperScopeType": "xmlElement"
+            }
+        }
+    }
+}

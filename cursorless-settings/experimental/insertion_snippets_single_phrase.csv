@@ -8,6 +8,8 @@ con lamb, constLambdaBlock.name
 con type, constantDeclarationWithType.name
 data class, dataclass.name
 div, div.attributes
+span, span.attributes
+elm, htmlGeneric.tag
 face, interface.name
 forEach, forEach.array
 funk, functionDeclaration.name

@@ -153,7 +153,7 @@ cut word right:             user.cut_word_right()
 
 # Paste
 (pace | paste) that:        edit.paste()
-(pace | paste) enter:
+(pace | paste) yep:
     edit.paste()
     key(enter)
 paste match:                edit.paste_match_style()

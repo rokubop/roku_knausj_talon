@@ -104,6 +104,7 @@ class Actions:
 
     def on_pop():
         """Do pop"""
+        actions.user.mouse_scroll_stop()
         if actions.user.mouse_is_dragging():
             print("pop as drag end")
             actions.user.mouse_drag_end()
