@@ -21,6 +21,7 @@ troll it:                   user.mouse_click("ctrl")
 trip it:                    user.mouse_click("triple")
 alt it:                     user.mouse_click("alt")
 
+
 <user.modifiers> touch:
     key("{modifiers}:down")
     mouse_click(0)
@@ -34,6 +35,23 @@ alt it:                     user.mouse_click("alt")
     # close the mouse grid
     user.grid_close()
     user.grid_close()
+
+
+<user.modifiers> drag:
+    key("{modifiers}:down")
+    user.mouse_drag(0)
+    key("{modifiers}:up")
+
+<user.modifiers> drag right:
+    key("{modifiers}:down")
+    user.mouse_drag(1)
+    key("{modifiers}:up")
+
+<user.modifiers> drag mid:
+    key("{modifiers}:down")
+    user.mouse_drag(2)
+    key("{modifiers}:up")
+
 drag [it]:
     user.mouse_drag(0)
     user.grid_close()

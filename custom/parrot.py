@@ -84,6 +84,8 @@ class Actions:
         """Reverse the last command"""
         global last_tut, last_palete
 
+        actions.user.cancel_repeat_repeatedly()
+
         if (actions.speech.enabled() and stateReverse.is_active()):
             last_command = actions.user.history_get(0)
             stateReverse.activate_reverse()

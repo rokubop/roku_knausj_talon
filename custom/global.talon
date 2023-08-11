@@ -8,7 +8,6 @@ copy paste:                 key(ctrl-c ctrl-v)
 <user.operator> dash:       " - "
 screenshot:                 key(f3)
 open (in | with) paint:
-    # talon copy active app
     user.switcher_launch('C:\Program Files\WindowsApps\Microsoft.Paint_11.2302.19.0_x64__8wekyb3d8bbwe\PaintApp\mspaint.exe')
     sleep(500ms)
     key(ctrl-v)
@@ -23,3 +22,10 @@ then: skip()
 tab yep:
     key(tab)
     key(enter)
+south yep:
+    key(down)
+    key(enter)
+north yep:
+    key(up)
+    key(enter)
+continue [<number_small>]:   user.start_repeat_repeatedly(number_small or 1)
