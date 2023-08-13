@@ -20,6 +20,9 @@ two_way_opposites = [
     # tab and shift tab
 ]
 
+# ss_debounce_time = "20ms"
+ss_debounce_time = "120ms"
+
 state = {}
 cron_jobs = {}
 callbacks = {}
@@ -114,9 +117,10 @@ class Actions:
 
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
+        global ss_debounce_time
         if name not in state:
             state[name] = active
-            cron_jobs[name] = cron.after("120ms", lambda: callback(name))
+            cron_jobs[name] = cron.after(ss_debounce_time, lambda: callback(name))
         elif state[name] != active:
             cron.cancel(cron_jobs[name])
             state.pop(name)
