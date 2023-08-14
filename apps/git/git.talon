@@ -28,6 +28,10 @@ git clone:                  "git clone "
 git switch:                 "git switch -\n"
 git checkout:               "git checkout "
 git checkout branch:        "git checkout -b "
+git checkout branch clip:
+    insert("git checkout -b ")
+    edit.paste()
+    key(enter)
 git checkout branch <user.text>: "git checkout -b {text}\n"
 git checkout master:        "git checkout master\n"
 git checkout main:          "git checkout main\n"
@@ -47,6 +51,7 @@ git push upstream:
     insert("git rev-parse --abbrev-ref HEAD | clip.exe\n")
     insert("git push --set-upstream origin ")
     edit.paste()
+    key(enter)
 git stash:                  "git stash\n"
 git stash list:             "git stash list | code -\n"
 git stash pop:              "git stash pop\n"
@@ -66,6 +71,10 @@ git reset hard:             "git reset --hard"
 git fetch all:              "git fetch --all\n"
 git fetch upstream:         "git fetch upstream\n"
 git branch:                 "git branch | code -\n"
+git branch delete:          "git branch -D "
+git branch delete clip:
+    insert("git branch -D ")
+    edit.paste()
 git branch (viv | vest):    "git branch -vv | code -\n"
 git branch halt:            "git branch"
 git branch list all:        "git branch --list --all | code -\n"
@@ -79,13 +88,19 @@ git remote (vest | viv):    "git remote -v\n"
 git remote add:             "git remote add "
 git remote add upstream :   "git remote add upstream\n"
 git remote set ural:        "git remote set-url "
-git remote set ural upstream:        "git remote set-url upstream "
+git remote set ural upstream:"git remote set-url upstream "
 git reset:                  "git reset\n"
 git reset head <number_small>: "git reset HEAD~{number_small}\n"
 yarn build:                 "yarn build\n"
 git status$:                "git status\n"
 git add patch$:             "git add --patch\n"
 git show head$:             "git show HEAD\n"
+git diff tool clip$:
+    insert("git difftool ")
+    edit.paste()
+    insert("^ ")
+    edit.paste()
+    key(enter)
 git diff$:                  "git diff\n"
 git diff (cached | cashed)$: "git diff --cached\n"
 

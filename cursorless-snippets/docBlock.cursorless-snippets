@@ -1,0 +1,25 @@
+{
+  "docBlock": {
+    "definitions": [
+      {
+        "scope": {
+          "langIds": [
+            "javascript",
+            "typescript",
+            "javascriptreact",
+            "typescriptreact"
+          ]
+        },
+        "body": [
+          "/**",
+          " * $comment",
+          " */"
+        ]
+      }
+    ],
+    "description": "",
+    "variables": {
+      "comment": {}
+    }
+  }
+}

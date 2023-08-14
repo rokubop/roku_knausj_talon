@@ -67,11 +67,11 @@ wheel down | downer:        user.mouse_scroll_down(6)
 wheel down here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down()
-wheel tiny [down]:          user.mouse_scroll_down(0.2)
+wheel tiny [down]:          user.mouse_scrollnl_down(0.2)
 wheel tiny [down] here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down(0.2)
-wheel downer:               user.mouse_scroll_down_continuous()
+wheel downer | downer start:               user.mouse_scroll_down_continuous()
 wheel downer here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down_continuous()
@@ -83,7 +83,7 @@ wheel tiny up:              user.mouse_scroll_up(0.2)
 wheel tiny up here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up(0.2)
-wheel upper:                user.mouse_scroll_up_continuous()
+wheel upper | upper start:                user.mouse_scroll_up_continuous()
 wheel upper here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up_continuous()

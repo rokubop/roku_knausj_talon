@@ -4,6 +4,7 @@ class, classDeclaration.body
 con, constantDeclaration.value
 con type, constantDeclarationWithType.value
 condition, ifStatement.condition
+doc block, docBlock.comment
 else, ifElseStatement.alternative
 funk, functionDeclaration.body
 funk type, functionDeclarationWithType.body
