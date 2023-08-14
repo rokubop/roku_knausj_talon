@@ -1,6 +1,6 @@
 import os
 
-from talon import Context, Module, actions, app, ui
+from talon import Context, Module, actions, app, ui, clip
 
 mod = Module()
 apps = mod.apps
@@ -83,6 +83,28 @@ if app.platform == "windows":
         "Program Manager",
     ]
 
+@mod.action_class
+class Actions:
+    def windows_path_to_wsl(path: str):
+        """converts a windows path to a wsl path"""
+        if len(path) > 1 and path[1] == ":":
+            drive = path[0].lower()
+            path = "/mnt/" + drive + path[2:]
+
+        path = path.replace("\\", "/")
+
+        return path
+
+    def open_explorer_path_in_wsl():
+        """opens the current path in wsl"""
+        actions.key("ctrl-l")
+        actions.key("ctrl-c")
+        actions.insert("ubuntu")
+        actions.key("enter")
+        actions.sleep("1000ms")
+        wsl_path = actions.user.windows_path_to_wsl(clip.text())
+        actions.insert(f"cd {wsl_path}")
+        actions.key("enter")
 
 @ctx.action_class("user")
 class UserActions:

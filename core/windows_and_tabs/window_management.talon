@@ -48,3 +48,15 @@ swap$:
     key(tab)
     sleep(50ms)
     key(alt:up)
+swap twice$:
+    key(alt:down)
+    key(tab:2)
+    sleep(50ms)
+    key(alt:up)
+swap thrice$:
+    key(alt:down)
+    key(tab:3)
+    sleep(50ms)
+    key(alt:up)
+swap next$:                 key(alt-escape)
+swap last$:                 key(alt-shift-escape)
