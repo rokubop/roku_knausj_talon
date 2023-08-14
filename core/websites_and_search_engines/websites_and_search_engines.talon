@@ -10,6 +10,8 @@ open {user.website}:        user.open_url(website)
     text = clip.text()
     user.search_with_search_engine(search_engine, text)
 
+chat <user.find>$:
+    user.open_with_chat_gpt()
 chat <user.find> <user.text>$:
     user.search_with_chat_gpt(user.text)
 chat <user.find> <user.clip>$:

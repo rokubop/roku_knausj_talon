@@ -1,155 +1,163 @@
-# Zoom
-# zoom in:                    edit.zoom_in()
-# zoom out:                   edit.zoom_out()
-# zoom reset:                 edit.zoom_reset()
-
-# Searching
-# find it:                    edit.find()
-# next one:                   edit.find_next()
-
 # Navigation
-
-# The reason for these spoken forms is that "page up" and "page down" are globally defined as keys.
-scroll up:                  edit.page_up()
-scroll down:                edit.page_down()
-
-# go word left:               edit.word_left()
-# go word right:              edit.word_right()
-
-go left:                    edit.left()
-go right:                   edit.right()
-go up:                      edit.up()
-go down:                    edit.down()
-
-# go line start:              edit.line_start()
-# go line end:                edit.line_end()
-
-# go way left:
-#     edit.line_start()
-#     edit.line_start()
-# go way right:               edit.line_end()
-# go way up:                  edit.file_start()
-# go way down:                edit.file_end()
-
-go top:                     edit.file_start()
-go bottom:                  edit.file_end()
-
-# go page up:                 edit.page_up()
-# go page down:               edit.page_down()
-
-# Selecting
-select all:                 edit.select_all()
-select line:                edit.select_line()
-select line start:          user.select_line_start()
-select line end:            user.select_line_end()
-
-select left:                edit.extend_left()
-select right:               edit.extend_right()
-select up:                  edit.extend_line_up()
-select down:                edit.extend_line_down()
-
-select word:                edit.select_word()
-select word left:           edit.extend_word_left()
-select word right:          edit.extend_word_right()
-
-select way left:            edit.extend_line_start()
-select way right:           edit.extend_line_end()
-select way up:              edit.extend_file_start()
-select way down:            edit.extend_file_end()
-
-# Indentation
-indent [more]:              edit.indent_more()
-(indent less | out dent):   edit.indent_less()
-
-# Delete
-clear all:                  user.delete_all()
-clear line:                 edit.delete_line()
-clear line start:           user.delete_line_start()
-clear line end:             user.delete_line_end()
-clear left:                 edit.delete()
-clear right:                user.delete_right()
-
-clear up:
-    edit.extend_line_up()
-    edit.delete()
-
-clear down:
-    edit.extend_line_down()
-    edit.delete()
-
-clear word:                 edit.delete_word()
-
-clear word left:
-    edit.extend_word_left()
-    edit.delete()
-
-clear word right:
+tug:                        edit.left()
+drain:                      edit.word_left()
+push:                       edit.right()
+step:                       edit.word_right()
+north:                      edit.up()
+south:                      edit.down()
+head:                       edit.line_start()
+tail:                       edit.line_end()
+scout:                      edit.find()
+yep:                        key(enter)
+scrape:                     key(escape)
+pour | lap:                 edit.line_insert_down()
+drink:                      edit.line_insert_up()
+disk:                       edit.save()
+new disk | disk new | new diss | disk as: user.save_as()
+disk all:                   edit.save_all()
+nope:                       edit.undo()
+scratch:                    edit.delete()
+drill:                      user.delete_right()
+smart paste | show clip:    key(win-v)
+scratcher: key(ctrl-backspace)
+driller:
     edit.extend_word_right()
     edit.delete()
 
-clear way left:
+slapper | new graph:
+    edit.line_insert_down()
+    edit.line_insert_down()
+
+# Navigation
+scroll up:                  edit.page_up()
+scroll down:                edit.page_down()
+pre line:                   edit.line_start()
+post line:                  edit.line_end()
+pre file | go top:          edit.file_start()
+post file | go bottom:      edit.file_end()
+page up:                    edit.page_up()
+page down:                  edit.page_down()
+
+# Selecting
+<user.select> lefter:              edit.extend_word_left()
+<user.select> writer:              edit.extend_word_right()
+# take head:                       edit.extend_line_start()
+# take tail:                       edit.extend_line_end()
+<user.select> (all| file):         edit.select_all()
+<user.select> line:                edit.select_line()
+<user.select> head [line]:         user.select_line_start()
+<user.select> tail [line]:         user.select_line_end()
+<user.select> left:                edit.extend_left()
+<user.select> right:               edit.extend_right()
+<user.select> up:                  edit.extend_line_up()
+<user.select> down:                edit.extend_line_down()
+<user.select> word:                edit.select_word()
+<user.select> word left:           edit.extend_word_left()
+<user.select> word right:          edit.extend_word_right()
+<user.select> head file:           edit.extend_file_start()
+<user.select> tail fine:           edit.extend_file_end()
+
+# Indentation
+indent [more] | indent this:              edit.indent_more()
+(indent less | out dent | dedent this):   edit.indent_less()
+
+# Delete
+(clear | chuck) (all | file):         user.delete_all()
+(clear | chuck) line:                 edit.delete_line()
+(clear | chuck) line start:           user.delete_line_start()
+(clear | chuck) line end:             user.delete_line_end()
+clear left:                 edit.delete()
+clear right:                user.delete_right()
+clear up:
+    edit.extend_line_up()
+    edit.delete()
+clear down:
+    edit.extend_line_down()
+    edit.delete()
+clear word:                 edit.delete_word()
+clear word left:
+    edit.extend_word_left()
+    edit.delete()
+clear word right:
+    edit.extend_word_right()
+    edit.delete()
+(clear | chuck) head [line]:
     edit.extend_line_start()
     edit.delete()
-
-clear way right:
+(clear | chuck) tail [line]:
     edit.extend_line_end()
     edit.delete()
-
-clear way up:
+(clear | chuck) head file:
     edit.extend_file_start()
     edit.delete()
-
-clear way down:
+(clear | chuck) tail file:
     edit.extend_file_end()
+    edit.delete()
+<user.delete> head:
+    edit.extend_line_start()
+    edit.delete()
+<user.delete> tail:
+    edit.extend_line_end()
+    edit.delete()
+<user.delete> all:
+    edit.select_all()
     edit.delete()
 
 # Copy
 copy that:                  edit.copy()
-copy all:                   user.copy_all()
+copy (all | file):          user.copy_all()
 copy line:                  user.copy_line()
 copy line start:            user.copy_line_start()
 copy line end:              user.copy_line_end()
 copy word:                  user.copy_word()
 copy word left:             user.copy_word_left()
 copy word right:            user.copy_word_right()
-
-#to do: do we want these variants, seem to conflict
-# copy left:
-#      edit.extend_left()
-#      edit.copy()
-# copy right:
-#     edit.extend_right()
-#     edit.copy()
-# copy up:
-#     edit.extend_up()
-#     edit.copy()
-# copy down:
-#     edit.extend_down()
-#     edit.copy()
+copy head:
+    edit.extend_line_start()
+    edit.copy()
+copy tail:
+    edit.extend_line_end()
+    edit.copy()
+copy head file:
+    edit.extend_file_start()
+    edit.copy()
+copy tail file:
+    edit.extend_file_end()
+    edit.copy()
+copy lefter:
+    edit.extend_word_left()
+    edit.copy()
+copy righter:
+    edit.extend_word_right()
+    edit.copy()
 
 # Cut
-cut that:                   edit.cut()
-cut all:                    user.cut_all()
-cut line:                   user.cut_line()
-cut line start:             user.cut_line_start()
-cut line end:               user.cut_line_end()
-cut word:                   user.cut_word()
-cut word left:              user.cut_word_left()
-cut word right:             user.cut_word_right()
-
-#to do: do we want these variants
-# cut left:
-#      edit.select_all()
-#      edit.cut()
-# cut right:
-#      edit.select_all()
-#      edit.cut()
-# cut up:
-#      edit.select_all()
-#     edit.cut()
-# cut down:
-#     edit.select_all()
-#     edit.cut()
+carve that:                   edit.cut()
+carve (all | file):           user.cut_all()
+carve line:                   user.cut_line()
+carve line start:             user.cut_line_start()
+carve line end:               user.cut_line_end()
+carve word:                   user.cut_word()
+carve word left:              user.cut_word_left()
+carve word right:             user.cut_word_right()
+carve lefter:
+    edit.extend_word_left()
+    edit.cut()
+carve righter:
+    edit.extend_word_right()
+    edit.cut()
+carve head [line]:
+    edit.extend_line_start()
+    edit.cut()
+carve tail [line]:
+    edit.extend_line_end()
+    edit.cut()
+carve head file:
+    edit.extend_file_start()
+    edit.cut()
+carve tail file:
+    edit.extend_file_end()
+    edit.cut()
 
 # Paste
 (pace | paste) that:        edit.paste()
@@ -185,3 +193,24 @@ redo that:                  edit.redo()
 # Save
 file save:                  edit.save()
 file save all:              edit.save_all()
+
+copy paste:                 key(ctrl-c ctrl-v)
+
+tab yep:
+    key(tab)
+    key(enter)
+south yep:
+    key(down)
+    key(enter)
+north yep:
+    key(up)
+    key(enter)
+
+<user.operator> stack:      ": "
+<user.operator> dash:       " - "
+<user.operator> item:       "- "
+<user.operator> task:       "- [ ] "
+<user.operator> code:
+    "``"
+    edit.left()
+<user.operator> code block: "```\n"

@@ -68,6 +68,10 @@ class Actions:
         webbrowser.open(url)
 
     # roku additions
+    def open_with_chat_gpt():
+        """Open with chat GPT"""
+        webbrowser.open("https://chat.openai.com/?model=gpt-4")
+
     def search_with_chat_gpt(search_text: str):
         """Search with chat GPT"""
         webbrowser.open("https://chat.openai.com/?model=gpt-4")
