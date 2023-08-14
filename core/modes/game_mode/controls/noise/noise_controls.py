@@ -7,6 +7,9 @@ mod.list("game_noises")
 mod.list("game_noise_controls")
 
 ctx = Context()
+ctx.matches = """
+tag: user.game_mode
+"""
 noises = ("pop", "hiss")
 ctx.lists["user.game_noises"] = noises
 noise_action_names = {
@@ -174,12 +177,14 @@ def _execute_noise_binding(noise, is_active):
     elif is_active:
         action_name_to_action[action_name](True)
 
-
 def on_pop(_):
     global lock_binding
 
+
     if not GameModeHelper.is_game_mode():
         return
+
+    print("pop from game noise controls")
 
     with lock_binding:
         is_execute_binding, is_execute_after = actions.user.game_before_on_pop()
@@ -194,6 +199,8 @@ def on_hiss(is_active):
 
     if not GameModeHelper.is_game_mode():
         return
+
+    print("hiss from game noise controls")
 
     with lock_binding:
         is_execute_binding, is_execute_after = actions.user.game_before_on_hiss()

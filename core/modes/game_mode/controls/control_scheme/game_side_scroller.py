@@ -84,6 +84,7 @@ class UserActions:
         actions.user.game_jump()
 
     def on_pop():
+        print("pop from game side scroller")
         actions.user.game_side_scroller_start_stop()
 
     def noise_shush_start():
