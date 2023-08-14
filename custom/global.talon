@@ -29,11 +29,11 @@ north yep:
     key(enter)
 continue [<number_small>]:  user.start_repeat_repeatedly(number_small or 1)
 
-flow scout [<user.text>]:
+flow <user.find> [<user.text>]:
     key(ctrl-shift-alt-f)
     insert(user.text or "")
 
-windows scout [<user.text>]:
+windows <user.find> [<user.text>]:
     key(win)
     sleep(100ms)
     insert(user.text or "")

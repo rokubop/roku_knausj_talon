@@ -58,6 +58,18 @@ stateReverse = StateReverse()
 
 @mod.action_class
 class Actions:
+    def toggleScrollSpeed():
+        """Toggle scroll speed"""
+        global ss_debounce_time
+        if ss_debounce_time == "40ms":
+            print("setting speed to 120ms")
+            actions.user.hud_publish_mouse_particle('float_up', '0000FF')
+            ss_debounce_time = "120ms"
+        else:
+            print("setting speed to 40ms")
+            actions.user.hud_publish_mouse_particle('float_up', 'FF0000')
+            ss_debounce_time = "40ms"
+
     def on_palate():
         """Repeat or wake up."""
         global last_palete, last_tut

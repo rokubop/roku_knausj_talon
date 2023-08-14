@@ -30,3 +30,8 @@ show downloads:             browser.show_downloads()
 show extensions:            browser.show_extensions()
 show history:               browser.show_history()
 show cache:                 browser.show_clear_cache()
+
+history <user.find> <user.text>:
+    browser.show_history()
+    sleep(800ms)
+    insert(user.text)

@@ -3,15 +3,15 @@ from talon import Module, actions, app
 # virtual keyboard
 def register_keyboard():
     keys = [
-	    actions.user.hud_create_virtual_key('1', 'One'),
-	    actions.user.hud_create_virtual_key('2', 'Two'),
-	    actions.user.hud_create_virtual_key('3', 'Three'),
-	    actions.user.hud_create_virtual_key('4', 'Four'),
-	    actions.user.hud_create_virtual_key('5', 'Five'),
-	    actions.user.hud_create_virtual_key('6', 'Six'),
-	    actions.user.hud_create_virtual_key('7', 'Seven'),
-	    actions.user.hud_create_virtual_key('8', 'Eight'),
-	    actions.user.hud_create_virtual_key('9', 'Nine')
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'One'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Two'),
+	    actions.user.hud_create_virtual_key(actions.user.toggleScrollSpeed, 'Toggle scroll speed'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Four'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Five'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Six'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Seven'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Eight'),
+	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Nine')
 	]
     actions.user.hud_register_virtual_keyboard('example_keyboard', keys)
 
@@ -131,6 +131,9 @@ app.register("ready", append_poller)
 mod = Module()
 @mod.action_class
 class Action:
+    def no_op():
+        """Does nothing"""
+        hello = 1
 
     def start_counting():
         """Starts counting on the Talon HUD status bar"""

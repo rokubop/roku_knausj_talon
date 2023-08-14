@@ -40,7 +40,8 @@ parrot(aa):		print("aa")
 parrot(oh):
 				print("oh")
 parrot(iy):
-				print("iy")
+	# user.hud_activate_virtual_key()
+	print("iy")
 parrot(ae):
 				print("ae")
 parrot(horse):
