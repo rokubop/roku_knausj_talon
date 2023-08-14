@@ -4,8 +4,7 @@ mode: command
 settings():
     speech.timeout = 0.05
 
-# view
-focus:                      key(keypad_decimal)
+# camera
 cam set:                    key(ctrl-alt-keypad_0)
 cam dog:                    key(keypad_0)
 cam top:                    key(keypad_7)
@@ -16,6 +15,8 @@ cam front:                  key(keypad_1)
 cam back:                   key(ctrl-keypad_1)
 cam:                        user.mouse_drag(2)
 orthogonal | orthog:        key(keypad_5)
+
+# views
 show graph:                 key(shift-f6)
 show three D:               key(shift-f5)
 show (shader | material):   key(shift-f3)
@@ -25,6 +26,7 @@ show geometry:              key(shift-f3)
 show image:                 key(shift-f10)
 
 # operations
+focus:                      key(keypad_decimal)
 add:                        key(shift-a)
 box:                        user.mouse_drag(0)
 pan:

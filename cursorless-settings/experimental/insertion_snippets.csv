@@ -4,6 +4,8 @@ elsif, elseIfStatement
 if else, ifElseStatement
 if, ifStatement
 in it, constructor
+lambda, lambdaExpression
+lambda block, lambdaBlock
 map, map
 try, tryCatchStatement
 with, withStatement
