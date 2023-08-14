@@ -171,6 +171,11 @@ class Actions:
         """Show command palette"""
         actions.key("ctrl-shift-p")
 
+    def save_without_formatting():
+        """Save current document without formatting"""
+        actions.user.vscode("hideSuggestWidget")
+        actions.user.vscode("workbench.action.files.saveWithoutFormatting")
+
     def tab_force_close():
         """Forces the current tab to close"""
         actions.user.vscode("workbench.action.revertAndCloseActiveEditor")

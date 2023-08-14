@@ -1,4 +1,3 @@
--
 again:                      user.repeat()
 confetti:                   user.vscode('cursorless.toggleDecorations')
 mouse (mid | five):         user.mouse_move_center_active_window()
@@ -18,7 +17,7 @@ desktop {user.system_paths}:
     sleep(500ms)
     user.file_manager_open_directory(system_paths)
 
-then: skip()
+then:                       skip()
 tab yep:
     key(tab)
     key(enter)
@@ -28,4 +27,13 @@ south yep:
 north yep:
     key(up)
     key(enter)
-continue [<number_small>]:   user.start_repeat_repeatedly(number_small or 1)
+continue [<number_small>]:  user.start_repeat_repeatedly(number_small or 1)
+
+flow scout [<user.text>]:
+    key(ctrl-shift-alt-f)
+    insert(user.text or "")
+
+windows scout [<user.text>]:
+    key(win)
+    sleep(100ms)
+    insert(user.text or "")

@@ -10,7 +10,6 @@ tail:                       edit.line_end()
 
 # Selecting
 
-
 <user.select> lefter:       edit.extend_word_left()
 <user.select> writer:       edit.extend_word_right()
 take head:                  edit.extend_line_start()
@@ -22,15 +21,13 @@ slapper | new graph:
 
 # Delete
 
-
 scratch:                    edit.delete()
 drill:                      user.delete_right()
 scratcher:
-    key(alt-backspace)
-    # edit.extend_word_left()
+    key(ctrl-backspace)
+# edit.extend_word_left()
 
-    # edit.delete()
-
+# edit.delete()
 
 driller:
     edit.extend_word_right()
@@ -50,7 +47,6 @@ driller:
 
 # Copy commands
 
-
 copy lefter:
     edit.extend_word_left()
     edit.copy()
@@ -61,7 +57,6 @@ copy righter:
 
 #cut commands
 
-
 cut lefter:
     edit.extend_word_left()
     edit.cut()
@@ -71,7 +66,6 @@ cut righter:
     edit.cut()
 
 # Other
-
 
 pour | lap:                 edit.line_insert_down()
 drink:                      edit.line_insert_up()

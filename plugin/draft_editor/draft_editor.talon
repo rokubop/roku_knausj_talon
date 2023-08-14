@@ -4,7 +4,7 @@ not tag: user.draft_editor_app_focused
 
 draft this:                 user.draft_editor_open()
 
-draft all:
+draft (all | oliver):
     edit.select_all()
     user.draft_editor_open()
 

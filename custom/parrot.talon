@@ -30,22 +30,23 @@ parrot(buzz):
 				print("buzz")
 parrot(gluck):
 				print("gluck")
-parrot(finger_snap):
-				print("finger_snap")
+# parrot(finger_snap):
+# 				print("finger_snap")
 parrot(ch):
 				print("ch")
 parrot(ah):
 				print("ah")
+parrot(aa):		print("aa")
 parrot(oh):
 				print("oh")
-parrot(ee):
-				print("ee")
+parrot(iy):
+				print("iy")
 parrot(ae):
 				print("ae")
 parrot(horse):
 				print("horse")
-parrot(whistle):
-				print("whistle")
+# parrot(whistle):
+# 				print("whistle")
 parrot(chopper):
 				print("chopper")
 parrot(hurr):

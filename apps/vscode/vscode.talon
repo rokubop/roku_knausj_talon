@@ -149,7 +149,7 @@ jest first:
     key(tab)
 jest param:                 user.vscode("editor.action.triggerParameterHints")
 jest <user.cursorless_target>:
-    user.cursorless_single_target_command("setSelectionAfter", cursorless_target)
+    user.cursorless_command("setSelectionAfter", cursorless_target)
     code.complete()
 format document:            user.format_document()
 refactor this:              user.vscode("editor.action.refactor")
@@ -468,10 +468,10 @@ pilot (dog | toggle | off | on):
 #     mimic("pre {prose}")
 #     mimic(prev_command)
 
-also <user.cursorless_target>:
-    prev_command = user.history_get(1)
-    user.cursorless_single_target_command("setSelectionBefore", cursorless_target)
-    mimic(prev_command)
+# also <user.cursorless_target>:
+#     prev_command = user.history_get(1)
+#     user.cursorless_single_target_command("setSelectionBefore", cursorless_target)
+#     mimic(prev_command)
 
 dismiss:
     user.vscode("notifications.hideList")
@@ -484,4 +484,7 @@ dismiss:
 #     mimic("pre row {user.prose_number}")
 #     edit.line_end()
 
+# Tabs
 tab keep:                   user.vscode("workbench.action.keepEditor")
+tab {self.letter} [{self.letter}]:
+    user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
