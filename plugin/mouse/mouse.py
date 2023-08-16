@@ -322,7 +322,7 @@ def show_cursor_helper(show):
         ctrl.cursor_visible(show)
 
 
-@ctx.action("user.noise_trigger_pop")
+@ctx.action("user.on_pop")
 def on_pop():
     print("pop from mouse.py")
     actions.user.mouse_scroll_stop()

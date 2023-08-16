@@ -12,9 +12,28 @@ modes = {
 for key, value in modes.items():
     mod.mode(key, value)
 
+global hard_sleep
+hard_sleep = False
 
 @mod.action_class
 class Actions:
+    def wake_if_not_hard_sleep():
+        """Wakes up if hard sleep is not active."""
+        if not hard_sleep:
+            actions.speech.enable()
+            actions.user.hud_publish_mouse_particle('float_up', '36d96a')
+
+    def set_hard_sleep():
+        """Sets hard sleep mode."""
+        global hard_sleep
+        hard_sleep = True
+
+    def unset_hard_sleep():
+        """Unsets hard sleep mode."""
+        global hard_sleep
+        hard_sleep = False
+
+
     def talon_mode():
         """For windows and Mac with Dragon, enables Talon commands and Dragon's command mode."""
         actions.speech.enable()

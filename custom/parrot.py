@@ -120,14 +120,14 @@ class Actions:
     def on_pop():
         """Do pop"""
         # check mouse.py for implementation
-        print("pop")
-        # actions.user.mouse_scroll_stop()
-        # if actions.user.mouse_is_dragging():
-        #     print("pop as drag end")
-        #     actions.user.mouse_drag_end()
-        # else:
-        #     print("pop as click")
-        #     actions.user.click()
+        # print("pop")
+        actions.user.mouse_scroll_stop()
+        if actions.user.mouse_is_dragging():
+            print("pop as drag end")
+            actions.user.mouse_drag_end()
+        else:
+            print("pop as click")
+            actions.user.click()
 
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
