@@ -47,23 +47,22 @@ spring forward:             user.vscode("workbench.action.navigateForward")
 <user.teleport> next:
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-<user.teleport> [dock] <user.text> [{user.file_extension}] [halt]:
-    user.vscode("workbench.action.quickOpen")
-    sleep(100ms)
-    user.insert_formatted(text or "", "smash")
-    # insert(text or "")
-    insert(file_extension or "")
-    sleep(600ms)
-    key(enter)
-    sleep(150ms)
+# <user.teleport> [dock] <user.text> [{user.file_extension}] [halt]:
+#     user.vscode("workbench.action.quickOpen")
+#     sleep(100ms)
+#     user.insert_formatted(text or "", "smash")
+#     # insert(text or "")
+#     insert(file_extension or "")
+#     sleep(600ms)
+#     key(enter)
+#     sleep(150ms)
 
 <user.teleport> dock:       user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
-(<user.show_list> (dock | stock) | dock <user.show_list>):
-    user.vscode("workbench.action.quickOpen")
+# ((<user.show_list> <user.teleport>) (dock | stock) | dock <user.show_list>):
+#     user.vscode("workbench.action.quickOpen")
 
-<user.show_list> [dock | stock] [<user.text>] [{user.file_extension}] [halt]:
-    # user.get_teleport_destination("{text}{file_extension or ''}")
+(<user.show_list> | <user.teleport>) [<user.text>] [{user.file_extension}]:
     user.vscode("workbench.action.quickOpen")
     sleep(100ms)
     insert(text or "")
@@ -90,12 +89,12 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     key(ctrl-enter)
     sleep(250ms)
 
-<user.teleport> same (sesh | session | workspace) [<user.text>] [halt]:
-    user.vscode("workbench.action.openRecent")
-    sleep(250ms)
-    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-    key(enter)
-    sleep(250ms)
+# <user.teleport> same (sesh | session | workspace) [<user.text>] [halt]:
+#     user.vscode("workbench.action.openRecent")
+#     sleep(250ms)
+#     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+#     key(enter)
+#     sleep(250ms)
 
 <user.show_list> (win | window) [<user.text>]:
     user.vscode("workbench.action.switchWindow")
@@ -411,6 +410,7 @@ diswap:
     key(tab)
     sleep(50ms)
     key(alt:up)
+    sleep(300ms)
 
 disclose:
     key(esc:5)

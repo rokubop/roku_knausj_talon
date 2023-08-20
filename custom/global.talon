@@ -30,3 +30,8 @@ windows <user.find> [<user.text>]:
     key(win)
     sleep(100ms)
     insert(user.text or "")
+
+reload it:
+    sleep(100ms)
+    key(f5)
+    sleep(300ms)

@@ -5,7 +5,7 @@ window next:                app.window_next()
 window last:                app.window_previous()
 window close:               app.window_close()
 window hide:                app.window_hide()
-(swap | focus) <user.running_applications>: user.switcher_focus(running_applications)
+focus <user.running_applications>: user.switcher_focus(running_applications)
 # following only works on windows. Can't figure out how to make it work for mac. No idea what the equivalent for linux would be.
 ^windows$:                  user.switcher_menu()
 running list:               user.switcher_toggle_running()
@@ -43,20 +43,23 @@ snap <user.running_applications> [screen] right:
     user.switcher_focus("VB-AUDIO Virtual Audio Device Mixing Console Application")
     sleep(200ms)
     user.parse_phrase(phrase or "")
-swap$:
+swap:
     key(alt:down)
     key(tab)
     sleep(50ms)
     key(alt:up)
-swap twice$:
+    sleep(300ms)
+swap twice:
     key(alt:down)
     key(tab:2)
     sleep(50ms)
     key(alt:up)
-swap thrice$:
+    sleep(300ms)
+swap thrice:
     key(alt:down)
     key(tab:3)
     sleep(50ms)
     key(alt:up)
-swap next$:                 key(alt-escape)
-swap last$:                 key(alt-shift-escape)
+    sleep(300ms)
+swap next:                 key(alt-escape)
+swap last:                 key(alt-shift-escape)
