@@ -40,8 +40,7 @@ ctx.lists["self.domain"] = {
     "com":            "com",
     "net":            "net",
     "org":            "org",
-    "sweden":         "se",
-    "s e":           "se",
+    "gov":            "gov"
 }
 
 extension_siblings = {

@@ -1,4 +1,5 @@
 app: fl studio
+os: windows
 -
 
 settings():

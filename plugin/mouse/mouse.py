@@ -171,6 +171,34 @@ class Actions:
         if setting_mouse_wake_hides_cursor.get() >= 1:
             show_cursor_helper(False)
 
+    def mouse_drag_new(action: str):
+        """Press and hold a specific mouse button for dragging"""
+        if action == "left":
+            actions.user.mouse_drag(0)
+        elif action == "right":
+            actions.user.mouse_drag(1)
+        elif action == "middle":
+            actions.user.mouse_drag(2)
+        elif action == "double":
+            actions.user.mouse_drag(0)
+            actions.user.mouse_drag(0)
+        elif action == "triple":
+            actions.user.mouse_drag(0)
+            actions.user.mouse_drag(0)
+            actions.user.mouse_drag(0)
+        elif action == "control" or action == "ctrl":
+            actions.key("ctrl:down")
+            actions.user.mouse_drag(0)
+            actions.key("ctrl:up")
+        elif action == "shift":
+            actions.key("shift:down")
+            actions.user.mouse_drag(0)
+            actions.key("shift:up")
+        elif action == "alt":
+            actions.key("alt:down")
+            actions.user.mouse_drag(0)
+            actions.key("alt:up")
+
     def mouse_drag(button: int):
         """Press and hold/release a specific mouse button for dragging"""
         global is_dragging

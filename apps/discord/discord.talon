@@ -9,7 +9,6 @@ react:                      key(+)
 <user.teleport> [{user.discord_destination}] [<user.text>]:
     user.discord_quick_switcher(user.discord_destination or "", user.text or "")
     sleep(100ms)
-    key(enter)
 <user.show_list> [{user.discord_destination}] [<user.text>]:
     user.discord_quick_switcher(user.discord_destination or "", user.text or "")
 <user.teleport> last:

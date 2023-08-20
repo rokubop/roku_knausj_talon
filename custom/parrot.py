@@ -2,6 +2,7 @@
 from talon import Module, actions, cron, Context
 from datetime import datetime
 import time
+from ..plugin.debouncer import Debouncer
 
 mod = Module()
 ctx = Context()
@@ -21,7 +22,7 @@ two_way_opposites = [
 ]
 
 # ss_debounce_time = "20ms"
-ss_debounce_time = "120ms"
+ss_debounce_time = "100ms"
 
 state = {}
 cron_jobs = {}
@@ -35,6 +36,7 @@ for key, value in two_way_opposites:
 
 last_tut = ""
 last_palete = ""
+
 
 class StateReverse:
     def __init__(self):
@@ -55,6 +57,12 @@ class StateReverse:
         return self.is_reverse_active
 
 stateReverse = StateReverse()
+
+shush_debouncer = Debouncer(500, actions.user.noise_shush_start, actions.user.noise_shush_stop)
+hiss_debouncer = Debouncer(300, actions.user.noise_hiss_start, actions.user.noise_hiss_stop)
+ee_debouncer = Debouncer(200, actions.user.noise_ee_start, actions.user.noise_ee_stop)
+oo_debouncer = Debouncer(200, actions.user.noise_oo_start, actions.user.noise_oo_stop)
+# shush_debouncer.start()
 
 @mod.action_class
 class Actions:
@@ -129,6 +137,82 @@ class Actions:
             print("pop as click")
             actions.user.click()
 
+    def on_shush_start():
+        """Do shush start"""
+        # print("on_shush_start called")
+        shush_debouncer.start()
+        # actions.user.noise_debounce("shush", True)
+
+    def on_shush_stop():
+        """Do shush stop"""
+        # print("on_shush_stop called")
+        shush_debouncer.stop()
+        # actions.user.noise_debounce("shush", False)
+
+    def on_hiss_start():
+        """Do hiss start"""
+        # actions.user.noise_debounce("hiss", True)
+        # print("on_hiss_start called")
+        hiss_debouncer.start()
+
+    def on_hiss_stop():
+        """Do hiss stop"""
+        # print("on_hiss_stop called")
+        hiss_debouncer.stop()
+        # actions.user.noise_debounce("hiss", False)
+
+    def on_oo_start():
+        """Do oo start"""
+        oo_debouncer.start()
+        # actions.user.noise_debounce("oo", True)
+
+    def on_oo_stop():
+        """Do oo stop"""
+        oo_debouncer.stop()
+        # actions.user.noise_debounce("oo", False)
+
+    def on_ee_start():
+        """Do ee start"""
+        ee_debouncer.start()
+        # actions.user.noise_debounce("ee", True)
+
+    def on_ee_stop():
+        """Do ee stop"""
+        ee_debouncer.stop()
+        # actions.user.noise_debounce("ee", False)
+
+    def on_cluck():
+        """Do cluck"""
+        print("cluck")
+
+    def on_aa():
+        """Do aa"""
+        print("aa")
+
+    def on_ah():
+        """Do ah"""
+        print("ah")
+
+    # def on_ch():
+    #     """Do ch"""
+    #     print("ch")
+
+    def on_eh():
+        """Do eh"""
+        print("eh")
+
+    def on_oh():
+        """Do oh"""
+        print("oh")
+
+    def on_short_oo():
+        """Do short_oo"""
+        print("short_oo")
+
+    def on_uh():
+        """Do uh"""
+        print("uh")
+
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
         global ss_debounce_time
@@ -155,6 +239,22 @@ class Actions:
         """Noise hiss stopped"""
         print("hiss:stop")
 
+    def noise_ee_start():
+        """Noise ee started"""
+        print("ee:start")
+
+    def noise_ee_stop():
+        """Noise ee stopped"""
+        print("ee:stop")
+
+    def noise_oo_start():
+        """Noise oo started"""
+        print("oo:start")
+
+    def noise_oo_stop():
+        """Noise oo stopped"""
+        print("oo:stop")
+
 def callback(name: str):
     active = state.pop(name)
     callbacks[name](active)
@@ -165,15 +265,29 @@ def on_shush(active: bool):
     else:
         actions.user.noise_shush_stop()
 
-
 def on_hiss(active: bool):
     if active:
         actions.user.noise_hiss_start()
     else:
         actions.user.noise_hiss_stop()
 
+def on_ee(active: bool):
+    if active:
+        actions.user.noise_ee_start()
+    else:
+        actions.user.noise_ee_stop()
+
+def on_oo(active: bool):
+    if active:
+        actions.user.noise_oo_start()
+    else:
+        actions.user.noise_oo_stop()
+
+callbacks["ch"] = on_shush
 callbacks["shush"] = on_shush
 callbacks["hiss"] = on_hiss
+callbacks["ee"] = on_ee
+callbacks["oo"] = on_oo
 
 chrome_ctx = Context()
 ctx.matches = """
@@ -189,7 +303,7 @@ class ChromeActions:
 
     def noise_shush_stop():
         actions.user.abort_specific_phrases(
-            ["hash", "ssh"], shush_start, time.perf_counter()
+            ["hash", "ssh", "oo", "ee", "ch"], shush_start, time.perf_counter()
         )
         actions.user.mouse_scroll_stop()
 

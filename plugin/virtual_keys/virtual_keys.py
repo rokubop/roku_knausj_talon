@@ -3,17 +3,19 @@ from talon import Module, actions, app
 # virtual keyboard
 def register_keyboard():
     keys = [
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'One'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Two'),
-	    actions.user.hud_create_virtual_key(actions.user.toggleScrollSpeed, 'Toggle scroll speed'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Four'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Five'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Six'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Seven'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Eight'),
-	    actions.user.hud_create_virtual_key(actions.user.no_op, 'Nine')
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_one, 'One'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_two, 'Two'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_three, 'Three'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_four, 'Four'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_five, 'Five'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_six, 'Six'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_seven, 'Seven'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_eight, 'Eight'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_nine, 'Nine')
 	]
-    actions.user.hud_register_virtual_keyboard('example_keyboard', keys)
+    actions.user.hud_register_virtual_keyboard('virtual_keyboard', keys)
+    actions.user.hud_set_virtual_keyboard('virtual_keyboard')
+    actions.user.hud_set_virtual_keyboard_visibility(0)
 
 app.register('ready', register_keyboard)
 
@@ -37,6 +39,41 @@ mod = Module()
 
 @mod.action_class
 class Actions:
+    def virtual_region_one():
+        """Virtual region one"""
+        print("Virtual region one")
+
+    def virtual_region_two():
+        """Virtual region two"""
+        print("Virtual region two")
+
+    def virtual_region_three():
+        """Virtual region three"""
+        print("Virtual region three")
+
+    def virtual_region_four():
+        """Virtual region four"""
+        print("Virtual region four")
+
+    def virtual_region_five():
+        """Virtual region five"""
+        print("Virtual region five")
+
+    def virtual_region_six():
+        """Virtual region six"""
+        print("Virtual region six")
+
+    def virtual_region_seven():
+        """Virtual region seven"""
+        print("Virtual region seven")
+
+    def virtual_region_eight():
+        """Virtual region eight"""
+        print("Virtual region eight")
+
+    def virtual_region_nine():
+        """Virtual region nine"""
+        print("Virtual region nine")
 
     def add_yellow_cursor():
         """Add a yellow icon to the cursor tracker"""

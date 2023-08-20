@@ -4,8 +4,6 @@ tag(): user.tabs
 tag(): user.find
 tag(): user.file_manager
 
-(show | hide | toggle) hints: key(alt-;)
-hints | hint (show | hide | yes | no): key(alt-;)
 
 view (large | big | largest): key(ctrl-shift-1)
 view (medium | mid):        key(ctrl-shift-2)
