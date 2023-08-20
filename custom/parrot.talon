@@ -1,7 +1,8 @@
 not mode:                   sleep
+and not mode:               user.parrot
 -
 parrot(cluck):
-	user.on_cluck()
+	user.parrot_mode_enable()
 parrot(tut):
 	print("tut")
 	user.on_tut()
@@ -10,8 +11,6 @@ parrot(palate_click):
 	user.on_palate()
 parrot(pop):
 	user.on_pop()
-# parrot(bup):
-# 	print("bup")
 parrot(shush):
 	user.on_shush_start()
 parrot(shush:stop):
@@ -20,10 +19,6 @@ parrot(hiss):
 	user.on_hiss_start()
 parrot(hiss:stop):
 	user.on_hiss_stop()
-# parrot(oo):
-# 	user.on_oo_start()
-# parrot(oo:stop):
-# 	user.on_oo_stop()
 parrot(ee):
 	user.on_ee_start()
 parrot(ee:stop):
@@ -34,27 +29,25 @@ parrot(aa):
 parrot(ah):
 	user.on_ah()
 	print("ah")
-# parrot(eh):
-# 	user.on_eh()
-# 	print("eh")
+parrot(eh):
+	user.on_eh()
+	print("eh")
 parrot(oh):
 	user.on_oh()
 	print("oh")
-# parrot(short-oh):
-# 	user.on_short_oh()
-# 	print("short_oh")
-# parrot(uh):
-# 	user.on_uh()
-# 	print("uh")
-# parrot(ch):
-	# 	user.on_ch()
-	# 	print("ch")
-# parrot(ch):
-	# print('ch:start')
-	# user.on_shush_start()
-# parrot(ch:stop):
-	# print('ch:stop')
-	# user.on_shush_stop()
+parrot(er):
+	user.on_er()
+	print("er")
+parrot(guh):
+	user.on_guh()
+	print("guh")
+parrot(nn):
+	user.on_nn()
+	print("nn")
+parrot(jj):
+	user.on_jj()
+	print("jj")
+
 
 
 # parrot(ue):

@@ -193,9 +193,9 @@ class Actions:
         """Do ah"""
         print("ah")
 
-    # def on_ch():
-    #     """Do ch"""
-    #     print("ch")
+    def on_ch():
+        """Do ch"""
+        print("ch")
 
     def on_eh():
         """Do eh"""
@@ -212,6 +212,22 @@ class Actions:
     def on_uh():
         """Do uh"""
         print("uh")
+
+    def on_jj():
+        """Do jj"""
+        print("jj")
+
+    def on_er():
+        """Do er"""
+        print("er")
+
+    def on_guh():
+        """Do guh"""
+        print("guh")
+
+    def on_nn():
+        """Do nn"""
+        print("nn")
 
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
