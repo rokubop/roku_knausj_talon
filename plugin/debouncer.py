@@ -14,6 +14,7 @@ class Debouncer:
             self.started = False
             self.stop_action()
         if self.timer_handle:  # Clear timer handle after executing.
+            cron.cancel(self.timer_handle)
             self.timer_handle = None
 
     def start(self):
@@ -29,3 +30,6 @@ class Debouncer:
             if self.timer_handle:
                 cron.cancel(self.timer_handle)
             self.timer_handle = cron.after(f"{self.debounce_duration}ms", self._actual_stop)
+
+    def force_stop(self):
+        self._actual_stop()

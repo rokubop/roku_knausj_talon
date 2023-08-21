@@ -14,8 +14,10 @@ parrot(oh):
 parrot(jj):
     user.parrot_mouse_drag(2)
 parrot(hiss):
+    print("hiss")
     user.parrot_scroll_down()
 parrot(shush):
+    print("shush")
     user.parrot_scroll_up()
 parrot(ee):
     user.parrot_mouse_and_scroll_stop()
@@ -27,7 +29,7 @@ parrot(eh):
     user.parrot_set_modifier('alt')
 parrot(tut):
     user.parrot_cancel_modifiers()
-    key(ctrl-z)
+    # key(ctrl-z)
 parrot(er):
     user.parrot_mode_disable()
     # user.parrot_trigger_virtual_key()

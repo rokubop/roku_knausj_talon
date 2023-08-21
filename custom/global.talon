@@ -20,6 +20,7 @@ desktop {user.system_paths}:
 then:                       skip()
 
 continue [<number_small>]:  user.start_repeat_repeatedly(number_small or 1)
+stop:                       user.cancel_repeat_repeatedly()
 
 flow <user.find> [<user.text>]:
     key(ctrl-shift-alt-f)

@@ -20,9 +20,9 @@ parrot(hiss):
 parrot(hiss:stop):
 	user.on_hiss_stop()
 parrot(ee):
-	user.on_ee_start()
+	user.on_force_scroll_stop()
 parrot(ee:stop):
-	user.on_ee_stop()
+	# user.on_ee_stop()
 parrot(aa):
 	user.on_aa()
 	print("aa")

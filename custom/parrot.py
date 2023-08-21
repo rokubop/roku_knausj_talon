@@ -171,6 +171,11 @@ class Actions:
         oo_debouncer.stop()
         # actions.user.noise_debounce("oo", False)
 
+    def on_force_scroll_stop():
+        """Do force scroll stop"""
+        hiss_debouncer.force_stop()
+        shush_debouncer.force_stop()
+
     def on_ee_start():
         """Do ee start"""
         ee_debouncer.start()
