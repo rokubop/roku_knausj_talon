@@ -31,6 +31,10 @@ please [<user.text>]:
     edit.delete_line()
     insert(text or "")
 
+add list: insert("- ")
+add task: insert("- [ ] ")
+task (yes | no): key(ctrl-l)
+
 bar (show | hide | dog) | (show | hide) bar:
     key(alt-b)
 

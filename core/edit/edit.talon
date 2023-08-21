@@ -62,10 +62,10 @@ indent [more] | indent this: edit.indent_more()
 (indent less | out dent | dedent this): edit.indent_less()
 
 # Delete
-(clear | chuck) (all | file): user.delete_all()
-(clear | chuck) line:       edit.delete_line()
-(clear | chuck) line start: user.delete_line_start()
-(clear | chuck) line end:   user.delete_line_end()
+clear (all | file):         user.delete_all()
+clear line:                 edit.delete_line()
+clear line start:           user.delete_line_start()
+clear line end:             user.delete_line_end()
 clear left:                 edit.delete()
 clear right:                user.delete_right()
 clear up:
@@ -81,16 +81,16 @@ clear word left:
 clear word right:
     edit.extend_word_right()
     edit.delete()
-(clear | chuck) head [line]:
+clear head [line]:
     edit.extend_line_start()
     edit.delete()
-(clear | chuck) tail [line]:
+clear tail [line]:
     edit.extend_line_end()
     edit.delete()
-(clear | chuck) head file:
+clear head file:
     edit.extend_file_start()
     edit.delete()
-(clear | chuck) tail file:
+clear tail file:
     edit.extend_file_end()
     edit.delete()
 <user.delete> head:
