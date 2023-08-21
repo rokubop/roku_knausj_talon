@@ -16,9 +16,15 @@ parrot(jj):
 parrot(hiss):
     print("hiss")
     user.parrot_scroll_down()
+parrot(hiss:stop):
+    print("hiss:stop")
+    user.parrot_scroll_stop_soft()
 parrot(shush):
     print("shush")
     user.parrot_scroll_up()
+parrot(shush:stop):
+    print("shush:stop")
+    user.parrot_scroll_stop_soft()
 parrot(ee):
     user.parrot_mouse_and_scroll_stop()
 parrot(guh):
@@ -28,7 +34,7 @@ parrot(nn):
 parrot(eh):
     user.parrot_set_modifier('alt')
 parrot(tut):
-    user.parrot_cancel_modifiers()
+    user.parrot_cursor_stay_toggle()
     # key(ctrl-z)
 parrot(er):
     user.parrot_mode_disable()

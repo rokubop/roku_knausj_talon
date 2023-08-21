@@ -1,4 +1,5 @@
 from talon import Module, actions, ctrl
+from ...plugin.debouncer import Debouncer
 
 mod = Module()
 mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling")
@@ -6,8 +7,27 @@ mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling"
 is_dragging = False
 modifiers = []
 
+shush_debouncer = Debouncer(150, actions.user.parrot_scroll_up_start, actions.user.parrot_scroll_up_stop)
+hiss_debouncer = Debouncer(150, actions.user.parrot_scroll_down_start, actions.user.parrot_scroll_down_stop)
+
 @mod.action_class
 class ParrotModeActions:
+    def parrot_scroll_up_start():
+        """Shush start"""
+        actions.user.mouse_scrolling("up")
+
+    def parrot_scroll_up_stop():
+        """Shush stop"""
+        actions.user.mouse_scroll_stop()
+
+    def parrot_scroll_down_start():
+        """Hiss start"""
+        actions.user.mouse_scrolling("down")
+
+    def parrot_scroll_down_stop():
+        """Hiss stop"""
+        actions.user.mouse_scroll_stop()
+
     def parrot_mouse_drag(button: int):
         """Drag the mouse in a direction"""
         global is_dragging
@@ -36,13 +56,20 @@ class ParrotModeActions:
         """Scroll the mouse down"""
         for key in modifiers:
             actions.key(f"{key}:down")
-        actions.user.mouse_scroll_down();
+        hiss_debouncer.start()
+        # actions.user.mouse_scroll_down();
 
     def parrot_scroll_up():
         """Scroll the mouse up"""
         for key in modifiers:
             actions.key(f"{key}:down")
-        actions.user.mouse_scroll_up();
+        shush_debouncer.start()
+        # actions.user.mouse_scroll_up();
+
+    def parrot_scroll_stop_soft():
+        """Stop scrolling the mouse"""
+        shush_debouncer.stop()
+        hiss_debouncer.stop()
 
     def parrot_mouse_and_scroll_stop():
         """Stop mouse and scroll"""
@@ -54,6 +81,8 @@ class ParrotModeActions:
         for key in modifiers:
             actions.key(f"{key}:up")
         actions.user.mouse_scroll_stop()
+        shush_debouncer.stop()
+        hiss_debouncer.stop()
         modifiers.clear()
 
     def parrot_set_modifier(key: str):
@@ -66,6 +95,10 @@ class ParrotModeActions:
         for key in modifiers:
             actions.key(f"{key}:up")
         modifiers.clear()
+
+    def parrot_cursor_stay_toggle():
+        """Toggle cursor stay"""
+        actions.user.mouse_toggle_stay_in_place()
 
     def parrot_trigger_virtual_key():
         """Trigger virtual key"""
@@ -84,8 +117,10 @@ class UserActions:
     def parrot_mode_disable():
         """Disable parrot mode"""
         print('parrot mode disabled')
+        actions.user.parrot_scroll_stop_soft()
         actions.user.clear_screen_regions()
         actions.user.parrot_mouse_and_scroll_stop()
+        actions.user.mouse_scroll_stop()
         actions.mode.disable("user.parrot")
         actions.mode.enable("command")
         actions.mode.disable("dictation")

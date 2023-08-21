@@ -304,6 +304,14 @@ class Actions:
         rect = ui.active_window().rect
         ctrl.mouse_move(rect.left + (rect.width / 2), rect.top + (rect.height / 2))
 
+    def mouse_toggle_stay_in_place():
+        """toggle stay in place"""
+        global _stay_job
+        if _stay_job:
+            _stop_stay_job()
+        else:
+            _start_stay_job()
+
     def mouse_stay_in_place(is_stay: bool):
         """stay in place so that for example
         content that is not hoverable

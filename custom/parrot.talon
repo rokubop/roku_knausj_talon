@@ -12,13 +12,13 @@ parrot(palate_click):
 parrot(pop):
 	user.on_pop()
 parrot(shush):
-	user.on_shush_start()
+	# user.on_shush_start()
 parrot(shush:stop):
-	user.on_shush_stop()
+	# user.on_shush_stop()
 parrot(hiss):
-	user.on_hiss_start()
+	# user.on_hiss_start()
 parrot(hiss:stop):
-	user.on_hiss_stop()
+	# user.on_hiss_stop()
 parrot(ee):
 	user.on_force_scroll_stop()
 parrot(ee:stop):

@@ -3,7 +3,7 @@ os: windows
 -
 
 settings():
-    speech.timeout = 0.05
+    speech.timeout = 0.15
 
 # adding instruments (tracks) and plugins (mixer)
 add {user.fl_instrument}:
