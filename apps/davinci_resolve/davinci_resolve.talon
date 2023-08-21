@@ -39,3 +39,9 @@ zoom out:
     key(alt:down)
     mouse_scroll(300)
     key(alt:up)
+
+# view
+(show | hide) {user.davinci_mouse_location}:
+    user.davinci_click_position(davinci_mouse_location)
+{user.davinci_mouse_location} (yes | no | dog):
+    user.davinci_click_position(davinci_mouse_location)
