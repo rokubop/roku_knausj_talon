@@ -1,0 +1,213 @@
+{
+  "ah": {
+    "sounds": ["ah"],
+    "threshold": {
+      ">power": 20,
+      ">probability": 0.87
+    },
+    "throttle": {
+      "eh": 0.15,
+      "oh": 0.15
+    }
+  },
+  "buh": {
+    "sounds": ["buh"],
+    "threshold": {
+      ">power": 10,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "buh": 0.1,
+      "pop": 0.1
+    }
+  },
+  "cluck": {
+    "sounds": ["Alveolar click"],
+    "threshold": {
+      ">power": 10,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "cluck": 0.12,
+      "pop": 0.2
+    }
+  },
+  "ee": {
+    "sounds": ["yi"],
+    "threshold": {
+      ">power": 13,
+      ">probability": 0.9
+    },
+    "graceperiod": 0.1,
+    "grace_threshold": {
+      ">power": 5,
+      ">probability": 0.6
+    },
+    "throttle": {
+      "tut": 0.2,
+      "lll": 0.2
+    }
+  },
+  "eh": {
+    "sounds": ["eh"],
+    "threshold": {
+      ">power": 20,
+      ">probability": 0.87
+    }
+  },
+  "er": {
+    "sounds": ["er"],
+    "threshold": {
+      ">power": 10,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "er": 0.1,
+      "eh": 0.1
+    }
+  },
+  "guh": {
+    "sounds": ["guh"],
+    "threshold": {
+      ">power": 20,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "guh": 0.1,
+      "eh": 0.2
+    }
+  },
+  "j": {
+    "sounds": ["j"],
+    "threshold": {
+      ">power": 20,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "j": 0.1
+    }
+  },
+  "k": {
+    "sounds": ["k"],
+    "threshold": {
+      ">power": 20,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "k": 0.1,
+      "tut": 0.1,
+      "guh": 0.1
+    }
+  },
+  "lll": {
+    "sounds": ["lll"],
+    "threshold": {
+      ">power": 0.5,
+      ">probability": 0.7
+    },
+    "graceperiod": 0.1,
+    "grace_threshold": {
+      ">power": 0.2,
+      ">probability": 0.4,
+      ">times": 6
+    },
+    "throttle": {
+      "lll": 0.3
+    }
+  },
+  "hiss": {
+    "sounds": ["ss"],
+    "threshold": {
+      ">power": 0.5,
+      ">probability": 0.7
+    },
+    "graceperiod": 0.1,
+    "grace_threshold": {
+      ">power": 0.2,
+      ">probability": 0.4
+    },
+    "throttle": {
+      "tut": 0.5
+    }
+  },
+  "nn": {
+    "sounds": ["nn"],
+    "threshold": {
+      ">power": 10,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "nn": 0.2
+    }
+  },
+  "oh": {
+    "sounds": ["oh"],
+    "threshold": {
+      ">power": 10,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "oh": 0.2,
+      "ah": 0.1
+    }
+  },
+  "palate_click": {
+    "sounds": ["Palate"],
+    "threshold": {
+      ">power": 15,
+      ">probability": 0.86
+    },
+    "throttle": {
+      "palate_click": 0.12,
+      "cluck": 0.15,
+      "shush": 0.15
+    }
+  },
+  "pop": {
+    "sounds": ["pop"],
+    "threshold": {
+      ">power": 2,
+      ">probability": 0.95
+    },
+    "throttle": {
+      "pop": 0.15
+    }
+  },
+  "shush": {
+    "sounds": ["sh"],
+    "threshold": {
+      ">power": 0.5,
+      ">probability": 0.7
+    },
+    "graceperiod": 0.1,
+    "grace_threshold": {
+      ">power": 0.1,
+      ">probability": 0.4
+    },
+    "throttle": {
+      "ch": 0.2,
+      "jj": 0.2,
+      "tut": 0.5
+    }
+  },
+  "tut": {
+    "sounds": ["tut"],
+    "threshold": {
+      ">power": 20,
+      ">probability": 0.97
+    },
+    "throttle": {
+      "tut": 0.15
+    }
+  },
+  "vv": {
+    "sounds": ["vv"],
+    "threshold": {
+      ">power": 10,
+      ">probability": 0.9
+    },
+    "throttle": {
+      "vv": 0.2
+    }
+  }
+}
