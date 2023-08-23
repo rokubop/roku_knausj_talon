@@ -13,7 +13,7 @@ parrot(jj): user.parrot_mouse_drag(2)
 
 parrot(ee): user.parrot_mouse_and_scroll_stop()
 
-parrot(tut): user.tracking.control_toggle()
+parrot(tut): tracking.control_toggle()
 
 parrot(guh): user.parrot_set_modifier('ctrl')
 parrot(nn): user.parrot_set_modifier('shift')

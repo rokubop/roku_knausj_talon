@@ -10,17 +10,6 @@
       "oh": 0.15
     }
   },
-  "buh": {
-    "sounds": ["buh"],
-    "threshold": {
-      ">power": 10,
-      ">probability": 0.9
-    },
-    "throttle": {
-      "buh": 0.1,
-      "pop": 0.1
-    }
-  },
   "cluck": {
     "sounds": ["Alveolar click"],
     "threshold": {
@@ -75,44 +64,6 @@
     "throttle": {
       "guh": 0.1,
       "eh": 0.2
-    }
-  },
-  "j": {
-    "sounds": ["j"],
-    "threshold": {
-      ">power": 20,
-      ">probability": 0.9
-    },
-    "throttle": {
-      "j": 0.1
-    }
-  },
-  "k": {
-    "sounds": ["k"],
-    "threshold": {
-      ">power": 20,
-      ">probability": 0.9
-    },
-    "throttle": {
-      "k": 0.1,
-      "tut": 0.1,
-      "guh": 0.1
-    }
-  },
-  "lll": {
-    "sounds": ["lll"],
-    "threshold": {
-      ">power": 0.5,
-      ">probability": 0.7
-    },
-    "graceperiod": 0.1,
-    "grace_threshold": {
-      ">power": 0.2,
-      ">probability": 0.4,
-      ">times": 6
-    },
-    "throttle": {
-      "lll": 0.3
     }
   },
   "hiss": {
@@ -198,16 +149,6 @@
     },
     "throttle": {
       "tut": 0.15
-    }
-  },
-  "vv": {
-    "sounds": ["vv"],
-    "threshold": {
-      ">power": 10,
-      ">probability": 0.9
-    },
-    "throttle": {
-      "vv": 0.2
     }
   }
 }

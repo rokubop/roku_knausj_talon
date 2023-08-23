@@ -261,6 +261,7 @@ file new [<user.filename>]:
     "{filename or ''}"
 [file | folder] (show | reveal) in desktop: user.vscode("revealFileInOS")
 file reveal:                user.vscode("workbench.files.action.showActiveFileInExplorer")
+show explorer:              user.vscode("revealFileInOS")
 file copy path:             user.vscode("copyFilePath")
 file copy relative:         user.vscode("copyRelativeFilePath")
 file copy name:             user.vscode("andreas.copyFilename")
