@@ -37,7 +37,6 @@ tab split:                  user.rango_command_without_target("moveCurrentTabToN
     sleep(200ms)
     user.insert_formatted("{text}", "NO_SPACES")
     sleep(200ms)
-    key(enter)
 
 <user.show_list> dock <user.text>$:
     user.chrome_mod("o")

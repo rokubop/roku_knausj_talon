@@ -32,7 +32,7 @@ ctx.lists["user.prose_snippets"] = {
     "void": " ",
     "yep": "\n",
     "double": "\"",
-    "brick": "\`",
+    "brick": "`",
     "slash": "/",
     "stroke": " /",
     # "new graph": "\n\n",
