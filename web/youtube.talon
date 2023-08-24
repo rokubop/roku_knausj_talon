@@ -6,6 +6,8 @@ app: youtube
 
 speed down:                 key(shift-,)
 speed up:                   key(shift-.)
+sound up:                   key(up:2)
+sound down:                 key(down:2)
 subtitles:                  key(c)
 mini player:                key(i)
 theater:                    key(t)

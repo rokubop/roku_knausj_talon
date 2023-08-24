@@ -26,25 +26,25 @@ parrot(hiss:stop):
 	# print("hiss:stop")
 	# user.on_hiss_stop()
 parrot(ee):
-	# print("ee")
+	print("ee")
 	user.on_force_scroll_stop()
 parrot(ee:stop):
 	# print("ee:stop")
 	# user.on_ee_stop()
 parrot(ah):
-	# print("ah")
+	print("ah")
 	user.on_ah()
 parrot(eh):
-	# print("eh")
+	print("eh")
 	user.on_eh()
 parrot(oh):
-	# print("oh")
+	print("oh")
 	user.on_oh()
 parrot(er):
 	# print("er")
 	user.on_er()
 parrot(guh):
-	# print("guh")
+	print("guh")
 	user.on_guh()
 parrot(nn):
 	# print("nn")
