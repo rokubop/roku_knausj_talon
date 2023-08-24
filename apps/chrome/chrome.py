@@ -24,6 +24,9 @@ mod.apps.chrome = """
 os: linux
 and app.name: Google-chrome
 """
+mod.apps.chrome = """
+win.title: /Google Chrome/
+"""
 
 ctx.matches = r"""
 app: chrome

@@ -85,6 +85,11 @@ class Actions:
         red_cursor = [actions.user.hud_create_screen_region('cursor_example', 'FF0000')]
         actions.user.hud_publish_screen_regions('cursor', red_cursor, 1)
 
+    def add_blue_cursor():
+        """Add a blue icon to the cursor tracker"""
+        blue_cursor = [actions.user.hud_create_screen_region('cursor_example', '0490c9')]
+        actions.user.hud_publish_screen_regions('cursor', blue_cursor, 1)
+
     def add_split_cursor_regions():
         """Shows a red icon when looking at the top of the screen, and a yellow icon otherwise"""
         split_cursors = [

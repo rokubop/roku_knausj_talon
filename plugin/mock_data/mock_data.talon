@@ -20,7 +20,8 @@ mock address:
 
 mock date [<number>]:
     key(down tab)
-    key(down tab)
+    insert(3)
+    key(tab)
     insert(number or "1999")
     key(tab)
 

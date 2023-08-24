@@ -34,6 +34,7 @@ class ParrotModeActions:
 
         if not is_dragging:
             is_dragging = True
+            actions.user.add_blue_cursor()
             for key in modifiers:
                 actions.key(f"{key}:down")
             ctrl.mouse_click(button=button, down=True)
@@ -74,6 +75,8 @@ class ParrotModeActions:
     def parrot_mouse_and_scroll_stop():
         """Stop mouse and scroll"""
         global is_dragging
+        if is_dragging:
+            actions.user.add_red_cursor()
         is_dragging = False
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
@@ -102,6 +105,16 @@ class ParrotModeActions:
 
     def parrot_trigger_virtual_key():
         """Trigger virtual key"""
+
+    def parrot_track_toggle():
+        """Toggle track"""
+        actions.user.hud_publish_mouse_particle('float_up', '20b2aa')
+        actions.tracking.control_toggle()
+
+    def parrot_zoom():
+        """Zoom"""
+        actions.user.mouse_toggle_zoom_mouse()
+
 
 mod = Module()
 @mod.action_class
