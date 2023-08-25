@@ -138,6 +138,7 @@ search next:                user.vscode("search.action.focusNextSearchResult")
 search last:                user.vscode("search.action.focusPreviousSearchResult")
 change next:                user.vscode("workbench.action.compareEditor.nextChange")
 change last:                user.vscode("workbench.action.compareEditor.previousChange")
+change revert:              user.vscode("git.revertSelectedRanges")
 spot last:                  user.vscode("workbench.action.navigatePreviousInEditLocations")
 doc split:                  user.vscode("workbench.action.splitEditor")
 
