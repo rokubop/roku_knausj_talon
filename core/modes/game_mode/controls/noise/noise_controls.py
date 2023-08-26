@@ -210,5 +210,5 @@ def on_hiss(is_active):
             actions.user.game_after_on_hiss()
 
 
-noise.register("pop", on_pop)
-noise.register("hiss", on_hiss)
+# noise.register("pop", on_pop)
+# noise.register("hiss", on_hiss)

@@ -1,6 +1,9 @@
 mode: user.parrot
 and not mode: sleep
 -
+settings():
+    user.scroll_speed_multiplier = 0.6
+
 parrot(cluck): user.parrot_mode_disable()
 
 parrot(pop): user.parrot_mouse_click(0)
@@ -19,7 +22,15 @@ parrot(guh): user.parrot_track_toggle()
 
 # parrot(guh): user.parrot_set_modifier('ctrl')
 parrot(nn): user.parrot_set_modifier('shift')
-# parrot(eh): user.parrot_set_modifier('alt')
+
+# parrot(eh):
+#     region = user.parrot_get_3x3_region()
+#     if region = 1:
+#         user.parrot_set_modifier('alt')
+#     else if user.parrot_is_3x3_region_7():
+#         user.parrot_set_modifier('ctrl')
+#     else if user.parrot_is_3x3_region_4():
+#         user.parrot_set_modifier('shift')
 
 parrot(hiss): user.parrot_scroll_down()
 parrot(hiss:stop): user.parrot_scroll_stop_soft()

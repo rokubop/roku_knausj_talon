@@ -47,6 +47,36 @@ ctx.lists["user.prose_snippets"] = {
     "stack": ":",
 }
 
+text_rule_parts = [
+    "{user.vocabulary}",
+    # "{user.key_punctuation}",
+    "<user.abbreviation>",
+    "<user.spell>",
+    # "<user.number_dd>",
+    "<user.number_prefix>",
+    "<phrase>",
+]
+
+prose_rule_parts = [
+    "{user.vocabulary}",
+    "{user.punctuation}",
+    "{user.prose_snippets}",
+    # "{user.key_punctuation}",
+    "<user.abbreviation>",
+    "<user.spell>",
+    # "<user.number_dd>",
+    "<user.number_prefix>",
+    # "<user.placeholder>",
+    "<user.prose_modifier>"
+    "<user.prose_number>",
+    "<phrase>",
+]
+
+prose_rule_original = "({user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <phrase> | <user.prose_number> | <user.prose_modifier>)+"
+text_rule_original = "({user.vocabulary} | <phrase>)+"
+text_rule = f"({'|'.join(text_rule_parts)})+"
+prose_role = f"({'|'.join(prose_rule_parts)})+"
+
 @mod.capture(rule="{user.prose_modifiers}")
 def prose_modifier(m) -> Callable:
     return getattr(DictationFormat, m.prose_modifiers)
@@ -84,15 +114,18 @@ def word(m) -> str:
             actions.dictate.replace_words(actions.dictate.parse_words(m.word))
         )
 
-
-@mod.capture(rule="({user.vocabulary} | <phrase>)+")
+@mod.capture(rule=text_rule)
 def text(m) -> str:
     """A sequence of words, including user-defined vocabulary."""
     return format_phrase(m)
 
+@mod.capture(rule="(spell | {self.letter}) {self.letter}+")
+def spell(m) -> str:
+    """Spell word phoneticly"""
+    return "".join(m.letter_list)
 
 @mod.capture(
-    rule="({user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <phrase> | <user.prose_number> | <user.prose_modifier>)+"
+    rule=prose_role
 )
 def prose(m) -> str:
     """Mixed words and punctuation, auto-spaced & capitalized."""
