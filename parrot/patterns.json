@@ -14,7 +14,7 @@
         "sounds": ["Alveolar click"],
         "threshold": {
             ">power": 10,
-            ">probability": 0.9
+            ">probability": 0.99
         },
         "throttle": {
             "cluck": 0.12,
