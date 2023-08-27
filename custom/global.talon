@@ -1,4 +1,5 @@
-again:                      user.repeat()
+again:                      core.repeat_phrase()
+# user.repeat()
 confetti:                   user.vscode('cursorless.toggleDecorations')
 mouse (mid | five):         user.mouse_move_center_active_window()
 smart paste | show clip:    key(win-v)
