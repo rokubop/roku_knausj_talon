@@ -2,8 +2,8 @@
     "ah": {
         "sounds": ["ah"],
         "threshold": {
-            ">power": 13,
-            ">probability": 0.8
+            ">power": 3,
+            ">probability": 0.7
         },
         "throttle": {
             "eh": 0.15,
@@ -24,8 +24,8 @@
     "ee": {
         "sounds": ["yi"],
         "threshold": {
-            ">power": 13,
-            ">probability": 0.9
+            ">power": 3,
+            ">probability": 0.8
         },
         "graceperiod": 0.1,
         "grace_threshold": {
@@ -98,8 +98,8 @@
     "oh": {
         "sounds": ["oh"],
         "threshold": {
-            ">power": 10,
-            ">probability": 0.9
+            ">power": 3,
+            ">probability": 0.7
         },
         "throttle": {
             "oh": 0.2,

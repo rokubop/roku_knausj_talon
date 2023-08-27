@@ -196,15 +196,15 @@ file save all:              edit.save_all()
 
 copy paste:                 key(ctrl-c ctrl-v)
 
-tab yep:
-    key(tab)
-    key(enter)
-south yep:
-    key(down)
-    key(enter)
-north yep:
-    key(up)
-    key(enter)
+# tab yep:
+#     key(tab)
+#     key(enter)
+# south yep:
+#     key(down)
+#     key(enter)
+# north yep:
+#     key(up)
+#     key(enter)
 
 <user.operator> stack:      ": "
 <user.operator> dash:       " - "

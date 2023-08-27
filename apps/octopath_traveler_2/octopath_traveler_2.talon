@@ -1,4 +1,5 @@
 app: octopath_traveler_2
+mode: command
 and not mode: sleep
 -
 settings():

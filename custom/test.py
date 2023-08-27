@@ -12,6 +12,7 @@ ctx = Context()
 class Actions:
     def test_one():
         """test"""
+        # actions.core.repeat_phrase()
         print(ui.active_window())
 
     def test_two():

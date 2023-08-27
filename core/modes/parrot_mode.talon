@@ -7,7 +7,8 @@ settings():
 parrot(cluck): user.parrot_mode_disable()
 
 parrot(pop): user.parrot_mouse_click(0)
-parrot(palate_click): user.parrot_mouse_click(1)
+parrot(palate_click): core.repeat_phrase()
+    # user.parrot_mouse_click(1)
 parrot(er): user.parrot_mouse_click(0, 2)
 
 parrot(ah): user.parrot_mouse_drag(0)

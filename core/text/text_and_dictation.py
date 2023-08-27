@@ -67,7 +67,7 @@ prose_rule_parts = [
     # "<user.number_dd>",
     "<user.number_prefix>",
     # "<user.placeholder>",
-    "<user.prose_modifier>"
+    "<user.prose_modifier>",
     "<user.prose_number>",
     "<phrase>",
 ]

@@ -12,4 +12,6 @@ press <user.modifiers>:     key(modifiers)
 press <user.keys>:          key(keys)
 
 hold <user.modifiers>:      key("{modifiers}:down")
-release | lease | lego <user.modifiers>: key("{modifiers}:up")
+hold <user.keys>:           key("{keys}:down")
+release <user.keys>:        key("{keys}:up")
+release <user.modifiers>:   key("{modifiers}:up")
