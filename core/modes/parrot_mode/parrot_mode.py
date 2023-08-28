@@ -1,5 +1,5 @@
 from talon import Module, actions, ctrl
-from ...plugin.debouncer import Debouncer
+from ....plugin.debouncer import Debouncer
 
 mod = Module()
 mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling")
