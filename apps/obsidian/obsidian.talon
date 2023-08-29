@@ -12,35 +12,35 @@ tag(): user.ocr_cursorless
     insert('today daily note')
     key(enter)
 
-<user.teleport> dock:
+<user.teleport> [<user.text>] [{user.file_extension}]:
     key(ctrl-o)
     edit.delete_line()
-
-<user.teleport> dock <user.text>:
-    key(ctrl-o)
-    edit.delete_line()
-    insert(text)
-    key(enter)
-
-<user.find> dock <user.text>:
-    key(ctrl-o)
-    edit.delete_line()
-    insert(text)
+    sleep(100ms)
+    insert(text or "")
+    insert(file_extension or "")
+    sleep(300ms)
 
 please [<user.text>]:
     key(ctrl-p)
     edit.delete_line()
     insert(text or "")
 
+add H one: insert("# ")
+add H two: insert("## ")
+add H three: insert("### ")
+add H four: insert("#### ")
+add H five: insert("##### ")
 add list: insert("- ")
 add task: insert("- [ ] ")
 task (yes | no): key(ctrl-l)
 
-bar (show | hide | dog) | (show | hide) bar:
+bar (show | hide | dog) | (show | hide) (bar | files):
     key(alt-b)
 
-rack (show | hide | dog) | (show | hide) rack:
+rack (show | hide | dog) | (show | hide) (rack | calendar):
     key(alt-c)
 
 task (dog | check | uncheck | complete):
     key(ctrl-l)
+
+show (help | settings): key(ctrl-,)

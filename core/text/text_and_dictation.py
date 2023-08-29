@@ -28,6 +28,7 @@ ctx.lists["user.prose_snippets"] = {
     "word space": "space",
     "boom": ". ",
     "spam": ", ",
+    "dot": ".",
     "space": " ",
     "void": " ",
     "yep": "\n",
