@@ -53,7 +53,7 @@ text_rule_parts = [
     "<user.abbreviation>",
     "<user.spell>",
     # "<user.number_dd>",
-    "<user.number_prefix>",
+    # "<user.number_prefix>",
     "<phrase>",
 ]
 
@@ -65,7 +65,7 @@ prose_rule_parts = [
     "<user.abbreviation>",
     "<user.spell>",
     # "<user.number_dd>",
-    "<user.number_prefix>",
+    # "<user.number_prefix>",
     # "<user.placeholder>",
     "<user.prose_modifier>",
     "<user.prose_number>",
@@ -96,6 +96,10 @@ def prose_number_with_dot(m) -> str:
 def prose_number_with_colon(m) -> str:
     return m.number_string_1 + ":" + m.number_string_2
 
+@mod.capture(rule="brief {self.abbreviation}")
+def abbreviation(m) -> str:
+    """Abbreviated words"""
+    return m.abbreviation
 
 @mod.capture(
     rule="<user.prose_simple_number> | <user.prose_number_with_dot> | <user.prose_number_with_colon>"

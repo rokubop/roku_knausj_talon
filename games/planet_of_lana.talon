@@ -36,7 +36,6 @@ up:                         user.game_side_scroller_up()
 down:                       user.game_crouch()
 jump:                       user.game_jump()
 go | stop:                  user.game_side_scroller_start_stop()
-down:                       user.game_crouch()
 (grab | move):
     mouse_release()
     mouse_drag()

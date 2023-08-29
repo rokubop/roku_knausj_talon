@@ -110,7 +110,7 @@
         "sounds": ["Palate"],
         "threshold": {
             ">power": 15,
-            ">probability": 0.86
+            ">probability": 0.96
         },
         "throttle": {
             "palate_click": 0.12,
