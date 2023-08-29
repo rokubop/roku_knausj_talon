@@ -42,7 +42,13 @@ add H five [<user.text>]:
     user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
 add list: insert("- ")
 add task: insert("- [ ] ")
+
 task (yes | no): key(ctrl-l)
+
+form task [at this]: key(ctrl-l)
+form bold [at this]: key(ctrl-b)
+form italic [at this]: key(ctrl-i)
+form strike [at this]: key(ctrl-shift-x)
 
 bar (show | hide | dog) | (show | hide) (bar | files):
     key(alt-b)
