@@ -25,11 +25,21 @@ please [<user.text>]:
     edit.delete_line()
     insert(text or "")
 
-add H one: insert("# ")
-add H two: insert("## ")
-add H three: insert("### ")
-add H four: insert("#### ")
-add H five: insert("##### ")
+add H one [<user.text>]:
+    insert("# ")
+    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+add H two [<user.text>]:
+    insert("## ")
+    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+add H three [<user.text>]:
+    insert("### ")
+    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+add H four [<user.text>]:
+    insert("#### ")
+    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
+add H five [<user.text>]:
+    insert("##### ")
+    user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
 add list: insert("- ")
 add task: insert("- [ ] ")
 task (yes | no): key(ctrl-l)
