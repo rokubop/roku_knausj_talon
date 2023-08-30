@@ -310,7 +310,7 @@ alternate_keys.update({
 
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
-    alternate_keys["menu key"] = "menu"
+    alternate_keys["menu"] = "menu"
     alternate_keys["print screen"] = "printscr"
 
 special_keys = {k: k for k in simple_keys}

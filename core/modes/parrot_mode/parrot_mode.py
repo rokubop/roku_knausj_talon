@@ -110,6 +110,7 @@ class ParrotModeActions:
         """Toggle track"""
         actions.user.hud_publish_mouse_particle('float_up', '20b2aa')
         actions.tracking.control_toggle()
+        # actions.tracking.control_toggle()
 
     def parrot_zoom():
         """Zoom"""

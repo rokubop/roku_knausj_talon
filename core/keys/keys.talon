@@ -15,3 +15,14 @@ hold <user.modifiers>:      key("{modifiers}:down")
 hold <user.keys>:           key("{keys}:down")
 release <user.keys>:        key("{keys}:up")
 release <user.modifiers>:   key("{modifiers}:up")
+
+# doesn't work
+# key(alt-l): key(right)
+# key(alt-j): key(down)
+# key(alt-k): key(up)
+# key(alt-h): key(left)
+
+# key(alt-shift-l): key(shift-right)
+# key(alt-shift-j): key(shift-down)
+# key(alt-shift-k): key(shift-up)
+# key(alt-shift-h): key(shift-left)

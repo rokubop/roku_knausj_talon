@@ -24,6 +24,10 @@ os: windows
 
 # # -- Contexts
 ^con [<user.text>]: user.fluent_search(text or "")
+^swap <user.text>:
+    user.fluent_search(text or "")
+    sleep(0.1)
+    key(enter)
 
 # # -- Menu search / Homerow
 # # In-app search hotkey
