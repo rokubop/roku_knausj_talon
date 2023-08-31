@@ -5,8 +5,8 @@ confetti:                   user.vscode('cursorless.toggleDecorations')
 mouse (mid | five):         user.mouse_move_center_active_window()
 mouse bar:                  mouse_move(190, 338)
 mouse (term | base):        mouse_move(924, 939)
-mouse left:                 mouse_move(709, 419)
-mouse right:                mouse_move(1293, 468)
+mouse (left | one):         mouse_move(709, 419)
+mouse (right | two):        mouse_move(1293, 468)
 mouse rack:                 mouse_move(1717, 459)
 
 smart paste | show clip:    key(win-v)
@@ -25,11 +25,6 @@ then:                       skip()
 continue [<number_small>]:  user.start_repeat_repeatedly(number_small or 1)
 stop:                       user.cancel_repeat_repeatedly()
 
-flow <user.find> [<user.text>]:
-    key(ctrl-shift-alt-f)
-    sleep(100ms)
-    insert(user.text or "")
-
 windows <user.find> [<user.text>]:
     key(win)
     sleep(100ms)
@@ -45,6 +40,7 @@ explore {user.system_paths}:
     key(win-e)
     sleep(500ms)
     user.file_manager_open_directory(system_paths)
+explore this:               key(shift-alt-r)
 
 desktop new:                key(win-ctrl-d)
 desktop (right | next):     key(win-ctrl-right)
