@@ -2,7 +2,9 @@ app: blender
 mode: command
 -
 settings():
-    speech.timeout = 0.05
+    speech.timeout = 0.15
+
+parrot(tut): mouse_click(1)
 
 # camera
 cam set:                    key(ctrl-alt-keypad_0)

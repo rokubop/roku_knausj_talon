@@ -28,6 +28,7 @@ parrot(hiss:stop):
 parrot(ee):
 	print("ee")
 	user.on_force_scroll_stop()
+	user.omega_mouse_left_click()
 parrot(ee:stop):
 	# print("ee:stop")
 	# user.on_ee_stop()

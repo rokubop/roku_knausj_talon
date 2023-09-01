@@ -24,7 +24,8 @@ parrot(guh): user.parrot_track_toggle()
 # parrot(guh): user.parrot_set_modifier('ctrl')
 # parrot(nn): user.parrot_set_modifier('shift')
 
-parrot(eh): user.parrot_trigger_virtual_key()
+parrot(nn): user.parrot_mouse_nav_mode_enable()
+    # user.parrot_trigger_virtual_key()
 
 parrot(hiss): user.parrot_scroll_down()
 parrot(hiss:stop): user.parrot_scroll_stop_soft()

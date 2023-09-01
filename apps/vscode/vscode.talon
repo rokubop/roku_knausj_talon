@@ -492,3 +492,8 @@ dismiss:
 tab keep:                   user.vscode("workbench.action.keepEditor")
 tab {self.letter} [{self.letter}]:
     user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+
+tab yep:
+    key(tab)
+    sleep(50ms)
+    key(enter)
