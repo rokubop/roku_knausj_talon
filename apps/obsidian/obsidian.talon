@@ -60,3 +60,4 @@ task (dog | check | uncheck | complete):
     key(ctrl-l)
 
 show (help | settings): key(ctrl-,)
+add (prop | tag): key(ctrl-;)
