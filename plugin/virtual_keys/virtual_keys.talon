@@ -1,8 +1,8 @@
-# (options | virtual keys) set: user.hud_set_virtual_keyboard('example_keyboard')
-# (options | virtual keys) remove: user.hud_set_virtual_keyboard()
-# (options | virtual keys) show: user.hud_set_virtual_keyboard_visibility(1)
-# (options | virtual keys) hide: user.hud_set_virtual_keyboard_visibility(0)
-# option (yes | no | dog) |  key this: user.hud_activate_virtual_key()
+(options | virtual keys) set: user.hud_set_virtual_keyboard('example_keyboard')
+(options | virtual keys) remove: user.hud_set_virtual_keyboard()
+(options | virtual keys) show: user.hud_set_virtual_keyboard_visibility(1)
+(options | virtual keys) hide: user.hud_set_virtual_keyboard_visibility(0)
+option (yes | no | dog) |  key this: user.hud_activate_virtual_key()
 
 # dwell toolbar set:          user.hud_set_dwell_toolbar('example_toolbar')
 # dwell toolbar remove:       user.hud_set_dwell_toolbar()

@@ -1,8 +1,9 @@
-from talon import Module, actions, ctrl
+from talon import Module, Context, actions, ctrl
 from ....plugin.debouncer import Debouncer
 
 mod = Module()
 mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling")
+ctx = Context()
 
 is_dragging = False
 modifiers = []
@@ -105,6 +106,8 @@ class ParrotModeActions:
 
     def parrot_trigger_virtual_key():
         """Trigger virtual key"""
+        print("eh from parrot mode")
+        actions.user.hud_activate_virtual_key()
 
     def parrot_track_toggle():
         """Toggle track"""
@@ -138,3 +141,8 @@ class UserActions:
         actions.mode.disable("user.parrot")
         actions.mode.enable("command")
         actions.mode.disable("dictation")
+
+@ctx.action_class("user")
+class UserActions:
+    def virtual_region_one():
+        print('got it')

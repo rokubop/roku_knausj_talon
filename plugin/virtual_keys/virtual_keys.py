@@ -17,6 +17,7 @@ def register_keyboard():
     actions.user.hud_set_virtual_keyboard('virtual_keyboard')
     actions.user.hud_set_virtual_keyboard_visibility(0)
 
+print("registering virtual keyboard")
 app.register('ready', register_keyboard)
 
 # dwell toolbar

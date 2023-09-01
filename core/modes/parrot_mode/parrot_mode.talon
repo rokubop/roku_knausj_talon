@@ -24,14 +24,7 @@ parrot(guh): user.parrot_track_toggle()
 # parrot(guh): user.parrot_set_modifier('ctrl')
 # parrot(nn): user.parrot_set_modifier('shift')
 
-# parrot(eh):
-#     region = user.parrot_get_3x3_region()
-#     if region = 1:
-#         user.parrot_set_modifier('alt')
-#     else if user.parrot_is_3x3_region_7():
-#         user.parrot_set_modifier('ctrl')
-#     else if user.parrot_is_3x3_region_4():
-#         user.parrot_set_modifier('shift')
+parrot(eh): user.parrot_trigger_virtual_key()
 
 parrot(hiss): user.parrot_scroll_down()
 parrot(hiss:stop): user.parrot_scroll_stop_soft()
