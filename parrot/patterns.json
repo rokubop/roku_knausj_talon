@@ -6,8 +6,9 @@
             ">probability": 0.7
         },
         "throttle": {
-            "eh": 0.15,
-            "oh": 0.15
+            "eh": 0.5,
+            "oh": 0.5,
+            "ah": 0.5
         }
     },
     "cluck": {
@@ -44,8 +45,9 @@
             ">probability": 0.87
         },
         "throttle": {
-            "eh": 0.2,
-            "ah": 0.2
+            "eh": 0.5,
+            "oh": 0.5,
+            "ah": 0.5
         }
     },
     "er": {
@@ -102,8 +104,9 @@
             ">probability": 0.7
         },
         "throttle": {
-            "oh": 0.2,
-            "ah": 0.1
+            "eh": 0.5,
+            "oh": 0.5,
+            "ah": 0.5
         }
     },
     "palate_click": {
