@@ -246,6 +246,11 @@ class UserActions:
   #   print("on_tut")
   #   # actions.key("escape")
 
+  def on_palate():
+    """Do on_palate"""
+    actions.mouse_click(1)
+    # actions.key("escape")
+
   # def on_eh():
   #   """Do on_eh"""
   #   global noise

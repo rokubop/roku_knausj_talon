@@ -6,7 +6,9 @@ settings():
 
 parrot(cluck): user.parrot_mode_disable()
 
-parrot(pop): user.parrot_mouse_click(0)
+parrot(pop):
+    user.parrot_mouse_click(0)
+    user.parrot_mouse_click(0)
 parrot(palate_click): core.repeat_phrase()
     # user.parrot_mouse_click(1)
 parrot(er): user.parrot_mouse_click(0, 2)
@@ -24,7 +26,7 @@ parrot(guh): user.parrot_track_toggle()
 # parrot(guh): user.parrot_set_modifier('ctrl')
 # parrot(nn): user.parrot_set_modifier('shift')
 
-parrot(nn): user.parrot_mouse_nav_mode_enable()
+parrot(nn): user.parrot_mouse_rpg_mode_enable()
     # user.parrot_trigger_virtual_key()
 
 parrot(hiss): user.parrot_scroll_down()

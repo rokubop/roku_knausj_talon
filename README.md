@@ -1,6 +1,7 @@
 # roku_talon
 
-Fork of [talonhub/community](https://github.com/talonhub/community) for my personal Talon commands
+This is my personal repository of Talon commands, continually WIP.
+Fork of [talonhub/community](https://github.com/talonhub/community).
 
 ## Custom Apps
 - [Audacity](apps/audacity/audacity.talon)
@@ -12,17 +13,22 @@ Fork of [talonhub/community](https://github.com/talonhub/community) for my perso
 - [Obsidian](apps/obsidian/obsidian.talon)
 - [YouTube](web/youtube.talon)
 
+## Custom Features
+- [Parrot mode WIP](core/mode/parrot_mode/parrot_mode.py)
+- [Parrot repeat and reverse repeat](custom/parrot.py)
+- [Parrot mouse RPG mode](core/mode/parrot_mode/parrot_mouse_rpg_mode.py)
+- [Talon restart](plugin/talon_helpers/talon_helpers.py)
+- [Windows powershell command](update-repos.ps1) or [shell command](update-repos.sh) to update all of repositories sibling to current directory
+- [window max/min/restore for windows](core/windows_and_tabs/window_and_tabs_win_roku.py)
+- [Inserting mock data into fields](plugin/mock_data/mock_data.talon)
+
 ## Custom Games
+- [automatic game mode switch](games/automatic_game_mod.py)
 - [Card Survival Tropical Island](games/card_survival_tropical_island.talon)
 - [Planet of Lana](games/planet_of_lana.talon)
 - [The Forgotten City](games/planet_of_lana.talon)
 
-## Custom Features
-- [Talon restart](plugin/talon_helpers/talon_helpers.py)
-- [Windows powershell command](update-repos.ps1) or [shell command](update-repos.sh) to update all of repositories sibling to current directory
-- [Parrot palate for repeat and tut for doing the opposite](custom/parrot.py)
-- [Inserting mock data into fields](plugin/mock_data/mock_data.talon)
-- [window max/min/restore for windows](core/windows_and_tabs/window_and_tabs_win_roku.py)
+## Borrowed Features
 - pokey_talon style centralized [terms for select/teleport/delete/find/list](core/terms_roku.py)
 - [ziemus's game_mode](https://github.com/ziemus/knausj_talon/tree/main/core/modes/game_modehttps://github.com/ziemus/knausj_talon/tree/main/core/modes/game_mode)
   - added [game_side_scroller](core/modes/game_mode/controls/control_scheme/game_side_scroller.py)

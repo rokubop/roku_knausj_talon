@@ -10,4 +10,4 @@ parrot(ee):
     mouse_release(0)
     mouse_release(2)
 # parrot(tut): mouse_click(1)
-# parrot(eh): user.parrot_mouse_nav_mode_enable()
+# parrot(eh): user.parrot_mouse_rpg_mode_enable()

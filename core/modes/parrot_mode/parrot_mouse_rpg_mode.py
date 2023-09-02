@@ -1,7 +1,7 @@
 from talon import Module, Context, actions, ctrl, cron
 
 mod = Module()
-mod.mode("parrot_mouse_nav", "Parrot Mode for controlling mouse, modifiers, and scrolling")
+mod.mode("parrot_mouse_rpg", "Parrot Mode for controlling mouse, modifiers, and scrolling")
 ctx = Context()
 
 nav_job = None
@@ -30,35 +30,35 @@ def start_moving(dx, dy):
 
 @mod.action_class
 class ParrotMouseNavModeActions:
-    def parrot_mouse_nav_move_left():
+    def parrot_mouse_rpg_move_left():
         """Start moving mouse to the left"""
         print("Start moving mouse to the left")
         start_moving(-1, 0)
 
-    def parrot_mouse_nav_move_right():
+    def parrot_mouse_rpg_move_right():
         """Start moving mouse to the right"""
         print("Start moving mouse to the right")
         start_moving(1, 0)
 
-    def parrot_mouse_nav_move_down():
+    def parrot_mouse_rpg_move_down():
         """Start moving mouse down"""
         print("Start moving mouse down")
         start_moving(0, 1)
 
-    def parrot_mouse_nav_move_up():
+    def parrot_mouse_rpg_move_up():
         """Start moving mouse up"""
         print("Start moving mouse up")
         start_moving(0, -1)
 
-    def parrot_mouse_nav_move_slow():
+    def parrot_mouse_rpg_move_slow():
         """Move mouse slowly"""
         update_speed("slow" if speed != speeds["fast"] else "default")
 
-    def parrot_mouse_nav_move_fast():
+    def parrot_mouse_rpg_move_fast():
         """Move mouse quickly"""
         update_speed("fast" if speed != speeds["slow"] else "default")
 
-    def parrot_mouse_nav_stop():
+    def parrot_mouse_rpg_stop():
         """Stop moving mouse"""
         print("parrot mouse nav stop")
         global nav_job, direction
@@ -68,23 +68,23 @@ class ParrotMouseNavModeActions:
 
 @mod.action_class
 class UserActions:
-    def parrot_mouse_nav_mode_enable():
+    def parrot_mouse_rpg_mode_enable():
         """Enable parrot mouse nav mode"""
         print("parrot mouse nav mode enabled")
         actions.user.add_yellow_cursor()
-        actions.user.parrot_mouse_nav_stop()
+        actions.user.parrot_mouse_rpg_stop()
         update_speed("fast")
         actions.mode.disable("user.parrot")
         actions.mode.disable("command")
         actions.mode.disable("dictation")
-        actions.mode.enable("user.parrot_mouse_nav")
+        actions.mode.enable("user.parrot_mouse_rpg")
 
-    def parrot_mouse_nav_mode_disable():
+    def parrot_mouse_rpg_mode_disable():
         """Disable parrot mouse nav mode"""
         print("parrot mouse nav mode disabled")
-        actions.user.parrot_mouse_nav_stop()
+        actions.user.parrot_mouse_rpg_stop()
         actions.user.clear_screen_regions()
         update_speed("fast")
-        actions.mode.disable("user.parrot_mouse_nav")
+        actions.mode.disable("user.parrot_mouse_rpg")
         actions.mode.disable("command")
         actions.mode.disable("dictation")
