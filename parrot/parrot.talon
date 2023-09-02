@@ -41,6 +41,8 @@ parrot(eh):
 parrot(oh):
 	print("oh")
 	user.on_oh()
+parrot(t):
+	print("t")
 parrot(er):
 	# print("er")
 	user.on_er()
@@ -50,5 +52,3 @@ parrot(guh):
 parrot(nn):
 	# print("nn")
 	user.on_nn()
-parrot(buh):
-	# print("buh")

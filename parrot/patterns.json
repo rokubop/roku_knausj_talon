@@ -3,12 +3,12 @@
         "sounds": ["ah"],
         "threshold": {
             ">power": 3,
-            ">probability": 0.7
+            ">probability": 0.9
         },
         "throttle": {
-            "eh": 0.5,
-            "oh": 0.5,
-            "ah": 0.5
+            "eh": 0.2,
+            "oh": 0.2,
+            "ah": 0.2
         }
     },
     "cluck": {
@@ -25,8 +25,8 @@
     "ee": {
         "sounds": ["yi"],
         "threshold": {
-            ">power": 3,
-            ">probability": 0.8
+            ">power": 10,
+            ">probability": 0.99
         },
         "graceperiod": 0.1,
         "grace_threshold": {
@@ -39,15 +39,16 @@
         }
     },
     "eh": {
-        "sounds": ["eh"],
+        "sounds": ["eh", "ay"],
         "threshold": {
             ">power": 20,
-            ">probability": 0.87
+            ">probability": 0.99
         },
         "throttle": {
-            "eh": 0.5,
-            "oh": 0.5,
-            "ah": 0.5
+            "eh": 0.7,
+            "oh": 0.7,
+            "ah": 0.7,
+            "ay": 0.7
         }
     },
     "er": {
@@ -65,11 +66,15 @@
         "sounds": ["guh"],
         "threshold": {
             ">power": 20,
-            ">probability": 0.9
+            ">probability": 0.97
         },
         "throttle": {
             "guh": 0.7,
-            "eh": 0.2
+            "eh": 0.7,
+            "ay": 0.7,
+            "ah": 0.7,
+            "oo": 0.7,
+            "k": 0.7
         }
     },
     "hiss": {
@@ -91,22 +96,23 @@
         "sounds": ["nn"],
         "threshold": {
             ">power": 10,
-            ">probability": 0.9
+            ">probability": 0.99
         },
         "throttle": {
             "nn": 0.2
         }
     },
     "oh": {
-        "sounds": ["oh"],
+        "sounds": ["oh", "oo"],
         "threshold": {
-            ">power": 3,
-            ">probability": 0.7
+            ">power": 5,
+            ">probability": 0.98
         },
         "throttle": {
-            "eh": 0.5,
-            "oh": 0.5,
-            "ah": 0.5
+            "eh": 0.7,
+            "oh": 0.7,
+            "oo": 0.7,
+            "ah": 0.3
         }
     },
     "palate_click": {
@@ -157,6 +163,16 @@
         },
         "throttle": {
             "tut": 0.15
+        }
+    },
+    "t": {
+        "sounds": ["t"],
+        "threshold": {
+            ">power": 5,
+            ">probability": 0.97
+        },
+        "throttle": {
+            "t": 0.15
         }
     }
 }
