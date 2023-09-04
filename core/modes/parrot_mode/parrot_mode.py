@@ -92,6 +92,7 @@ class ParrotModeActions:
     def parrot_set_modifier(key: str):
         """Set the modifier"""
         if not is_dragging and key not in modifiers:
+            print("prepare modifier " + key)
             modifiers.append(key)
 
     def parrot_cancel_modifiers():
@@ -135,8 +136,8 @@ class UserActions:
         """Disable parrot mode"""
         print('parrot mode disabled')
         actions.user.parrot_scroll_stop_soft()
-        actions.user.clear_screen_regions()
         actions.user.parrot_mouse_and_scroll_stop()
+        actions.user.clear_screen_regions()
         actions.user.mouse_scroll_stop()
         actions.mode.disable("user.parrot")
         actions.mode.enable("command")

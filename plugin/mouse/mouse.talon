@@ -7,25 +7,24 @@ touch | click it | ticket:
     user.grid_close()
     user.mouse_drag_end()
 
-right click | rick it | risk:
+^right click | rick it:
     mouse_click(1)
     user.grid_close()
 
-mid click | mick it:
+^mid click | mick it:
     mouse_click(2)
     user.grid_close()
 
-ship it:                    user.mouse_click("shift")
-dub it:                     user.mouse_click("double")
-troll it:                   user.mouse_click("ctrl")
-trip it:                    user.mouse_click("triple")
-alt it:                     user.mouse_click("alt")
-
+^ship it:                   user.mouse_click("shift")
+^dub it:                    user.mouse_click("double")
+^troll it:                  user.mouse_click("ctrl")
+^trip it:                   user.mouse_click("triple")
+^alt it:                    user.mouse_click("alt")
 
 <user.modifiers> touch:
     key("{modifiers}:down")
     mouse_click(0)
-    key("{modifiers}:up")
+    key("{modifiers}:}")
     # close the mouse grid"
     user.grid_close()
 <user.modifiers> righty:
@@ -35,7 +34,6 @@ alt it:                     user.mouse_click("alt")
     # close the mouse grid
     user.grid_close()
     user.grid_close()
-
 
 <user.modifiers> drag:
     key("{modifiers}:down")
@@ -52,14 +50,14 @@ alt it:                     user.mouse_click("alt")
     user.mouse_drag(2)
     key("{modifiers}:up")
 
-drag [it]:
+^drag [it]:
     user.mouse_drag(0)
     user.grid_close()
-drag right | right drag | risk drag | drag risk:
+^drag right | right drag | risk drag | drag risk:
     user.mouse_drag(1)
     user.grid_close()
 
-drag mid | mid drag:
+^drag mid | mid drag:
     user.mouse_drag(2)
     user.grid_close()
 end drag | drag (end | stop): user.mouse_drag_end()
@@ -71,7 +69,7 @@ wheel tiny [down]:          user.mouse_scrollnl_down(0.2)
 wheel tiny [down] here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down(0.2)
-wheel downer | downer start:               user.mouse_scroll_down_continuous()
+wheel downer | downer start: user.mouse_scroll_down_continuous()
 wheel downer here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down_continuous()
@@ -83,7 +81,7 @@ wheel tiny up:              user.mouse_scroll_up(0.2)
 wheel tiny up here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up(0.2)
-wheel upper | upper start:                user.mouse_scroll_up_continuous()
+wheel upper | upper start:  user.mouse_scroll_up_continuous()
 wheel upper here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up_continuous()

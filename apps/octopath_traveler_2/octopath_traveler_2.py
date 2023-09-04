@@ -9,5 +9,8 @@ ctx.matches = r"""
 os: windows
 app: octopath_traveler_2
 """
-# @mod.action_class
-# class Actions:
+
+@ctx.action_class
+class Actions:
+    def on_tut():
+        actions.key("c")

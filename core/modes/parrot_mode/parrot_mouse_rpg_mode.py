@@ -7,8 +7,8 @@ ctx = Context()
 nav_job = None
 direction = None
 
-speeds = {"slow": 1, "default": 4, "fast": 10}
-speed = speeds["fast"]
+speeds = {"slow": 1, "default": 7, "fast": 10}
+speed = speeds["default"]
 
 def update_speed(new_speed):
     global speed
@@ -73,7 +73,7 @@ class UserActions:
         print("parrot mouse nav mode enabled")
         actions.user.add_yellow_cursor()
         actions.user.parrot_mouse_rpg_stop()
-        update_speed("fast")
+        update_speed("default")
         actions.mode.disable("user.parrot")
         actions.mode.disable("command")
         actions.mode.disable("dictation")
@@ -84,7 +84,7 @@ class UserActions:
         print("parrot mouse nav mode disabled")
         actions.user.parrot_mouse_rpg_stop()
         actions.user.clear_screen_regions()
-        update_speed("fast")
+        update_speed("default")
         actions.mode.disable("user.parrot_mouse_rpg")
-        actions.mode.disable("command")
+        actions.mode.enable("command")
         actions.mode.disable("dictation")

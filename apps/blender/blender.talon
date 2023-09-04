@@ -47,3 +47,9 @@ tail:                       key(shift-right)
 stop:                       key(space)
 record [dog]:               key(ctrl-alt-r)
 (record | record) animation: key(ctrl-f12)
+
+zen mode:                   key(ctrl-space)
+[add] prop [<user.text>]:
+    key(shift-a)
+    key(s)
+    insert(user.text)
