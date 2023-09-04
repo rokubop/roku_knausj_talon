@@ -47,22 +47,9 @@ spring forward:             user.vscode("workbench.action.navigateForward")
 <user.teleport> next:
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-# <user.teleport> [dock] <user.text> [{user.file_extension}] [halt]:
-#     user.vscode("workbench.action.quickOpen")
-#     sleep(100ms)
-#     user.insert_formatted(text or "", "smash")
-#     # insert(text or "")
-#     insert(file_extension or "")
-#     sleep(600ms)
-#     key(enter)
-#     sleep(150ms)
-
 <user.teleport> dock:       user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
-# ((<user.show_list> <user.teleport>) (dock | stock) | dock <user.show_list>):
-#     user.vscode("workbench.action.quickOpen")
-
-(<user.show_list> | <user.teleport>) [<user.text>] [{user.file_extension}]:
+<user.teleport> [<user.text>] [{user.file_extension}]:
     user.vscode("workbench.action.quickOpen")
     sleep(100ms)
     insert(text or "")
@@ -76,12 +63,6 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     insert(file_extension or "")
     sleep(300ms)
 
-<user.show_list> (sesh | session | workspace) [<user.text>] [halt]:
-    user.vscode("workbench.action.openRecent")
-    sleep(250ms)
-    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-    sleep(250ms)
-
 <user.teleport> (sesh | session | workspace) [<user.text>] [halt]:
     user.vscode("workbench.action.openRecent")
     sleep(250ms)
@@ -89,25 +70,10 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     key(ctrl-enter)
     sleep(250ms)
 
-# <user.teleport> same (sesh | session | workspace) [<user.text>] [halt]:
-#     user.vscode("workbench.action.openRecent")
-#     sleep(250ms)
-#     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-#     key(enter)
-#     sleep(250ms)
-
-<user.show_list> (win | window) [<user.text>]:
-    user.vscode("workbench.action.switchWindow")
-    sleep(250ms)
-    insert(text or "")
-    sleep(250ms)
-
 <user.teleport> (win | window) [<user.text>]:
     user.vscode("workbench.action.switchWindow")
     sleep(50ms)
     insert(text or "")
-    key(enter)
-    sleep(250ms)
 
 <user.teleport> form:
     user.find_sibling_file("form", 7, 2)
@@ -174,17 +140,21 @@ split up:                   user.vscode("workbench.action.moveEditorToAboveGroup
 split down:                 user.vscode("workbench.action.moveEditorToBelowGroup")
 split left:                 user.vscode("workbench.action.moveEditorToLeftGroup")
 split right:                user.vscode("workbench.action.moveEditorToRightGroup")
-(folk | focus) up:          user.vscode("workbench.action.focusAboveGroup")
-(folk | focus) down:        user.vscode("workbench.action.focusBelowGroup")
-(folk | focus) left:        user.vscode("workbench.action.focusLeftGroup")
-(folk | focus) right:       user.vscode("workbench.action.focusRightGroup")
+
+group up:          user.vscode("workbench.action.focusAboveGroup")
+group down:        user.vscode("workbench.action.focusBelowGroup")
+group (left | one):        user.vscode("workbench.action.focusLeftGroup")
+group (right | two):       user.vscode("workbench.action.focusRightGroup")
+group close: user.vscode("workbench.action.closeEditorsAndGroup")
+group close others: user.vscode("workbench.action.closeEditorsInOtherGroups")
+group (collapse | join | single): user.vscode("workbench.action.editorLayoutSingle")
+group switch:                 user.vscode("workbench.action.toggleEditorGroupLayout")
+group reset: user.vscode("workbench.action.evenEditorWidths")
+
 shrink x:                   user.vscode("workbench.action.decreaseViewWidth")
 shrink y | grow term | term grow: user.vscode("workbench.action.decreaseViewHeight")
 (grow | expand) x:          user.vscode("workbench.action.increaseViewWidth")
 (grow | expand) y | shrink term | term shrink: user.vscode("workbench.action.increaseViewHeight")
-split flip:                 user.vscode("workbench.action.toggleEditorGroupLayout")
-split clear:                user.vscode("workbench.action.joinTwoGroups")
-split solo:                 user.vscode("workbench.action.editorLayoutSingle")
 maximize | grow$:            user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
@@ -353,42 +323,6 @@ cursor last:                user.vscode("editor.action.addSelectionToPreviousFin
 cursor (breed | all):       user.vscode("editor.action.selectHighlights")
 cursor skip:                user.vscode("editor.action.moveSelectionToNextFindMatch")
 
-# Debug and run
-build program:              user.vscode("workbench.action.tasks.build")
-run program:                user.vscode("workbench.action.debug.run")
-debug start:                user.vscode("workbench.action.debug.start")
-breakpoint:                 user.vscode("editor.debug.action.toggleBreakpoint")
-# continue:                   user.vscode("workbench.action.debug.continue")
-step over:                  user.vscode("workbench.action.debug.stepOver")
-step into:                  user.vscode("workbench.action.debug.stepInto")
-step out:                   user.vscode("workbench.action.debug.stepOut")
-debug restart:              user.vscode("workbench.action.debug.restart")
-debug pause:                user.vscode("workbench.action.debug.pause")
-debug stop:                 user.vscode("workbench.action.debug.stop")
-debug select:               user.vscode("workbench.action.debug.selectandstart")
-debug extension:
-    user.vscode("workbench.action.debug.selectandstart")
-    "run extension"
-    key(enter)
-debug test:
-    user.vscode("workbench.action.debug.selectandstart")
-    "extension tests"
-    key(enter)
-debug subset:
-    user.vscode("workbench.action.debug.selectandstart")
-    "run test subset"
-    key(enter)
-run task compile:
-    user.vscode("workbench.action.tasks.runTask")
-    "compile"
-    sleep(200ms)
-    key(enter)
-run task [<user.text>]:
-    user.vscode("workbench.action.tasks.runTask")
-    "{text or ''}"
-dev tools:                  user.vscode("workbench.action.toggleDevTools")
-select element:             key(ctrl-shift-c)
-
 # Find a symbol
 <user.find> symbol [<user.text>]$:
     user.vscode("workbench.action.showAllSymbols")
@@ -492,7 +426,6 @@ dismiss:
 tab keep:                   user.vscode("workbench.action.keepEditor")
 tab {self.letter} [{self.letter}]:
     user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
-
 tab yep:
     key(tab)
     sleep(50ms)
