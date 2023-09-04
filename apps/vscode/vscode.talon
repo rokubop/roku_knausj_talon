@@ -12,10 +12,13 @@ settings():
     insert_wait = 7
 
 (focus | show) term:        user.vscode("workbench.action.terminal.focus")
-(focus | show) (files | folders): user.vscode_focus_files()
+(focus | show) (files | folders):
+    user.vscode_focus_files()
+    mouse_move(197, 426)
 (focus | show) extensions:  user.vscode("workbench.view.extensions")
 (focus | show) outline:     user.vscode("outline.focus")
 (focus | show) run:         user.vscode("workbench.view.debug")
+show rack:                  user.vscode("workbench.action.toggleAuxiliaryBar")
 focus search:               user.vscode("workbench.action.findInFiles")
 focus exclude:              user.vscode("workbench.action.focusFilesToExclude")
 focus include:              user.vscode("search.action.focusFilesToInclude")
@@ -159,9 +162,11 @@ maximize | grow$:            user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
 # Sidebar
-bar (show | hide | close | open | yes | no):
+bar (show | open | yes):
     user.vscode("workbench.action.toggleSidebarVisibility")
     mouse_move(207, 425)
+bar (hide | close | no):
+    user.vscode("workbench.action.toggleSidebarVisibility")
 bar explore:
     user.vscode("workbench.view.explorer")
     mouse_move(207, 425)
@@ -183,9 +188,11 @@ bar source:
 bar file:
     user.vscode("workbench.files.action.showActiveFileInExplorer")
     mouse_move(207, 425)
-rack (show | hide | close | open | yes | no):
+rack (show | open | yes):
     user.vscode("workbench.action.toggleAuxiliaryBar")
     mouse_move(1752, 245)
+rack (hide | close | no):
+    user.vscode("workbench.action.toggleAuxiliaryBar")
 (top | tabs | tab) (show | hide | yes | no): user.vscode("workbench.action.toggleTabsVisibility")
 (file | files | bar) collapse: user.vscode("workbench.files.action.collapseExplorerFolders")
 ref last:                   user.vscode("references-view.prev")
