@@ -21,6 +21,12 @@ touch | click it | ticket:
 ^trip it:                   user.mouse_click("triple")
 ^alt it:                    user.mouse_click("alt")
 
+^ship right:                user.mouse_click("shift", 1)
+^dub right:                 user.mouse_click("double", 1)
+^troll right:               user.mouse_click("ctrl", 1)
+^trip right:                user.mouse_click("triple", 1)
+^alt right:                 user.mouse_click("alt", 1)
+
 <user.modifiers> touch:
     key("{modifiers}:down")
     mouse_click(0)

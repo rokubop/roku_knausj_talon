@@ -5,7 +5,6 @@ tag(): user.tabs
 tag(): user.find
 tag(): user.emoji
 
-
 <user.teleport> (profile | user):
     user.chrome_mod("shift-m")
     sleep(200ms)
@@ -31,6 +30,10 @@ tab (recent | <user.show_list>) <user.text>$:
     insert("{text}")
 
 tab split:                  user.rango_command_without_target("moveCurrentTabToNewWindow")
+split <user.window_snap_position>:
+    user.rango_command_without_target("moveCurrentTabToNewWindow")
+    sleep(200ms)
+    user.snap_window(window_snap_position)
 
 <user.teleport> dock <user.text>$:
     user.chrome_mod("o")
@@ -66,17 +69,16 @@ break <number>:
     sleep(100ms)
     key(ctrl-b)
 
-
 (light | dark) mode:        key(alt-shift-d)
 (hide | show) rack | rack (hide | show | dog | toggle): key(ctrl-shift-h)
 (hide | show) bar | bar (hide | show | dog | toggle): key(ctrl-shift-y)
 (hide | show) base | base (hide | show | dog | toggle): key(f12)
 
-base next:                 key("ctrl-]")
-base last:                 key("ctrl-[")
-(base | rack) switch:                key("ctrl-shift-d")
+base next:                  key("ctrl-]")
+base last:                  key("ctrl-[")
+(base | rack) switch:       key("ctrl-shift-d")
 
-term (show | hide | dog):                  key(escape)
+term (show | hide | dog):   key(escape)
 term clear:                 key(ctrl-l)
 
 zen mode:                   key(ctrl-shift-y ctrl-shift-h)
