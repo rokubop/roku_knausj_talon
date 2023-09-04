@@ -159,15 +159,33 @@ maximize | grow$:            user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
 # Sidebar
-bar (show | hide | close | open | yes | no): user.vscode("workbench.action.toggleSidebarVisibility")
-bar explore:                user.vscode("workbench.view.explorer")
-bar extensions:             user.vscode("workbench.view.extensions")
-bar outline:                user.vscode("outline.focus")
-bar debug:                  user.vscode("workbench.view.debug")
-bar search:                 user.vscode("workbench.view.search")
-bar source:                 user.vscode("workbench.view.scm")
-bar file:                   user.vscode("workbench.files.action.showActiveFileInExplorer")
-rack (show | hide | close | open | yes | no): user.vscode("workbench.action.toggleAuxiliaryBar")
+bar (show | hide | close | open | yes | no):
+    user.vscode("workbench.action.toggleSidebarVisibility")
+    mouse_move(207, 425)
+bar explore:
+    user.vscode("workbench.view.explorer")
+    mouse_move(207, 425)
+bar extensions:
+    user.vscode("workbench.view.extensions")
+    mouse_move(207, 425)
+bar outline:
+    user.vscode("outline.focus")
+    mouse_move(207, 425)
+bar debug:
+    user.vscode("workbench.view.debug")
+    mouse_move(207, 425)
+bar search:
+    user.vscode("workbench.view.search")
+    mouse_move(207, 425)
+bar source:
+    user.vscode("workbench.view.scm")
+    mouse_move(207, 425)
+bar file:
+    user.vscode("workbench.files.action.showActiveFileInExplorer")
+    mouse_move(207, 425)
+rack (show | hide | close | open | yes | no):
+    user.vscode("workbench.action.toggleAuxiliaryBar")
+    mouse_move(1752, 245)
 (top | tabs | tab) (show | hide | yes | no): user.vscode("workbench.action.toggleTabsVisibility")
 (file | files | bar) collapse: user.vscode("workbench.files.action.collapseExplorerFolders")
 ref last:                   user.vscode("references-view.prev")
@@ -190,8 +208,6 @@ def show:                   user.vscode("editor.action.revealDefinition")
 (term | base | bay) output:       user.vscode("workbench.panel.output.focus")
 (term | base | bay) problems:     user.vscode("workbench.panel.markers.view.focus")
 ((term | base | bay) terminal | focus (term | base)): user.vscode("workbench.action.terminal.focus")
-(term | base) debug:        user.vscode("workbench.debug.action.toggleRepl")
-# (term | base) clear:        user.vscode("workbench.debug.panel.action.clearReplAction")
 term clear:                 key(ctrl-l)
 (<user.teleport> term | term <user.teleport>) <user.text>: "z {text}\n"
 (<user.show_list> term | term <user.show_list>) <user.text>: "z -l {text}\n"
@@ -209,6 +225,7 @@ term grow:                  user.vscode("workbench.action.terminal.resizePaneUp"
 term shrink:                user.vscode("workbench.action.terminal.resizePaneDown")
 term bridge:                user.vscode("workbench.action.terminal.focusNextPane")
 term <number_small>:        user.vscode_terminal(number_small)
+
 katie:                      "cd "
 katie up:                   "cd ..\n"
 katie <user.text>:          "cd {text}\n"
@@ -278,13 +295,6 @@ git merge {user.git_branch}:
     user.vscode("git.merge")
     sleep(50ms)
     "{git_branch}"
-# git checkout {user.git_branch}: user.git_find_branch(git_branch)
-# git checkout [<user.text>]: user.git_find_branch(text or "")
-# git checkout branch [<user.text>]:
-#     user.vscode("git.branch")
-#     sleep(50ms)
-#     text = user.format_text(text or '', "SNAKE_CASE")
-#     "{text}"
 
 git checkout clip:
     "git checkout {clip.text()}\n"
@@ -297,7 +307,6 @@ git commit [<user.text>]:
     sleep(300ms)
     text = user.format_text(text or "", "CAPITALIZE_FIRST_WORD")
     "{text}"
-
 
 # Folding
 fold recursive:             user.vscode("editor.foldRecursively")
@@ -334,12 +343,10 @@ align columns:              user.vscode("rainbow-csv.Align")
 shrink columns:             user.vscode("rainbow-csv.Shrink")
 
 # Misc
-install extension:          user.vscode("workbench.extensions.action.installVSIX")
 window reload:              user.vscode("workbench.action.reloadWindow")
-trim trailing:              user.vscode("editor.action.trimTrailingWhitespace")
-inspect scope:              user.vscode("editor.action.inspectTMScopes")
 disk raw:                   user.save_without_formatting()
 disk files:                 user.vscode("workbench.action.files.saveFiles")
+
 diswap:
     edit.save()
     key(alt:down)
@@ -416,11 +423,6 @@ dismiss:
     user.vscode("notifications.hideToasts")
     user.vscode("workbench.action.terminal.hideSuggestWidget")
     user.vscode("hideSuggestWidget")
-
-# row <user.prose_number>:    mimic("pre row {user.prose_number}")
-# row <user.prose_number> tail:
-#     mimic("pre row {user.prose_number}")
-#     edit.line_end()
 
 # Tabs
 tab keep:                   user.vscode("workbench.action.keepEditor")
