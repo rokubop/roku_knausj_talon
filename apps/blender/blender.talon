@@ -6,6 +6,11 @@ settings():
 
 parrot(tut): mouse_click(1)
 
+please [<user.text>]:
+    key(f3)
+    sleep(50ms)
+    insert(user.text or "")
+
 # camera
 cam set:                    key(ctrl-alt-keypad_0)
 cam dog:                    key(keypad_0)
@@ -30,6 +35,7 @@ show image:                 key(shift-f10)
 
 # operations
 focus:                      key(keypad_decimal)
+isolate:                    key(/)
 add:                        key(shift-a)
 box:                        user.mouse_drag(0)
 pan:
