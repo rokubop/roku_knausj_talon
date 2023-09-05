@@ -19,6 +19,7 @@ cam:                        user.mouse_drag(2)
 orthogonal | orthog:        key(keypad_5)
 
 # views
+show asset:                 key(shift-f1)
 show graph:                 key(shift-f6)
 show three D:               key(shift-f5)
 show (shader | material):   key(shift-f3)

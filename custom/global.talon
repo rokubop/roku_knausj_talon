@@ -51,6 +51,4 @@ desktop (show | revert | hide): key(win-d)
 zoom [in]:                  key(ctrl-plus)
 zoom out:                   key(ctrl-minus)
 
-# key(f21):                   key(enter)
-# key(f22):                   key(space)
-# key(f23):                   key(a)
+open log:                   user.open_powershell_and_tail_log()

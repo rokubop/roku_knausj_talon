@@ -96,10 +96,11 @@
         "sounds": ["nn"],
         "threshold": {
             ">power": 10,
-            ">probability": 0.99
+            ">probability": 0.97
         },
         "throttle": {
-            "nn": 0.2
+            "nn": 0.2,
+            "guh": 0.5
         }
     },
     "oh": {

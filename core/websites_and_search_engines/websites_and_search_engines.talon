@@ -1,4 +1,8 @@
 open {user.website}:        user.open_url(website)
+open clip:                  user.open_url(clip.text())
+open this:
+    text = actions.edit.selected_text()
+    user.open_url(text)
 {user.search_engine} <user.find> <user.text>$:
     user.search_with_search_engine(search_engine, user.text)
 {user.search_engine} [<user.find>] (that | this):
