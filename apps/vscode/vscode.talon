@@ -37,6 +37,7 @@ show settings <user.text>:
     "{text}"
 show [key board] shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
 show [key board] shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
+show (markdown | preview):             user.vscode("markdown.showPreviewToSide")
 
 # Teleport / Scout
 <user.teleport> back:       user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
@@ -122,7 +123,6 @@ jest <user.cursorless_target>:
     code.complete()
 format document:            user.format_document()
 refactor this:              user.vscode("editor.action.refactor")
-open preview:               user.vscode("markdown.showPreviewToSide")
 
 # Problems
 problem next:               user.vscode("editor.action.marker.nextInFiles")

@@ -169,7 +169,7 @@
     "t": {
         "sounds": ["t"],
         "threshold": {
-            ">power": 5,
+            ">power": 20,
             ">probability": 0.97
         },
         "throttle": {
