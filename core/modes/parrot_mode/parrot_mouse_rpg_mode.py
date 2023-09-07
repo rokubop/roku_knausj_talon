@@ -7,12 +7,13 @@ ctx = Context()
 nav_job = None
 direction = None
 
-speeds = {"slow": 1, "default": 7, "fast": 10}
-speed = speeds["default"]
+speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 11}
+speed_default = "medium"
+speed = speed_default
 
 def update_speed(new_speed):
     global speed
-    speed = speeds.get(new_speed, speeds["default"])
+    speed = speeds.get(new_speed, speed_default)
 
 def nav_tick():
     global direction
@@ -51,12 +52,21 @@ class ParrotMouseNavModeActions:
         start_moving(0, -1)
 
     def parrot_mouse_rpg_move_slow():
-        """Move mouse slowly"""
-        update_speed("slow" if speed != speeds["fast"] else "default")
+        """Move mouse slower"""
+        global speed
+        update_speed("slow")
 
     def parrot_mouse_rpg_move_fast():
-        """Move mouse quickly"""
-        update_speed("fast" if speed != speeds["slow"] else "default")
+        """Move mouse faster"""
+        global speed
+        if speed == speeds["slow"]:
+            update_speed("medium")
+        elif speed == speeds["medium"]:
+            update_speed("fast")
+        elif speed == speeds["fast"]:
+            update_speed("fastest")
+        elif speed == speeds["fastest"]:
+            return
 
     def parrot_mouse_rpg_stop():
         """Stop moving mouse"""
@@ -73,7 +83,7 @@ class UserActions:
         print("parrot mouse nav mode enabled")
         actions.user.add_yellow_cursor()
         actions.user.parrot_mouse_rpg_stop()
-        update_speed("default")
+        update_speed(speed_default)
         actions.mode.disable("user.parrot")
         actions.mode.disable("command")
         actions.mode.disable("dictation")
@@ -84,7 +94,7 @@ class UserActions:
         print("parrot mouse nav mode disabled")
         actions.user.parrot_mouse_rpg_stop()
         actions.user.clear_screen_regions()
-        update_speed("default")
+        update_speed(speed_default)
         actions.mode.disable("user.parrot_mouse_rpg")
         actions.mode.enable("command")
         actions.mode.disable("dictation")
