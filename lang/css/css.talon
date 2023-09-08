@@ -34,10 +34,10 @@ variable <user.text>:
     name = user.formatted_text(text, "DASH_SEPARATED")
     insert("var(--{name})")
 
-op var: user.insert_between("var(--", ")")
+<user.operator> var: user.insert_between("var(--", ")")
 
 at {user.css_at_rule}: "@{css_at_rule} "
 unit {user.css_unit}: insert(css_unit)
 
 [value] current color: "currentColor"
-op important: " !important"
+<user.operator> important: " !important"

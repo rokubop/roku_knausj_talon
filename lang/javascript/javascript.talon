@@ -27,7 +27,7 @@ settings():
 
 is strict equal:            " === "
 is strict not equal:        " !== "
-op null else:               " ?? "
+# op null else:               " ?? "
 
 <user.operator> or quest:   " ?? "
 <user.operator> (string | quote) var: user.insert_between("${", "}")

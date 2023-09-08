@@ -22,8 +22,8 @@ is lesser:                  user.code_operator_less_than()
 <user.operator> or:         user.code_operator_or()
 
 # set operators
-(op | is) in:               user.code_operator_in()
-(op | is) not in:           user.code_operator_not_in()
+is in:               user.code_operator_in()
+is not in:           user.code_operator_not_in()
 
 # TODO: This operator should either be abstracted into a function or removed.
 <user.operator> colon:      " : "

@@ -16,16 +16,20 @@ class Actions:
 
     def pedal_center_down():
         """Center pedal"""
+        actions.user.parrot_scroll_down()
         print("default center pedal down")
 
     def pedal_center_up():
         """Center pedal up"""
+        actions.user.parrot_scroll_stop_soft()
         print('default center pedal up')
 
     def pedal_right_down():
         """Right pedal"""
+        actions.user.parrot_scroll_up()
         print("default right pedal down")
 
     def pedal_right_up():
         """Right pedal up"""
+        actions.user.parrot_scroll_stop_soft()
         print('default right pedal up')

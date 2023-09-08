@@ -19,6 +19,10 @@ bookmark tabs:              browser.bookmark_tabs()
 
 bookmark show:              browser.bookmarks()
 bookmark bar [show]:        browser.bookmarks_bar()
+bookmark <user.find> [<user.text>]:
+    browser.bookmarks()
+    sleep(200ms)
+    insert(user.text or "")
 downloads show:             browser.show_downloads()
 extensions show:            browser.show_extensions()
 history show:               browser.show_history()

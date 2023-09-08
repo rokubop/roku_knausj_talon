@@ -204,8 +204,8 @@ class UserActions:
     def code_operator_equal():
         actions.auto_insert(" === ")
 
-    def code_operator_loose_equal():
-        actions.auto_insert(" == ")
+    # def code_operator_loose_equal():
+    #     actions.auto_insert(" == ")
 
     def code_operator_not_equal():
         actions.auto_insert(" !== ")
