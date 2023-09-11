@@ -15,7 +15,8 @@ hold <user.modifiers>:      key("{modifiers}:down")
 hold <user.keys>:           key("{keys}:down")
 release <user.keys>:        key("{keys}:up")
 release <user.modifiers>:   key("{modifiers}:up")
-
+caps lock:                  key(capslock)
+num lock:                   key(numlock)
 # doesn't work
 # key(alt-l): key(right)
 # key(alt-j): key(down)

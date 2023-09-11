@@ -2,19 +2,19 @@ again:                      core.repeat_phrase()
 
 confetti:                   user.vscode('cursorless.toggleDecorations')
 
-mouse (mid | five):         user.mouse_move_center_active_window()
-mouse (bar | leaf):         mouse_move(190, 338)
-mouse ledge:                mouse_move(28, 478)
-mouse ridge:                mouse_move(1911, 487)
-mouse (term | base):        mouse_move(924, 939)
-mouse (left | one):         mouse_move(709, 419)
-mouse (right | two):        mouse_move(1293, 468)
-mouse (rack | reef):        mouse_move(1717, 459)
+^mouse (mid | five):        user.mouse_move_center_active_window()
+^mouse (bar | leaf):        mouse_move(190, 338)
+^mouse ledge:               mouse_move(28, 478)
+^mouse ridge:               mouse_move(1911, 487)
+^mouse (term | base):       mouse_move(924, 939)
+^mouse (left | one):        mouse_move(709, 419)
+^mouse (right | two):       mouse_move(1293, 468)
+^mouse (rack | reef):       mouse_move(1717, 459)
 
 smart paste | show clip:    key(win-v)
 screenshot:                 key(win-shift-s)
 
-fast mode:                  mode.enable("user.fast")
+^fast mode:                 mode.enable("user.fast")
 
 open (in | with) paint:
     user.switcher_launch('C:\\Program Files\\WindowsApps\\Microsoft.Paint_11.2302.19.0_x64__8wekyb3d8bbwe\\PaintApp\\mspaint.exe')
@@ -24,8 +24,8 @@ open (in | with) paint:
 
 then:                       skip()
 
-continue [<number_small>]:  user.start_repeat_repeatedly(number_small or 1)
-stop:                       user.cancel_repeat_repeatedly()
+^continue [<number_small>]: user.start_repeat_repeatedly(number_small or 1)
+^stop:                      user.cancel_repeat_repeatedly()
 
 windows <user.find> [<user.text>]:
     key(win)

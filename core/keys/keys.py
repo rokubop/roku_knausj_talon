@@ -1,4 +1,4 @@
-from talon import Context, Module, actions, app
+from talon import Context, Module, actions, app, ctrl
 
 from ..user_settings import get_list_from_csv
 

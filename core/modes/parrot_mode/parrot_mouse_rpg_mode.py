@@ -8,7 +8,7 @@ nav_job = None
 direction = None
 
 speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 11}
-speed_default = "medium"
+speed_default = "slow"
 speed = speed_default
 
 def update_speed(new_speed):

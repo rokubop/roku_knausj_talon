@@ -86,10 +86,25 @@ class Actions:
         red_cursor = [actions.user.hud_create_screen_region('cursor_example', 'FF0000')]
         actions.user.hud_publish_screen_regions('cursor', red_cursor, 1)
 
+    def add_purple_cursor():
+        """Add a purple icon to the cursor tracker"""
+        purple_cursor = [actions.user.hud_create_screen_region('cursor_example', '800080')]
+        actions.user.hud_publish_screen_regions('cursor', purple_cursor, 1)
+
     def add_blue_cursor():
         """Add a blue icon to the cursor tracker"""
         blue_cursor = [actions.user.hud_create_screen_region('cursor_example', '0490c9')]
         actions.user.hud_publish_screen_regions('cursor', blue_cursor, 1)
+
+    def add_green_cursor():
+        """Add a green icon to the cursor tracker"""
+        green_cursor = [actions.user.hud_create_screen_region('cursor_example', '50C878')]
+        actions.user.hud_publish_screen_regions('cursor', green_cursor, 1)
+
+    def add_color_cursor(color: str):
+        """Add a color icon to the cursor tracker"""
+        color_cursor = [actions.user.hud_create_screen_region('cursor_example', color)]
+        actions.user.hud_publish_screen_regions('cursor', color_cursor, 1)
 
     def add_split_cursor_regions():
         """Shows a red icon when looking at the top of the screen, and a yellow icon otherwise"""

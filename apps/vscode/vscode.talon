@@ -53,10 +53,14 @@ spring forward:             user.vscode("workbench.action.navigateForward")
 
 <user.teleport> dock:       user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
 
-<user.teleport> [<user.text>] [{user.file_extension}]:
+^<user.teleport>:
     user.vscode("workbench.action.quickOpen")
     sleep(100ms)
-    insert(text or "")
+
+^<user.teleport> <user.text> [{user.file_extension}]:
+    user.vscode("workbench.action.quickOpen")
+    sleep(100ms)
+    insert(text)
     insert(file_extension or "")
     sleep(300ms)
 
