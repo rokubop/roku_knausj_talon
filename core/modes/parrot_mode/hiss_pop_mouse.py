@@ -77,8 +77,8 @@ class ParrotHissPopMouseActions:
         print("Parrot hiss pop mouse disabled")
         actions.user.clear_screen_regions()
         actions.user.add_red_cursor()
-        actions.tracking.control_gaze_toggle(True)
-        actions.tracking.control_head_toggle(True)
+        # actions.tracking.control_gaze_toggle(True)
+        # actions.tracking.control_head_toggle(True)
         # actions.tracking.control_toggle(False)
         ctx.tags = []
 
