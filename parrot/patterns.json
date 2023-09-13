@@ -83,8 +83,8 @@
     "hiss": {
         "sounds": ["ss"],
         "threshold": {
-            ">power": 0.5,
-            ">probability": 0.7
+            ">power": 5,
+            ">probability": 0.91
         },
         "graceperiod": 0.1,
         "grace_threshold": {
@@ -145,8 +145,8 @@
     "shush": {
         "sounds": ["sh"],
         "threshold": {
-            ">power": 0.5,
-            ">probability": 0.7
+            ">power": 5,
+            ">probability": 0.91
         },
         "graceperiod": 0.1,
         "grace_threshold": {

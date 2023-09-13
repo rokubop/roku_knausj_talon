@@ -20,6 +20,7 @@ is_eye_tracker_enabled = False
 class ParrotModeActions:
     def parrot_scroll_up_start():
         """Shush start"""
+        actions.user.parrot_freeze_mouse()
         actions.user.mouse_scrolling("up")
 
     def parrot_scroll_up_stop():
@@ -28,6 +29,7 @@ class ParrotModeActions:
 
     def parrot_scroll_down_start():
         """Hiss start"""
+        actions.user.parrot_freeze_mouse()
         actions.user.mouse_scrolling("down")
 
     def parrot_scroll_down_stop():
@@ -58,6 +60,8 @@ class ParrotModeActions:
                 ctrl.mouse_click(button=button, hold=16000)
             for key in modifiers:
                 actions.key(f"{key}:up")
+        actions.user.parrot_freeze_mouse()
+        actions.user.parrot_mode_disable()
 
     def parrot_scroll_down():
         """Scroll the mouse down"""
@@ -89,6 +93,7 @@ class ParrotModeActions:
             ctrl.mouse_click(button=button, up=True)
         for key in modifiers:
             actions.key(f"{key}:up")
+        actions.user.parrot_freeze_mouse()
         actions.user.mouse_scroll_stop()
         shush_debouncer.stop()
         hiss_debouncer.stop()
@@ -146,10 +151,21 @@ class ParrotModeActions:
         else:
             actions.user.parrot_mouse_teleport()
 
+    def parrot_teleport_mouse_soft():
+        """Teleport mouse and enable head tracking until next action"""
+        global is_mouse_moving
+        actions.tracking.control_head_toggle(False)
+        actions.tracking.control_gaze_toggle(True)
+        actions.sleep("50ms")
+        actions.tracking.control_gaze_toggle(False)
+        actions.tracking.control_head_toggle(True)
+        actions.user.add_green_cursor()
+        is_mouse_moving = True
+
     def parrot_mouse_teleport():
         """Teleport mouse"""
-        actions.tracking.control_gaze_toggle(True)
         actions.tracking.control_head_toggle(False)
+        actions.tracking.control_gaze_toggle(True)
         actions.sleep("50ms")
         if is_mouse_moving:
             if current_tracking_mode == 'default':
@@ -175,6 +191,8 @@ class ParrotModeActions:
         global is_mouse_moving
         actions.tracking.control_gaze_toggle(False)
         actions.tracking.control_head_toggle(False)
+        actions.user.clear_screen_regions()
+        actions.user.add_red_cursor()
         is_mouse_moving = False
 
     def parrot_use_head_tracking_only():
