@@ -71,12 +71,10 @@ spring forward:             user.vscode("workbench.action.navigateForward")
     insert(file_extension or "")
     sleep(300ms)
 
-<user.teleport> (sesh | session | workspace) [<user.text>] [halt]:
+<user.teleport> sesh [<user.text>]:
     user.vscode("workbench.action.openRecent")
     sleep(250ms)
     user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
-    key(ctrl-enter)
-    sleep(250ms)
 
 <user.teleport> (win | window) [<user.text>]:
     user.vscode("workbench.action.switchWindow")
@@ -384,7 +382,7 @@ snip last:                  user.vscode("jumpToPrevSnippetPlaceholder")
 #     user.change_language(code_language)
 #     key(enter)
 
-change language [<user.text>]:
+change language [<user.text>]:a
     user.change_language(text or "")
 
 please [<user.text>]$:
