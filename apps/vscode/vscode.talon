@@ -209,7 +209,7 @@ def show:                   user.vscode("editor.action.revealDefinition")
 
 # Terminal
 (folk | show | hide) (term | base | bay): user.vscode("workbench.action.togglePanel")
-(term | base | bay) (show | hide | dog ): user.vscode("workbench.action.togglePanel")
+(term | base | bay) (show | hide | dog | yes | no ): user.vscode("workbench.action.togglePanel")
 (term | base | bay) (max | min | zen | zen mode):
     user.vscode("workbench.action.alignPanelCenter")
     user.vscode("workbench.action.toggleMaximizedPanel")
