@@ -13,7 +13,7 @@ please [<user.text>]:
 
 # camera
 cam set:                    key(ctrl-alt-keypad_0)
-cam:                        key(keypad_0)
+cam [(yes | no | dog)]:     key(keypad_0)
 cam top:                    key(keypad_7)
 cam bottom:                 key(ctrl-keypad_7)
 cam (side | right):         key(keypad_3)

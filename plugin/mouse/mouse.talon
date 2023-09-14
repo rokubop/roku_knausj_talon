@@ -15,31 +15,23 @@ touch | click it | ticket:
     mouse_click(2)
     user.grid_close()
 
-^ship it:                   user.mouse_click("shift")
+^<user.modifiers> it:       user.mouse_click("{modifiers}-left")
+^<user.modifiers> <user.modifiers> it:
+    user.mouse_click("{modifiers_1}-{modifiers_2}-left")
+^<user.modifiers> <user.modifiers> <user.modifiers> it:
+    user.mouse_click("{modifiers_1}-{modifiers_2}-{modifiers_3}-left")
+
 ^dub it:                    user.mouse_click("double")
-^troll it:                  user.mouse_click("ctrl")
 ^trip it:                   user.mouse_click("triple")
-^alt it:                    user.mouse_click("alt")
 
-^ship right:                user.mouse_click("shift", 1)
+^<user.modifiers> right:    user.mouse_click("{modifiers}-right")
+^<user.modifiers> <user.modifiers> right:
+    user.mouse_click("{modifiers_1}-{modifiers_2}-right")
+^<user.modifiers> <user.modifiers> <user.modifiers> right:
+    user.mouse_click("{modifiers_1}-{modifiers_2}-{modifiers_3}-right")
+
 ^dub right:                 user.mouse_click("double", 1)
-^troll right:               user.mouse_click("ctrl", 1)
 ^trip right:                user.mouse_click("triple", 1)
-^alt right:                 user.mouse_click("alt", 1)
-
-<user.modifiers> touch:
-    key("{modifiers}:down")
-    mouse_click(0)
-    key("{modifiers}:}")
-    # close the mouse grid"
-    user.grid_close()
-<user.modifiers> righty:
-    key("{modifiers}:down")
-    mouse_click(1)
-    key("{modifiers}:up")
-    # close the mouse grid
-    user.grid_close()
-    user.grid_close()
 
 <user.modifiers> drag:
     key("{modifiers}:down")

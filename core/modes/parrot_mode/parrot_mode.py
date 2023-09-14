@@ -61,7 +61,7 @@ class ParrotModeActions:
             for key in modifiers:
                 actions.key(f"{key}:up")
         actions.user.parrot_freeze_mouse()
-        actions.user.parrot_mode_disable()
+        # actions.user.parrot_mode_disable()
 
     def parrot_scroll_down():
         """Scroll the mouse down"""

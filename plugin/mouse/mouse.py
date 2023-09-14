@@ -126,12 +126,22 @@ is_dragging = True
 class Actions:
     def mouse_click(action: str, button: int = 0):
         """Click mouse button"""
-        # actions.user.mouse_scroll_stop_for_click()
-        if action == "left":
+        modifiers = action.split("-")
+
+        if "shift" in modifiers:
+            actions.key("shift:down")
+        if "control" in modifiers or "ctrl" in modifiers:
+            actions.key("ctrl:down")
+        if "alt" in modifiers:
+            actions.key("alt:down")
+        if "win" in modifiers:
+            actions.key("win:down")
+
+        if "left" in modifiers:
             actions.mouse_click(0)
-        elif action == "right":
+        elif "right" in modifiers:
             actions.mouse_click(1)
-        elif action == "middle":
+        elif "middle" in modifiers:
             actions.mouse_click(2)
         elif action == "double":
             actions.mouse_click(button)
@@ -140,21 +150,15 @@ class Actions:
             actions.mouse_click(button)
             actions.mouse_click(button)
             actions.mouse_click(button)
-        elif action == "control" or action == "ctrl":
-            actions.key("ctrl:down")
-            actions.mouse_click(button)
-            actions.key("ctrl:up")
-        elif action == "shift":
-            actions.key("shift:down")
-            actions.mouse_click(button)
+
+        if "shift" in modifiers:
             actions.key("shift:up")
-        elif action == "alt":
-            actions.key("alt:down")
-            actions.mouse_click(button)
+        if "control" in modifiers or "ctrl" in modifiers:
+            actions.key("ctrl:up")
+        if "alt" in modifiers:
             actions.key("alt:up")
-        elif action == "center":
-            # actions.user.mouse_center_window()
-            actions.mouse_click(button)
+        if "win" in modifiers:
+            actions.key("win:up")
 
     def mouse_show_cursor():
         """Shows the cursor"""
