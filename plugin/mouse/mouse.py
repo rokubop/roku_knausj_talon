@@ -124,7 +124,7 @@ is_dragging = True
 
 @mod.action_class
 class Actions:
-    def mouse_click(action: str, button: int = 0):
+    def mouse_click(action: str = "left", button: int = 0):
         """Click mouse button"""
         modifiers = action.split("-")
 
