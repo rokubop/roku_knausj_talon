@@ -1,10 +1,19 @@
-from talon import Module, Context, actions, ctrl
+from talon import Module, Context, actions, ctrl, settings
 from ....plugin.debouncer import Debouncer
 
 mod = Module()
 mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling")
 mod.tag("parrot_tracking", desc="Tag for parrot tracking mode")
 mod.tag("parrot_hiss_pop_mouse", desc="Tag for hiss pop mouse")
+
+setting_roku_freeze_on_click = mod.setting(
+    "roku_freeze_on_click", bool, default=True
+)
+
+setting_roku_persist_frozen_mouse_on_exit = mod.setting(
+    "roku_persist_frozen_mouse_on_exit", bool, default=True
+)
+
 ctx = Context()
 
 is_dragging = False
@@ -60,7 +69,10 @@ class ParrotModeActions:
                 ctrl.mouse_click(button=button, hold=16000)
             for key in modifiers:
                 actions.key(f"{key}:up")
-        actions.user.parrot_freeze_mouse()
+
+        if settings.get("user.roku_freeze_on_click"):
+            actions.user.parrot_freeze_mouse()
+        # actions.user.parrot_freeze_mouse()
         # actions.user.parrot_mode_disable()
 
     def parrot_scroll_down():

@@ -1,12 +1,16 @@
 app: bg_3
 -
 parrot(tut): mouse_click(1)
+# parrot(cluck): user.parrot_mode_select('bg_3_follow')
+
+# parrot(cluck): user.parrot_mode_enable()
+fly: user.parrot_mode_bg_fly_toggle()
 
 highlight [yes]: key(alt:down)
 highlight (off | no | stop): key(alt:up)
 
 cam top: key(o)
-(focus | follow) [me] | cam me: key(home)
+(focus | follow) [me] | cam me | home: key(home)
 
 car one: key(f1)
 car two: key(f2)

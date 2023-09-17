@@ -3,6 +3,8 @@ and not mode: sleep
 -
 settings():
     user.scroll_speed_multiplier = 0.6
+    user.roku_freeze_on_click = true
+    user.roku_persist_frozen_mouse_on_exit = true
 
 parrot(cluck): user.parrot_mode_disable()
 parrot(pop): user.parrot_mouse_click(0)
@@ -11,11 +13,12 @@ parrot(ah): user.parrot_mouse_drag(0)
 parrot(oh): user.parrot_mouse_drag(2)
 # parrot(oh): user.parrot_zoom()
 parrot(t):
-    print("t")
+    user.parrot_use_default_tracking()
+    print("t from parrot_mode")
     # user.parrot_set_modifier('ctrl')
 parrot(nn):
-    print("nn")
-    # user.parrot_set_modifier('shift')
+    print("nn from parrot_mode")
+    user.parrot_set_modifier('shift')
 parrot(eh): user.parrot_teleport_mouse_soft()
 # parrot(eh): user.parrot_hiss_pop_mouse_enable()
 # parrot(eh): user.parrot_set_modifier('alt')
