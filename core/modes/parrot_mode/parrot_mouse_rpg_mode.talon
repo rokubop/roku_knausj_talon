@@ -21,7 +21,9 @@ parrot(palate_click): user.parrot_mouse_rpg_repeat_dir_by_increment()
 parrot(tut): user.parrot_mouse_rpg_repeat_reverse_dir_by_increment()
 
 parrot(ee): user.parrot_mouse_rpg_stop()
-parrot(eh): user.parrot_teleport_mouse_soft()
+parrot(eh):
+    user.parrot_mouse_rpg_mode_disable()
+    user.parrot_teleport_mouse_soft()
 parrot(nn): user.parrot_mouse_rpg_move_slow()
 parrot(guh): user.parrot_mouse_rpg_move_fast()
 
