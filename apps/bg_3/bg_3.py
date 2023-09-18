@@ -15,6 +15,8 @@ os: windows
 app: bg_3
 """
 
+is_highlighted = False
+
 @mod.action_class
 class Actions:
     def parrot_mode_bg_fly_enable():
@@ -37,3 +39,13 @@ class Actions:
             actions.user.parrot_mode_bg_fly_disable()
         else:
             actions.user.parrot_mode_bg_fly_enable()
+
+    def bg_toggle_highlight():
+        """Toggle highlight mode"""
+        global is_highlighted
+        if is_highlighted:
+            actions.key("alt:up")
+            is_highlighted = False
+        else:
+            actions.key("alt:down")
+            is_highlighted = True

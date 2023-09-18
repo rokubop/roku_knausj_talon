@@ -11,7 +11,7 @@ parrot(cluck):
     user.parrot_mode_bg_fly_disable()
     user.parrot_use_default_tracking()
     user.parrot_mode_disable()
-parrot(palate):
+parrot(palate_click):
     print("palate")
     user.parrot_mode_bg_fly_disable()
     user.parrot_use_default_tracking()

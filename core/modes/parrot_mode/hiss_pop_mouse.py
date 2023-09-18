@@ -40,8 +40,6 @@ class ParrotHissPopMouseActions:
         global is_gaze_enabled
         print("Hiss pop mouse prepare click")
         # Turn on gaze momentarily to teleport the mouse
-        # actions.tracking.control_gaze_toggle(False)
-        # actions.sleep("50ms")
         actions.tracking.control_head_toggle(False)
         actions.tracking.control_gaze_toggle(True)
         actions.sleep("50ms")
@@ -50,10 +48,6 @@ class ParrotHissPopMouseActions:
         actions.sleep("50ms")
         actions.tracking.control_head_toggle(True)
         is_gaze_enabled = False
-        # actions.sleep("1000ms")
-        # # Turn off gaze and head tracking
-        # actions.tracking.control_gaze_toggle(False)
-        # actions.tracking.control_head_toggle(False)
 
     def parrot_hiss_pop_mouse_halt_no_click_soft():
         """Hiss pop mouse halt no click"""

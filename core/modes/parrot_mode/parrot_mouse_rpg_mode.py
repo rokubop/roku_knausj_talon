@@ -1,8 +1,22 @@
-from talon import Module, Context, actions, ctrl, cron
+from talon import Module, Context, actions, ctrl, cron, settings
 
 mod = Module()
+
 mod.mode("parrot_mouse_rpg", "Parrot Mode for controlling mouse, modifiers, and scrolling")
-ctx = Context()
+
+setting_parrot_rpg_increment_x = mod.setting(
+    "parrot_rpg_increment_x",
+    desc="X increment for parrot mouse rpg mode",
+    type=int,
+    default=26
+)
+
+setting_parrot_rpg_increment_y = mod.setting(
+    "parrot_rpg_increment_y",
+    desc="Y increment for parrot mouse rpg mode",
+    type=int,
+    default=26
+)
 
 nav_job = None
 direction = None
@@ -51,6 +65,28 @@ class ParrotMouseNavModeActions:
         print("Start moving mouse up")
         start_moving(0, -1)
 
+    def parrot_mouse_rpg_repeat_dir_by_increment():
+        """Repeat previous direction by the increment defined by the settings"""
+        x, y = ctrl.mouse_pos()
+        increment_x = setting_parrot_rpg_increment_x.get()
+        increment_y = setting_parrot_rpg_increment_y.get()
+        dx = direction[0] * increment_x
+        dy = direction[1] * increment_y
+
+        if direction:
+            ctrl.mouse_move(x + dx, y + dy)
+
+    def parrot_mouse_rpg_repeat_reverse_dir_by_increment():
+        """Repeat previous direction by the increment defined by the settings"""
+        x, y = ctrl.mouse_pos()
+        increment_x = setting_parrot_rpg_increment_x.get()
+        increment_y = setting_parrot_rpg_increment_y.get()
+        dx = direction[0] * increment_x * -1
+        dy = direction[1] * increment_y * -1
+
+        if direction:
+            ctrl.mouse_move(x + dx, y + dy)
+
     def parrot_mouse_rpg_move_slow():
         """Move mouse slower"""
         global speed
@@ -74,10 +110,7 @@ class ParrotMouseNavModeActions:
         global nav_job, direction
         if nav_job:
             cron.cancel(nav_job)
-        direction = None
 
-@mod.action_class
-class UserActions:
     def parrot_mouse_rpg_mode_enable():
         """Enable parrot mouse nav mode"""
         print("parrot mouse nav mode enabled")

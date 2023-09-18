@@ -2,11 +2,13 @@ app: bg_3
 mode: user.parrot
 and not mode: sleep
 -
-parrot(pop):                user.parrot_hiss_pop_mouse_click()
+parrot(pop):
+    user.parrot_hiss_pop_mouse_click()
 parrot(hiss):               user.parrot_hiss_pop_mouse_and_scroll_start()
 parrot(hiss:stop):          user.parrot_hiss_pop_mouse_and_scroll_stop_soft()
 parrot(shush):              user.parrot_hiss_pop_mouse_set_default_tracking()
-parrot(tut):                key(escape)
+parrot(tut):
+    key(escape)
 parrot(cluck):
     user.release_dir_keys_all()
     user.parrot_mode_disable()
@@ -17,6 +19,6 @@ parrot(ee):
     user.release_dir_keys_all()
     user.parrot_hiss_pop_mouse_stop_if_preferred()
 
-parrot(eh):                 skip()
-parrot(t):                  skip()
+parrot(eh):                 user.bg_toggle_highlight()
+parrot(t):                  mouse_click(1)
 parrot(guh):                skip()

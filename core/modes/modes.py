@@ -33,6 +33,14 @@ class Actions:
         global hard_sleep
         hard_sleep = False
 
+    def toggle_hard_sleep():
+        """Toggles hard sleep mode."""
+        global hard_sleep
+        hard_sleep = not hard_sleep
+
+    def is_hard_sleep():
+        """Returns true if hard sleep mode is active."""
+        return hard_sleep
 
     def talon_mode():
         """For windows and Mac with Dragon, enables Talon commands and Dragon's command mode."""

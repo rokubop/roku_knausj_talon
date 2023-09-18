@@ -1,9 +1,11 @@
 app: bg_3
 -
-parrot(tut): mouse_click(1)
-# parrot(cluck): user.parrot_mode_select('bg_3_follow')
+settings():
+    user.parrot_rpg_increment_x = 43
+    user.parrot_rpg_increment_y = 43
 
-# parrot(cluck): user.parrot_mode_enable()
+# parrot(tut): mouse_click(1)
+
 fly: user.parrot_mode_bg_fly_toggle()
 
 highlight [yes]: key(alt:down)
@@ -16,6 +18,8 @@ car one: key(f1)
 car two: key(f2)
 car three: key(f3)
 car four: key(f4)
+car next: key("]")
+car last: key("[")
 
 disk | quick save: key(f5)
 quick load: key(f8)
