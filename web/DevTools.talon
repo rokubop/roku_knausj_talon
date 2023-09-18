@@ -5,7 +5,7 @@ mode: command
 <user.teleport> [<user.text>]:
     key("ctrl-p")
     sleep(400ms)
-    "{text}"
+    user.insert_formatted(text, "NO_SPACES")
     sleep(100ms)
 
 (step | next): key(f10)
