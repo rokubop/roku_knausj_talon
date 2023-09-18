@@ -133,6 +133,7 @@ modifier_keys = {
 modifier_keys.update({
     "king": "ctrl",
     "troll": "ctrl",
+    "king": "ctrl",
     "ship": "shift"
 })
 

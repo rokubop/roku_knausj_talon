@@ -41,6 +41,7 @@ ctx.lists["user.prose_snippets"] = {
     "space": " ",
     "void": " ",
     "yep": "\n",
+    "dash": "-",
     "double": "\"",
     "brick": "`",
     "slash": "/",
