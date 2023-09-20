@@ -56,3 +56,8 @@ zoom out:                   $key(ctrl-minus)
 open log:                   user.open_powershell_and_tail_log()
 
 tracker:              user.parrot_use_default_tracking()
+
+reader (yes | no):
+    key(capslock:down)
+    key(s)
+    key(capslock:up)

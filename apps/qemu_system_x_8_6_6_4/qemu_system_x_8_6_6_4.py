@@ -13,18 +13,18 @@ app: qemu_system_x_8_6_6_4
 class Actions:
     def android_scroll_down():
         """scroll down"""
-        actions.mouse_drag(0);
+        actions.mouse_drag(0)
         x, y = ctrl.mouse_pos()
         ctrl.mouse_move(x, y - 600)
         actions.sleep("100ms")
-        actions.mouse_release(0);
+        actions.mouse_release(0)
         ctrl.mouse_move(x, y)
 
     def android_scroll_up():
         """scroll up"""
-        actions.mouse_drag(0);
+        actions.mouse_drag(0)
         x, y = ctrl.mouse_pos()
         ctrl.mouse_move(x, y + 600)
         actions.sleep("100ms")
-        actions.mouse_release(0);
+        actions.mouse_release(0)
         ctrl.mouse_move(x, y)
