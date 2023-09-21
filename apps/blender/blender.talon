@@ -60,3 +60,7 @@ zen mode:                   key(ctrl-space)
     key(shift-a)
     key(s)
     insert(user.text)
+
+pivot [point]: key(.)
+orient | orientation: key(,)
+preview: user.mouse_click("ctrl-shift-left")

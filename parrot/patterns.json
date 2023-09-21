@@ -134,7 +134,7 @@
     "pop": {
         "sounds": ["pop"],
         "threshold": {
-            ">power": 10,
+            ">power": 7,
             ">probability": 0.99
         },
         "throttle": {
