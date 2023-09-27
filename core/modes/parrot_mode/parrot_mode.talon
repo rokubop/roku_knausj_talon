@@ -19,7 +19,9 @@ parrot(t):
 parrot(nn):
     print("nn from parrot_mode")
     user.parrot_set_modifier('shift')
-parrot(eh): user.parrot_teleport_mouse_soft()
+parrot(eh):
+    print("eh from parrot_mode")
+    user.parrot_teleport_mouse_soft()
 # parrot(eh): user.parrot_hiss_pop_mouse_enable()
 # parrot(eh): user.parrot_set_modifier('alt')
 parrot(ee): user.parrot_mouse_and_scroll_stop()

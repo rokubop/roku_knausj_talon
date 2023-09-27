@@ -3,6 +3,7 @@ from datetime import datetime
 import time
 
 mod = Module()
+mod.tag("fl_studio_pan_mode", desc="Tag for fl studio pan mode")
 mod.list("fl_instrument", desc="Instruments")
 mod.list("fl_plugin", desc="Plugins")
 mod.list("fl_slot_y_position", desc="Slot position")
@@ -226,18 +227,63 @@ class Actions:
       """Stretch toggle"""
       actions.key("shift-m")
 
+    def fl_studio_pan_mode_disable():
+      """Disable fl studio pan mode"""
+      print("disable")
+      ctx.tags = []
+
+    def fl_studio_pan_mode_enable():
+      """Enable fl studio pan mode"""
+      print("enablean")
+      ctx.tags = ["user.fl_studio_pan_mode"]
+
 global noise
 
 @ctx.action_class("user")
 class UserActions:
-  def on_cluck():
-    """Do cluck"""
-    global noise
-    noise = "cluck"
-    print("on_cluck from fl")
-    # actions.user.hud_activate_virtual_key()
-    actions.user.on_pop()
-    actions.user.on_pop()
+  def virtual_region_one():
+    """Virtual region one"""
+    actions.user.fl_view_window_next()
+
+  def virtual_region_two():
+    """Virtual region two"""
+    actions.user.fl_toggle_keys()
+
+  def virtual_region_three():
+    """Virtual region three"""
+    actions.user.fl_view_window_last()
+
+  def virtual_region_four():
+    """Virtual region four"""
+    actions.user.fl_toggle_bar()
+
+  def virtual_region_five():
+    """Virtual region five"""
+    actions.user.fl_view_playlist()
+
+  def virtual_region_six():
+    """Virtual region six"""
+    actions.user.fl_toggle_stretch()
+
+  def virtual_region_seven():
+    """Virtual region seven"""
+    actions.user.fl_view_channel()
+
+  def virtual_region_eight():
+    """Virtual region eight"""
+    actions.user.fl_view_mixer()
+
+  def virtual_region_nine():
+    """Virtual region nine"""
+    actions.user.fl_view_piano_roll()
+  # def on_cluck():
+  #   """Do cluck"""
+  #   global noise
+  #   noise = "cluck"
+  #   print("on_cluck from fl")
+  #   # actions.user.hud_activate_virtual_key()
+  #   actions.user.on_pop()
+  #   actions.user.on_pop()
 
   # def on_tut():
   #   """Do on_tut"""
@@ -246,10 +292,10 @@ class UserActions:
   #   print("on_tut")
   #   # actions.key("escape")
 
-  def on_palate():
-    """Do on_palate"""
-    actions.mouse_click(1)
-    # actions.key("escape")
+  # def on_palate():
+  #   """Do on_palate"""
+  #   actions.mouse_click(1)
+  #   # actions.key("escape")
 
   # def on_eh():
   #   """Do on_eh"""
@@ -360,42 +406,6 @@ class UserActions:
   #   for modifier in modifiers:
   #     actions.key(f"{modifier}:up")
   #   modifiers.clear()
-
-  def virtual_region_one():
-    """Virtual region one"""
-    actions.user.fl_view_window_next()
-
-  def virtual_region_two():
-    """Virtual region two"""
-    actions.user.fl_toggle_keys()
-
-  def virtual_region_three():
-    """Virtual region three"""
-    actions.user.fl_view_window_last()
-
-  def virtual_region_four():
-    """Virtual region four"""
-    actions.user.fl_toggle_bar()
-
-  def virtual_region_five():
-    """Virtual region five"""
-    actions.user.fl_view_playlist()
-
-  def virtual_region_six():
-    """Virtual region six"""
-    actions.user.fl_toggle_stretch()
-
-  def virtual_region_seven():
-    """Virtual region seven"""
-    actions.user.fl_view_channel()
-
-  def virtual_region_eight():
-    """Virtual region eight"""
-    actions.user.fl_view_mixer()
-
-  def virtual_region_nine():
-    """Virtual region nine"""
-    actions.user.fl_view_piano_roll()
 
 # def register_regions():
 #     keys = [

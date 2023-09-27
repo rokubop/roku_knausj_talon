@@ -67,8 +67,7 @@ class ParrotModeActions:
                 actions.key(f"{key}:down")
             for i in range(times):
                 ctrl.mouse_click(button=button, hold=16000)
-            for key in modifiers:
-                actions.key(f"{key}:up")
+            actions.user.parrot_cancel_modifiers()
 
         if settings.get("user.roku_freeze_on_click"):
             actions.user.parrot_freeze_mouse()
@@ -103,24 +102,26 @@ class ParrotModeActions:
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
             ctrl.mouse_click(button=button, up=True)
-        for key in modifiers:
-            actions.key(f"{key}:up")
+        actions.user.parrot_cancel_modifiers()
         actions.user.parrot_freeze_mouse()
         actions.user.mouse_scroll_stop()
         shush_debouncer.stop()
         hiss_debouncer.stop()
-        modifiers.clear()
 
     def parrot_set_modifier(key: str):
         """Set the modifier"""
         if not is_dragging and key not in modifiers:
             print("prepare modifier " + key)
+            if key == 'shift':
+                print("shift")
+                actions.user.hud_add_ability('modifiers', image='shift_down', enabled=True, colour='FFFFFF',  activated=True)
             modifiers.append(key)
 
     def parrot_cancel_modifiers():
         """Cancel modifiers"""
         for key in modifiers:
             actions.key(f"{key}:up")
+        actions.user.hud_add_ability('modifiers', image='shift_down', enabled=False, colour='FFFFFF',  activated=False)
         modifiers.clear()
 
     def parrot_cursor_stay_toggle():

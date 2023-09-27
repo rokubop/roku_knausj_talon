@@ -23,7 +23,7 @@ direction = None
 
 speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 11}
 speed_default = "slow"
-speed = speed_default
+speed = speeds[speed_default]
 
 def update_speed(new_speed):
     global speed

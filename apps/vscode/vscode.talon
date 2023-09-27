@@ -382,7 +382,7 @@ snip last:                  user.vscode("jumpToPrevSnippetPlaceholder")
 #     user.change_language(code_language)
 #     key(enter)
 
-change language [<user.text>]:a
+change language [<user.text>]:
     user.change_language(text or "")
 
 please [<user.text>]$:

@@ -84,7 +84,7 @@ track clone:
 track delete:
     mouse_click(1)
     key(e enter enter)
-track (make | new | insert):
+track (add | make | new | insert):
     mouse_click(1)
     key(i)
 group above:
@@ -99,6 +99,8 @@ track color:
     key(down down enter)
 
 # playlist/timeline actions
+pan:                        user.fl_studio_pan_mode_enable()
+time (add | insert):        key(ctrl-insert)
 slice:
     key(alt-shift:down)
     mouse_click()

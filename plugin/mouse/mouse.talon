@@ -83,12 +83,12 @@ wheel upper | upper start:  user.mouse_scroll_up_continuous()
 wheel upper here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up_continuous()
-mouse gaze:                 user.mouse_gaze_scroll()
-mouse gaze here:
+^mouse gaze:                user.mouse_gaze_scroll()
+^mouse gaze here:
     user.mouse_move_center_active_window()
     user.mouse_gaze_scroll()
-mouse stop:                 user.mouse_scroll_stop()
-mouse stop here:
+^mouse stop:                user.mouse_scroll_stop()
+^mouse stop here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_stop()
 wheel left:                 user.mouse_scroll_left()

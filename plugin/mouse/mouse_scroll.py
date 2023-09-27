@@ -1,4 +1,4 @@
-from talon import Module, actions, app, ui, cron
+from talon import Module, actions, app, ui, cron, ctrl
 import time
 
 mod = Module()
@@ -98,7 +98,7 @@ class Actions:
         """Starts gaze scroll"""
         global gaze_job, gaze_origin_y
         actions.user.mouse_scroll_stop()
-        _, gaze_origin_y = actions.user.mouse_pos()
+        _, gaze_origin_y = ctrl.mouse_pos()
         gaze_job = cron.interval("16ms", scroll_gaze_helper)
 
 
@@ -115,7 +115,7 @@ def scroll_continuous_helper():
 
 
 def scroll_gaze_helper():
-    x, y = actions.user.mouse_pos()
+    x, y = ctrl.mouse_pos()
     window = get_window_for_cursor(x, y)
     if window is None:
         return
