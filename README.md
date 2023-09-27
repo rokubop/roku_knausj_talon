@@ -23,10 +23,7 @@ Fork of [talonhub/community](https://github.com/talonhub/community).
 - [Inserting mock data into fields](plugin/mock_data/mock_data.talon)
 
 ## Custom Games
-- [automatic game mode switch](games/automatic_game_mod.py)
-- [Card Survival Tropical Island](games/card_survival_tropical_island.talon)
-- [Planet of Lana](games/planet_of_lana.talon)
-- [The Forgotten City](games/planet_of_lana.talon)
+- WIP
 
 ## Borrowed Features
 - pokey_talon style centralized [terms for select/teleport/delete/find/list](core/terms_roku.py)
