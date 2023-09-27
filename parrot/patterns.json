@@ -61,8 +61,8 @@
             ">probability": 0.9
         },
         "throttle": {
-            "er": 0.1,
-            "eh": 0.1
+            "er": 0.3,
+            "eh": 0.3
         }
     },
     "guh": {

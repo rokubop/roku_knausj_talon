@@ -6,7 +6,7 @@ settings():
     user.parrot_rpg_increment_x = 26
     user.parrot_rpg_increment_y = 26
 
-parrot(cluck): user.parrot_mouse_rpg_mode_disable()
+parrot(cluck): user.parrot_mouse_rpg_mode_disable_full()
 
 parrot(pop):
     user.parrot_mouse_rpg_stop()
@@ -28,4 +28,4 @@ parrot(eh):
 parrot(nn): user.parrot_mouse_rpg_move_slow()
 parrot(guh): user.parrot_mouse_rpg_move_fast()
 
-parrot(er):print("er")
+parrot(er): user.parrot_mouse_rpg_mode_disable()

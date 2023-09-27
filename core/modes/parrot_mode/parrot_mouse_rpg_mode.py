@@ -122,8 +122,8 @@ class ParrotMouseNavModeActions:
         actions.mode.disable("dictation")
         actions.mode.enable("user.parrot_mouse_rpg")
 
-    def parrot_mouse_rpg_mode_disable():
-        """Disable parrot mouse nav mode"""
+    def parrot_mouse_rpg_mode_disable_full():
+        """Disable parrot mouse nav mode and exit parrot mode"""
         print("parrot mouse nav mode disabled")
         actions.user.parrot_mouse_rpg_stop()
         actions.user.clear_screen_regions()
@@ -131,3 +131,12 @@ class ParrotMouseNavModeActions:
         actions.mode.disable("user.parrot_mouse_rpg")
         actions.mode.enable("command")
         actions.mode.disable("dictation")
+
+    def parrot_mouse_rpg_mode_disable():
+        """Disable parrot mouse nav mode"""
+        print("parrot mouse nav mode disabled")
+        actions.user.parrot_mouse_rpg_stop()
+        actions.user.clear_screen_regions()
+        update_speed(speed_default)
+        actions.mode.disable("user.parrot_mouse_rpg")
+        actions.user.parrot_mode_enable()
