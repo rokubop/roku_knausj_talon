@@ -15,31 +15,20 @@ parrot(oh): user.parrot_mouse_drag(2)
 parrot(t):
     user.parrot_use_default_tracking()
     print("t from parrot_mode")
-    # user.parrot_set_modifier('ctrl')
 parrot(nn):
     print("nn from parrot_mode")
-    user.parrot_set_modifier('shift')
+    user.kingfisher_parrot_trigger_virtual_key()
 parrot(eh):
     print("eh from parrot_mode")
     user.parrot_teleport_mouse_soft()
-# parrot(eh): user.parrot_hiss_pop_mouse_enable()
-# parrot(eh): user.parrot_set_modifier('alt')
 parrot(ee): user.parrot_mouse_and_scroll_stop()
 parrot(guh):
     user.parrot_track_toggle()
     user.parrot_use_default_tracking()
-# parrot(guh): user.parrot_mouse_move_toggle()
-# parrot(guh): user.parrot_tracking_mode_enable()
 parrot(tut): user.parrot_mouse_click(1)
 parrot(er):
     user.parrot_freeze_mouse()
     user.parrot_mouse_rpg_mode_enable()
-# user.parrot_trigger_virtual_key()
-# change into browsing mode with mouse position snapping
-# ah for left position
-# oh for right position
-# eh for middle position
-# back button
 parrot(hiss): user.parrot_scroll_down()
 parrot(hiss:stop): user.parrot_scroll_stop_soft()
 parrot(shush): user.parrot_scroll_up()

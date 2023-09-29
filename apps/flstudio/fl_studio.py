@@ -125,6 +125,12 @@ class Actions:
       actions.user.fl_set_resample_mode()
       ctrl.mouse_move(x, y)
 
+    def fl_mouse_move_time():
+      """move cursor to the time y"""
+      x, y = ctrl.mouse_pos()
+      ctrl.mouse_move(x , 139)
+      actions.mouse_click(0)
+
     def fl_set_normalized_layout():
       """ """
       ctrl.mouse_move(156, 19)
@@ -239,43 +245,43 @@ class Actions:
 
 global noise
 
-@ctx.action_class("user")
-class UserActions:
-  def virtual_region_one():
-    """Virtual region one"""
-    actions.user.fl_view_window_next()
+# @ctx.action_class("user")
+# class UserActions:
+  # def virtual_region_one():
+  #   """Virtual region one"""
+  #   actions.user.fl_view_window_next()
 
-  def virtual_region_two():
-    """Virtual region two"""
-    actions.user.fl_toggle_keys()
+  # def virtual_region_two():
+  #   """Virtual region two"""
+  #   actions.user.fl_toggle_keys()
 
-  def virtual_region_three():
-    """Virtual region three"""
-    actions.user.fl_view_window_last()
+  # def virtual_region_three():
+  #   """Virtual region three"""
+  #   actions.user.fl_view_window_last()
 
-  def virtual_region_four():
-    """Virtual region four"""
-    actions.user.fl_toggle_bar()
+  # def virtual_region_four():
+  #   """Virtual region four"""
+  #   actions.user.fl_toggle_bar()
 
-  def virtual_region_five():
-    """Virtual region five"""
-    actions.user.fl_view_playlist()
+  # def virtual_region_five():
+  #   """Virtual region five"""
+  #   actions.user.fl_view_playlist()
 
-  def virtual_region_six():
-    """Virtual region six"""
-    actions.user.fl_toggle_stretch()
+  # def virtual_region_six():
+  #   """Virtual region six"""
+  #   actions.user.fl_toggle_stretch()
 
-  def virtual_region_seven():
-    """Virtual region seven"""
-    actions.user.fl_view_channel()
+  # def virtual_region_seven():
+  #   """Virtual region seven"""
+  #   actions.user.fl_view_channel()
 
-  def virtual_region_eight():
-    """Virtual region eight"""
-    actions.user.fl_view_mixer()
+  # def virtual_region_eight():
+  #   """Virtual region eight"""
+  #   actions.user.fl_view_mixer()
 
-  def virtual_region_nine():
-    """Virtual region nine"""
-    actions.user.fl_view_piano_roll()
+  # def virtual_region_nine():
+  #   """Virtual region nine"""
+  #   actions.user.fl_view_piano_roll()
   # def on_cluck():
   #   """Do cluck"""
   #   global noise

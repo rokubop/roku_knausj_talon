@@ -40,7 +40,10 @@ take box | box:
     key("ctrl:down")
     mouse_drag()
     key("ctrl:up")
-take (nothing | none):      key(ctrl-d)
+
+pre time | time it:         user.fl_mouse_move_time()
+
+time clear | take (nothing | none): key(ctrl-d)
 take time:                  key(ctrl-enter)
 take this:
     key("ctrl:down")
@@ -65,7 +68,7 @@ bar collapse:               key(ctrl-up)
 # windows
 mix:                        key(f9)
 midi:                       key(f7)
-playlist | time:            key(f5)
+range | playlist | time:    key(f5)
 channels | inst:            key(f6)
 cleanup | hide all | close all | high doll: key(f12 f5 f9)
 layout (one | set | default | reset): user.fl_set_normalized_layout()
@@ -168,9 +171,9 @@ zoom out:
     key("ctrl:up")
 shrink:
     key("alt:down")
-    mouse_scroll(1000)
+    mouse_scroll(500)
     key("alt:up")
 grow:
     key("alt:down")
-    mouse_scroll(-1000)
+    mouse_scroll(-500)
     key("alt:up")

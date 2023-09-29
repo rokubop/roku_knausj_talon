@@ -1,4 +1,4 @@
-from talon import Module, Context, actions, ctrl, settings
+from talon import Module, Context, actions, ctrl, settings, app
 from ....plugin.debouncer import Debouncer
 
 mod = Module()
@@ -24,6 +24,7 @@ hiss_debouncer = Debouncer(150, actions.user.parrot_scroll_down_start, actions.u
 is_mouse_moving = False
 current_tracking_mode = 'default'
 is_eye_tracker_enabled = False
+use_active_mouse = False
 
 @mod.action_class
 class ParrotModeActions:
@@ -45,6 +46,12 @@ class ParrotModeActions:
         """Hiss stop"""
         actions.user.mouse_scroll_stop()
 
+    def parrot_toggle_active_mouse():
+        """Toggle active mouse"""
+        global use_active_mouse
+        use_active_mouse = not use_active_mouse
+        print(f"use active mouse: {use_active_mouse}")
+
     def parrot_mouse_drag(button: int):
         """Drag the mouse in a direction"""
         global is_dragging
@@ -58,35 +65,35 @@ class ParrotModeActions:
 
     def parrot_mouse_click(button: int, times: int = 1):
         """Click the mouse"""
-        global is_dragging
+        global is_dragging, use_active_mouse
 
         if is_dragging:
-            actions.user.parrot_mouse_and_scroll_stop()
+            if use_active_mouse:
+                actions.user.parrot_mouse_and_scroll_stop_keep_modifiers()
+            else:
+                actions.user.parrot_mouse_and_scroll_stop()
         else:
             for key in modifiers:
                 actions.key(f"{key}:down")
             for i in range(times):
                 ctrl.mouse_click(button=button, hold=16000)
-            actions.user.parrot_cancel_modifiers()
+            if not use_active_mouse:
+                actions.user.parrot_cancel_modifiers()
 
-        if settings.get("user.roku_freeze_on_click"):
+        if not use_active_mouse:
             actions.user.parrot_freeze_mouse()
-        # actions.user.parrot_freeze_mouse()
-        # actions.user.parrot_mode_disable()
 
     def parrot_scroll_down():
         """Scroll the mouse down"""
         for key in modifiers:
             actions.key(f"{key}:down")
         hiss_debouncer.start()
-        # actions.user.mouse_scroll_down();
 
     def parrot_scroll_up():
         """Scroll the mouse up"""
         for key in modifiers:
             actions.key(f"{key}:down")
         shush_debouncer.start()
-        # actions.user.mouse_scroll_up();
 
     def parrot_scroll_stop_soft():
         """Stop scrolling the mouse"""
@@ -108,13 +115,46 @@ class ParrotModeActions:
         shush_debouncer.stop()
         hiss_debouncer.stop()
 
+    def parrot_mouse_and_scroll_stop_keep_modifiers():
+        """Stop mouse and scroll but keep modifiers"""
+        global is_dragging
+        if is_dragging:
+            actions.user.add_red_cursor()
+        is_dragging = False
+        buttons_held_down = list(ctrl.mouse_buttons_down())
+        for button in buttons_held_down:
+            ctrl.mouse_click(button=button, up=True)
+        actions.user.parrot_freeze_mouse()
+        actions.user.mouse_scroll_stop()
+        shush_debouncer.stop()
+        hiss_debouncer.stop()
+
     def parrot_set_modifier(key: str):
         """Set the modifier"""
         if not is_dragging and key not in modifiers:
             print("prepare modifier " + key)
             if key == 'shift':
                 print("shift")
-                actions.user.hud_add_ability('modifiers', image='shift_down', enabled=True, colour='FFFFFF',  activated=True)
+                actions.user.hud_add_ability('modifiers',
+                    image='shift_down',
+                    enabled=True,
+                    colour='FFFFFF',
+                    activated=True)
+            elif key == 'ctrl':
+                print("ctrl")
+                actions.user.hud_add_ability('modifiers',
+                    image='ctrl',
+                    enabled=True,
+                    colour='FFFFFF',
+                    activated=True)
+            elif key == 'alt':
+                print("alt")
+                actions.user.hud_add_ability('modifiers',
+                    image='alt',
+                    enabled=True,
+                    colour='FFFFFF',
+                    activated=True)
+
             modifiers.append(key)
 
     def parrot_cancel_modifiers():
@@ -130,8 +170,23 @@ class ParrotModeActions:
 
     def parrot_trigger_virtual_key():
         """Trigger virtual key"""
-        print("eh from parrot mode")
         actions.user.hud_activate_virtual_key()
+
+    def kingfisher_parrot_trigger_virtual_key():
+        """Temporarily teleport mouse and trigger virtual key"""
+        pos = ctrl.mouse_pos()
+        actions.tracking.control_head_toggle(False)
+        actions.tracking.control_gaze_toggle(True)
+        actions.sleep("50ms")
+        actions.user.hud_activate_virtual_key()
+        ctrl.mouse_move(*pos)
+        if is_mouse_moving:
+            if current_tracking_mode == 'default':
+                actions.user.parrot_use_default_tracking()
+            else:
+                actions.user.parrot_use_head_tracking_only()
+        else:
+            actions.user.parrot_freeze_mouse()
 
     def parrot_zoom():
         """Zoom"""
@@ -283,10 +338,70 @@ class UserActions:
         # actions.user.parrot_use_default_tracking()
         ctx.tags = []
 
-
-
-
-@ctx.action_class("user")
-class UserActions:
     def virtual_region_one():
-        print('got it')
+        """Virtual region one"""
+        print('region one')
+
+    def virtual_region_two():
+        """Virtual region two"""
+        print('region two')
+
+    def virtual_region_three():
+        """Virtual region three"""
+        print('region three')
+
+    def virtual_region_four():
+        """Virtual region four"""
+        actions.user.parrot_toggle_active_mouse()
+        print('region four')
+
+    def virtual_region_five():
+        """Virtual region five"""
+        print('region five')
+
+    def virtual_region_six():
+        """Virtual region six"""
+        print('region six')
+
+    def virtual_region_seven():
+        """Virtual region seven"""
+        actions.user.parrot_set_modifier('ctrl')
+        print('region seven')
+        print('holding ctrl')
+
+    def virtual_region_eight():
+        """Virtual region eight"""
+        actions.user.parrot_set_modifier('shift')
+        print('region eight')
+        print('holding shift')
+
+    def virtual_region_nine():
+        """Virtual region nine"""
+        actions.user.parrot_set_modifier('alt')
+        print('region nine')
+        print('holding alt')
+
+
+def register_regions():
+    keys = [
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_one, 'One'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_two, 'Two'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_three, 'Three'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_four, 'Four'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_five, 'Five'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_six, 'Six'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_seven, 'Seven'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_eight, 'Eight'),
+	    actions.user.hud_create_virtual_key(actions.user.virtual_region_nine, 'Nine'),
+	  ]
+    actions.user.hud_register_virtual_keyboard('virtual_keyboard', keys)
+    actions.user.hud_set_virtual_keyboard('virtual_keyboard')
+    actions.user.hud_set_virtual_keyboard_visibility(0)
+
+app.register('ready', register_regions)
+
+
+# @ctx.action_class("user")
+# class UserActions:
+#     def virtual_region_one():
+#         print('got it')
