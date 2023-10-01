@@ -1,17 +1,16 @@
-from talon import Module, Context, actions, ctrl, settings, app
+import time
+from talon import Module, Context, actions, ctrl, settings, app, speech_system
 from ....plugin.debouncer import Debouncer
 
 mod = Module()
 mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling")
 mod.tag("parrot_tracking", desc="Tag for parrot tracking mode")
-mod.tag("parrot_hiss_pop_mouse", desc="Tag for hiss pop mouse")
-
-setting_roku_freeze_on_click = mod.setting(
-    "roku_freeze_on_click", bool, default=True
-)
 
 setting_roku_persist_frozen_mouse_on_exit = mod.setting(
     "roku_persist_frozen_mouse_on_exit", bool, default=True
+)
+setting_parrot_mode_mouse_freeze_on_click = mod.setting(
+    "parrot_mode_mouse_freeze_on_click", bool, default=True
 )
 
 ctx = Context()
@@ -25,6 +24,7 @@ is_mouse_moving = False
 current_tracking_mode = 'default'
 is_eye_tracker_enabled = False
 use_active_mouse = False
+flex_macro = None
 
 @mod.action_class
 class ParrotModeActions:
@@ -63,7 +63,7 @@ class ParrotModeActions:
                 actions.key(f"{key}:down")
             ctrl.mouse_click(button=button, down=True)
 
-    def parrot_mouse_click(button: int, times: int = 1):
+    def parrot_mouse_click(button: int = 0, times: int = 1, track: str = "freeze"):
         """Click the mouse"""
         global is_dragging, use_active_mouse
 
@@ -80,8 +80,13 @@ class ParrotModeActions:
             if not use_active_mouse:
                 actions.user.parrot_cancel_modifiers()
 
-        if not use_active_mouse:
-            actions.user.parrot_freeze_mouse()
+        if track == "freeze" or setting_parrot_mode_mouse_freeze_on_click.get():
+            if not use_active_mouse:
+                actions.user.parrot_freeze_mouse()
+        elif track == "gaze":
+            actions.user.parrot_use_default_tracking()
+        elif track == "head":
+            actions.user.parrot_use_head_tracking_only()
 
     def parrot_scroll_down():
         """Scroll the mouse down"""
@@ -175,6 +180,8 @@ class ParrotModeActions:
     def kingfisher_parrot_trigger_virtual_key():
         """Temporarily teleport mouse and trigger virtual key"""
         pos = ctrl.mouse_pos()
+        if not actions.tracking.control_enabled():
+            actions.tracking.control_toggle(True)
         actions.tracking.control_head_toggle(False)
         actions.tracking.control_gaze_toggle(True)
         actions.sleep("50ms")
@@ -295,33 +302,49 @@ class ParrotModeActions:
             actions.tracking.control_head_toggle(True)
             is_mouse_moving = True
 
+    def parrot_set_flex_macro():
+        """Set flex macro"""
+        global flex_macro
+        flex_macro = actions.user.history_get(1)
 
+    def parrot_clear_flex_macro():
+        """Clear flex macro"""
+        global flex_macro
+        flex_macro = None
 
-
+    def parrot_run_flex_macro():
+        """Run flex macro"""
+        global flex_macro
+        if flex_macro:
+            actions.mode.disable("user.parrot")
+            actions.mode.enable("command")
+            actions.mimic(flex_macro)
+            actions.mode.disable("command")
+            actions.mode.enable("user.parrot")
 
 mod = Module()
 @mod.action_class
 class UserActions:
-    def parrot_mode_enable():
-        """Enable parrot mode"""
-        print("parrot mode enabled")
-        actions.user.clear_screen_regions()
-        actions.user.add_red_cursor()
-        actions.mode.enable("user.parrot")
-        actions.mode.disable("command")
-        actions.mode.disable("dictation")
+    # def parrot_mode_enable():
+    #     """Enable parrot mode"""
+    #     print("parrot mode enabled")
+    #     actions.user.clear_screen_regions()
+    #     actions.user.add_red_cursor()
+    #     actions.mode.enable("user.parrot")
+    #     actions.mode.disable("command")
+    #     actions.mode.disable("dictation")
 
-    def parrot_mode_disable():
-        """Disable parrot mode"""
-        print('parrot mode disabled')
-        actions.user.parrot_scroll_stop_soft()
-        actions.user.parrot_mouse_and_scroll_stop()
-        actions.user.clear_screen_regions()
-        actions.user.mouse_scroll_stop()
-        # is_eye_tracker_enabled = False
-        actions.mode.disable("user.parrot")
-        actions.mode.enable("command")
-        actions.mode.disable("dictation")
+    # def parrot_mode_disable():
+    #     """Disable parrot mode"""
+    #     print('parrot mode disabled')
+    #     actions.user.parrot_scroll_stop_soft()
+    #     actions.user.parrot_mouse_and_scroll_stop()
+    #     actions.user.clear_screen_regions()
+    #     actions.user.mouse_scroll_stop()
+    #     # is_eye_tracker_enabled = False
+    #     actions.mode.disable("user.parrot")
+    #     actions.mode.enable("command")
+    #     actions.mode.disable("dictation")
 
     def parrot_tracking_mode_enable():
         """Enable parrot tracking mode"""
@@ -340,10 +363,13 @@ class UserActions:
 
     def virtual_region_one():
         """Virtual region one"""
+        actions.user.parrot_set_flex_macro()
         print('region one')
 
     def virtual_region_two():
         """Virtual region two"""
+        actions.user.parrot_track_toggle()
+        actions.user.parrot_use_default_tracking()
         print('region two')
 
     def virtual_region_three():
@@ -399,7 +425,6 @@ def register_regions():
     actions.user.hud_set_virtual_keyboard_visibility(0)
 
 app.register('ready', register_regions)
-
 
 # @ctx.action_class("user")
 # class UserActions:

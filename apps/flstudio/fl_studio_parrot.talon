@@ -13,3 +13,4 @@ and not mode: sleep
 # parrot(ee):
 #     mouse_release()
 #     user.parrot_mouse_and_scroll_stop()
+parrot(guh):                key(space)

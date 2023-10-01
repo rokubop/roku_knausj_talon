@@ -7,7 +7,7 @@ touch | click it | ticket:
     user.grid_close()
     user.mouse_drag_end()
 
-^right click | rick it:
+^right:
     mouse_click(1)
     user.grid_close()
 
