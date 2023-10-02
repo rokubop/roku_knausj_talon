@@ -7,7 +7,7 @@ logging_enabled = True
 
 def log(msg: str):
     if logging_enabled:
-        print(f"parrot: {msg}")
+        print(f"tag: {', '.join(ctx.tags)}, parrot: {msg}")
 
 @mod.action_class
 class ParrotMode:

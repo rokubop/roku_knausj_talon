@@ -6,13 +6,6 @@ mod = Module()
 mod.mode("parrot", "Parrot Mode for controlling mouse, modifiers, and scrolling")
 mod.tag("parrot_tracking", desc="Tag for parrot tracking mode")
 
-setting_roku_persist_frozen_mouse_on_exit = mod.setting(
-    "roku_persist_frozen_mouse_on_exit", bool, default=True
-)
-setting_parrot_mode_mouse_freeze_on_click = mod.setting(
-    "parrot_mode_mouse_freeze_on_click", bool, default=True
-)
-
 ctx = Context()
 
 is_dragging = False
@@ -80,12 +73,17 @@ class ParrotModeActions:
             if not use_active_mouse:
                 actions.user.parrot_cancel_modifiers()
 
-        if track == "freeze" or setting_parrot_mode_mouse_freeze_on_click.get():
+        print("setting for mouse freeze")
+        print(settings.get("user.parrot_mode_mouse_freeze_on_click"))
+        if track == "freeze" or settings.get("user.parrot_mode_mouse_freeze_on_click"):
+            print("freeze mode")
             if not use_active_mouse:
                 actions.user.parrot_freeze_mouse()
         elif track == "gaze":
+            print("gaze mode")
             actions.user.parrot_use_default_tracking()
         elif track == "head":
+            print("head mode")
             actions.user.parrot_use_head_tracking_only()
 
     def parrot_scroll_down():

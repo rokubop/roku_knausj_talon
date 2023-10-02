@@ -3,7 +3,6 @@ and not mode: sleep
 -
 settings():
     user.scroll_speed_multiplier = 0.6
-    user.roku_persist_frozen_mouse_on_exit = true
 
 parrot(pop): user.parrot_mode_pop()
 parrot(cluck): user.parrot_mode_cluck()

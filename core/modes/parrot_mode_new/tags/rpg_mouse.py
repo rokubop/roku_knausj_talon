@@ -4,7 +4,10 @@ mod = Module()
 ctx = Context()
 
 mod.tag("parrot_mouse_rpg", desc="Tag for the RPG mode of parrot")
-ctx.matches = "tag: user.parrot_mouse_rpg"
+ctx.matches = """
+mode: user.parrot
+tag: user.parrot_mouse_rpg
+"""
 
 @ctx.action_class("user")
 class ParrotCommands:

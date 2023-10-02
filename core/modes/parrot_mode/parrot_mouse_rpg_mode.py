@@ -2,24 +2,8 @@ from talon import Module, Context, actions, ctrl, cron, settings
 
 mod = Module()
 
-# mod.mode("parrot_mouse_rpg", "Parrot Mode for controlling mouse, modifiers, and scrolling")
-
-setting_parrot_rpg_increment_x = mod.setting(
-    "parrot_rpg_increment_x",
-    desc="X increment for parrot mouse rpg mode",
-    type=int,
-    default=26
-)
-
-setting_parrot_rpg_increment_y = mod.setting(
-    "parrot_rpg_increment_y",
-    desc="Y increment for parrot mouse rpg mode",
-    type=int,
-    default=26
-)
-
 nav_job = None
-direction = None
+direction = (0, 1)
 
 speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 11}
 speed_default = "slow"
@@ -69,8 +53,12 @@ class ParrotMouseNavModeActions:
         """Repeat previous direction by the increment defined by the settings"""
         print('parrot_mouse_rpg_repeat_dir_by_increment')
         x, y = ctrl.mouse_pos()
-        increment_x = setting_parrot_rpg_increment_x.get()
-        increment_y = setting_parrot_rpg_increment_y.get()
+        # print(settings.get("user.parrot_rpg_increment_x"))
+        increment_x = settings.get("user.parrot_rpg_increment_x")
+        increment_y = settings.get("user.parrot_rpg_increment_y")
+        print(increment_x)
+        print(increment_y)
+
         dx = direction[0] * increment_x
         dy = direction[1] * increment_y
 
@@ -80,8 +68,8 @@ class ParrotMouseNavModeActions:
     def parrot_mouse_rpg_repeat_reverse_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
         x, y = ctrl.mouse_pos()
-        increment_x = setting_parrot_rpg_increment_x.get()
-        increment_y = setting_parrot_rpg_increment_y.get()
+        increment_x = settings.get("user.parrot_rpg_increment_x")
+        increment_y = settings.get("user.parrot_rpg_increment_y")
         dx = direction[0] * increment_x * -1
         dy = direction[1] * increment_y * -1
 
