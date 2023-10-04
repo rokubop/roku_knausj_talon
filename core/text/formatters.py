@@ -133,6 +133,7 @@ formatters_dict = {
         else word,
     ),
     "SPACE_FIRST_WORD": (SEP, first_vs_rest(lambda w: " " + w)),
+    "SPACE_SURROUND": (SEP, surround(' ')),
     "SPACE_CAPITALIZE_FIRST_WORD": (SEP, first_vs_rest(lambda w: " " + w[:1].upper() + w[1:])),
 }
 
@@ -299,10 +300,9 @@ def unformat_text(text: str) -> str:
 ctx.lists["self.formatters"] = formatters_words.keys()
 ctx.lists["self.prose_formatter"] = {
     "say": "NOOP",
-    "speak": "NOOP",
-    "sentence": "CAPITALIZE_FIRST_WORD",
     "state": "CAPITALIZE_FIRST_WORD",
     "more": "SPACE_FIRST_WORD",
+    "make": "SPACE_SURROUND",
     "trench": "SPACE_CAPITALIZE_FIRST_WORD",
 }
 
