@@ -92,17 +92,18 @@
             ">probability": 0.4
         },
         "throttle": {
-            "tut": 0.5
+            "tut": 0.5,
+            "t": 0.3
         }
     },
     "nn": {
         "sounds": ["nn"],
         "threshold": {
             ">power": 5,
-            ">probability": 0.97
+            ">probability": 0.91
         },
         "throttle": {
-            "nn": 0.2,
+            "nn": 0.5,
             "guh": 0.5
         }
     },
@@ -156,13 +157,14 @@
         "throttle": {
             "ch": 0.2,
             "jj": 0.2,
-            "tut": 0.5
+            "tut": 0.5,
+            "t": 0.2
         }
     },
     "tut": {
         "sounds": ["tut"],
         "threshold": {
-            ">power": 20,
+            ">power": 17,
             ">probability": 0.97
         },
         "throttle": {
@@ -172,12 +174,13 @@
     "t": {
         "sounds": ["t"],
         "threshold": {
-            ">power": 20,
-            ">probability": 0.97
+            ">power": 3,
+            ">probability": 0.99
         },
         "throttle": {
-            "t": 0.15,
-            "hiss": 0.5
+            "t": 0.3,
+            "shush": 0.3,
+            "hiss": 0.3
         }
     }
 }

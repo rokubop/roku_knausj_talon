@@ -103,11 +103,19 @@ class ParrotModeActions:
         shush_debouncer.stop()
         hiss_debouncer.stop()
 
+    def parrot_set_cursor_color():
+        """Set the cursor color"""
+        if actions.user.parrot_mode_has_tag("user.parrot_side_b"):
+            actions.user.add_color_cursor("FF00FF")
+        else:
+            actions.user.add_red_cursor()
+
+
     def parrot_mouse_and_scroll_stop():
         """Stop mouse and scroll"""
         global is_dragging
         if is_dragging:
-            actions.user.add_red_cursor()
+            actions.user.parrot_set_cursor_color()
         is_dragging = False
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
@@ -122,7 +130,7 @@ class ParrotModeActions:
         """Stop mouse and scroll but keep modifiers"""
         global is_dragging
         if is_dragging:
-            actions.user.add_red_cursor()
+            actions.user.parrot_set_cursor_color()
         is_dragging = False
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
@@ -177,6 +185,7 @@ class ParrotModeActions:
 
     def kingfisher_parrot_trigger_virtual_key():
         """Temporarily teleport mouse and trigger virtual key"""
+        actions.user.hud_publish_mouse_particle('float_up', 'FFFF00')
         pos = ctrl.mouse_pos()
         if not actions.tracking.control_enabled():
             actions.tracking.control_toggle(True)
@@ -234,7 +243,10 @@ class ParrotModeActions:
         actions.sleep("50ms")
         actions.tracking.control_gaze_toggle(False)
         actions.tracking.control_head_toggle(True)
-        actions.user.add_green_cursor()
+        if actions.user.parrot_mode_has_tag("user.parrot_side_b"):
+            actions.user.add_color_cursor("00FFFF")
+        else:
+            actions.user.add_green_cursor()
         is_mouse_moving = True
 
     def parrot_mouse_teleport():
@@ -267,7 +279,7 @@ class ParrotModeActions:
         actions.tracking.control_gaze_toggle(False)
         actions.tracking.control_head_toggle(False)
         actions.user.clear_screen_regions()
-        actions.user.add_red_cursor()
+        actions.user.parrot_set_cursor_color()
         is_mouse_moving = False
 
     def parrot_use_head_tracking_only():
@@ -359,6 +371,7 @@ class UserActions:
         # actions.user.parrot_use_default_tracking()
         ctx.tags = []
 
+
     def virtual_region_one():
         """Virtual region one"""
         actions.user.parrot_set_flex_macro()
@@ -381,6 +394,11 @@ class UserActions:
 
     def virtual_region_five():
         """Virtual region five"""
+        # if actions.user.parrot_mode_has_tag('user.parrot_side_b'):
+        #     actions.user.parrot_side_b_disable()
+        #     actions.user.parrot_mode_reset_tags()
+        # else:
+        #     actions.user.parrot_side_b_enable()
         print('region five')
 
     def virtual_region_six():
@@ -423,8 +441,3 @@ def register_regions():
     actions.user.hud_set_virtual_keyboard_visibility(0)
 
 app.register('ready', register_regions)
-
-# @ctx.action_class("user")
-# class UserActions:
-#     def virtual_region_one():
-#         print('got it')

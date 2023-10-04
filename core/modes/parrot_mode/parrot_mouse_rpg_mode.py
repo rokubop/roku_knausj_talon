@@ -5,7 +5,7 @@ mod = Module()
 nav_job = None
 direction = (0, 1)
 
-speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 11}
+speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 15}
 speed_default = "slow"
 speed = speeds[speed_default]
 
@@ -92,6 +92,14 @@ class ParrotMouseNavModeActions:
             update_speed("fastest")
         elif speed == speeds["fastest"]:
             return
+
+    def parrot_mouse_rpg_move_to_interaction_axis():
+        """Mouse move to interaction axis"""
+        pos = ctrl.mouse_pos()
+        y = settings.get("user.parrot_rpg_interaction_axis_y_pos")
+        print(f"the value of y is {y}")
+        ctrl.mouse_move(pos[0], y)
+        actions.user.parrot_mouse_rpg_stop()
 
     def parrot_mouse_rpg_stop():
         """Stop moving mouse"""

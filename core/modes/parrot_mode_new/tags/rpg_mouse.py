@@ -2,12 +2,21 @@ from talon import Context, Module, actions
 
 mod = Module()
 ctx = Context()
+# ctx_parrot = Context()
 
 mod.tag("parrot_mouse_rpg", desc="Tag for the RPG mode of parrot")
 ctx.matches = """
 mode: user.parrot
 tag: user.parrot_mouse_rpg
 """
+
+# ctx_parrot.matches = r"""
+# mode: user.parrot
+# """
+
+ctx.settings = {
+    "user.parrot_rpg_interaction_axis_y_pos": 140,
+}
 
 @ctx.action_class("user")
 class ParrotCommands:
@@ -27,6 +36,7 @@ class ParrotCommands:
         actions.user.parrot_mode_enable()
         actions.user.parrot_teleport_mouse_soft()
     def parrot_nn(): actions.user.parrot_mouse_rpg_move_slow()
-    def parrot_t(): actions.user.parrot_mouse_rpg_move_fast()
+    def parrot_t(): actions.user.parrot_mouse_rpg_move_to_interaction_axis()
     def parrot_er(): actions.user.parrot_mouse_rpg_mode_disable()
-    def parrot_guh(): actions.user.parrot_run_flex_macro()
+    def parrot_guh(): actions.user.parrot_mouse_rpg_move_fast()
+    # def parrot_guh(): actions.user.parrot_run_flex_macro()

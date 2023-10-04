@@ -19,7 +19,7 @@ app: chants_of_sennaar
 
 ctx_parrot_default.matches = r"""
 app: chants_of_sennaar
-tag: user.parrot_mode_default
+tag: user.parrot_default
 """
 
 ctx_parrot.settings = {

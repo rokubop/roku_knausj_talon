@@ -50,7 +50,7 @@ desktop (left | last):      key(win-ctrl-left)
 desktop close:              key(win-ctrl-f4)
 desktop (show | revert | hide): key(win-d)
 
-zoom [in]:                  key(ctrl-plus)
+^zoom [in]:                 key(ctrl-plus)
 zoom out:                   key(ctrl-minus)
 
 open log:                   user.open_powershell_and_tail_log()

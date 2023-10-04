@@ -18,7 +18,7 @@ class ParrotMode:
         actions.user.clear_screen_regions()
         actions.user.add_red_cursor()
         actions.mode.enable("user.parrot")
-        ctx.tags = ["user.parrot_mode_default"]
+        ctx.tags = ["user.parrot_default"]
         print(ctx.tags)
         actions.mode.disable("command")
         actions.mode.disable("dictation")
@@ -40,9 +40,18 @@ class ParrotMode:
         print(f'enabling {tag}')
         ctx.tags = [tag]
 
+    def parrot_mode_has_tag(tag: str) -> bool:
+        """Check if parrot mode has tag"""
+        return tag in ctx.tags
+
+    def parrot_mode_append_tag(tag: str):
+        """Enable parrot mode with tag"""
+        print(f'enabling {tag}')
+        ctx.tags = [*ctx.tags, tag]
+
     def parrot_mode_reset_tags():
         """Enable parrot mode reset tags"""
-        ctx.tags = ["user.parrot_mode_default"]
+        ctx.tags = ["user.parrot_default"]
 
 
 @mod.action_class

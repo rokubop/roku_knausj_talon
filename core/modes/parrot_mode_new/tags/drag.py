@@ -9,7 +9,7 @@ ctx.matches = r"""
 tag: user.parrot_mode_drag
 """
 
-ctx.tags = ["user.parrot_mode_default"]
+ctx.tags = ["user.parrot_default"]
 
 # @ctx.action_class("user")
 # class ParrotCommands:

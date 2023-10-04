@@ -17,6 +17,13 @@ mod.setting(
 )
 
 mod.setting(
+    "parrot_rpg_interaction_axis_y_pos",
+    desc="Y position of an interaction bar in the application",
+    type=int,
+    default=140
+)
+
+mod.setting(
     "roku_persist_frozen_mouse_on_exit", bool, default=True
 )
 
