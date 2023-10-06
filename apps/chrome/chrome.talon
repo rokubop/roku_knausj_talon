@@ -58,7 +58,10 @@ go <number>:
 
 (break | bug) this:         key(ctrl-b)
 (break | bug) (toggle | dog | yes | no): key(ctrl-f8)
-(break | bug) (pause | resume): key(ctrl-f8)
+(break | bug) pause: key(ctrl-f8)
+(break | bug) resume:
+    key(ctrl-f8)
+    key(f8)
 (break | bug) (step | step over): key(f10)
 (break | bug) (step in | step into): key(f11)
 (break | bug) (step out | step outside): key(shift-f11)

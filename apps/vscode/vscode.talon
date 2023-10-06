@@ -317,6 +317,10 @@ git commit [<user.text>]:
     text = user.format_text(text or "", "CAPITALIZE_FIRST_WORD")
     "{text}"
 
+git close:
+    app.tab_close()
+    user.vscode("workbench.action.terminal.focus")
+
 # Folding
 fold recursive:             user.vscode("editor.foldRecursively")
 unfold recursive:           user.vscode("editor.unfoldRecursively")

@@ -24,6 +24,8 @@ ctx.lists["self.phrase_ender"] = {
     "yep": "\n",
     "spam": ", ",
     "void": " ",
+    "dash": "-",
+    "stack": ":",
 }
 # Maps spoken forms to DictationFormat method names (see DictationFormat below).
 ctx.lists["user.prose_modifiers"] = {
