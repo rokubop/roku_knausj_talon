@@ -55,6 +55,9 @@ talon dump context:
 talon (bug report | report bug):
     user.open_url("https://github.com/knausj85/knausj_talon/issues")
 ^talon create [app] context$: user.talon_create_app_context()
+^talon create parrot context$: user.talon_create_app_parrot_context()
+^talon create game context$: user.talon_create_app_context(true)
+^talon create game parrot context$: user.talon_create_app_parrot_context(true)
 
 ^talon restart$:            user.talon_restart()
 ^talon quit$:               user.talon_quit()

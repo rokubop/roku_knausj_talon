@@ -34,7 +34,7 @@ cam_job = None
 direction = None
 
 speeds = {"slow": 5, "medium": 10, "fast": 20, "fastest": 30}
-speed_default = "medium"
+speed_default = "slow"
 speed = speeds[speed_default]
 
 def update_speed(new_speed):

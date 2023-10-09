@@ -1,5 +1,5 @@
 import time
-from talon import Module, Context, actions, ctrl, settings, app, speech_system
+from talon import Module, Context, actions, ctrl, settings, app, speech_system, cron
 from ....plugin.debouncer import Debouncer
 
 mod = Module()
@@ -18,6 +18,7 @@ current_tracking_mode = 'default'
 is_eye_tracker_enabled = False
 use_active_mouse = False
 flex_macro = None
+special = False
 
 @mod.action_class
 class ParrotModeActions:
@@ -44,6 +45,11 @@ class ParrotModeActions:
         global use_active_mouse
         use_active_mouse = not use_active_mouse
         print(f"use active mouse: {use_active_mouse}")
+        if use_active_mouse:
+            actions.user.hud_publish_mouse_particle('float_up', '30F343')
+        else:
+            actions.user.hud_publish_mouse_particle('float_up', 'F36D30')
+
 
     def parrot_mouse_drag(button: int):
         """Drag the mouse in a direction"""
@@ -61,17 +67,17 @@ class ParrotModeActions:
         global is_dragging, use_active_mouse
 
         if is_dragging:
-            if use_active_mouse:
-                actions.user.parrot_mouse_and_scroll_stop_keep_modifiers()
-            else:
-                actions.user.parrot_mouse_and_scroll_stop()
+            # if use_active_mouse:
+            actions.user.parrot_mouse_and_scroll_stop_keep_modifiers()
+            # else:
+            #     actions.user.parrot_mouse_and_scroll_stop()
         else:
             for key in modifiers:
                 actions.key(f"{key}:down")
             for i in range(times):
                 ctrl.mouse_click(button=button, hold=16000)
-            if not use_active_mouse:
-                actions.user.parrot_cancel_modifiers()
+            # if not use_active_mouse:
+            #     actions.user.parrot_cancel_modifiers()
 
         print("setting for mouse freeze")
         print(settings.get("user.parrot_mode_mouse_freeze_on_click"))
@@ -107,12 +113,13 @@ class ParrotModeActions:
         """Set the cursor color"""
         if actions.user.parrot_mode_has_tag("user.parrot_side_b"):
             actions.user.add_color_cursor("FF00FF")
+        elif actions.user.parrot_mode_has_tag("user.parrot_pan"):
+            actions.user.add_color_cursor("FFA500")
         else:
             actions.user.add_red_cursor()
 
-
-    def parrot_mouse_and_scroll_stop():
-        """Stop mouse and scroll"""
+    def parrot_mouse_stop():
+        """Stop mouse"""
         global is_dragging
         if is_dragging:
             actions.user.parrot_set_cursor_color()
@@ -120,6 +127,10 @@ class ParrotModeActions:
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
             ctrl.mouse_click(button=button, up=True)
+
+    def parrot_mouse_and_scroll_stop():
+        """Stop mouse and scroll"""
+        actions.user.parrot_mouse_stop()
         actions.user.parrot_cancel_modifiers()
         actions.user.parrot_freeze_mouse()
         actions.user.mouse_scroll_stop()
@@ -179,6 +190,18 @@ class ParrotModeActions:
         """Toggle cursor stay"""
         actions.user.mouse_toggle_stay_in_place()
 
+    def parrot_deactivates_special():
+        """Deactivate special"""
+        global special
+        special = False
+
+    def parrot_activate_special_briefly():
+        """Activate special briefly"""
+        global special
+        special = True
+        cron.after("300ms", lambda : actions.user.parrot_deactivates_special())
+
+
     def parrot_trigger_virtual_key():
         """Trigger virtual key"""
         actions.user.hud_activate_virtual_key()
@@ -235,7 +258,11 @@ class ParrotModeActions:
 
     def parrot_teleport_mouse_soft():
         """Teleport mouse and enable head tracking until next action"""
-        global is_mouse_moving
+        global is_mouse_moving, special
+        if special:
+            actions.user.parrot_cancel_modifiers()
+            actions.user.parrot_toggle_active_mouse()
+
         if not actions.tracking.control_enabled():
             actions.tracking.control_toggle(True)
         actions.tracking.control_head_toggle(False)

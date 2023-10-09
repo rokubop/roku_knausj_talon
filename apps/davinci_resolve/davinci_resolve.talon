@@ -1,5 +1,8 @@
 app: davinci_resolve
 -
+settings():
+    speech.timeout = 0.20
+    user.parrot_default_tag = "user.parrot_default_interactive"
 
 hand:                       user.mouse_drag(2)
 tail:                       key(down)

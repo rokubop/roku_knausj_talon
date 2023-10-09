@@ -4,6 +4,7 @@ and not mode: sleep
 settings():
     user.scroll_speed_multiplier = 0.6
 
+^<phrase>: skip()
 parrot(pop): user.parrot_mode_pop()
 parrot(cluck): user.parrot_mode_cluck()
 parrot(palate_click): user.parrot_mode_palate()

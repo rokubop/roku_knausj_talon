@@ -3,6 +3,7 @@ mode: command
 -
 settings():
     speech.timeout = 0.15
+    user.parrot_default_tag = "user.parrot_default_interactive"
 
 parrot(tut): mouse_click(1)
 

@@ -1,4 +1,4 @@
-from talon import Context, Module, actions
+from talon import Context, Module, actions, settings
 
 mod = Module()
 ctx = Context()
@@ -11,14 +11,13 @@ def log(msg: str):
 
 @mod.action_class
 class ParrotMode:
-
     def parrot_mode_enable():
         """Enable parrot mode"""
         print("parrot mode enabled")
         actions.user.clear_screen_regions()
         actions.user.add_red_cursor()
         actions.mode.enable("user.parrot")
-        ctx.tags = ["user.parrot_default"]
+        ctx.tags = [settings.get("user.parrot_default_tag")]
         print(ctx.tags)
         actions.mode.disable("command")
         actions.mode.disable("dictation")
@@ -51,7 +50,7 @@ class ParrotMode:
 
     def parrot_mode_reset_tags():
         """Enable parrot mode reset tags"""
-        ctx.tags = ["user.parrot_default"]
+        ctx.tags = [settings.get("user.parrot_default_tag")]
 
 
 @mod.action_class

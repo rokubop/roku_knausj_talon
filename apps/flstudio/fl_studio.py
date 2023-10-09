@@ -245,8 +245,8 @@ class Actions:
 
 global noise
 
-# @ctx.action_class("user")
-# class UserActions:
+@ctx.action_class("user")
+class UserActions:
   # def virtual_region_one():
   #   """Virtual region one"""
   #   actions.user.fl_view_window_next()
@@ -259,17 +259,19 @@ global noise
   #   """Virtual region three"""
   #   actions.user.fl_view_window_last()
 
-  # def virtual_region_four():
-  #   """Virtual region four"""
-  #   actions.user.fl_toggle_bar()
+  def virtual_region_four():
+    actions.key("c")
+    # actions.user.fl_toggle_bar()
 
-  # def virtual_region_five():
-  #   """Virtual region five"""
-  #   actions.user.fl_view_playlist()
+  def virtual_region_five():
+    # """Virtual region five"""
+    actions.key("p")
+    # actions.user.fl_view_playlist()
 
-  # def virtual_region_six():
-  #   """Virtual region six"""
-  #   actions.user.fl_toggle_stretch()
+  def virtual_region_six():
+    """Virtual region six"""
+    actions.key("t")
+    # actions.user.fl_toggle_stretch()
 
   # def virtual_region_seven():
   #   """Virtual region seven"""

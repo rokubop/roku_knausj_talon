@@ -4,6 +4,7 @@ os: windows
 
 settings():
     speech.timeout = 0.20
+    user.parrot_default_tag = "user.parrot_default_interactive"
 
 # adding instruments (tracks) and plugins (mixer)
 add {user.fl_instrument}:
@@ -102,7 +103,7 @@ track color:
     key(down down enter)
 
 # playlist/timeline actions
-pan:                        user.fl_studio_pan_mode_enable()
+# pan:                        user.fl_studio_pan_mode_enable()
 time (add | insert):        key(ctrl-insert)
 slice:
     key(alt-shift:down)

@@ -3,6 +3,13 @@ from talon import Module
 mod = Module()
 
 mod.setting(
+    "parrot_default_tag",
+    desc="default tag for parrot",
+    type=str,
+    default="user.parrot_default"
+)
+
+mod.setting(
     "parrot_rpg_increment_x",
     desc="X increment for parrot mouse rpg mode",
     type=int,

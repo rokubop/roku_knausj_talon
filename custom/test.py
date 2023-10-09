@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+from typing import List, Optional
 from talon import Module, Context, actions, ui
 
 mod = Module()
