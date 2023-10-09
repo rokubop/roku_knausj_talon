@@ -21,8 +21,11 @@ class Actions:
     def parrot_position_mode_enable():
         """Enable parrot position mode"""
         print("parrot position mode enabled")
-        actions.user.parrot_mode_append_tag("user.parrot_position")
         actions.user.parrot_teleport_mouse_soft()
+        if actions.user.parrot_is_active_mouse_enabled():
+            # don't enter this mode if mouse is active
+            return
+        actions.user.parrot_mode_append_tag("user.parrot_position")
         if actions.user.parrot_mode_has_tag("user.parrot_side_b"):
             actions.user.add_color_cursor("00FFFF")
         else:

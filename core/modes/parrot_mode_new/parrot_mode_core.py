@@ -30,10 +30,8 @@ class ParrotMode:
     def parrot_mode_disable():
         """Disable parrot mode"""
         print('parrot mode disabled')
-        actions.user.parrot_scroll_stop_soft()
-        actions.user.parrot_mouse_and_scroll_stop()
+        actions.user.parrot_disable_running()
         actions.user.clear_screen_regions()
-        actions.user.mouse_scroll_stop()
         ctx.tags = []
         actions.mode.disable("user.parrot")
         actions.mode.enable("command")

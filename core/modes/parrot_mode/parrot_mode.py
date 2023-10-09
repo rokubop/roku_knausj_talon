@@ -40,6 +40,11 @@ class ParrotModeActions:
         """Hiss stop"""
         actions.user.mouse_scroll_stop()
 
+    def parrot_is_active_mouse_enabled() -> bool:
+        """Is active mouse enabled"""
+        global use_active_mouse
+        return use_active_mouse
+
     def parrot_toggle_active_mouse():
         """Toggle active mouse"""
         global use_active_mouse
@@ -47,6 +52,8 @@ class ParrotModeActions:
         print(f"use active mouse: {use_active_mouse}")
         if use_active_mouse:
             actions.user.hud_publish_mouse_particle('float_up', '30F343')
+            actions.tracking.control_head_toggle(True)
+            actions.tracking.control_gaze_toggle(True)
         else:
             actions.user.hud_publish_mouse_particle('float_up', 'F36D30')
 
@@ -129,6 +136,16 @@ class ParrotModeActions:
         buttons_held_down = list(ctrl.mouse_buttons_down())
         for button in buttons_held_down:
             ctrl.mouse_click(button=button, up=True)
+
+    def parrot_disable_running():
+        """Disable running"""
+        actions.user.parrot_mouse_stop()
+        actions.user.parrot_cancel_modifiers()
+        if not actions.user.parrot_is_active_mouse_enabled():
+            actions.user.parrot_freeze_mouse()
+        actions.user.mouse_scroll_stop()
+        shush_debouncer.stop()
+        hiss_debouncer.stop()
 
     def parrot_mouse_and_scroll_stop():
         """Stop mouse and scroll"""
@@ -261,12 +278,18 @@ class ParrotModeActions:
     def parrot_teleport_mouse_soft():
         """Teleport mouse and enable head tracking until next action"""
         global is_mouse_moving, special
+        if not actions.tracking.control_enabled():
+            actions.tracking.control_toggle(True)
+
         if special:
             actions.user.parrot_cancel_modifiers()
             actions.user.parrot_toggle_active_mouse()
 
-        if not actions.tracking.control_enabled():
-            actions.tracking.control_toggle(True)
+        if actions.user.parrot_is_active_mouse_enabled():
+            actions.tracking.control_gaze_toggle(True)
+            actions.tracking.control_head_toggle(True)
+            return
+
         actions.tracking.control_head_toggle(False)
         actions.tracking.control_gaze_toggle(True)
         actions.sleep("50ms")
