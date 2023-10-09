@@ -113,6 +113,8 @@ class ParrotModeActions:
         """Set the cursor color"""
         if actions.user.parrot_mode_has_tag("user.parrot_side_b"):
             actions.user.add_color_cursor("FF00FF")
+        elif actions.user.parrot_mode_has_tag("user.parrot_default_interactive"):
+            actions.user.add_color_cursor("f22160")
         elif actions.user.parrot_mode_has_tag("user.parrot_pan"):
             actions.user.add_color_cursor("FFA500")
         else:

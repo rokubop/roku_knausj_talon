@@ -15,9 +15,14 @@ class ParrotMode:
         """Enable parrot mode"""
         print("parrot mode enabled")
         actions.user.clear_screen_regions()
-        actions.user.add_red_cursor()
+        default_tag = settings.get("user.parrot_default_tag")
+        if default_tag == "user.parrot_default_interactive":
+            actions.user.add_color_cursor("f22160")
+        else:
+            actions.user.add_red_cursor()
+
         actions.mode.enable("user.parrot")
-        ctx.tags = [settings.get("user.parrot_default_tag")]
+        ctx.tags = [default_tag]
         print(ctx.tags)
         actions.mode.disable("command")
         actions.mode.disable("dictation")
