@@ -25,3 +25,11 @@ class Actions:
         # actions.sleep(300ms);
         # actions.key("r");
         actions.key("win-down")
+
+    def app_switch(index: int = 1):
+        """Switch to the app at the given index"""
+        actions.key("alt:down")
+        actions.key(f"tab:{index}")
+        actions.sleep("50ms")
+        actions.key("alt:up")
+        actions.sleep("300ms")

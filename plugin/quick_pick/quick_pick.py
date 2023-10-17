@@ -10,10 +10,10 @@ from typing import Callable, Optional
 import math
 
 FONT_FAMILY = "Segoe UI Symbol"
-BACKGROUND_COLOR = "000000"  # Snow
+BACKGROUND_COLOR = "fffafa"  # Snow
 HOVER_COLOR = "6495ed"  # CornflowerBlue
-BORDER_COLOR = "fffafa"  # Black
-TEXT_COLOR = "fffafa"  # Black
+BORDER_COLOR = "000000"  # Black
+TEXT_COLOR = "000000"  # Black
 SNAP_COLORS = [
     "cd5c5c",  # IndianRed
     "1e90ff",  # DodgerBlue
@@ -71,19 +71,19 @@ size: Size = None
 canvas: Canvas = None
 mouse_pos: Point2d = None
 hover_rect: Rect = None
-repeater_callback: Callable[[], None] = None
+quick_pick_action: Callable[[], None] = None
 buttons: list[Button] = []
 
 circle_options = [
-    CircleOption("double", -90, actions.user.mouse_drag, True),
-    CircleOption("ctrl", -140, lambda: actions.user.mouse_click("control"), True),
-    CircleOption("shift", -40, lambda: actions.user.mouse_click("right"), True),
-    CircleOption("alt", -170, actions.user.go_back),
+    CircleOption("🖑", -90, actions.user.mouse_drag, True),
+    CircleOption("repeat", -140, lambda: actions.core.repeat_phrase(), True),
+    CircleOption("🖙", -40, lambda: actions.user.mouse_click("right"), True),
+    CircleOption("🡨", -170, actions.user.go_back),
     CircleOption("🡪", -10, actions.user.go_forward),
     CircleOption("╳", 13, actions.app.tab_close),
-    CircleOption("🖳", 140, lambda: actions.key("ctrl-shift-escape")),
-    CircleOption("🗗", 40, lambda: actions.user.app_switcher()),
-    CircleOption("🔍", 90, actions.user.browser_search_selected),
+    CircleOption("talon mute", 140, lambda: actions.user.sleep_toggle()),
+    CircleOption("🗗", 40, lambda: actions.user.app_switch()),
+    # CircleOption("🔍", 90, actions.user.browser_search_selected),
 ]
 
 media_options = [
@@ -217,7 +217,6 @@ def draw_snap_positions(
 
 def get_running_options() -> list[Option]:
     running = actions.user.get_running_applications()
-
     return [
         Option(key, lambda key=key: actions.user.window_focus_name(running[key]))
         for key in sorted(running)
@@ -267,7 +266,7 @@ def get_button_for_position(pos: Point2d):
 
 
 def on_mouse(e: MouseEvent):
-    global repeater_callback, hover_rect
+    global quick_pick_action, hover_rect
     button = get_button_for_position(e.gpos)
 
     if e.event == "mousemove":
@@ -283,7 +282,7 @@ def on_mouse(e: MouseEvent):
                 actions.mouse_move(mouse_pos.x, mouse_pos.y)
             actions.sleep("100ms")
             button.callback()
-            repeater_callback = button.callback
+            quick_pick_action = button.callback
 
 
 def show():
@@ -306,14 +305,14 @@ def hide():
     canvas = None
 
 
-# @ctx.action_class("user")
-# class UserActions:
-#     def noise_cluck():
-#         # If available the repeat noise repeats the last quick pick callback
-#         if repeater_callback:
-#             repeater_callback()
-#         else:
-#             actions.next()
+@ctx.action_class("user")
+class UserActions:
+    def pedal_center_down():
+        # If available the repeat noise repeats the last quick pick callback
+        if quick_pick_action:
+            quick_pick_action()
+        else:
+            actions.next()
 
 
 @mod.action_class
@@ -327,10 +326,10 @@ class Actions:
 
 
 # def on_post_phrase(phrase: Phrase):
-#     global repeater_callback
+#     global quick_pick_action
 #     # On each spoken phrase the repeater noise returns to default implementation
-#     if repeater_callback and phrase.get("phrase"):
-#         repeater_callback = None
+#     if quick_pick_action and phrase.get("phrase"):
+#         quick_pick_action = None
 
 
 # speech_system.register("post:phrase", on_post_phrase)
