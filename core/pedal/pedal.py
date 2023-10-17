@@ -40,11 +40,13 @@ class Actions:
 
     def pedal_right_down():
         """Right pedal"""
-        actions.key("ctrl-shift-m")
+        actions.user.quick_pick_show()
+        # actions.key("ctrl-shift-m")
         # actions.user.parrot_scroll_up()
         print("default right pedal down")
 
     def pedal_right_up():
         """Right pedal up"""
+
         # actions.user.parrot_scroll_stop_soft()
         print('default right pedal up')

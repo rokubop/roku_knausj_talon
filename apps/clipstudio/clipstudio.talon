@@ -1,5 +1,9 @@
 app: clip_studio_paint
 -
+settings():
+    speech.timeout = 0.20
+    user.parrot_default_tag = "user.parrot_default_interactive"
+
 move | hand:                key(m)
 pen | brush:                key(d)
 paint:                      key(g)

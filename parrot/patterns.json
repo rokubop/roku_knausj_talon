@@ -33,10 +33,11 @@
             ">power": 5,
             ">probability": 0.6
         },
+        "times": 4,
         "throttle": {
             "tut": 0.2,
-            "lll": 0.2,
-            "eh": 0.2,
+            "eh": 0.3,
+            "er": 0.3,
             "guh": 0.2
         }
     },
@@ -46,7 +47,9 @@
             ">power": 20,
             ">probability": 0.99
         },
+        "times": 4,
         "throttle": {
+            "ee": 0.1,
             "eh": 0.3,
             "oh": 0.3,
             "ah": 0.3,

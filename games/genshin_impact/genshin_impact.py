@@ -84,7 +84,7 @@ class Actions:
             cron.cancel(fight_job)
             fight_job = None
 
-    def genshin_repeater():
+    def fps_repeater():
         """Repeat previous direction"""
         print("hello")
         print(ctx.tags)
@@ -92,7 +92,8 @@ class Actions:
             print("got it")
             actions.user.mouse_move_repeat_dir_by_increment()
         else:
-            actions.core.repeat_phrase()
+            actions.key("space")
+            # actions.core.repeat_phrase()
 
     def genshin_scan_toggle():
         """Toggle scan mode"""
@@ -166,6 +167,13 @@ class Actions:
 
         if direction:
             win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx * speed), int(dy * speed))
+
+    def genshin_stop_all_():
+        """Stop moving mouse or direction"""
+        if cam_job:
+            actions.user.mouse_move_native_stop()
+        actions.key("shift:up")
+        actions.user.release_dir_keys_all()
 
     def genshin_stop_layer():
         """Stop moving mouse or direction"""

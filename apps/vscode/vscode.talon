@@ -410,11 +410,11 @@ wrap dog:                   user.vscode("editor.action.toggleWordWrap")
 pilot jest:                 user.vscode("editor.action.inlineSuggest.trigger")
 pilot next:                 user.vscode("editor.action.inlineSuggest.showNext")
 pilot last:                 user.vscode("editor.action.inlineSuggest.showPrevious")
-[pilot] yes:                user.vscode("editor.action.inlineSuggest.commit")
+[pilot] yep:                user.vscode("editor.action.inlineSuggest.commit")
 pilot word:                 user.vscode("editor.action.inlineSuggest.acceptNextWord")
 pilot nope:                 user.vscode("editor.action.inlineSuggest.undo")
 pilot cancel:               user.vscode("editor.action.inlineSuggest.hide")
-pilot (dog | toggle | off | on):
+pilot (no | yes):
     user.vscode("github.copilot.toggleCopilot")
     mouse_move(1683, 954)
     sleep(300ms)

@@ -24,6 +24,7 @@ ctx.lists["self.phrase_ender"] = {
     "yep": "\n",
     "spam": ", ",
     "void": " ",
+    "score": "_",
     "dash": "-",
     "stack": ":",
 }

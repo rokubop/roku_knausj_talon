@@ -46,10 +46,21 @@ class ParrotMode:
         """Check if parrot mode has tag"""
         return tag in ctx.tags
 
+    def parrot_mode_get_tags() -> list:
+        """Get tags for parrot mode"""
+        print(f'getting tags: {list(ctx.tags)}')
+        return list(ctx.tags)
+
     def parrot_mode_append_tag(tag: str):
         """Enable parrot mode with tag"""
         print(f'enabling {tag}')
         ctx.tags = [*ctx.tags, tag]
+
+    def parrot_mode_remove_tag(tag: str):
+        """Enable parrot mode with tag"""
+        print(f'removing {tag}')
+        ctx.tags = [t for t in ctx.tags if t != tag]
+        print(f'new tags: {ctx.tags}')
 
     def parrot_mode_reset_tags():
         """Enable parrot mode reset tags"""

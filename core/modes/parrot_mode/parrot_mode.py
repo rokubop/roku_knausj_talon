@@ -19,6 +19,7 @@ is_eye_tracker_enabled = False
 use_active_mouse = False
 flex_macro = None
 special = False
+recent_tools = []
 
 @mod.action_class
 class ParrotModeActions:
@@ -213,11 +214,20 @@ class ParrotModeActions:
         """Deactivate special"""
         global special
         special = False
+        actions.user.parrot_side_b_disable()
+        # print(actions.user.parrot_mode_remove_tag("user.parrot_side_b"))
+        # print(actions.user.parrot_mode_has_tag("user.parrot_default_interactive"))
+        # print(actions.user.parrot_mode_has_tag("user.parrot_fps"))
+        # print(actions.user.parrot_mode_has_tag("user.parrot_pan"))
+        # actions.user.parrot_set_cursor_color()
 
-    def parrot_activate_special_briefly():
+    def parrot_activate_side_b_briefly():
         """Activate special briefly"""
         global special
         special = True
+        actions.user.parrot_side_b_enable()
+        # actions.user.parrot_mode_append_tag("user.parrot_side_b")
+        # actions.user.add_color_cursor("FF00FF")
         cron.after("300ms", lambda : actions.user.parrot_deactivates_special())
 
 
@@ -383,6 +393,20 @@ class ParrotModeActions:
             actions.mimic(flex_macro)
             actions.mode.disable("command")
             actions.mode.enable("user.parrot")
+
+    def parrot_tool_switch():
+        """Parrot tool switch"""
+        global recent_tools
+        if not len(recent_tools):
+            recent_tools = actions.user.parrot_tools_get()
+
+        if recent_tools[1]:
+            actions.key(recent_tools[1])
+            recent_tools = [recent_tools[1], recent_tools[0], recent_tools[2:]]
+
+    def parrot_tools_get():
+        """Parrot get tools"""
+        return ["p", "c", "t", "m"]
 
 mod = Module()
 @mod.action_class

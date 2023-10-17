@@ -37,7 +37,7 @@ class ParrotCommands:
     def parrot_t(): actions.user.kingfisher_parrot_trigger_virtual_key()
 
     def parrot_nn():
-        actions.user.parrot_activate_special_briefly()
+        actions.user.parrot_activate_side_b_briefly()
         actions.user.parrot_set_modifier('shift')
         # actions.user.parrot_side_b_enable()
 

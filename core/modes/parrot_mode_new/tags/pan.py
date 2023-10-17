@@ -35,6 +35,7 @@ class ParrotCommands:
         # actions.user.parrot_mouse_stop()
         actions.user.parrot_mouse_and_scroll_stop()
         actions.user.parrot_pan_mode_disable()
+    # def parrot_nn(): actions.user.parrot_activate_side_b_briefly()
     # def parrot_ee():
     #     # actions.user.parrot_mouse_rpg_stop()
     #     actions.next()

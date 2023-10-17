@@ -19,7 +19,7 @@ parrot(ah): user.mouse_move_native_left()
 parrot(oh): user.mouse_move_native_right()
 parrot(t): user.mouse_move_native_up()
 parrot(guh): user.mouse_move_native_down()
-parrot(palate_click): user.genshin_repeater()
+parrot(palate_click): user.fps_repeater()
 
 # parrot(cluck):
 #     print("cluck")

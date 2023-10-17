@@ -13,9 +13,10 @@ class ParrotCommands:
     def parrot_palate(): actions.core.repeat_phrase()
     def parrot_ah(): actions.user.parrot_mouse_drag(0)
     def parrot_oh(): actions.user.parrot_pan_mode_enable()
-    def parrot_t(): actions.user.kingfisher_parrot_trigger_virtual_key()
+    # def parrot_t(): actions.user.kingfisher_parrot_trigger_virtual_key()
+    def parrot_t(): actions.user.parrot_tool_switch()
     def parrot_nn():
-        actions.user.parrot_activate_special_briefly()
+        actions.user.parrot_activate_side_b_briefly()
         actions.user.parrot_set_modifier('shift')
     def parrot_eh(): actions.user.parrot_position_mode_enable()
     def parrot_ee(): actions.user.parrot_mouse_and_scroll_stop()
