@@ -8,9 +8,13 @@ ctx_parrot_pan = Context()
 
 mod.tag("parrot_fps", desc="Tag for fps parrot mode")
 ctx.matches = "tag: user.parrot_fps"
-ctx_parrot_side_b.matches = "tag: user.parrot_side_b"
+ctx_parrot_side_b.matches = """
+tag: user.parrot_side_b
+and tag: user.parrot_fps
+"""
 ctx_parrot_pan.matches = """
 tag: user.parrot_pan
+and tag: user.parrot_fps
 and mode: user.parrot
 """
 ctx.settings = {

@@ -12,6 +12,11 @@ please [<user.text>]:
     sleep(50ms)
     insert(user.text or "")
 
+<user.letter> <user.letter> <number>:
+    key(letter_1)
+    key(letter_2)
+    insert(number)
+
 # camera
 cam set:                    key(ctrl-alt-keypad_0)
 cam [(yes | no | dog)]:     key(keypad_0)
@@ -38,7 +43,6 @@ show image:                 key(shift-f10)
 focus:                      key(keypad_decimal)
 isolate:                    key(/)
 add:                        key(shift-a)
-box:                        user.mouse_drag(0)
 pan:
     key(shift:down)
     user.mouse_drag(2)
