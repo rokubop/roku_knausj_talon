@@ -3,15 +3,15 @@ from talon import Module, Context, ctrl
 mod = Module()
 mod.list("davinci_mouse_location", desc="Mouse locations")
 
-mod.apps.davinci_resolve = """
+mod.apps.davinci_resolve = r"""
 os: windows
-and app.app: davinci resolve
+and app.exe: Resolve.exe
 """
 
 ctx = Context()
-ctx.matches = """
+ctx.matches = r"""
 os: windows
-app.app: davinci resolve
+app: davinci_resolve
 """
 
 ctx.lists["self.davinci_mouse_location"] = {

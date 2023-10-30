@@ -125,7 +125,7 @@ is_dragging = True
 @mod.action_class
 class Actions:
     def mouse_click(action: str = "left", button: int = 0):
-        """Click mouse button"""
+        """Click mouse button - left, right, middle, ctrl-shift-left, double"""
         modifiers = action.split("-")
 
         if "shift" in modifiers:

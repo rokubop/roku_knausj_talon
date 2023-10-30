@@ -499,7 +499,6 @@ class UserActions:
         print('region nine')
         print('holding alt')
 
-
 def register_regions():
     keys = [
 	    actions.user.hud_create_virtual_key(actions.user.virtual_region_one, 'One'),

@@ -48,3 +48,8 @@ zoom out:
     user.davinci_click_position(davinci_mouse_location)
 {user.davinci_mouse_location} (yes | no | dog):
     user.davinci_click_position(davinci_mouse_location)
+
+# command prompt when in material view / node editor
+(node | prop) [<user.text>]:
+    key(ctrl-space)
+    insert(user.text)
