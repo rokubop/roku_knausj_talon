@@ -22,7 +22,6 @@ def select(m) -> str:
 @mod.capture(rule=TELEPORT)
 def teleport(m) -> str:
     """Verb to use for commands that teleport the cursor to another place"""
-    print("teleport")
     return str(m)
 
 

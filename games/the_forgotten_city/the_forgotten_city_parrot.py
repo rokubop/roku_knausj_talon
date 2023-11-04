@@ -51,7 +51,7 @@ class Actions:
     def parrot_ah(): actions.user.mouse_move_native_left()
     def parrot_oh(): actions.user.mouse_move_native_right()
     def parrot_ee():
-        actions.user.genshin_stop_layer()
+        actions.user.fps_stop_layer()
         actions.key("shift:up")
         actions.key("ctrl:up")
     def parrot_guh(): actions.key("shift:down")
@@ -83,7 +83,7 @@ class Actions:
 #         actions.user.mouse_move_native_stop()
 #         actions.user.hold_dir_key_mutually_exclusive('d')
 #     def parrot_ee():
-#         actions.user.genshin_stop_layer()
+#         actions.user.fps_stop_layer()
 #     # def parrot_eh():
 #     #     actions.user.mouse_move_native_stop()
 #     #     actions.user.hold_dir_key_mutually_exclusive('a')

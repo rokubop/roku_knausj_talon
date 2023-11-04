@@ -12,3 +12,13 @@
 
 # ^use {user.playback_microphone_pair}:
 #     user.change_sound_device_pair(playback_microphone_pair)
+
+voice [meter] switch:
+    user.switcher_focus('vb audio')
+    mouse_move(1765, 487)
+    mouse_click()
+
+# os: windows
+# and app.name: VB-AUDIO Virtual Audio Device Mixing Console Application
+# os: windows
+# and app.exe: voicemeeter.exe
