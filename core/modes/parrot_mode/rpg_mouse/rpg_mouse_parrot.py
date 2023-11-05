@@ -15,7 +15,7 @@ ctx.settings = {
 
 @ctx.action_class("user")
 class ParrotCommands:
-    def parrot_cluck(): actions.user.rpg_mouse_mode_disable_full()
+    def parrot_cluck(): actions.user.parrot_rpg_mouse_mode_disable_full()
     def parrot_pop():
         actions.user.rpg_mouse_stop()
         actions.user.mouse_click()
@@ -27,10 +27,10 @@ class ParrotCommands:
     def parrot_tut(): actions.user.rpg_mouse_repeat_reverse_dir_by_increment()
     def parrot_ee(): actions.user.rpg_mouse_stop()
     def parrot_eh():
-        actions.user.rpg_mouse_mode_disable()
+        actions.user.parrot_rpg_mouse_mode_disable()
         actions.user.parrot_mode_enable()
         actions.user.parrot_teleport_mouse_soft()
     def parrot_nn(): actions.user.rpg_mouse_move_slow()
     def parrot_t(): actions.user.rpg_mouse_move_to_interaction_axis()
-    def parrot_er(): actions.user.rpg_mouse_mode_disable()
+    def parrot_er(): actions.user.parrot_rpg_mouse_mode_disable()
     def parrot_guh(): actions.user.rpg_mouse_move_fast()

@@ -5,13 +5,13 @@ ctx = Context()
 
 mod.setting(
     "rpg_mouse_increment_x",
-    desc="X increment for parrot mouse rpg mode",
+    desc="X increment for rpg mouse mode",
     type=int,
     default=26
 )
 mod.setting(
     "rpg_mouse_increment_y",
-    desc="Y increment for parrot mouse rpg mode",
+    desc="Y increment for rpg mouse mode",
     type=int,
     default=26
 )
@@ -51,22 +51,18 @@ def start_moving(dx, dy):
 class RpgMouseActions:
     def rpg_mouse_move_left():
         """Start moving mouse to the left"""
-        print("Start moving mouse to the left")
         start_moving(-1, 0)
 
     def rpg_mouse_move_right():
         """Start moving mouse to the right"""
-        print("Start moving mouse to the right")
         start_moving(1, 0)
 
     def rpg_mouse_move_down():
         """Start moving mouse down"""
-        print("Start moving mouse down")
         start_moving(0, 1)
 
     def rpg_mouse_move_up():
         """Start moving mouse up"""
-        print("Start moving mouse up")
         start_moving(0, -1)
 
     def rpg_mouse_repeat_dir_by_increment():
@@ -74,8 +70,6 @@ class RpgMouseActions:
         x, y = ctrl.mouse_pos()
         increment_x = settings.get("user.rpg_mouse_increment_x")
         increment_y = settings.get("user.rpg_mouse_increment_y")
-        print(increment_x)
-        print(increment_y)
 
         dx = direction[0] * increment_x
         dy = direction[1] * increment_y
@@ -115,27 +109,26 @@ class RpgMouseActions:
         """Mouse move to interaction axis"""
         pos = ctrl.mouse_pos()
         y = settings.get("user.rpg_mouse_interaction_axis_y_pos")
-        print(f"the value of y is {y}")
         ctrl.mouse_move(pos[0], y)
         actions.user.rpg_mouse_stop()
 
     def rpg_mouse_stop():
         """Stop moving mouse"""
-        print("parrot mouse nav stop")
         global nav_job, direction
         if nav_job:
             cron.cancel(nav_job)
 
-    def rpg_mouse_mode_enable():
+@mod.action_class
+class ParrotRpgMouseActions:
+    def parrot_rpg_mouse_mode_enable():
         """Enable parrot mouse nav mode"""
-        print("parrot mouse nav mode enabled")
         actions.user.parrot_freeze_mouse()
         actions.user.add_yellow_cursor()
         actions.user.rpg_mouse_stop()
         update_speed(speed_default)
         actions.user.parrot_mode_enable_tag("user.rpg_mouse")
 
-    def rpg_mouse_mode_disable_full():
+    def parrot_rpg_mouse_mode_disable_full():
         """Disable parrot mouse nav mode and exit parrot mode"""
         print("parrot mouse nav mode disabled")
         actions.user.rpg_mouse_stop()
@@ -144,7 +137,7 @@ class RpgMouseActions:
         actions.user.parrot_mode_reset_tags()
         actions.user.parrot_mode_disable()
 
-    def rpg_mouse_mode_disable():
+    def parrot_rpg_mouse_mode_disable():
         """Disable parrot mouse nav mode"""
         print("parrot mouse nav mode disabled")
         actions.user.rpg_mouse_stop()

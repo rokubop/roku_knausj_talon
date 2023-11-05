@@ -21,7 +21,7 @@ class ParrotCommands:
     def parrot_ee(): actions.user.parrot_mouse_and_scroll_stop()
     def parrot_guh(): actions.user.parrot_run_flex_macro()
     def parrot_tut(): actions.user.parrot_mouse_click(1)
-    def parrot_er(): actions.user.rpg_mouse_mode_enable()
+    def parrot_er(): actions.user.parrot_rpg_mouse_mode_enable()
     def parrot_hiss(): actions.user.parrot_scroll_down()
     def parrot_hiss_stop(): actions.user.parrot_scroll_stop_soft()
     def parrot_shush(): actions.user.parrot_scroll_up()
