@@ -121,7 +121,7 @@ class RpgMouseActions:
 @mod.action_class
 class ParrotRpgMouseActions:
     def parrot_rpg_mouse_mode_enable():
-        """Enable parrot mouse nav mode"""
+        """Enable parrot mouse rpg mode"""
         actions.user.parrot_freeze_mouse()
         actions.user.add_yellow_cursor()
         actions.user.rpg_mouse_stop()
@@ -129,8 +129,7 @@ class ParrotRpgMouseActions:
         actions.user.parrot_mode_enable_tag("user.rpg_mouse")
 
     def parrot_rpg_mouse_mode_disable_full():
-        """Disable parrot mouse nav mode and exit parrot mode"""
-        print("parrot mouse nav mode disabled")
+        """Disable parrot mouse rpg mode and exit parrot mode"""
         actions.user.rpg_mouse_stop()
         actions.user.clear_screen_regions()
         update_speed(speed_default)
@@ -138,8 +137,7 @@ class ParrotRpgMouseActions:
         actions.user.parrot_mode_disable()
 
     def parrot_rpg_mouse_mode_disable():
-        """Disable parrot mouse nav mode"""
-        print("parrot mouse nav mode disabled")
+        """Disable parrot mouse rpg mode"""
         actions.user.rpg_mouse_stop()
         actions.user.clear_screen_regions()
         update_speed(speed_default)
