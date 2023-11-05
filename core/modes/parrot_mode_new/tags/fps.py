@@ -120,7 +120,8 @@ class Actions:
     def parrot_hiss_stop(): actions.skip()
     def parrot_ah(): actions.user.mouse_move_native_left()
     def parrot_oh(): actions.user.mouse_move_native_right()
-    def parrot_eh(): actions.user.hold_dir_key_mutually_exclusive('a')
+    # def parrot_eh(): actions.user.hold_dir_key_mutually_exclusive('a')
+    # def parrot_eh(): actions.user.parrot_position_mode_enable()
     def parrot_er():
         actions.user.enable_parrot_fps_compass()
         cron.after("1s", actions.user.disable_parrot_fps_compass)
@@ -531,7 +532,6 @@ class FpsFlickActions:
     def fps_flick_mouse_down():
         """Flick mouse down"""
         global compass_north_offset, compass_north_anchor, y_offset
-        x360 = settings.get("user.fps_calibrate_x_360")
         y90 = settings.get("user.fps_calibrate_y_floor_to_center")
         target_y_pos = int(y90 / 2)
         dy = target_y_pos - y_offset
@@ -568,7 +568,6 @@ class FpsFlickActions:
     def fps_flick_mouse_up():
         """Flick mouse up"""
         global compass_north_offset, compass_north_anchor, y_offset
-        x360 = settings.get("user.fps_calibrate_x_360")
         y90 = settings.get("user.fps_calibrate_y_floor_to_center")
         target_y_pos = -int(y90 / 2)
         dy = target_y_pos - y_offset

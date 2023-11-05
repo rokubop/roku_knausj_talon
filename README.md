@@ -16,7 +16,7 @@ Fork of [talonhub/community](https://github.com/talonhub/community).
 ## Custom Features
 - [Parrot mode WIP](core/mode/parrot_mode/parrot_mode.py)
 - [Parrot repeat and reverse repeat](custom/parrot.py)
-- [Parrot mouse RPG mode](core/mode/parrot_mode/parrot_mouse_rpg_mode.py)
+- [Parrot mouse RPG mode](core/mode/parrot_mode/rpg_mouse_mode.py)
 - [Talon restart](plugin/talon_helpers/talon_helpers.py)
 - [Windows powershell command](update-repos.ps1) or [shell command](update-repos.sh) to update all of repositories sibling to current directory
 - [window max/min/restore for windows](core/windows_and_tabs/window_and_tabs_win_roku.py)

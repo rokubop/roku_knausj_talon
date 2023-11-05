@@ -1,6 +1,7 @@
 from talon import Module, Context, actions, ctrl, cron, settings
 
 mod = Module()
+ctx = Context()
 
 nav_job = None
 direction = (0, 1)
@@ -28,32 +29,30 @@ def start_moving(dx, dy):
     nav_job = cron.interval("16ms", nav_tick)
 
 @mod.action_class
-class ParrotMouseNavModeActions:
-    def parrot_mouse_rpg_move_left():
+class RpgMouseActions:
+    def rpg_mouse_move_left():
         """Start moving mouse to the left"""
         print("Start moving mouse to the left")
         start_moving(-1, 0)
 
-    def parrot_mouse_rpg_move_right():
+    def rpg_mouse_move_right():
         """Start moving mouse to the right"""
         print("Start moving mouse to the right")
         start_moving(1, 0)
 
-    def parrot_mouse_rpg_move_down():
+    def rpg_mouse_move_down():
         """Start moving mouse down"""
         print("Start moving mouse down")
         start_moving(0, 1)
 
-    def parrot_mouse_rpg_move_up():
+    def rpg_mouse_move_up():
         """Start moving mouse up"""
         print("Start moving mouse up")
         start_moving(0, -1)
 
-    def parrot_mouse_rpg_repeat_dir_by_increment():
+    def rpg_mouse_repeat_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
-        print('parrot_mouse_rpg_repeat_dir_by_increment')
         x, y = ctrl.mouse_pos()
-        # print(settings.get("user.parrot_rpg_increment_x"))
         increment_x = settings.get("user.parrot_rpg_increment_x")
         increment_y = settings.get("user.parrot_rpg_increment_y")
         print(increment_x)
@@ -65,7 +64,7 @@ class ParrotMouseNavModeActions:
         if direction:
             ctrl.mouse_move(x + dx, y + dy)
 
-    def parrot_mouse_rpg_repeat_reverse_dir_by_increment():
+    def rpg_mouse_repeat_reverse_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
         x, y = ctrl.mouse_pos()
         increment_x = settings.get("user.parrot_rpg_increment_x")
@@ -76,12 +75,12 @@ class ParrotMouseNavModeActions:
         if direction:
             ctrl.mouse_move(x + dx, y + dy)
 
-    def parrot_mouse_rpg_move_slow():
+    def rpg_mouse_move_slow():
         """Move mouse slower"""
         global speed
         update_speed("slow")
 
-    def parrot_mouse_rpg_move_fast():
+    def rpg_mouse_move_fast():
         """Move mouse faster"""
         global speed
         if speed == speeds["slow"]:
@@ -93,50 +92,43 @@ class ParrotMouseNavModeActions:
         elif speed == speeds["fastest"]:
             return
 
-    def parrot_mouse_rpg_move_to_interaction_axis():
+    def rpg_mouse_move_to_interaction_axis():
         """Mouse move to interaction axis"""
         pos = ctrl.mouse_pos()
         y = settings.get("user.parrot_rpg_interaction_axis_y_pos")
         print(f"the value of y is {y}")
         ctrl.mouse_move(pos[0], y)
-        actions.user.parrot_mouse_rpg_stop()
+        actions.user.rpg_mouse_stop()
 
-    def parrot_mouse_rpg_stop():
+    def rpg_mouse_stop():
         """Stop moving mouse"""
         print("parrot mouse nav stop")
         global nav_job, direction
         if nav_job:
             cron.cancel(nav_job)
 
-    def parrot_mouse_rpg_mode_enable():
+    def rpg_mouse_mode_enable():
         """Enable parrot mouse nav mode"""
         print("parrot mouse nav mode enabled")
         actions.user.parrot_freeze_mouse()
         actions.user.add_yellow_cursor()
-        actions.user.parrot_mouse_rpg_stop()
+        actions.user.rpg_mouse_stop()
         update_speed(speed_default)
-        actions.user.parrot_mode_enable_tag("user.parrot_mouse_rpg")
-        # actions.mode.disable("user.parrot")
-        # actions.mode.disable("command")
-        # actions.mode.disable("dictation")
-        # actions.mode.enable("user.parrot_mouse_rpg")
+        actions.user.parrot_mode_enable_tag("user.rpg_mouse")
 
-    def parrot_mouse_rpg_mode_disable_full():
+    def rpg_mouse_mode_disable_full():
         """Disable parrot mouse nav mode and exit parrot mode"""
         print("parrot mouse nav mode disabled")
-        actions.user.parrot_mouse_rpg_stop()
+        actions.user.rpg_mouse_stop()
         actions.user.clear_screen_regions()
         update_speed(speed_default)
         actions.user.parrot_mode_reset_tags()
         actions.user.parrot_mode_disable()
-        # actions.mode.disable("user.parrot_mouse_rpg")
-        # actions.mode.enable("command")
-        # actions.mode.disable("dictation")
 
-    def parrot_mouse_rpg_mode_disable():
+    def rpg_mouse_mode_disable():
         """Disable parrot mouse nav mode"""
         print("parrot mouse nav mode disabled")
-        actions.user.parrot_mouse_rpg_stop()
+        actions.user.rpg_mouse_stop()
         actions.user.clear_screen_regions()
         update_speed(speed_default)
         actions.user.parrot_mode_reset_tags()
