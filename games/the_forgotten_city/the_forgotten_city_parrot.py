@@ -29,9 +29,9 @@ tag: user.parrot_side_b
 """
 
 # ctx_parrot.settings = {
-#     "user.parrot_rpg_increment_y": 75,
-#     "user.parrot_rpg_increment_x": 75,
-#     "user.parrot_rpg_interaction_axis_y_pos": 75,
+#     "user.rpg_mouse_increment_y": 75,
+#     "user.rpg_mouse_increment_x": 75,
+#     "user.rpg_mouse_interaction_axis_y_pos": 75,
 # }
 
 ctx.settings = {

@@ -4,19 +4,19 @@ mod = Module()
 ctx = Context()
 
 mod.setting(
-    "parrot_rpg_increment_x",
+    "rpg_mouse_increment_x",
     desc="X increment for parrot mouse rpg mode",
     type=int,
     default=26
 )
 mod.setting(
-    "parrot_rpg_increment_y",
+    "rpg_mouse_increment_y",
     desc="Y increment for parrot mouse rpg mode",
     type=int,
     default=26
 )
 mod.setting(
-    "parrot_rpg_interaction_axis_y_pos",
+    "rpg_mouse_interaction_axis_y_pos",
     desc="Y position of an interaction bar in the application",
     type=int,
     default=140
@@ -72,8 +72,8 @@ class RpgMouseActions:
     def rpg_mouse_repeat_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
         x, y = ctrl.mouse_pos()
-        increment_x = settings.get("user.parrot_rpg_increment_x")
-        increment_y = settings.get("user.parrot_rpg_increment_y")
+        increment_x = settings.get("user.rpg_mouse_increment_x")
+        increment_y = settings.get("user.rpg_mouse_increment_y")
         print(increment_x)
         print(increment_y)
 
@@ -86,8 +86,8 @@ class RpgMouseActions:
     def rpg_mouse_repeat_reverse_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
         x, y = ctrl.mouse_pos()
-        increment_x = settings.get("user.parrot_rpg_increment_x")
-        increment_y = settings.get("user.parrot_rpg_increment_y")
+        increment_x = settings.get("user.rpg_mouse_increment_x")
+        increment_y = settings.get("user.rpg_mouse_increment_y")
         dx = direction[0] * increment_x * -1
         dy = direction[1] * increment_y * -1
 
@@ -114,7 +114,7 @@ class RpgMouseActions:
     def rpg_mouse_move_to_interaction_axis():
         """Mouse move to interaction axis"""
         pos = ctrl.mouse_pos()
-        y = settings.get("user.parrot_rpg_interaction_axis_y_pos")
+        y = settings.get("user.rpg_mouse_interaction_axis_y_pos")
         print(f"the value of y is {y}")
         ctrl.mouse_move(pos[0], y)
         actions.user.rpg_mouse_stop()

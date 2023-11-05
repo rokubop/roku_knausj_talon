@@ -24,8 +24,8 @@ tag: user.parrot_default
 
 ctx_parrot.settings = {
     "user.parrot_mode_mouse_freeze_on_click": False,
-    "user.parrot_rpg_increment_y": 75,
-    "user.parrot_rpg_increment_x": 75,
+    "user.rpg_mouse_increment_y": 75,
+    "user.rpg_mouse_increment_x": 75,
 }
 
 @ctx.action_class("user")

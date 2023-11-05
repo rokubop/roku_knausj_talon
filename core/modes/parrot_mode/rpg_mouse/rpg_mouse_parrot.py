@@ -10,7 +10,7 @@ tag: user.rpg_mouse
 """
 
 ctx.settings = {
-    "user.parrot_rpg_interaction_axis_y_pos": 140,
+    "user.rpg_mouse_interaction_axis_y_pos": 140,
 }
 
 @ctx.action_class("user")

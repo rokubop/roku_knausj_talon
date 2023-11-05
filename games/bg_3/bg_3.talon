@@ -1,8 +1,8 @@
 app: bg_3
 -
 settings():
-    user.parrot_rpg_increment_x = 43
-    user.parrot_rpg_increment_y = 43
+    user.rpg_mouse_increment_x = 43
+    user.rpg_mouse_increment_y = 43
     speech.timeout = 0.20
     user.parrot_default_tag = "user.parrot_default_interactive"
 # parrot(tut): mouse_click(1)
