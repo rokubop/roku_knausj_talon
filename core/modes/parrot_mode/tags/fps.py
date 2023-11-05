@@ -7,10 +7,14 @@ ctx_parrot_side_b = Context()
 ctx_parrot_pan = Context()
 ctx_parrot_fps_compass = Context()
 ctx_parrot_fps_flick = Context()
+ctx_parrot_fps_walk_dir = Context()
+ctx_parrot_fps_orbit_scan = Context()
 
 mod.tag("parrot_fps", desc="Tag for fps parrot mode")
 mod.tag("parrot_fps_compass", desc="Tag for fps compass parrot mode")
 mod.tag("parrot_fps_flick", desc="Tag for fps flick parrot mode")
+mod.tag("parrot_fps_walk_dir", desc="Tag for fps walk dir")
+mod.tag("parrot_fps_orbit_scan", desc="Tag for fps orbit scan")
 ctx.matches = """
 tag: user.parrot_fps
 and mode: user.parrot
@@ -35,6 +39,16 @@ tag: user.parrot_fps
 and tag: user.parrot_fps_flick
 and mode: user.parrot
 """
+ctx_parrot_fps_walk_dir.matches = """
+tag: user.parrot_fps
+and tag: user.parrot_fps_walk_dir
+and mode: user.parrot
+"""
+ctx_parrot_fps_orbit_scan.matches = """
+tag: user.parrot_fps
+and tag: user.parrot_fps_orbit_scan
+and mode: user.parrot
+"""
 ctx.settings = {
     "key_hold": 64.0,
     "key_wait": 16.0,
@@ -57,6 +71,7 @@ compass_north_offset = 0
 y_offset = 0
 last_action = None
 set_last_action_job = None
+last_mode = "parrot_fps_compass"
 
 def set_last_action(action):
     global last_action, set_last_action_job
@@ -114,20 +129,46 @@ class Actions:
                 repeater_actions[last_action]()
         else:
             actions.user.parrot_mouse_click(1)
-
     def parrot_hiss():
         actions.user.hold_dir_key_mutually_exclusive('w')
     def parrot_hiss_stop(): actions.skip()
-    def parrot_ah(): actions.user.mouse_move_native_left()
-    def parrot_oh(): actions.user.mouse_move_native_right()
-    # def parrot_eh(): actions.user.hold_dir_key_mutually_exclusive('a')
+    def parrot_ah():
+        global last_mode
+        if last_mode == "parrot_fps_compass":
+            actions.user.fps_compass_go_north_west_relative()
+            actions.user.fps_compass_snap_to_closest_45()
+        elif last_mode == "parrot_fps_orbit_scan":
+            actions.user.mouse_move_native_left()
+        elif last_mode == "parrot_fps_move_dir":
+            actions.user.hold_dir_key_mutually_exclusive('a')
+    def parrot_oh():
+        global last_mode
+        if last_mode == "parrot_fps_compass":
+            actions.user.fps_compass_go_north_east_relative()
+            actions.user.fps_compass_snap_to_closest_45()
+        elif last_mode == "parrot_fps_orbit_scan":
+            actions.user.mouse_move_native_right()
+        elif last_mode == "parrot_fps_move_dir":
+            actions.user.hold_dir_key_mutually_exclusive('d')
+    def parrot_eh():
+        global last_mode
+        if last_mode == "parrot_fps_move_dir":
+            actions.user.parrot_mode_reset_tags()
+            actions.user.parrot_position_mode_enable()
+        last_mode = "parrot_fps_move_dir"
+
     # def parrot_eh(): actions.user.parrot_position_mode_enable()
     def parrot_er():
+        global last_mode
+        last_mode = "parrot_fps_compass"
         actions.user.enable_parrot_fps_compass()
         cron.after("1s", actions.user.disable_parrot_fps_compass)
     def parrot_shush(): actions.user.hold_dir_key_mutually_exclusive('s')
     def parrot_shush_stop(): actions.skip()
-    def parrot_nn(): actions.user.parrot_activate_side_b_briefly()
+    def parrot_nn():
+        global last_mode
+        last_mode = "parrot_fps_orbit_scan"
+        actions.user.parrot_activate_side_b_briefly()
     def parrot_ee(): actions.user.fps_stop_layer()
     def parrot_palate():
         global last_action
@@ -138,10 +179,11 @@ class Actions:
             actions.key("space")
         # else:
         #     actions.user.fps_repeater()
-    def parrot_t():actions.key("q")
+    def parrot_t(): actions.key("q")
     def parrot_guh():
-        actions.user.enable_parrot_fps_flick()
-        cron.after("1s", actions.user.disable_parrot_fps_flick)
+        actions.user.fps_flick_mouse_down_toggle()
+        # actions.user.enable_parrot_fps_flick()
+        # cron.after("1s", actions.user.disable_parrot_fps_flick)
         # actions.user.fps_grid()
 
 
@@ -333,6 +375,25 @@ class Actions:
         actions.user.disable_parrot_fps_compass()
     def parrot_shush_stop(): actions.skip()
 
+####################################################################################################
+# Walk Direction
+@ctx_parrot_fps_walk_dir.action_class("user")
+class Actions:
+    def parrot_ee(): actions.user.fps_stop_layer()
+    def parrot_ah():
+        actions.user.hold_dir_key_mutually_exclusive('a')
+    def parrot_oh():
+        actions.user.hold_dir_key_mutually_exclusive('d')
+
+####################################################################################################
+# Orbit Scan
+@ctx_parrot_fps_orbit_scan.action_class("user")
+class Actions:
+    def parrot_ee(): actions.user.fps_stop_layer()
+    def parrot_ah():
+        actions.user.mouse_move_native_left()
+    def parrot_oh():
+        actions.user.mouse_move_native_right()
 
 @mod.action_class
 class MouseActions:
@@ -362,6 +423,30 @@ class MouseActions:
         """Disable parrot fps compass"""
         tags = set(ctx.tags)
         tags.discard("user.parrot_fps_compass")
+        ctx.tags = tags
+
+    def enable_parrot_fps_walk_dir():
+        """Enable parrot walk dir"""
+        tags = set(ctx.tags)
+        tags.add("user.parrot_fps_walk_dir")
+        ctx.tags = tags
+
+    def disable_parrot_fps_walk_dir():
+        """Disable parrot walk dir"""
+        tags = set(ctx.tags)
+        tags.discard("user.parrot_fps_walk_dir")
+        ctx.tags = tags
+
+    def enable_parrot_fps_orbit_scan():
+        """Enable parrot orbit scan"""
+        tags = set(ctx.tags)
+        tags.add("user.parrot_fps_orbit_scan")
+        ctx.tags = tags
+
+    def disable_parrot_fps_orbit_scan():
+        """Disable parrot orbit scan"""
+        tags = set(ctx.tags)
+        tags.discard("user.parrot_fps_orbit_scan")
         ctx.tags = tags
 
     def enable_parrot_fps_flick():
@@ -528,6 +613,14 @@ class FpsFlickActions:
         """Set center anchor"""
         global y_offset
         y_offset = 0
+
+    def fps_flick_mouse_down_toggle():
+        """Toggle flick mouse down"""
+        global y_offset
+        if y_offset <= 100:
+            actions.user.fps_flick_mouse_down()
+        else:
+            actions.user.fps_flick_mouse_center()
 
     def fps_flick_mouse_down():
         """Flick mouse down"""

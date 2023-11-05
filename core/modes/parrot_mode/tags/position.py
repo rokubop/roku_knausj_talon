@@ -7,14 +7,20 @@ mod.tag("parrot_position", desc="Tag for position parrot mode")
 
 ctx.matches = r"""
 tag: user.parrot_position
+mode: user.parrot
 """
 
 @ctx.action_class("user")
 class ParrotCommands:
+    def parrot_pop(): actions.user.parrot_mouse_click(0)
     def parrot_cluck():
         actions.user.parrot_position_mode_disable()
         actions.user.parrot_mode_disable()
     def parrot_eh(): actions.user.parrot_teleport_mouse_soft()
+    def parrot_ah(): actions.user.parrot_mouse_drag(0)
+    def parrot_ee(): actions.user.parrot_mouse_and_scroll_stop()
+    def parrot_tut(): actions.user.parrot_mouse_click(1)
+
 
 @mod.action_class
 class Actions:

@@ -7,6 +7,7 @@ class Actions:
     def pedal_left_down():
         """Left pedal"""
         print("default left pedal down")
+        # actions.key("ctrl-shift-m")
         ctrl.mouse_click(button=0, down=True)
 
     def pedal_left_up():
@@ -16,6 +17,7 @@ class Actions:
 
     def pedal_center_down():
         """Center pedal"""
+        actions.speech.toggle()
         print("default center pedal down")
 
     def pedal_center_up():
