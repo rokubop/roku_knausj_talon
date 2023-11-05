@@ -7,5 +7,7 @@ settings():
     user.fps_mouse_y_speed_continuous = 20
     user.fps_mouse_x_speed_increment = 500
     user.fps_mouse_x_speed_increment = 500
+    user.fps_calibrate_x_360 = 4521
+    user.fps_calibrate_y_floor_to_center = 1150
 
-tag(): user.fps_camera
+# tag(): user.fps_camera
