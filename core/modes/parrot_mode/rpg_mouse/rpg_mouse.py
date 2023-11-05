@@ -3,6 +3,25 @@ from talon import Module, Context, actions, ctrl, cron, settings
 mod = Module()
 ctx = Context()
 
+mod.setting(
+    "parrot_rpg_increment_x",
+    desc="X increment for parrot mouse rpg mode",
+    type=int,
+    default=26
+)
+mod.setting(
+    "parrot_rpg_increment_y",
+    desc="Y increment for parrot mouse rpg mode",
+    type=int,
+    default=26
+)
+mod.setting(
+    "parrot_rpg_interaction_axis_y_pos",
+    desc="Y position of an interaction bar in the application",
+    type=int,
+    default=140
+)
+
 nav_job = None
 direction = (0, 1)
 
