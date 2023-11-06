@@ -374,3 +374,12 @@ tab yep:
     key(tab)
     sleep(50ms)
     key(enter)
+
+# Save and restore tabs extension
+tab group (disk | save):                   user.vscode("saveRestoreEditors.cleanRestoreEditors")
+tab group update:                   user.vscode("saveRestoreEditors.resaveEditors")
+tab group (open | pop | load | list) [<user.text>]:
+    user.vscode("saveRestoreEditors.restoreEditors")
+    sleep(100ms)
+    insert(text or "")
+tab group delete: user.vscode("saveRestoreEditors.cleanPopSavedEditors")

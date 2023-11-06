@@ -81,6 +81,7 @@ prose_rule_parts = [
     # "<user.number_dd>",
     # "<user.number_prefix>",
     # "<user.placeholder>",
+    "<user.format_text>",
     "<user.prose_modifier>",
     "<user.prose_number>",
     "<phrase>",
@@ -90,7 +91,6 @@ prose_rule_original = "({user.vocabulary} | {user.punctuation} | {user.prose_sni
 text_rule_original = "({user.vocabulary} | <phrase>)+"
 text_rule = f"({'|'.join(text_rule_parts)})+"
 prose_role = f"({'|'.join(prose_rule_parts)})+"
-
 @mod.capture(rule="{user.prose_modifiers}")
 def prose_modifier(m) -> Callable:
     return getattr(DictationFormat, m.prose_modifiers)
