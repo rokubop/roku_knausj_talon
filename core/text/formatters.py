@@ -173,6 +173,30 @@ formatters_dict = {
     "SPACE_CAPITALIZE_FIRST_WORD": (SEP, first_vs_rest(lambda w: " " + w[:1].upper() + w[1:])),
 }
 
+code_formatter_names = {
+    "all cap": "ALL_CAPS",
+    "all down": "ALL_LOWERCASE",
+    "camel": "PRIVATE_CAMEL_CASE",
+    "dotted": "DOT_SEPARATED",
+    "dub string": "DOUBLE_QUOTED_STRING",
+    "dunder": "DOUBLE_UNDERSCORE",
+    "hammer": "PUBLIC_CAMEL_CASE",
+    "kebab": "DASH_SEPARATED",
+    "packed": "DOUBLE_COLON_SEPARATED",
+    "padded": "SPACE_SURROUNDED_STRING",
+    "slasher": "SLASH_SEPARATED",
+    "smash": "NO_SPACES",
+    "snake": "SNAKE_CASE",
+    "string": "SINGLE_QUOTED_STRING",
+}
+
+prose_formatter_names = {
+    "say": "NOOP",
+    "speak": "NOOP",
+    "sentence": "CAPITALIZE_FIRST_WORD",
+    "title": "CAPITALIZE_ALL_WORDS",
+}
+
 # This is the mapping from spoken phrases to formatters
 formatters_words = {
     "all cap": formatters_dict["ALL_CAPS"],

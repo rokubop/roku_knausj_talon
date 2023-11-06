@@ -41,7 +41,7 @@ reverse, reverseTargets
 scout, findInDocument
 scout all, findInWorkspace
 shuffle, randomizeTargets
-snip | add, insertSnippet
+add, insertSnippet
 snip make, generateSnippet
 sort, sortTargets
 trade, swapTargets
