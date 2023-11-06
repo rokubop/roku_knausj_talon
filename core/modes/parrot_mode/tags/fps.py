@@ -78,7 +78,7 @@ def set_last_action(action):
     if set_last_action_job:
         cron.cancel(set_last_action_job)
     last_action = action
-    set_last_action_job = cron.after("1s", lambda: set_last_action(None))
+    set_last_action_job = cron.after("3s", lambda: set_last_action(None))
 
 repeater_actions = {
     "compass_north": actions.user.fps_compass_go_north_relative,
@@ -110,6 +110,8 @@ reverser_actions = {
     "flick_up": actions.user.fps_flick_center,
 }
 
+is_running = False
+
 @ctx.action_class("user")
 class Actions:
     def parrot_cluck():
@@ -120,7 +122,15 @@ class Actions:
         actions.key('e')
         actions.user.parrot_mouse_click(0)
         actions.user.fps_stop_layer()
-    # def parrot_t(): actions.skip()
+    def parrot_t():
+        global is_running
+        if is_running:
+            actions.key("shift:up")
+            is_running = False
+        else:
+            actions.key("shift:down")
+            is_running = True
+
     # def parrot_guh(): actions.skip()
     def parrot_tut():
         global last_action
@@ -168,7 +178,8 @@ class Actions:
     def parrot_nn():
         global last_mode
         last_mode = "parrot_fps_orbit_scan"
-        actions.user.parrot_activate_side_b_briefly()
+        actions.user.enable_parrot_fps_orbit_scan()
+        # actions.user.parrot_activate_side_b_briefly()
     def parrot_ee(): actions.user.fps_stop_layer()
     def parrot_palate():
         global last_action
@@ -177,9 +188,7 @@ class Actions:
                 repeater_actions[last_action]()
         else:
             actions.key("space")
-        # else:
-        #     actions.user.fps_repeater()
-    def parrot_t(): actions.key("q")
+    # def parrot_t(): actions.key("q")
     def parrot_guh():
         actions.user.fps_flick_mouse_down_toggle()
         # actions.user.enable_parrot_fps_flick()
@@ -187,36 +196,36 @@ class Actions:
         # actions.user.fps_grid()
 
 
-@ctx_parrot_side_b.action_class("user")
-class Actions:
-    def parrot_cluck():
-        if (actions.user.parrot_side_b_source_tag() == "user.parrot_fps"):
-            actions.user.parrot_mode_append_tag("user.parrot_default")
-            actions.user.parrot_mode_remove_tag("user.parrot_fps")
-        else:
-            actions.user.parrot_mode_reset_tags()
-    def parrot_hiss():
-        if (actions.user.parrot_side_b_source_tag() == "user.parrot_pan"):
-            actions.user.parrot_pan_mode_disable()
-            actions.user.hold_dir_key_mutually_exclusive('w')
-        else:
-            actions.user.parrot_mode_append_tag("user.parrot_pan")
-            actions.user.add_color_cursor("FFA500")
-            actions.user.mouse_move_native_down()
-        actions.user.parrot_side_b_disable()
-    def parrot_hiss_stop(): pass
-    def parrot_shush():
-        if (actions.user.parrot_side_b_source_tag() == "user.parrot_pan"):
-            actions.user.parrot_pan_mode_disable()
-            actions.user.hold_dir_key_mutually_exclusive('s')
-        else:
-            actions.user.parrot_mode_append_tag("user.parrot_pan")
-            actions.user.add_color_cursor("FFA500")
-            actions.user.mouse_move_native_up()
-        actions.user.parrot_side_b_disable()
-    def parrot_shush_stop(): pass
-    def parrot_eh(): actions.user.parrot_position_mode_enable()
-    def parrot_ee(): win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1200, 0)
+# @ctx_parrot_side_b.action_class("user")
+# class Actions:
+#     def parrot_cluck():
+#         if (actions.user.parrot_side_b_source_tag() == "user.parrot_fps"):
+#             actions.user.parrot_mode_append_tag("user.parrot_default")
+#             actions.user.parrot_mode_remove_tag("user.parrot_fps")
+#         else:
+#             actions.user.parrot_mode_reset_tags()
+#     def parrot_hiss():
+#         if (actions.user.parrot_side_b_source_tag() == "user.parrot_pan"):
+#             actions.user.parrot_pan_mode_disable()
+#             actions.user.hold_dir_key_mutually_exclusive('w')
+#         else:
+#             actions.user.parrot_mode_append_tag("user.parrot_pan")
+#             actions.user.add_color_cursor("FFA500")
+#             actions.user.mouse_move_native_down()
+#         actions.user.parrot_side_b_disable()
+#     def parrot_hiss_stop(): pass
+#     def parrot_shush():
+#         if (actions.user.parrot_side_b_source_tag() == "user.parrot_pan"):
+#             actions.user.parrot_pan_mode_disable()
+#             actions.user.hold_dir_key_mutually_exclusive('s')
+#         else:
+#             actions.user.parrot_mode_append_tag("user.parrot_pan")
+#             actions.user.add_color_cursor("FFA500")
+#             actions.user.mouse_move_native_up()
+#         actions.user.parrot_side_b_disable()
+#     def parrot_shush_stop(): pass
+#     def parrot_eh(): actions.user.parrot_position_mode_enable()
+#     def parrot_ee(): win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 1200, 0)
 
 @ctx_parrot_pan.action_class("user")
 class Actions:
@@ -314,6 +323,7 @@ class Actions:
     def parrot_palate():
         actions.user.fps_set_center_anchor()
         actions.user.disable_parrot_fps_flick()
+        actions.user.hud_publish_mouse_particle('float_up', 'ff0000')
     def parrot_hiss():
         actions.user.fps_flick_mouse_down()
         actions.user.disable_parrot_fps_flick()
@@ -347,7 +357,9 @@ class Actions:
     def parrot_pop():
         actions.user.fps_compass_snap_to_closest_45()
         actions.user.disable_parrot_fps_compass()
-    def parrot_palate(): actions.user.fps_compass_set_north_anchor()
+    def parrot_palate():
+        actions.user.fps_compass_set_north_anchor()
+        actions.user.hud_publish_mouse_particle('float_up', 'ff0000')
     def parrot_hiss():
         actions.user.fps_compass_go_north_relative()
         actions.user.disable_parrot_fps_compass()
@@ -389,11 +401,27 @@ class Actions:
 # Orbit Scan
 @ctx_parrot_fps_orbit_scan.action_class("user")
 class Actions:
+    def parrot_palate(): actions.user.mouse_move_repeat_dir_by_increment()
+    def parrot_tut(): actions.user.mouse_move_repeat_reverse_dir_by_increment()
     def parrot_ee(): actions.user.fps_stop_layer()
-    def parrot_ah():
-        actions.user.mouse_move_native_left()
-    def parrot_oh():
-        actions.user.mouse_move_native_right()
+    def parrot_ah(): actions.user.mouse_move_native_left()
+    def parrot_oh(): actions.user.mouse_move_native_right()
+    def parrot_hiss(): actions.user.mouse_move_native_down()
+    def parrot_hiss_stop(): pass
+    def parrot_shush(): actions.user.mouse_move_native_up()
+    def parrot_shush_stop(): pass
+    def parrot_nn(): actions.user.disable_parrot_fps_orbit_scan()
+    def parrot_cluck():
+        actions.user.disable_parrot_fps_orbit_scan()
+    def parrot_er():
+        actions.user.disable_parrot_fps_orbit_scan()
+        actions.next()
+    def parrot_eh():
+        actions.user.disable_parrot_fps_orbit_scan()
+        actions.next()
+    def parrot_guh():
+        actions.user.disable_parrot_fps_orbit_scan()
+        actions.next()
 
 @mod.action_class
 class MouseActions:
@@ -442,12 +470,14 @@ class MouseActions:
         tags = set(ctx.tags)
         tags.add("user.parrot_fps_orbit_scan")
         ctx.tags = tags
+        actions.user.add_color_cursor("FFA500")
 
     def disable_parrot_fps_orbit_scan():
         """Disable parrot orbit scan"""
         tags = set(ctx.tags)
         tags.discard("user.parrot_fps_orbit_scan")
         ctx.tags = tags
+        actions.user.parrot_set_cursor_color()
 
     def enable_parrot_fps_flick():
         """Enable parrot fps flick"""
@@ -486,7 +516,7 @@ class MouseActions:
 
         if direction:
             win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx), int(dy))
-        actions.user.fps_stop_layer()
+        # actions.user.fps_stop_layer()
 
     def mouse_move_repeat_reverse_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
