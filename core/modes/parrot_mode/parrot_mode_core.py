@@ -4,10 +4,21 @@ mod = Module()
 ctx = Context()
 
 logging_enabled = True
+preserved_tag = None
 
 def log(msg: str):
     if logging_enabled:
         print(f"tag: {', '.join(ctx.tags)}, parrot: {msg}")
+
+tag_enable_map = {
+    "user.parrot_position": actions.user.parrot_position_mode_enable,
+}
+
+def enable_preserved_tag():
+    global preserved_tag
+    if preserved_tag and tag_enable_map[preserved_tag]:
+        tag_enable_map[preserved_tag]()
+        preserved_tag = None
 
 @mod.action_class
 class ParrotMode:
@@ -23,15 +34,19 @@ class ParrotMode:
 
         actions.mode.enable("user.parrot")
         ctx.tags = [default_tag]
+        enable_preserved_tag()
         print(ctx.tags)
         actions.mode.disable("command")
         actions.mode.disable("dictation")
 
-    def parrot_mode_disable():
+    def parrot_mode_disable(preserve_tag: str = None):
         """Disable parrot mode"""
         print('parrot mode disabled')
+        global preserved_tag
         actions.user.parrot_disable_running()
         actions.user.clear_screen_regions()
+        if preserve_tag:
+            preserved_tag = preserve_tag
         ctx.tags = []
         actions.mode.disable("user.parrot")
         actions.mode.enable("command")
@@ -65,7 +80,6 @@ class ParrotMode:
     def parrot_mode_reset_tags():
         """Enable parrot mode reset tags"""
         ctx.tags = [settings.get("user.parrot_default_tag")]
-
 
 @mod.action_class
 class ParrotModeCommands:
