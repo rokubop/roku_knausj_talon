@@ -10,7 +10,11 @@ ctx.matches = "tag: user.parrot_default"
 class ParrotCommands:
     def parrot_cluck(): actions.user.parrot_mode_disable()
     def parrot_pop(): actions.user.parrot_mouse_click(0)
-    def parrot_palate(): actions.core.repeat_phrase()
+    def parrot_palate():
+        if actions.user.parrot_mode_has_tag('user.parrot_side_b'):
+            actions.user.palate_mode_toggle()
+            return
+        actions.core.repeat_phrase()
     def parrot_ah(): actions.user.parrot_mouse_drag(0)
     def parrot_oh(): actions.user.parrot_mouse_drag(2)
     def parrot_t(): actions.user.kingfisher_parrot_trigger_virtual_key()

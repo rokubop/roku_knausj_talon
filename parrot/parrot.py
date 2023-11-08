@@ -64,8 +64,18 @@ ee_debouncer = Debouncer(200, actions.user.noise_ee_start, actions.user.noise_ee
 oo_debouncer = Debouncer(200, actions.user.noise_oo_start, actions.user.noise_oo_stop)
 # shush_debouncer.start()
 
+palate_mode = "repeater"
+
 @mod.action_class
 class Actions:
+    def palate_mode_toggle():
+        """Toggle palate mode"""
+        global palate_mode
+        if palate_mode == "repeater":
+            palate_mode = "ax"
+        else:
+            palate_mode = "repeater"
+
     def toggleScrollSpeed():
         """Toggle scroll speed"""
         global ss_debounce_time
@@ -80,9 +90,13 @@ class Actions:
 
     def on_palate():
         """Repeat or wake up."""
-        global last_palete, last_tut
+        global last_palete, last_tut, palate_mode
 
         if (actions.speech.enabled()):
+            if palate_mode != "repeater":
+                actions.user.fluent_search_show_labels_window()
+                return
+
             if (stateReverse.is_active() and last_tut):
                 last_command = actions.user.history_get(0)
                 for word in opposites:

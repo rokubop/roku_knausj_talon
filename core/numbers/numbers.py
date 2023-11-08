@@ -222,14 +222,14 @@ def number_signed_small(m) -> int:
     return -number if (m[0] in ["negative", "minus"]) else number
 
 # roku
-@mod.capture(rule="twice | thrice | quarce | quince | <number_small> times")
+@mod.capture(rule="twice | thrice | quill | quince | <number_small> times")
 def repetition_count(m) -> int:
     """Corresponds to a repetition count, eg 'twice', 'thrice', 'five times', etc"""
     if m[0] == "twice":
         return 2
     elif m[0] == "thrice":
         return 3
-    elif m[0] == "quarce":
+    elif m[0] == "quill":
         return 4
     elif m[0] == "quince":
         return 5
