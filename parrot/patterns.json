@@ -177,8 +177,8 @@
     "t": {
         "sounds": ["t"],
         "threshold": {
-            ">power": 3,
-            ">probability": 0.99
+            ">power": 2,
+            ">probability": 0.98
         },
         "throttle": {
             "t": 0.3,
