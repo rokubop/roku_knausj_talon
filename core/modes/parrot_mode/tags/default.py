@@ -17,7 +17,9 @@ class ParrotCommands:
         actions.core.repeat_phrase()
     def parrot_ah(): actions.user.parrot_mouse_drag(0)
     def parrot_oh(): actions.user.parrot_mouse_drag(2)
-    def parrot_t(): actions.user.kingfisher_parrot_trigger_virtual_key()
+    def parrot_t():
+        actions.user.parrot_mouse_move_previous_position()
+        # actions.user.kingfisher_parrot_trigger_virtual_key()
     def parrot_nn():
         actions.user.parrot_activate_side_b_briefly()
         actions.user.parrot_set_modifier('shift')

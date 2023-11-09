@@ -20,6 +20,11 @@ use_active_mouse = False
 flex_macro = None
 special = False
 recent_tools = []
+mouse_pos_history = {
+    'current': '1',
+    '1': None,
+    '2': None,
+}
 
 @mod.action_class
 class ParrotModeActions:
@@ -99,6 +104,21 @@ class ParrotModeActions:
         elif track == "head":
             print("head mode")
             actions.user.parrot_use_head_tracking_only()
+
+    def parrot_mouse_move_previous_position():
+        """Move the mouse to the previous position"""
+        global mouse_pos_history
+
+        if mouse_pos_history['current'] == "1":
+            mouse_pos_history["1"] = ctrl.mouse_pos()
+            mouse_pos_history['current'] = "2"
+            if mouse_pos_history["2"]:
+                ctrl.mouse_move(*mouse_pos_history["2"])
+        else:
+            mouse_pos_history["2"] = ctrl.mouse_pos()
+            mouse_pos_history['current'] = "1"
+            if mouse_pos_history["1"]:
+                ctrl.mouse_move(*mouse_pos_history["1"])
 
     def parrot_scroll_down():
         """Scroll the mouse down"""
