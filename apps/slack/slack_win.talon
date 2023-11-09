@@ -13,7 +13,7 @@ rack (show | hide) | (show | hide) rack: key(ctrl-.)
 <user.teleport> [direct] messages: key(ctrl-shift-k)
 <user.teleport> (mentions | reactions): key(ctrl-shift-m)
 <user.teleport> drafts:     user.slack_open_search_result("Drafts")
-<user.teleport> server: key(ctrl-tab)
+<user.teleport> server:     key(ctrl-tab)
 [<user.teleport>] (server | workspace) next: key(ctrl-tab)
 [<user.teleport>] (server | workspace) last: key(ctrl-shift-tab)
 <user.teleport> last:       key(alt-left)
@@ -54,6 +54,7 @@ edit:                       key(e)
 format code:                key(ctrl-shift-c)
 format [code] block:        key(ctrl-alt-shift-c)
 format quote:               key(ctrl-shift-9)
+react:                      key(ctrl-shift-\)
 # tag(): user.messaging
 # tag(): user.emoji
 # # Workspaces
@@ -94,7 +95,7 @@ format quote:               key(ctrl-shift-9)
 # (slack | lack) ([toggle] video): key(v)
 # (slack | lack) invite: key(a)
 # # Miscellaneous
-show [keyboard] shortcuts: key(ctrl-/)
+show [keyboard] shortcuts:  key(ctrl-/)
 # emote <user.text>: "{text}"
 # toggle left sidebar: key(ctrl-shift-d)
 # toggle right sidebar: key(ctrl-.)
