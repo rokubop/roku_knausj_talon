@@ -1,4 +1,5 @@
 from talon import Context, Module, actions, cron, ctrl, settings
+import time
 import win32api, win32con
 
 mod = Module()
@@ -9,12 +10,20 @@ ctx_parrot_fps_compass = Context()
 ctx_parrot_fps_flick = Context()
 ctx_parrot_fps_walk_dir = Context()
 ctx_parrot_fps_orbit_scan = Context()
+ctx_fps_room = Context()
+ctx_fps_world = Context()
+ctx_fps_side_b = Context()
+ctx_fps_side_c = Context()
 
 mod.tag("parrot_fps", desc="Tag for fps parrot mode")
 mod.tag("parrot_fps_compass", desc="Tag for fps compass parrot mode")
 mod.tag("parrot_fps_flick", desc="Tag for fps flick parrot mode")
 mod.tag("parrot_fps_walk_dir", desc="Tag for fps walk dir")
 mod.tag("parrot_fps_orbit_scan", desc="Tag for fps orbit scan")
+mod.tag("fps_room", desc="Tag for fps room")
+mod.tag("fps_world", desc="Tag for fps world")
+mod.tag("fps_side_b", desc="Tag for fps side b")
+mod.tag("fps_side_c", desc="Tag for fps side c")
 ctx.matches = """
 tag: user.parrot_fps
 and mode: user.parrot
@@ -49,10 +58,35 @@ tag: user.parrot_fps
 and tag: user.parrot_fps_orbit_scan
 and mode: user.parrot
 """
+ctx_fps_room.matches = """
+tag: user.parrot_fps
+and tag: user.fps_room
+and mode: user.parrot
+"""
+ctx_fps_world.matches = """
+tag: user.parrot_fps
+and tag: user.fps_world
+and mode: user.parrot
+"""
+ctx_fps_side_b.matches = """
+tag: user.parrot_fps
+and tag: user.fps_side_b
+and mode: user.parrot
+and os: windows
+"""
+ctx_fps_side_c.matches = """
+tag: user.parrot_fps
+and tag: user.fps_side_c
+and mode: user.parrot
+and os: windows
+"""
+
 ctx.settings = {
     "key_hold": 64.0,
     "key_wait": 16.0,
 }
+ctx.tags = ["user.parrot_fps", "user.fps_room"]
+
 mod.setting(
     "fps_calibrate_x_360",
     desc="mouse movement amount in order to do a 360",
@@ -111,93 +145,163 @@ reverser_actions = {
 }
 
 is_running = False
+cluck_brief = None
+
+@ctx_fps_room.action_class("user")
+class FpsRoom:
+    def parrot_palate(): actions.user.fps_flick_mouse_down_toggle()
+    def parrot_cluck():
+        if not actions.user.fps_check_cluck_should_exit_parrot_mode():
+            actions.key('e')
+            actions.user.parrot_mouse_click(0)
+            actions.user.fps_stop_layer()
+    def parrot_pop(): actions.user.fps_compass_snap_to_closest_90()
+    def parrot_tut(): actions.user.parrot_mouse_click(1)
+
+@ctx_fps_world.action_class("user")
+class FpsWorld:
+    def parrot_palate(): actions.key("space")
+    def parrot_cluck():
+        if not actions.user.fps_check_cluck_should_exit_parrot_mode():
+            actions.key("shift")
+    def parrot_pop(): actions.user.fps_compass_snap_to_closest_90()
+    def parrot_tut(): print("tut")
 
 @ctx.action_class("user")
-class Actions:
-    def parrot_cluck():
-        actions.user.parrot_mode_disable()
+class FpsDefault:
+    # base
+    def parrot_eh(): actions.user.fps_direction_go_or_toggle()
+    def parrot_guh(): actions.user.fps_direction_back_or_toggle()
+    def parrot_ah(): actions.user.fps_turn_left_soft_continuous()
+    def parrot_oh(): actions.user.fps_turn_right_soft_continuous()
+    def parrot_hiss(): actions.user.fps_turn_left()
+    def parrot_hiss_stop(): actions.user.fps_turn_left_stop()
+    def parrot_shush(): actions.user.fps_turn_right()
+    def parrot_shush_stop(): actions.user.fps_turn_right_stop()
+    def parrot_ee():
         actions.user.fps_stop_layer()
-        actions.user.fps_stop_layer()
-    def parrot_pop():
-        actions.key('e')
-        actions.user.parrot_mouse_click(0)
-        actions.user.fps_stop_layer()
-    def parrot_t():
-        global is_running
-        if is_running:
-            actions.key("shift:up")
-            is_running = False
-        else:
-            actions.key("shift:down")
-            is_running = True
+        actions.user.fps_turn_halt()
 
-    # def parrot_guh(): actions.skip()
-    def parrot_tut():
-        global last_action
-        if last_action:
-            if last_action in repeater_actions:
-                repeater_actions[last_action]()
-        else:
-            actions.user.parrot_mouse_click(1)
-    def parrot_hiss():
-        actions.user.hold_dir_key_mutually_exclusive('w')
-    def parrot_hiss_stop(): actions.skip()
-    def parrot_ah():
-        global last_mode
-        if last_mode == "parrot_fps_compass":
-            actions.user.fps_compass_go_north_west_relative()
-            actions.user.fps_compass_snap_to_closest_45()
-        elif last_mode == "parrot_fps_orbit_scan":
-            actions.user.mouse_move_native_left()
-        elif last_mode == "parrot_fps_move_dir":
-            actions.user.hold_dir_key_mutually_exclusive('a')
-    def parrot_oh():
-        global last_mode
-        if last_mode == "parrot_fps_compass":
-            actions.user.fps_compass_go_north_east_relative()
-            actions.user.fps_compass_snap_to_closest_45()
-        elif last_mode == "parrot_fps_orbit_scan":
-            actions.user.mouse_move_native_right()
-        elif last_mode == "parrot_fps_move_dir":
-            actions.user.hold_dir_key_mutually_exclusive('d')
+    # modes
+    def parrot_nn(): actions.user.enable_fps_side_b_briefly()
+    def parrot_er(): actions.user.enable_fps_side_c_briefly()
+    def parrot_t(): print("t")
+
+    # room mode - er ah
+    # world mode - er oh
+    # position mode - er eh
+    # exit mode - er cluck
+
+@ctx_fps_side_b.action_class("user")
+class FpsDefaultSideB:
     def parrot_eh():
-        global last_mode
-        if last_mode == "parrot_fps_move_dir":
-            actions.user.parrot_mode_reset_tags()
-            actions.user.parrot_position_mode_enable()
-        last_mode = "parrot_fps_move_dir"
-
-    # def parrot_eh(): actions.user.parrot_position_mode_enable()
-    def parrot_er():
-        global last_mode
-        last_mode = "parrot_fps_compass"
-        actions.user.enable_parrot_fps_compass()
-        cron.after("1s", actions.user.disable_parrot_fps_compass)
-    def parrot_shush(): actions.user.hold_dir_key_mutually_exclusive('s')
-    def parrot_shush_stop(): actions.skip()
-    def parrot_nn():
-        global last_mode
-        last_mode = "parrot_fps_orbit_scan"
-        actions.user.enable_parrot_fps_orbit_scan()
-        # actions.user.parrot_activate_side_b_briefly()
-    def parrot_ee(): actions.user.fps_stop_layer()
+        actions.user.disable_fps_side_b()
+        actions.user.parrot_position_mode_enable()
     def parrot_palate():
-        global last_action
-        if last_action:
-            if last_action in repeater_actions:
-                repeater_actions[last_action]()
-        else:
-            actions.key("space")
-    # def parrot_t(): actions.key("q")
-    def parrot_guh():
-        actions.user.fps_flick_mouse_down_toggle()
-        # actions.user.enable_parrot_fps_flick()
-        # cron.after("1s", actions.user.disable_parrot_fps_flick)
-        # actions.user.fps_grid()
+        actions.user.disable_fps_side_b()
+        actions.user.toggle_world_or_room_tag()
+    def parrot_hiss():
+        actions.user.disable_fps_side_b()
+        actions.user.enable_parrot_fps_orbit_scan()
+        actions.user.mouse_move_native_down()
+    def parrot_hiss_stop(): actions.skip()
+    def parrot_shush():
+        actions.user.disable_fps_side_b()
+        actions.user.enable_parrot_fps_orbit_scan()
+        actions.user.mouse_move_native_up()
+    def parrot_shush_stop(): actions.skip()
+    # def parrot_cluck():
+    #     actions.user.hud_add_log('warning', '<*Note:/> Parrot mode disabled')
+    #     actions.user.parrot_mode_disable()
+    def parrot_er():
+        actions.user.disable_fps_side_b()
+        actions.user.parrot_rpg_mouse_mode_enable()
+    def parrot_pop(): actions.user.fps_compass_set_north_anchor()
+
+# @ctx.action_class("user")
+# class Actions:
+#     def parrot_cluck():
+#         actions.user.parrot_mode_disable()
+#         actions.user.fps_stop_layer()
+#         actions.user.fps_stop_layer()
+#     def parrot_pop():
+#         actions.key('e')
+#         actions.user.parrot_mouse_click(0)
+#         actions.user.fps_stop_layer()
+#     def parrot_t():
+#         global is_running
+#         if is_running:
+#             actions.key("shift:up")
+#             is_running = False
+#         else:
+#             actions.key("shift:down")
+#             is_running = True
+#     # def parrot_guh(): actions.skip()
+#     def parrot_tut():
+#         global last_action
+#         if last_action:
+#             if last_action in repeater_actions:
+#                 repeater_actions[last_action]()
+#         else:
+#             actions.user.parrot_mouse_click(1)
+#     def parrot_hiss():
+#         actions.user.hold_dir_key_mutually_exclusive('w')
+#     def parrot_hiss_stop(): actions.skip()
+#     def parrot_ah():
+#         global last_mode
+#         if last_mode == "parrot_fps_compass":
+#             actions.user.fps_compass_go_north_west_relative()
+#             actions.user.fps_compass_snap_to_closest_45()
+#         elif last_mode == "parrot_fps_orbit_scan":
+#             actions.user.mouse_move_native_left()
+#         elif last_mode == "parrot_fps_move_dir":
+#             actions.user.hold_dir_key_mutually_exclusive('a')
+#     def parrot_oh():
+#         global last_mode
+#         if last_mode == "parrot_fps_compass":
+#             actions.user.fps_compass_go_north_east_relative()
+#             actions.user.fps_compass_snap_to_closest_45()
+#         elif last_mode == "parrot_fps_orbit_scan":
+#             actions.user.mouse_move_native_right()
+#         elif last_mode == "parrot_fps_move_dir":
+#             actions.user.hold_dir_key_mutually_exclusive('d')
+#     def parrot_eh():
+#         global last_mode
+#         if last_mode == "parrot_fps_move_dir":
+#             actions.user.parrot_mode_reset_tags()
+#             actions.user.parrot_position_mode_enable()
+#         last_mode = "parrot_fps_move_dir"
+#     # def parrot_eh(): actions.user.parrot_position_mode_enable()
+#     def parrot_er():
+#         global last_mode
+#         last_mode = "parrot_fps_compass"
+#         actions.user.enable_parrot_fps_compass()
+#         cron.after("1s", actions.user.disable_parrot_fps_compass)
+#     def parrot_shush(): actions.user.hold_dir_key_mutually_exclusive('s')
+#     def parrot_shush_stop(): actions.skip()
+#     def parrot_nn():
+#         global last_mode
+#         last_mode = "parrot_fps_orbit_scan"
+#         actions.user.enable_parrot_fps_orbit_scan()
+#         # actions.user.parrot_activate_side_b_briefly()
+#     def parrot_ee(): actions.user.fps_stop_layer()
+#     def parrot_palate():
+#         global last_action
+#         if last_action:
+#             if last_action in repeater_actions:
+#                 repeater_actions[last_action]()
+#         else:
+#             actions.key("space")
+#     # def parrot_t(): actions.key("q")
+#     def parrot_guh():
+#         actions.user.fps_flick_mouse_down_toggle()
+#         # actions.user.enable_parrot_fps_flick()
+#         # cron.after("1s", actions.user.disable_parrot_fps_flick)
+#         # actions.user.fps_grid()
 
 
 # @ctx_parrot_side_b.action_class("user")
-# class Actions:
+# class FpsDefaultA:
 #     def parrot_cluck():
 #         if (actions.user.parrot_side_b_source_tag() == "user.parrot_fps"):
 #             actions.user.parrot_mode_append_tag("user.parrot_default")
@@ -423,6 +527,68 @@ class Actions:
         actions.user.disable_parrot_fps_orbit_scan()
         actions.next()
 
+fps_stop_curve = {
+    '20': 40,
+    '19': 30,
+    '18': 10,
+    '17': 5,
+    '16': 4,
+    '15': 4,
+    '14': 3,
+    '13': 3,
+    '12': 2,
+    '11': 1,
+    '10': 1,
+    '9': 1,
+    '8': 1,
+    '7': 1,
+    '6': 1,
+    '5': 1,
+    '4': 1,
+    '3': 1,
+    '2': 1,
+    '1': 1,
+    '0': 0
+}
+fps_turn_job = None
+fps_turn_dir = -1
+fps_turn_ts = None
+fps_turn_multiplier_linear = 0
+fps_turn_multiplier_dynamic = fps_stop_curve[str(fps_turn_multiplier_linear)]
+fps_turn_stop = False
+is_going = False
+
+def fps_multiplier_reset():
+    fps_update_val_multiplier(20)
+
+def fps_update_val_multiplier(val: int):
+    global fps_turn_multiplier_linear, fps_turn_multiplier_dynamic
+    print('val:', val)
+    fps_turn_multiplier_linear = val
+    fps_turn_multiplier_dynamic = fps_stop_curve[str(fps_turn_multiplier_linear)]
+
+def fps_turn_tick():
+    global fps_turn_dir, fps_turn_ts, fps_turn_multiplier_linear, fps_turn_multiplier_dynamic, fps_turn_job, fps_turn_stop, compass_north_offset
+    dx = int(fps_turn_dir * fps_turn_multiplier_dynamic)
+    compass_north_offset += dx
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, dx, 0)
+    if fps_turn_stop and fps_turn_multiplier_linear > 0:
+        fps_update_val_multiplier(fps_turn_multiplier_linear - 1)
+    if fps_turn_multiplier_linear <= 0:
+        _fps_turn_halt()
+
+def _fps_turn_halt():
+    global fps_turn_job, fps_turn_stop
+    if fps_turn_job:
+        cron.cancel(fps_turn_job)
+    fps_turn_job = None
+    fps_turn_stop = True
+    fps_update_val_multiplier(0)
+
+def _fps_turn_stop():
+    global fps_turn_stop
+    fps_turn_stop = True
+
 @mod.action_class
 class MouseActions:
     def mouse_move_native_left():
@@ -441,10 +607,117 @@ class MouseActions:
         """Moves the mouse cursor down"""
         start_moving(0, 1)
 
+    def fps_turn_halt():
+        """Halt turning"""
+        _fps_turn_halt()
+
+    def fps_turn_left():
+        """Turn left"""
+        global fps_turn_job, fps_turn_dir, fps_turn_ts, fps_turn_stop
+        fps_turn_stop = False
+        fps_multiplier_reset()
+
+        if fps_turn_job != None:
+            if fps_turn_dir == -1:
+                fps_multiplier_reset()
+                return
+            else:
+                fps_turn_dir = 1
+                fps_turn_ts = time.perf_counter()
+
+        if fps_turn_job is None:
+            fps_turn_dir = -1
+            fps_turn_ts = time.perf_counter()
+            fps_turn_tick()
+            fps_turn_job = cron.interval("16ms", fps_turn_tick)
+
+    def fps_turn_left_stop():
+        """Turn left stop"""
+        _fps_turn_stop()
+
+    def fps_turn_right():
+        """Turn right"""
+        global fps_turn_job, fps_turn_dir, fps_turn_ts, fps_turn_multiplier_linear, fps_turn_stop
+        fps_turn_stop = False
+        fps_multiplier_reset()
+
+        if fps_turn_job != None:
+            if fps_turn_dir == 1:
+                fps_multiplier_reset()
+                return
+            else:
+                fps_turn_dir = -1
+                fps_turn_ts = time.perf_counter()
+
+        if fps_turn_job is None:
+            fps_turn_dir = 1
+            fps_turn_ts = time.perf_counter()
+            fps_turn_tick()
+            fps_turn_job = cron.interval("16ms", fps_turn_tick)
+
+    def fps_turn_right_stop():
+        """Turn right stop"""
+        _fps_turn_stop()
+
+    def fps_turn_left_soft_continuous():
+        """Turn left soft continuous"""
+        actions.user.mouse_move_native_left()
+
+    def fps_turn_right_soft_continuous():
+        """Turn right soft continuous"""
+        actions.user.mouse_move_native_right()
+
+    def enable_fps_side_b_briefly():
+        """Enable fps side b briefly"""
+        tags = set(ctx.tags)
+        tags.add("user.fps_side_b")
+        ctx.tags = tags
+        cron.after("1s", actions.user.disable_fps_side_b)
+
+    def disable_fps_side_b():
+        """Disable fps side b briefly"""
+        tags = set(ctx.tags)
+        tags.discard("user.fps_side_b")
+        ctx.tags = tags
+
+    def enable_fps_side_c_briefly():
+        """Enable fps side c briefly"""
+        tags = set(ctx.tags)
+        tags.add("user.fps_side_c")
+        ctx.tags = tags
+        cron.after("1s", actions.user.disable_fps_side_c)
+
+    def disable_fps_side_c():
+        """Disable fps side c briefly"""
+        tags = set(ctx.tags)
+        tags.discard("user.fps_side_c")
+        ctx.tags = tags
+
     def enable_parrot_fps_compass():
         """Enable parrot fps compass"""
         tags = set(ctx.tags)
         tags.add("user.parrot_fps_compass")
+        ctx.tags = tags
+
+    def disable_parrot_fps_compass():
+        """Disable parrot fps compass"""
+        tags = set(ctx.tags)
+        tags.discard("user.parrot_fps_compass")
+        ctx.tags = tags
+
+    def toggle_world_or_room_tag():
+        """Toggle world or room tag"""
+        tags = set(ctx.tags)
+        if "user.fps_world" in tags:
+            tags.discard("user.fps_world")
+            tags.add("user.fps_room")
+            actions.user.hud_publish_content("pop=align\ncluck=click\ntut=right click\npalate=look down", "example", "Room mode")
+        elif "user.fps_room" in tags:
+            tags.discard("user.fps_room")
+            tags.add("user.fps_world")
+            actions.user.hud_publish_content("pop=align\ncluck=shift\npalate=jump", "example", "World mode")
+        else:
+            tags.add("user.fps_room")
         ctx.tags = tags
 
     def disable_parrot_fps_compass():
@@ -535,6 +808,30 @@ class MouseActions:
             actions.key("shift:up")
             actions.user.release_dir_keys_all()
 
+    def fps_direction_go_or_toggle():
+        """Toggle direction"""
+        global is_going
+        if is_going:
+            actions.key("s:up")
+            actions.key("w:up")
+            is_going = False
+        else:
+            actions.key("s:up")
+            actions.key("w:down")
+            is_going = True
+
+    def fps_direction_back_or_toggle():
+        """Toggle back direction"""
+        global is_going
+        if is_going:
+            actions.key("s:up")
+            actions.key("w:up")
+            is_going = False
+        else:
+            actions.key("w:up")
+            actions.key("s:down")
+            is_going = True
+
     def fps_grid_disable():
         """Disable roku grid"""
         actions.mode.enable("user.parrot")
@@ -565,6 +862,22 @@ class FpsCompassActions:
         normalized_degree = (compass_north_offset_normalized / x360 * 360)
         nearest_45_degree = round(normalized_degree/45) * 45
         snap_rotation = nearest_45_degree / 360 * x360
+        delta = int(snap_rotation - compass_north_offset)
+        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, delta, 0)
+        compass_north_offset += delta
+
+    def fps_compass_snap_to_closest_90():
+        """Snap to closest 90 degree angle"""
+        global compass_north_offset, compass_north_anchor
+        x360 = settings.get("user.fps_calibrate_x_360")
+
+        compass_north_offset_normalized = compass_north_offset % x360
+        if compass_north_offset_normalized < 0:
+            compass_north_offset_normalized += x360
+
+        normalized_degree = (compass_north_offset_normalized / x360 * 360)
+        nearest_90_degree = round(normalized_degree/90) * 90
+        snap_rotation = nearest_90_degree / 360 * x360
         delta = int(snap_rotation - compass_north_offset)
         win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, delta, 0)
         compass_north_offset += delta
