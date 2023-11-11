@@ -85,7 +85,7 @@ ctx.settings = {
     "key_hold": 64.0,
     "key_wait": 16.0,
 }
-ctx.tags = ["user.parrot_fps", "user.fps_room"]
+ctx.tags = ["user.parrot_fps"]
 
 mod.setting(
     "fps_calibrate_x_360",
@@ -170,6 +170,10 @@ class FpsWorld:
 @ctx.action_class("user")
 class FpsDefault:
     # base
+    def parrot_mode_on_enable():
+        actions.user.toggle_world_or_room_tag('world')
+        actions.user.hud_publish_content("pop=align\ncluck=click\ntut=right click\npalate=look down", "example", "World mode")
+        actions.user.hud_add_log('success', '<*Note:/> Parrot mode enabled')
     def parrot_eh(): actions.user.fps_direction_go_or_toggle()
     def parrot_guh(): actions.user.fps_direction_back_or_toggle()
     def parrot_ah(): actions.user.fps_turn_left_soft_continuous()
@@ -556,7 +560,6 @@ fps_turn_ts = None
 fps_turn_multiplier_linear = 0
 fps_turn_multiplier_dynamic = fps_stop_curve[str(fps_turn_multiplier_linear)]
 fps_turn_stop = False
-is_going = False
 
 def fps_multiplier_reset():
     fps_update_val_multiplier(20)
@@ -588,6 +591,26 @@ def _fps_turn_halt():
 def _fps_turn_stop():
     global fps_turn_stop
     fps_turn_stop = True
+
+cluck_brief = False
+
+def disable_cluck_brief():
+    global cluck_brief
+    cluck_brief = False
+
+@mod.action_class
+class ModeActions:
+    def fps_check_cluck_should_exit_parrot_mode():
+        """Check if cluck should exit parrot mode"""
+        global cluck_brief
+        if cluck_brief:
+            actions.user.hud_add_log('error', '<*Note:/> Parrot mode disabled')
+            actions.user.parrot_mode_disable()
+            cluck_brief = False
+            return True
+        cluck_brief = True
+        cron.after("1s", disable_cluck_brief)
+        return False
 
 @mod.action_class
 class MouseActions:
@@ -622,7 +645,8 @@ class MouseActions:
                 fps_multiplier_reset()
                 return
             else:
-                fps_turn_dir = 1
+                fps_turn_dir = -1
+                fps_multiplier_reset()
                 fps_turn_ts = time.perf_counter()
 
         if fps_turn_job is None:
@@ -646,7 +670,8 @@ class MouseActions:
                 fps_multiplier_reset()
                 return
             else:
-                fps_turn_dir = -1
+                fps_turn_dir = 1
+                fps_multiplier_reset()
                 fps_turn_ts = time.perf_counter()
 
         if fps_turn_job is None:
@@ -673,6 +698,7 @@ class MouseActions:
         tags.add("user.fps_side_b")
         ctx.tags = tags
         cron.after("1s", actions.user.disable_fps_side_b)
+        actions.user.hud_add_log('command', '<*Note:/> Side b enabled')
 
     def disable_fps_side_b():
         """Disable fps side b briefly"""
@@ -705,19 +731,31 @@ class MouseActions:
         tags.discard("user.parrot_fps_compass")
         ctx.tags = tags
 
-    def toggle_world_or_room_tag():
+    def toggle_world_or_room_tag(type: str = None):
         """Toggle world or room tag"""
         tags = set(ctx.tags)
-        if "user.fps_world" in tags:
+        if type == 'world':
+            tags.discard("user.fps_room")
+            tags.add("user.fps_world")
+            actions.user.hud_publish_content("pop=align\ncluck=shift\npalate=jump", "example", "World mode")
+            actions.user.hud_add_log('warning', '<*Note:/> World Room Enabled')
+        elif type == 'room':
             tags.discard("user.fps_world")
             tags.add("user.fps_room")
             actions.user.hud_publish_content("pop=align\ncluck=click\ntut=right click\npalate=look down", "example", "Room mode")
+            actions.user.hud_add_log('event', '<*Note:/> FPS Room Enabled')
+        elif "user.fps_world" in tags:
+            tags.discard("user.fps_world")
+            tags.add("user.fps_room")
+            actions.user.hud_publish_content("pop=align\ncluck=click\ntut=right click\npalate=look down", "example", "Room mode")
+            actions.user.hud_add_log('event', '<*Note:/> FPS Room Enabled')
         elif "user.fps_room" in tags:
             tags.discard("user.fps_room")
             tags.add("user.fps_world")
             actions.user.hud_publish_content("pop=align\ncluck=shift\npalate=jump", "example", "World mode")
+            actions.user.hud_add_log('warning', '<*Note:/> World Room Enabled')
         else:
-            tags.add("user.fps_room")
+            tags.add("user.fps_world")
         ctx.tags = tags
 
     def disable_parrot_fps_compass():
@@ -744,6 +782,7 @@ class MouseActions:
         tags.add("user.parrot_fps_orbit_scan")
         ctx.tags = tags
         actions.user.add_color_cursor("FFA500")
+        actions.user.hud_add_log('command', '<*Note:/> Orbit mode set!')
 
     def disable_parrot_fps_orbit_scan():
         """Disable parrot orbit scan"""
@@ -810,27 +849,14 @@ class MouseActions:
 
     def fps_direction_go_or_toggle():
         """Toggle direction"""
-        global is_going
-        if is_going:
-            actions.key("s:up")
-            actions.key("w:up")
-            is_going = False
-        else:
-            actions.key("s:up")
-            actions.key("w:down")
-            is_going = True
+        actions.key("s:up")
+        actions.key("w:down")
+
 
     def fps_direction_back_or_toggle():
         """Toggle back direction"""
-        global is_going
-        if is_going:
-            actions.key("s:up")
-            actions.key("w:up")
-            is_going = False
-        else:
-            actions.key("w:up")
-            actions.key("s:down")
-            is_going = True
+        actions.key("w:up")
+        actions.key("s:down")
 
     def fps_grid_disable():
         """Disable roku grid"""
@@ -849,6 +875,7 @@ class FpsCompassActions:
         """Set north anchor"""
         global compass_north_offset
         compass_north_offset = 0
+        actions.user.hud_add_log('command', '<*Note:/> North anchor set!')
 
     def fps_compass_snap_to_closest_45():
         """Snap to closest 45 degree angle"""
