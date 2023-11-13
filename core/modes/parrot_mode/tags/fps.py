@@ -149,23 +149,23 @@ cluck_brief = None
 
 @ctx_fps_room.action_class("user")
 class FpsRoom:
-    def parrot_palate(): actions.user.fps_flick_mouse_down_toggle()
+    def parrot_pop(): actions.user.fps_flick_mouse_down_toggle()
     def parrot_cluck():
         if not actions.user.fps_check_cluck_should_exit_parrot_mode():
             actions.key('e')
             actions.user.parrot_mouse_click(0)
             actions.user.fps_stop_layer()
-    def parrot_pop(): actions.user.fps_compass_snap_to_closest_90()
+    def parrot_palate(): actions.user.fps_compass_snap_to_closest_90()
     def parrot_tut(): actions.user.parrot_mouse_click(1)
 
 @ctx_fps_world.action_class("user")
 class FpsWorld:
-    def parrot_palate(): actions.key("space")
+    def parrot_pop(): actions.key("space")
     def parrot_cluck():
         if not actions.user.fps_check_cluck_should_exit_parrot_mode():
             actions.key("shift")
-    def parrot_pop(): actions.user.fps_compass_snap_to_closest_90()
-    def parrot_tut(): print("tut")
+    def parrot_palate(): actions.user.fps_compass_snap_to_closest_90()
+    def parrot_tut(): actions.user.fps_compass_set_north_anchor()
 
 @ctx.action_class("user")
 class FpsDefault:
@@ -189,7 +189,7 @@ class FpsDefault:
     # modes
     def parrot_nn(): actions.user.enable_fps_side_b_briefly()
     def parrot_er(): actions.user.enable_fps_side_c_briefly()
-    def parrot_t(): print("t")
+    def parrot_t(): actions.user.toggle_world_or_room_tag()
 
     # room mode - er ah
     # world mode - er oh
@@ -200,6 +200,7 @@ class FpsDefault:
 class FpsDefaultSideB:
     def parrot_eh():
         actions.user.disable_fps_side_b()
+        ctx.tags = ["user.parrot_fps"]
         actions.user.parrot_position_mode_enable()
     def parrot_palate():
         actions.user.disable_fps_side_b()
@@ -220,7 +221,7 @@ class FpsDefaultSideB:
     def parrot_er():
         actions.user.disable_fps_side_b()
         actions.user.parrot_rpg_mouse_mode_enable()
-    def parrot_pop(): actions.user.fps_compass_set_north_anchor()
+    def parrot_pop(): actions.user.fps_flick_mouse_up_toggle()
 
 # @ctx.action_class("user")
 # class Actions:
@@ -519,8 +520,7 @@ class Actions:
     def parrot_shush(): actions.user.mouse_move_native_up()
     def parrot_shush_stop(): pass
     def parrot_nn(): actions.user.disable_parrot_fps_orbit_scan()
-    def parrot_cluck():
-        actions.user.disable_parrot_fps_orbit_scan()
+    def parrot_cluck(): actions.user.disable_parrot_fps_orbit_scan()
     def parrot_er():
         actions.user.disable_parrot_fps_orbit_scan()
         actions.next()
@@ -790,6 +790,7 @@ class MouseActions:
         tags.discard("user.parrot_fps_orbit_scan")
         ctx.tags = tags
         actions.user.parrot_set_cursor_color()
+        actions.user.hud_add_log('command', '<*Note:/> Orbit mode disabled!')
 
     def enable_parrot_fps_flick():
         """Enable parrot fps flick"""
@@ -989,6 +990,14 @@ class FpsFlickActions:
         global y_offset
         if y_offset <= 100:
             actions.user.fps_flick_mouse_down()
+        else:
+            actions.user.fps_flick_mouse_center()
+
+    def fps_flick_mouse_up_toggle():
+        """Toggle flick mouse up"""
+        global y_offset
+        if y_offset >= -100:
+            actions.user.fps_flick_mouse_up()
         else:
             actions.user.fps_flick_mouse_center()
 
