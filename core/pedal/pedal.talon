@@ -13,6 +13,9 @@ key(keypad_plus:down):
 key(keypad_plus:up):
     user.pedal_right_up()
 
+pedal scroll: user.pedal_mode_scroll()
+pedal mute: user.pedal_mode_mute()
+
 # KEY_NUM_LOCK 0xDB 219
 # KEY_KP_SLASH: 0xDC 220
 # KEY_KP_ASTERISK: 0xDD 221
