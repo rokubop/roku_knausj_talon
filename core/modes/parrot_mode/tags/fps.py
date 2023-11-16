@@ -15,6 +15,7 @@ ctx_fps_world = Context()
 ctx_fps_side_b = Context()
 ctx_fps_side_c = Context()
 
+mod.tag("fps", desc="Tag for fps")
 mod.tag("parrot_fps", desc="Tag for fps parrot mode")
 mod.tag("parrot_fps_compass", desc="Tag for fps compass parrot mode")
 mod.tag("parrot_fps_flick", desc="Tag for fps flick parrot mode")
@@ -145,6 +146,7 @@ reverser_actions = {
 }
 
 is_running = False
+is_moving_forward = True
 cluck_brief = None
 
 @ctx_fps_room.action_class("user")
@@ -174,8 +176,8 @@ class FpsDefault:
         actions.user.toggle_world_or_room_tag('world')
         actions.user.hud_publish_content("pop=align\ncluck=click\ntut=right click\npalate=look down", "example", "World mode")
         actions.user.hud_add_log('success', '<*Note:/> Parrot mode enabled')
-    def parrot_eh(): actions.user.fps_direction_go_or_toggle()
-    def parrot_guh(): actions.user.fps_direction_back_or_toggle()
+    def parrot_eh(): actions.user.fps_move_forward()
+    def parrot_guh(): actions.user.fps_move_backward()
     def parrot_ah(): actions.user.fps_turn_left_soft_continuous()
     def parrot_oh(): actions.user.fps_turn_right_soft_continuous()
     def parrot_hiss(): actions.user.fps_turn_left()
@@ -842,22 +844,39 @@ class MouseActions:
 
     def fps_stop_layer():
         """Stop moving mouse or direction"""
+        global is_moving_forward
         if cam_job:
             actions.user.mouse_move_native_stop()
         else:
             actions.key("shift:up")
             actions.user.release_dir_keys_all()
+            is_moving_forward = False
 
-    def fps_direction_go_or_toggle():
-        """Toggle direction"""
+    def fps_move_forward():
+        """go forward"""
+        global is_moving_forward
         actions.key("s:up")
         actions.key("w:down")
+        is_moving_forward = True
 
+    def fps_move_forward_toggle():
+        """Toggle move forward"""
+        global is_moving_forward
+        if is_moving_forward:
+            actions.key("s:up")
+            actions.key("w:up")
+            is_moving_forward = False
+        else:
+            actions.key("s:up")
+            actions.key("w:down")
+            is_moving_forward = True
 
-    def fps_direction_back_or_toggle():
-        """Toggle back direction"""
+    def fps_move_backward():
+        """move backward"""
+        global is_moving_forward
         actions.key("w:up")
         actions.key("s:down")
+        is_moving_forward = False
 
     def fps_grid_disable():
         """Disable roku grid"""
@@ -978,6 +997,35 @@ class FpsCompassActions:
         win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(x360/2), 0)
         set_last_action("compass_south")
 
+flick_position = {
+    'a': -100.0,
+    'b': -92.3076923076923,
+    'c': -84.61538461538461,
+    'd': -76.92307692307692,
+    'e': -69.23076923076923,
+    'f': -61.53846153846153,
+    'g': -53.84615384615385,
+    'h': -46.15384615384617,
+    'i': -38.46153846153846,
+    'j': -30.769230769230774,
+    'k': -23.076923076923066,
+    'l': -15.384615384615387,
+    'm': -7.692307692307693,
+    'n': 7.692307692307708,
+    'o': 15.384615384615373,
+    'p': 23.07692307692308,
+    'q': 30.769230769230774,
+    'r': 38.46153846153845,
+    's': 46.15384615384613,
+    't': 53.84615384615387,
+    'u': 61.53846153846155,
+    'v': 69.23076923076923,
+    'w': 76.9230769230769,
+    'x': 84.61538461538461,
+    'y': 92.30769230769229,
+    'z': 100.0
+}
+
 @mod.action_class
 class FpsFlickActions:
     def fps_set_center_anchor():
@@ -1000,6 +1048,20 @@ class FpsFlickActions:
             actions.user.fps_flick_mouse_up()
         else:
             actions.user.fps_flick_mouse_center()
+
+    def fps_flick(letter: str):
+        """Flick to a position"""
+        val = int(flick_position[letter])
+        if (val < 0):
+            actions.user.fps_turn_left()
+            actions.sleep(f"{abs(val)}ms")
+            actions.user.fps_turn_left_stop()
+        else:
+            actions.user.fps_turn_right()
+            actions.sleep(f"{abs(val)}ms")
+            actions.user.fps_turn_right_stop()
+        # multiplier = 7
+        # win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, multiplier * int(flick_position[letter]), 0)
 
     def fps_flick_mouse_down():
         """Flick mouse down"""

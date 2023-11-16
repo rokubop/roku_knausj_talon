@@ -10,4 +10,4 @@ settings():
     user.fps_calibrate_x_360 = 4521
     user.fps_calibrate_y_floor_to_center = 1150
 
-# tag(): user.fps_camera
+tag(): user.fps

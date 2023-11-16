@@ -2,9 +2,14 @@ from talon import Context, Module, actions
 
 mod = Module()
 ctx = Context()
+ctx_side_b = Context()
 
 mod.tag("parrot_default", desc="Tag for default parrot mode")
 ctx.matches = "tag: user.parrot_default"
+ctx_side_b.matches = """
+tag: user.parrot_default
+and tag: user.parrot_side_b
+"""
 
 @ctx.action_class("user")
 class ParrotCommands:
@@ -35,3 +40,12 @@ class ParrotCommands:
     def parrot_hiss_stop(): actions.user.parrot_scroll_stop_soft()
     def parrot_shush(): actions.user.parrot_scroll_up()
     def parrot_shush_stop(): actions.user.parrot_scroll_stop_soft()
+
+# @ctx.action_class("user")
+# class ParrotCommands:
+#     def parrot_guh():
+#         actions.user.parrot_side_b_disable()
+#         actions.key("space")
+#         actions.user.parrot_mode_enable_tag("user.parrot_default_interactive")
+#         actions.user.add_color_cursor("f22160")
+#         # actions.user.parrot_mode_append_tag("user.parrot_default_interactive")
