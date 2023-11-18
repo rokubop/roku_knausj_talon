@@ -200,7 +200,7 @@ def number_string(m) -> str:
 @mod.capture(rule="<user.number_string> [(dot | point) <user.number_string>]")
 def number_string_with_dot(m) -> str:
     """Parses a number phrase, returning that number as a string, including a dot."""
-    return f"{m.number_string_1}.{m.number_string_2}" if len(m) > 1 else m[0]
+    return ".".join(m.number_string_list)
 
 
 @ctx.capture("number", rule="<user.number_string>")
