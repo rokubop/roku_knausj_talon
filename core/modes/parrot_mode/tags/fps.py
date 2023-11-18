@@ -659,6 +659,8 @@ class MouseActions:
 
     def fps_turn_left_stop():
         """Turn left stop"""
+        if fps_turn_ts:
+            print(f"stop: {fps_turn_ts - time.perf_counter()}")
         _fps_turn_stop()
 
     def fps_turn_right():
@@ -684,6 +686,8 @@ class MouseActions:
 
     def fps_turn_right_stop():
         """Turn right stop"""
+        if fps_turn_ts:
+            print(f"stop: {fps_turn_ts - time.perf_counter()}")
         _fps_turn_stop()
 
     def fps_turn_left_soft_continuous():

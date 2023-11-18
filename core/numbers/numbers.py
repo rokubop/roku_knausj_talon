@@ -191,11 +191,16 @@ def digits(m) -> int:
     """Parses a phrase representing a digit sequence, returning it as an integer."""
     return int(m.digit_string)
 
-
 @mod.capture(rule=f"{number_word_leading} ([and] {number_word})*")
 def number_string(m) -> str:
     """Parses a number phrase, returning that number as a string."""
     return parse_number(list(m))
+
+# roku
+@mod.capture(rule="<user.number_string> [(dot | point) <user.number_string>]")
+def number_string_with_dot(m) -> str:
+    """Parses a number phrase, returning that number as a string, including a dot."""
+    return f"{m.number_string_1}.{m.number_string_2}" if len(m) > 1 else m[0]
 
 
 @ctx.capture("number", rule="<user.number_string>")
