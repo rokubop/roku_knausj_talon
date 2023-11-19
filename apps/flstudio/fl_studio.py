@@ -49,6 +49,7 @@ ctx.lists["self.fl_plugin"] = {
   "kick starter": "kickstart",
   "micro": "fin-micro",
   "fin micro": "fin-micro",
+  "limiter": "limiter",
   "micro shift": "microshift",
   "morph eq": "morph eq",
   'oscilloscope': "oszi",

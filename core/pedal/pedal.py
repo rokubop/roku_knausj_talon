@@ -1,4 +1,4 @@
-from talon import Module, actions, ctrl, cron, scope, Context, settings
+from talon import Module, actions, Context
 
 mod = Module()
 ctx = Context()
@@ -8,6 +8,14 @@ recent_tags = ["user.pedal_scroll_up_down", "user.pedal_click_mute"]
 
 @mod.action_class
 class Actions:
+    def pedal_on_tag_enable():
+        """Triggered when a tag is enabled"""
+        actions.skip()
+
+    def pedal_on_tag_disable():
+        """Triggered when a tag is disabled"""
+        actions.skip()
+
     def pedal_left_down():
         """Left pedal"""
         actions.skip()
@@ -26,19 +34,11 @@ class Actions:
 
     def pedal_right_down():
         """Right pedal"""
-        actions.user.toggle_recent_mode()
+        actions.skip()
 
     def pedal_right_up():
         """Right pedal up"""
-        actions.skip()
-
-    def pedal_on_tag_enable():
-        """Triggered when a tag is enabled"""
-        actions.skip()
-
-    def pedal_on_tag_disable():
-        """Triggered when a tag is disabled"""
-        actions.skip()
+        actions.user.toggle_recent_mode()
 
     def toggle_recent_mode():
         """Toggle recent mode"""

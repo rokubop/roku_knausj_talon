@@ -6,25 +6,48 @@ settings():
     speech.timeout = 0.20
     user.parrot_default_tag = "user.parrot_default_interactive"
 
-# adding instruments (tracks) and plugins (mixer)
-add {user.fl_instrument}:
+# tracks
+track [add] {user.fl_instrument} | add {user.fl_instrument}:
     mouse_click(1)
     key(t i)
     insert(fl_instrument)
     key(enter)
+track clone:
+    mouse_click(1)
+    key(o o)
+    key(enter enter)
+track delete:
+    mouse_click(1)
+    key(e enter enter)
+track (add | make | new | insert):
+    mouse_click(1)
+    key(i)
+track (group | indent | dedent):
+    mouse_click(1)
+    key(g)
+track color:
+    mouse_click(1)
+    key(r)
+    mouse_click(0)
+track color group:
+    mouse_click(1)
+    key(down down enter)
 
-add {user.fl_plugin}:       user.fl_choose_plugin(fl_plugin)
-
-(plug | slot) {user.fl_slot_y_position}:
+slot [add] {user.fl_plugin}: user.fl_choose_plugin(fl_plugin)
+slot [add] <user.text>:     user.fl_choose_plugin(text)
+slot {user.fl_slot_y_position}:
     user.fl_click_slot(fl_slot_y_position)
-(plug | slot) {user.fl_slot_y_position} (dog | yes | no):
+slot {user.fl_slot_y_position} (dog | yes | no):
     user.fl_click_slot_light(fl_slot_y_position)
-(plug | slot) {user.fl_slot_y_position} delete:
+slot {user.fl_slot_y_position} delete:
     user.fl_click_slot_menu(fl_slot_y_position)
     key(e)
-(plug | slot) {user.fl_slot_y_position} {user.fl_plugin}:
+slot {user.fl_slot_y_position} {user.fl_plugin}:
     user.fl_move_mouse_to_slot(fl_slot_y_position)
     user.fl_choose_plugin(fl_plugin)
+slot (remove | delete):
+    mouse_click()
+    key(e)
 
 # tools
 pen:                        key(p)
@@ -79,28 +102,6 @@ zen mode:                   key(enter)
     key(shift:down)
     mouse_drag()
     key(shift:up)
-
-# tracks
-track clone:
-    mouse_click(1)
-    key(o o)
-    key(enter enter)
-track delete:
-    mouse_click(1)
-    key(e enter enter)
-track (add | make | new | insert):
-    mouse_click(1)
-    key(i)
-group above:
-    mouse_click(1)
-    key(g)
-track color:
-    mouse_click(1)
-    key(r)
-    mouse_click(0)
-(color group | auto color group):
-    mouse_click(1)
-    key(down down enter)
 
 # playlist/timeline actions
 # pan:                        user.fl_studio_pan_mode_enable()
