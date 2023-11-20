@@ -4,10 +4,17 @@ mod = Module()
 ctx = Context()
 ctx.tags = ["user.pedal_scroll_up_down"]
 
-recent_tags = ["user.pedal_scroll_up_down", "user.pedal_click_mute"]
+recent_tags = []
 
 @mod.action_class
 class Actions:
+    def pedal_available_tags():
+        """
+        Returns a list of available tags for the given context,
+        starting with the one that should be active first
+        """
+        return ["user.pedal_scroll_up_down", "user.pedal_click_mute"]
+
     def pedal_on_tag_enable():
         """Triggered when a tag is enabled"""
         actions.skip()
@@ -38,12 +45,28 @@ class Actions:
 
     def pedal_right_up():
         """Right pedal up"""
-        actions.user.toggle_recent_mode()
+        actions.user.toggle_last_tag()
 
-    def toggle_recent_mode():
-        """Toggle recent mode"""
+    def toggle_last_tag():
+        """Toggle last tag for the current context"""
         global recent_tags
-        recent_tags[0], recent_tags[1] = recent_tags[1], recent_tags[0]
+        available_tags = actions.user.pedal_available_tags()
+
+        print("available_tags", available_tags)
+        print("recent_tags", recent_tags)
+
+        if set(recent_tags) != set(available_tags):
+            # tags different = new context setting
+            # initialize recent_tags
+            print('setting tags')
+            recent_tags = available_tags
+        elif len(recent_tags) > 1:
+            # swap tags if we have more than one
+            recent_tags[0], recent_tags[1] = recent_tags[1], recent_tags[0]
+
         actions.user.pedal_on_tag_disable()
-        ctx.tags = [recent_tags[0]]
+        if recent_tags:
+            ctx.tags = [recent_tags[0]]
+        else:
+            ctx.tags = []
         actions.user.pedal_on_tag_enable()

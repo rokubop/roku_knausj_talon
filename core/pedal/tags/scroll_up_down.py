@@ -9,7 +9,6 @@ pause_eye_tracking_job = None
 
 @mod.action_class
 class Actions:
-
     def pause_eye_tracking(time: str = "1500ms"):
         """Pauses eye tracking"""
         global pause_eye_tracking_job
