@@ -123,10 +123,10 @@ class Actions:
         global canvas
         screen: Screen = ui.main_screen()
         canvas = Canvas.from_screen(screen)
-        canvas.register("draw", on_draw_2)
+        canvas.register("draw2", on_draw_2)
 
     def canvas_test_stop():
         """canvas_test_stop"""
         global canvas
         canvas.unregister("draw", on_draw)
-        canvas.unregister("draw", on_draw_2)
+        canvas.unregister("draw2", on_draw_2)
