@@ -26,7 +26,7 @@ parrot(hiss:stop):
 	# print("hiss:stop")
 	# user.on_hiss_stop()
 parrot(ee):
-	print("ee")
+	# print("ee")
 	user.on_force_scroll_stop()
 	# user.omega_mouse_left_click()
 parrot(ee:stop):
@@ -41,7 +41,7 @@ parrot(eh):
 parrot(oh):
 	# print("oh")
 	user.on_oh()
-parrot(t): actions.skip()
+parrot(t): skip()
 	# print("t")
 parrot(er):
 	# print("er")

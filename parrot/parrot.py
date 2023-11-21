@@ -202,51 +202,51 @@ class Actions:
 
     def on_cluck():
         """Do cluck"""
-        print("cluck")
+        actions.skip()
 
     def on_aa():
         """Do aa"""
-        print("aa")
+        actions.skip()
 
     def on_ah():
         """Do ah"""
-        print("ah")
+        actions.skip()
 
     def on_ch():
         """Do ch"""
-        print("ch")
+        actions.skip()
 
     def on_eh():
         """Do eh"""
-        print("eh")
+        actions.skip()
 
     def on_oh():
         """Do oh"""
-        print("oh")
+        actions.skip()
 
     def on_short_oo():
         """Do short_oo"""
-        print("short_oo")
+        actions.skip()
 
     def on_uh():
         """Do uh"""
-        print("uh")
+        actions.skip()
 
     def on_jj():
         """Do jj"""
-        print("jj")
+        actions.skip()
 
     def on_er():
         """Do er"""
-        print("er")
+        actions.skip()
 
     def on_guh():
         """Do guh"""
-        print("guh")
+        actions.skip()
 
     def on_nn():
         """Do nn"""
-        print("nn")
+        actions.skip()
 
     def noise_debounce(name: str, active: bool):
         """Start or stop continuous noise using debounce"""
