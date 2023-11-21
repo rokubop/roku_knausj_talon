@@ -117,6 +117,7 @@ class Actions:
         screen: Screen = ui.main_screen()
         canvas = Canvas.from_screen(screen)
         canvas.register("draw", on_draw)
+
     def canvas_test_two():
         """canvas_test_two"""
         global canvas

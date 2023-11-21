@@ -1,18 +1,17 @@
-from talon import Module, actions, Context
+from talon import Module, actions, Context, cron
 
 mod = Module()
 ctx = Context()
 ctx.tags = ["user.pedal_scroll_up_down"]
 
 recent_tags = []
+open_menu = False
+open_menu_cron = None
 
 @mod.action_class
 class Actions:
     def pedal_available_tags():
-        """
-        Returns a list of available tags for the given context,
-        starting with the one that should be active first
-        """
+        """Returns a list of available tags for the given context, starting with the one that should be active first"""
         return ["user.pedal_scroll_up_down", "user.pedal_click_mute"]
 
     def pedal_on_tag_enable():
@@ -41,11 +40,28 @@ class Actions:
 
     def pedal_right_down():
         """Right pedal"""
+        global open_menu_cron
+        open_menu_cron = cron.after("1s", actions.user.pedal_open_menu)
         actions.skip()
 
     def pedal_right_up():
         """Right pedal up"""
-        actions.user.toggle_last_tag()
+        global open_menu, open_menu_cron
+        if open_menu:
+            if open_menu_cron:
+                cron.cancel(open_menu_cron)
+                open_menu_cron = None
+                open_menu = False
+        else:
+            actions.user.toggle_last_tag()
+
+    def pedal_open_menu():
+        """Pedal open menu"""
+        global open_menu, open_menu_cron
+        actions.user.canvas_test_one()
+        cron.cancel(open_menu_cron)
+        open_menu = True
+        open_menu_cron = None
 
     def toggle_last_tag():
         """Toggle last tag for the current context"""

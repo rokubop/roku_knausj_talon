@@ -55,6 +55,8 @@ bar source:
 bar file:
     user.vscode("workbench.files.action.showActiveFileInExplorer")
     mouse_move(207, 425)
+bar (grow | expand):    user.vscode("workbench.action.decreaseViewWidth")
+bar shrink:    user.vscode("workbench.action.increaseViewWidth")
 rack (show | open | yes):
     user.vscode("workbench.action.toggleAuxiliaryBar")
     mouse_move(1752, 245)
@@ -169,10 +171,8 @@ group (collapse | join | single): user.vscode("workbench.action.editorLayoutSing
 group switch:                 user.vscode("workbench.action.toggleEditorGroupLayout")
 group reset: user.vscode("workbench.action.evenEditorWidths")
 
-shrink x:                   user.vscode("workbench.action.decreaseViewWidth")
-shrink y | grow term | term grow: user.vscode("workbench.action.decreaseViewHeight")
-(grow | expand) x:          user.vscode("workbench.action.increaseViewWidth")
-(grow | expand) y | shrink term | term shrink: user.vscode("workbench.action.increaseViewHeight")
+term grow: user.vscode("workbench.action.decreaseViewHeight")
+term shrink: user.vscode("workbench.action.increaseViewHeight")
 maximize | grow$:            user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
