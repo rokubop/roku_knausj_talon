@@ -2,16 +2,16 @@ not mode:                   sleep
 and not mode:               user.parrot
 -
 parrot(cluck):
-	print("cluck")
+	# print("cluck")
 	user.parrot_mode_enable()
 parrot(tut):
-	print("tut")
+	# print("tut")
 	user.on_tut()
 parrot(palate_click):
-	print("on_palate")
+	# print("on_palate")
 	user.on_palate()
 parrot(pop):
-	print("pop")
+	# print("pop")
 	user.on_pop()
 parrot(shush):
 	# print("shush")
@@ -33,21 +33,21 @@ parrot(ee:stop):
 	# print("ee:stop")
 	# user.on_ee_stop()
 parrot(ah):
-	print("ah")
+	# print("ah")
 	user.on_ah()
 parrot(eh):
-	print("eh")
+	# print("eh")
 	user.on_eh()
 parrot(oh):
-	print("oh")
+	# print("oh")
 	user.on_oh()
-parrot(t):
-	print("t")
+parrot(t): actions.skip()
+	# print("t")
 parrot(er):
 	# print("er")
 	user.on_er()
 parrot(guh):
-	print("guh")
+	# print("guh")
 	user.on_guh()
 parrot(nn):
 	# print("nn")

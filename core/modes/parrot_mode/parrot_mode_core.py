@@ -3,7 +3,7 @@ from talon import Context, Module, actions, settings
 mod = Module()
 ctx = Context()
 
-logging_enabled = True
+logging_enabled = False
 preserved_tag = None
 
 def log(msg: str):

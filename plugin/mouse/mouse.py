@@ -407,7 +407,6 @@ class UserActions:
 
 @ctx.action("user.on_pop")
 def on_pop():
-    print("pop from mouse.py")
     actions.user.mouse_scroll_stop()
 
     if setting_mouse_enable_pop_stops_scroll.get() >= 1 and (gaze_job or scroll_job):
