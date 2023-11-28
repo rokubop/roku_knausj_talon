@@ -174,7 +174,15 @@ mix {user.fl_mixer_x_position}: user.fl_click_mixer(fl_mixer_x_position)
 
 # pro mb commands
 
+# track visualize number grid
+
 # ss/sh parrot and foot pedal modes
+# pan- SS sh nn. SS sh. t switch
+# scroll - SS sh. nn. SS sh . t switch.  pal inc.
+# zoom - SS sh. nn. SS sh.  t switch.  pal inc
+# zoom y
+# knob - SS sh palate tut pop acct. 
+
 # move y?
 # move x?
 # knob
