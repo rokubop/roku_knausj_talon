@@ -162,7 +162,28 @@ resample only:
 mix start | pre mix:        user.fl_go_to_mixer_start()
 mix {user.fl_mixer_x_position}: user.fl_click_mixer(fl_mixer_x_position)
 
-# zoom
+# pro q commands
+# pro low cut
+# pro high pass
+# pro
+
+# serum commands
+# try windows ui to detect window title?
+
+# vital commands
+
+# pro mb commands
+
+# ss/sh parrot and foot pedal modes
+# move y?
+# move x?
+# knob
+# knob x | knob y - parrot and foot
+# zoom x - parrot and foot pedal
+# zoom y - parrot and foot pedal
+# scroll x - parrot and foot pedal
+# scroll y - parrot and foot pedal 
+
 zoom [in]:
     key("ctrl:down")
     mouse_scroll(-1000)
