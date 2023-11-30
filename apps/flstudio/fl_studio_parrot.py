@@ -31,7 +31,7 @@ tag: user.parrot_default_interactive
 # @ctx.action_class("user")
 # class Actions:
 
-@ctx_parrot_default.action_class("user")
-class Actions:
-    def parrot_palate():
-        actions.key("space")
+# @ctx_parrot_default.action_class("user")
+# class Actions:
+#     def parrot_palate():
+#         actions.key("space")
