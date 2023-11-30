@@ -300,7 +300,7 @@ alternate_keys.update({
     "clap": "enter",
     "lap": "enter",
     "yep": "enter",
-    "slap": "enter",
+    # "slap": "enter",
     "drill": "delete",
     "scratch": "backspace",
     "scrape": "escape",

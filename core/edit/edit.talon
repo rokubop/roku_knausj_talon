@@ -24,7 +24,7 @@ driller:
     edit.extend_word_right()
     edit.delete()
 
-slapper | new graph:
+new graph:
     edit.line_insert_down()
     edit.line_insert_down()
 
@@ -177,7 +177,7 @@ clone line:                 edit.line_clone()
 
 # Insert new line
 new line above:             edit.line_insert_up()
-new line [below] | slap:    edit.line_insert_down()
+new line [below]:    edit.line_insert_down()
 
 # Insert padding with optional symbols
 (pad | padding):            user.insert_between(" ", " ")

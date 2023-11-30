@@ -12,6 +12,7 @@ mode: all
 #     user.mouse_sleep()
 #     speech.disable()
 #     user.engine_sleep()
+
 ^sleep [<phrase>]$:
     user.hud_publish_mouse_particle('float_up', '493fd9')
     user.history_disable()

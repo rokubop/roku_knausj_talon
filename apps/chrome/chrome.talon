@@ -49,6 +49,7 @@ split <user.window_snap_position>:
 
 please [<user.text>]:
     key(escape ctrl-shift-p)
+    sleep(200ms)
     insert(text or "")
 
 go <number>:
