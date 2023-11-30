@@ -101,7 +101,49 @@ def on_draw(c: SkiaCanvas):
     c.draw_circle(500, 500, 100)
 
     # gradient text
+    c.paint.shader = skia.linear_gradient(
+        (500, 300), (500, 700), ["0000ff", "000000"], None
+    )
+    c.paint.style = c.paint.Style.STROKE
+    c.draw_text("C I R C L E", 500, 500)
+    c.draw_circle(500, 500, 100)
+
+def on_draw_3(c: SkiaCanvas):
+    # circle
+    c.paint.style = c.paint.Style.STROKE
+    c.draw_circle(100, 100, 100)
+
+    # rectangle
+    c.paint.color = "ff0000"
+    c.draw_rect(Rect(100, 100, 100, 100))
+
+    # round rectangle
+    c.paint.color = "0000ff"
+    c.paint.stroke_width = 4
+    c.draw_rrect(RoundRect.from_rect(Rect(200, 200, 100, 100), x=10, y=10))
+
+    # text
+    c.paint.color = "ffffff"
+    c.paint.style = c.paint.Style.FILL
+    c.paint.textsize = 20
+    c.draw_text("Hello, world!", 960, 580)
+
+    # gradient fill
     c.paint.shader = skia.Shader.linear_gradient(
+        (500, 300), (500, 700), ["ff0000", "0000ff"], None
+    )
+    c.paint.style = c.paint.Style.FILL
+    c.draw_circle(500, 500, 100)
+
+    # gradient stroke
+    c.paint.shader = skia.Shader.linear_gradient(
+        (500, 300), (500, 700), ["0000ff", "ff0000"], None
+    )
+    c.paint.style = c.paint.Style.STROKE
+    c.draw_circle(500, 500, 100)
+
+    # gradient text
+    c.paint.shader = skia.linear_gradient(
         (500, 300), (500, 700), ["0000ff", "000000"], None
     )
     c.paint.style = c.paint.Style.STROKE
@@ -125,8 +167,25 @@ class Actions:
         canvas = Canvas.from_screen(screen)
         canvas.register("draw2", on_draw_2)
 
+    def canvas_test_three():
+        """canvas_test_three"""
+        global canvas
+        screen: Screen = ui.main_screen()
+        canvas = Canvas.from_screen(screen)
+        canvas.register("draw3", on_draw_3)
+
     def canvas_test_stop():
         """canvas_test_stop"""
         global canvas
-        canvas.unregister("draw", on_draw)
-        canvas.unregister("draw2", on_draw_2)
+        if canvas:
+            canvas.unregister("draw", on_draw)
+            canvas.unregister("draw2", on_draw_2)
+            canvas.unregister("draw3", on_draw_3)
+            canvas.hide()
+            canvas.close()
+
+    def canvas_test_freeze():
+        """canvas_test_freeze"""
+        global canvas
+        if canvas:
+            canvas.freeze()

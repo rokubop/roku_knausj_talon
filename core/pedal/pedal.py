@@ -58,7 +58,7 @@ class Actions:
     def pedal_open_menu():
         """Pedal open menu"""
         global open_menu, open_menu_cron
-        actions.user.canvas_test_one()
+        # actions.user.canvas_test_one()
         cron.cancel(open_menu_cron)
         open_menu = True
         open_menu_cron = None

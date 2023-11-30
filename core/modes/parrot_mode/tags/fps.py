@@ -155,7 +155,7 @@ class FpsRoom:
     def parrot_cluck():
         if not actions.user.fps_check_cluck_should_exit_parrot_mode():
             actions.key('e')
-            actions.user.parrot_mouse_click(0)
+            # actions.user.parrot_mouse_click(0)
             actions.user.fps_stop_layer()
     def parrot_palate(): actions.user.fps_compass_snap_to_closest_90()
     def parrot_tut(): actions.user.parrot_mouse_click(1)
@@ -576,7 +576,7 @@ def fps_turn_tick():
     global fps_turn_dir, fps_turn_ts, fps_turn_multiplier_linear, fps_turn_multiplier_dynamic, fps_turn_job, fps_turn_stop, compass_north_offset
     dx = int(fps_turn_dir * fps_turn_multiplier_dynamic)
     compass_north_offset += dx
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, dx, 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx / 2), 0)
     if fps_turn_stop and fps_turn_multiplier_linear > 0:
         fps_update_val_multiplier(fps_turn_multiplier_linear - 1)
     if fps_turn_multiplier_linear <= 0:
