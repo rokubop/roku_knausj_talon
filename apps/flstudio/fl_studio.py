@@ -133,19 +133,19 @@ class Actions:
       actions.mouse_click(0)
 
     def fl_set_normalized_layout():
-      """ """
+      """Set normalized layout"""
       ctrl.mouse_move(156, 19)
       ctrl.mouse_click(0)
       actions.key("up:8 right up:2")
       actions.key("enter")
 
     def fl_set_declicking_mode():
-      """ """
+      """Set declicking mode"""
       ctrl.mouse_click(0)
       actions.key("down:2 enter")
 
     def fl_set_resample_mode():
-      """ """
+      """Set resample mood"""
       ctrl.mouse_click(0)
       actions.key("down:2 enter")
 
@@ -236,13 +236,28 @@ class Actions:
 
     def fl_studio_pan_mode_disable():
       """Disable fl studio pan mode"""
-      print("disable")
       ctx.tags = []
 
     def fl_studio_pan_mode_enable():
       """Enable fl studio pan mode"""
-      print("enablean")
       ctx.tags = ["user.fl_studio_pan_mode"]
+
+    def fl_tag_add(userTag: str):
+      """Add fl tag"""
+      tags = set(ctx.tags)
+      tags.add(userTag)
+      ctx.tags = tags
+
+    def fl_tag_remove(userTag: str):
+      """Remove fl tag"""
+      tags = set(ctx.tags)
+      if userTag in tags:
+        tags.remove(userTag)
+        ctx.tags = tags
+
+    def fl_tag_reset():
+      """Reset fl tag"""
+      ctx.tags = []
 
 global noise
 

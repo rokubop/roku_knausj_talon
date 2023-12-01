@@ -14,6 +14,8 @@ mode: user.parrot
 class ParrotCommands:
     def parrot_pop(): actions.user.parrot_mouse_click(0)
     def parrot_cluck():
+        if actions.user.parrot_is_mouse_moving():
+            actions.user.parrot_mouse_click(0)
         actions.user.parrot_position_mode_disable()
         actions.user.parrot_mode_disable()
     def parrot_eh(): actions.user.parrot_teleport_mouse_soft()

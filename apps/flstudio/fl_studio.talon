@@ -93,7 +93,7 @@ bar collapse:               key(ctrl-up)
 mix:                        key(f9)
 midi:                       key(f7)
 range | playlist | time:    key(f5)
-channels | inst:            key(f6)
+rack | channels | inst:     key(f6)
 cleanup | hide all | close all | high doll: key(f12 f5 f9)
 layout (one | set | default | reset): user.fl_set_normalized_layout()
 zen mode:                   key(enter)
@@ -181,7 +181,7 @@ mix {user.fl_mixer_x_position}: user.fl_click_mixer(fl_mixer_x_position)
 # scroll - SS sh. nn. SS sh . t switch.  pal inc.
 # zoom - SS sh. nn. SS sh.  t switch.  pal inc
 # zoom y
-# knob - SS sh palate tut pop acct. 
+# knob - SS sh palate tut pop acct.
 
 # move y?
 # move x?
@@ -190,21 +190,29 @@ mix {user.fl_mixer_x_position}: user.fl_click_mixer(fl_mixer_x_position)
 # zoom x - parrot and foot pedal
 # zoom y - parrot and foot pedal
 # scroll x - parrot and foot pedal
-# scroll y - parrot and foot pedal 
+# scroll y - parrot and foot pedal
 
-zoom [in]:
-    key("ctrl:down")
-    mouse_scroll(-1000)
-    key("ctrl:up")
-zoom out:
-    key("ctrl:down")
-    mouse_scroll(1000)
-    key("ctrl:up")
-shrink:
-    key("alt:down")
-    mouse_scroll(500)
-    key("alt:up")
-grow:
-    key("alt:down")
-    mouse_scroll(-500)
-    key("alt:up")
+[mode] zoom:
+    user.fl_tag_remove("user.fl_studio_scroll")
+    user.fl_tag_add("user.fl_studio_zoom")
+[mode] scroll:
+    user.fl_tag_remove("user.fl_studio_zoom")
+    user.fl_tag_add("user.fl_studio_scroll")
+mode default:               user.fl_tag_reset()
+
+# zoom [in]:
+#     key("ctrl:down")
+#     mouse_scroll(-1000)
+#     key("ctrl:up")
+# zoom out:
+#     key("ctrl:down")
+#     mouse_scroll(1000)
+#     key("ctrl:up")
+# shrink:
+#     key("alt:down")
+#     mouse_scroll(500)
+#     key("alt:up")
+# grow:
+#     key("alt:down")
+#     mouse_scroll(-500)
+#     key("alt:up")

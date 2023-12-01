@@ -331,6 +331,10 @@ class ParrotModeActions:
             actions.user.add_green_cursor()
         is_mouse_moving = True
 
+    def parrot_is_mouse_moving():
+        """Is mouse moving"""
+        return is_mouse_moving
+
     def parrot_mouse_teleport():
         """Teleport mouse"""
         actions.tracking.control_head_toggle(False)
