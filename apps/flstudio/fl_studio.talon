@@ -7,18 +7,16 @@ settings():
     user.parrot_default_tag = "user.parrot_default_interactive"
 
 # tracks
+go <user.letters>:
+    user.fl_click_track(letters)
+    mouse_click(0)
+track <user.letters>:       user.fl_click_track(letters)
+track <user.letters> {user.fl_instrument}:
+    user.fl_track_add_instrument(fl_instrument, letters)
 track [add] {user.fl_instrument} | add {user.fl_instrument}:
-    mouse_click(1)
-    key(t i)
-    insert(fl_instrument)
-    key(enter)
-track clone:
-    mouse_click(1)
-    key(o o)
-    key(enter enter)
-track delete:
-    mouse_click(1)
-    key(e enter enter)
+    user.fl_track_add_instrument(fl_instrument, "")
+track [<user.letters>] clone [<user.letters>]: user.fl_track_clone(letters or "")
+track [<user.letters>] delete [<user.letters>]: user.fl_track_delete(letters or "")
 track (add | make | new | insert):
     mouse_click(1)
     key(i)
@@ -57,7 +55,13 @@ mute:                       key(t)
 hand:                       user.mouse_drag(2)
 close | hide:               key(escape)
 play | pause:               key(space)
-tempo:                      key(ctrl-f5)
+tempo tap:                  key(ctrl-f5)
+tempo <number>:
+    mouse_move(493, 21)
+    mouse_click(1)
+    key(t)
+    insert(number)
+    key(enter)
 
 # selection
 take box | box:
@@ -91,8 +95,8 @@ bar collapse:               key(ctrl-up)
 
 # windows
 mix:                        key(f9)
-midi:                       key(f7)
-range | playlist | time:    key(f5)
+midi | note | keys:         key(f7)
+range | playlist | time | grid: key(f5)
 rack | channels | inst:     key(f6)
 cleanup | hide all | close all | high doll: key(f12 f5 f9)
 layout (one | set | default | reset): user.fl_set_normalized_layout()
@@ -194,10 +198,24 @@ mix {user.fl_mixer_x_position}: user.fl_click_mixer(fl_mixer_x_position)
 
 [mode] zoom:
     user.fl_tag_remove("user.fl_studio_scroll")
+    user.fl_tag_remove("user.pedal_head_gaze")
+    user.fl_tag_remove("user.fl_studio_ui")
     user.fl_tag_add("user.fl_studio_zoom")
 [mode] scroll:
     user.fl_tag_remove("user.fl_studio_zoom")
+    user.fl_tag_remove("user.pedal_head_gaze")
+    user.fl_tag_remove("user.fl_studio_ui")
     user.fl_tag_add("user.fl_studio_scroll")
+mode UI:
+    user.fl_tag_remove("user.fl_studio_zoom")
+    user.fl_tag_remove("user.pedal_head_gaze")
+    user.fl_tag_remove("user.fl_studio_scroll")
+    user.fl_tag_add("user.fl_studio_ui")
+mode gaze:
+    user.fl_tag_remove("user.fl_studio_zoom")
+    user.fl_tag_remove("user.fl_studio_ui")
+    user.fl_tag_remove("user.fl_studio_scroll")
+    user.fl_tag_add("user.pedal_head_gaze")
 mode default:               user.fl_tag_reset()
 
 # zoom [in]:
@@ -216,3 +234,8 @@ mode default:               user.fl_tag_reset()
 #     key("alt:down")
 #     mouse_scroll(-500)
 #     key("alt:up")
+
+test:
+    matches = user.mouse_helper_find_template_relative("2023-12-02_23.09.31.490836.png", 0, -12)
+    user.marker_ui_show(matches)
+# test:                       user.fl_test()

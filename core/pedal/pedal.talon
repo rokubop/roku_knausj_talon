@@ -13,8 +13,9 @@ key(keypad_plus:down):
 key(keypad_plus:up):
     user.pedal_right_up()
 
-pedal scroll:               user.pedal_mode_scroll()
-pedal mute:                 user.pedal_mode_mute()
+pedal scroll:               user.pedal_set_tag("user.pedal_scroll_up_down")
+pedal mute:                 user.pedal_set_tag("user.pedal_click_mute")
+pedal gaze:                 user.pedal_set_tag("user.pedal_head_gaze")
 
 # KEY_NUM_LOCK 0xDB 219
 # KEY_KP_SLASH: 0xDC 220

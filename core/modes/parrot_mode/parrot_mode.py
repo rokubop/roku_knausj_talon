@@ -64,7 +64,7 @@ class ParrotModeActions:
             actions.user.hud_publish_mouse_particle('float_up', 'F36D30')
 
 
-    def parrot_mouse_drag(button: int):
+    def parrot_mouse_drag(button: int = 0):
         """Drag the mouse in a direction"""
         global is_dragging
 

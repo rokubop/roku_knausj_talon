@@ -1,4 +1,4 @@
-from talon import Module, Context, actions, ctrl, app
+from talon import Module, Context, actions, ctrl, app, ui
 from datetime import datetime
 import time
 
@@ -106,6 +106,52 @@ ctx.lists["self.fl_mixer_x_position"] = {
   "nine": "983",
   "ten": "1027",
 }
+
+mod.list("fl_track_positions", desc="fl track positions")
+ctx.lists["user.fl_track_positions"] = {
+    "a": "328,180",
+    "b": "328,220",
+    "c": "328,260",
+    "d": "328,300",
+    "e": "328,340",
+    "f": "328,380",
+    "g": "328,420",
+    "h": "328,460",
+    "i": "328,500",
+    "k": "328,540",
+    "l": "328,580",
+}
+
+mod.list("fl_time_positions", desc="fl time positions")
+ctx.lists["user.fl_time_positions"] = {
+    "a": "399,139",
+    "b": "422,139",
+    "c": "445,139",
+    "d": "468,139",
+    "e": "491,139",
+    "f": "514,139",
+    "g": "537,139",
+    "h": "560,139",
+    "i": "583,139",
+    "j": "606,139",
+    "k": "629,139",
+    "l": "652,139",
+    "m": "675,139",
+    "n": "698,139",
+    "o": "721,139",
+    "p": "744,139",
+    "q": "767,139",
+    "r": "790,139",
+    "s": "813,139",
+    "t": "836,139",
+    "u": "859,139",
+    "v": "882,139",
+    "w": "905,139",
+    "x": "928,139",
+    "y": "951,139",
+    "z": "974,139",
+}
+
 
 fl_bar_is_visible = True
 mixer_y_pos = 693
@@ -258,6 +304,110 @@ class Actions:
     def fl_tag_reset():
       """Reset fl tag"""
       ctx.tags = []
+
+    def fl_click_track(letter: str):
+      """click a track"""
+      actions.user.fl_track_move_mouse(letter)
+      ctrl.mouse_click(0)
+
+    def fl_track_clone(letter: str = None):
+      """clone a track"""
+      if letter:
+        actions.user.fl_click_track(letter)
+      ctrl.mouse_click(1)
+      actions.key("o o")
+      actions.key("enter enter")
+
+    def fl_track_delete(letter: str = None):
+      """delete a track"""
+      if letter:
+        actions.user.fl_click_track(letter)
+      ctrl.mouse_click(1)
+      actions.key("e enter enter")
+
+    def fl_track_move_mouse(letter: str):
+      """Move mouse to rack"""
+      position = ctx.lists["user.fl_track_positions"][letter]
+      x, y = position.split(",")
+      ctrl.mouse_move(x, y)
+
+    def fl_track_add_instrument(fl_instrument: str, letter: str = None):
+      """Add instrument to track"""
+      if letter:
+        actions.user.fl_click_track(letter)
+      ctrl.mouse_click(1)
+      actions.key("t i")
+      actions.insert(fl_instrument)
+      actions.key("enter")
+
+    def fl_test():
+      """test"""
+      # print(ui.active_window())
+      pane = ui.focused_element()
+      print(pane)
+      print(dir(pane))
+      print(pane.rect)
+      # for attr in dir(pane):
+      #   try:
+      #       value = getattr(pane, attr)
+      #       print(f"{attr}: {value}")
+      #   except Exception as ex:
+      #       print(f"Error accessing {attr}: {ex}")
+      # print(ui.root_element())
+      # print(ui.win_event())
+
+# def win_event_handler(event, s):
+#   print(event, s)
+
+# ui.register("", win_event_handler)
+current_vst = None
+def win_event_handler(window):
+  global current_vst
+
+  # on windows, we get events from the clock
+  # and such, so this check is important
+  # if not window.app.exe or window != ui.active_window():
+  #     return
+
+  if "Phase Plant" in window.title:
+    current_vst = "phase_plant"
+  elif "Vital" in window.title:
+    current_vst = "vital"
+  elif "Serum" in window.title:
+    current_vst = "serum"
+
+  print("current_vst", current_vst)
+
+def ui_event(event_name, v):
+  # print(type(event_name), type(v))
+  if event_name == "win_title" and ("Windows" in v.title or "Asus" in v.title):
+    return
+  print(event_name, v)
+  return
+  if event_name == "win_show":
+    if "Phase Plant" in v.title:
+      print("Showing phase plant")
+      print(v.rect)
+    if "Vital" in v.title:
+      print("Showing vital")
+      print(v.rect)
+    if "Serum" in v.title:
+      print("Showing serum")
+      print(v.rect)
+
+  # if event_name == "win_title":
+  #   window = v
+  #   print(event_name, window)
+  #   print(dir(window))
+  #   print(window.rect)
+  #   # window = ui.active_window()
+  #   # rect = window.rect
+  #   print(f"Window Title Changed: {window.title} in application {window.app.name} (PID: {window.app.pid})")
+  #   print(dir(window.app))
+
+# ui.register("", ui_event)
+# ui.register("win_focus", win_event_handler)
+# ui.register("win_title", win_event_handler)
 
 global noise
 

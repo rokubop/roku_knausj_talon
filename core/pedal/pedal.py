@@ -80,9 +80,11 @@ class Actions:
             # swap tags if we have more than one
             recent_tags[0], recent_tags[1] = recent_tags[1], recent_tags[0]
 
+        new_tags = recent_tags[0] if recent_tags else []
+        actions.user.pedal_set_tag(new_tags)
+
+    def pedal_set_tag(user_tag: str):
+        """Set the current pedal tag"""
         actions.user.pedal_on_tag_disable()
-        if recent_tags:
-            ctx.tags = [recent_tags[0]]
-        else:
-            ctx.tags = []
+        ctx.tags = [user_tag]
         actions.user.pedal_on_tag_enable()
