@@ -23,6 +23,8 @@ os: windows
 
 @ctx_ui.action_class("user")
 class Actions:
+    def pedal_on_tag_enable():
+        actions.user.hud_add_log('event', '<*Pedal: UI drag />')
     def pedal_left_down():    actions.user.rpg_mouse_move_up()
     def pedal_left_up():      actions.user.rpg_mouse_stop()
     def pedal_center_down():  actions.user.rpg_mouse_move_down()

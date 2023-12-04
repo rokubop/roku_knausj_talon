@@ -8,7 +8,7 @@ ctx.matches = "tag: user.pedal_head_gaze"
 @ctx.action_class("user")
 class Actions:
     def pedal_on_tag_enable():
-        actions.user.hud_add_log('event', '<*Pedal: Head/Gaze />')
+        actions.user.hud_add_log('success', '<*Pedal: Head/Gaze />')
 
     def pedal_left_down():
         actions.tracking.control_head_toggle(False)

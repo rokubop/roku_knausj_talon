@@ -11,21 +11,21 @@ settings():
     insert_wait = 7
 
 # Views
-(show | focus) term | term (show | yes):        user.vscode("workbench.action.terminal.focus")
+(show | focus) term | term (show | yes): user.vscode("workbench.action.terminal.focus")
 hide term | term (hide | no | dog): user.vscode("workbench.action.togglePanel")
 show (files | folders):
     user.vscode_focus_files()
     mouse_move(197, 426)
-show extensions:  user.vscode("workbench.view.extensions")
-show outline:     user.vscode("outline.focus")
-show run:         user.vscode("workbench.view.debug")
+show extensions:            user.vscode("workbench.view.extensions")
+show outline:               user.vscode("outline.focus")
+show run:                   user.vscode("workbench.view.debug")
 show rack:                  user.vscode("workbench.action.toggleAuxiliaryBar")
 focus search:               user.vscode("workbench.action.findInFiles")
 focus exclude:              user.vscode("workbench.action.focusFilesToExclude")
 focus include:              user.vscode("search.action.focusFilesToInclude")
 show search:                user.vscode("workbench.view.search")
-show changes:     user.vscode_focus_changes()
-(show | focus) editor:               user.vscode("workbench.action.focusActiveEditorGroup")
+show changes:               user.vscode_focus_changes()
+(show | focus) editor:      user.vscode("workbench.action.focusActiveEditorGroup")
 (show | focus | hide | toggle) bar: user.vscode("workbench.action.toggleSidebarVisibility")
 
 # Sidebar
@@ -55,8 +55,8 @@ bar source:
 bar file:
     user.vscode("workbench.files.action.showActiveFileInExplorer")
     mouse_move(207, 425)
-bar (grow | expand):    user.vscode("workbench.action.decreaseViewWidth")
-bar shrink:    user.vscode("workbench.action.increaseViewWidth")
+bar (grow | expand):        user.vscode("workbench.action.decreaseViewWidth")
+bar shrink:                 user.vscode("workbench.action.increaseViewWidth")
 rack (show | open | yes):
     user.vscode("workbench.action.toggleAuxiliaryBar")
     mouse_move(1752, 245)
@@ -76,7 +76,7 @@ show settings <user.text>:
     "{text}"
 show [key board] shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
 show [key board] shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
-show (markdown | preview):             user.vscode("markdown.showPreviewToSide")
+show (markdown | preview):  user.vscode("markdown.showPreviewToSide")
 
 # Navigating files
 ^pop$:
@@ -100,8 +100,8 @@ pop (win | window) [<user.text>]:
     sleep(50ms)
     insert(text or "")
 
-pop back:       user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
-pop forward:    user.vscode("workbench.action.openNextRecentlyUsedEditor")
+pop back:                   user.vscode("workbench.action.openPreviousRecentlyUsedEditor")
+pop forward:                user.vscode("workbench.action.openNextRecentlyUsedEditor")
 spring back:                user.vscode("workbench.action.navigateBack")
 spring forward:             user.vscode("workbench.action.navigateForward")
 
@@ -110,7 +110,6 @@ pop last:
 
 pop next:
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
-
 
 # Find and replace
 scout (doc | folder | file) [<user.text>]:
@@ -130,14 +129,6 @@ spot last:                  user.vscode("workbench.action.navigatePreviousInEdit
 doc split:                  user.vscode("workbench.action.splitEditor")
 
 # Language features
-jest:                       code.complete()
-jest first:
-    code.complete()
-    key(tab)
-jest param:                 user.vscode("editor.action.triggerParameterHints")
-jest <user.cursorless_target>:
-    user.cursorless_command("setSelectionAfter", cursorless_target)
-    code.complete()
 format document:            user.format_document()
 refactor this:              user.vscode("editor.action.refactor")
 
@@ -161,28 +152,28 @@ split right:                user.vscode("workbench.action.moveEditorToRightGroup
 split up:                   user.vscode("workbench.action.moveEditorToAboveGroup")
 split down:                 user.vscode("workbench.action.moveEditorToBelowGroup")
 
-group up:          user.vscode("workbench.action.focusAboveGroup")
-group down:        user.vscode("workbench.action.focusBelowGroup")
-group (left | one):        user.vscode("workbench.action.focusLeftGroup")
-group (right | two):       user.vscode("workbench.action.focusRightGroup")
-group close: user.vscode("workbench.action.closeEditorsAndGroup")
-group close others: user.vscode("workbench.action.closeEditorsInOtherGroups")
+group up:                   user.vscode("workbench.action.focusAboveGroup")
+group down:                 user.vscode("workbench.action.focusBelowGroup")
+group (left | one):         user.vscode("workbench.action.focusLeftGroup")
+group (right | two):        user.vscode("workbench.action.focusRightGroup")
+group close:                user.vscode("workbench.action.closeEditorsAndGroup")
+group close others:         user.vscode("workbench.action.closeEditorsInOtherGroups")
 group (collapse | join | single): user.vscode("workbench.action.editorLayoutSingle")
-group switch:                 user.vscode("workbench.action.toggleEditorGroupLayout")
-group reset: user.vscode("workbench.action.evenEditorWidths")
+group switch:               user.vscode("workbench.action.toggleEditorGroupLayout")
+group reset:                user.vscode("workbench.action.evenEditorWidths")
 
-term grow: user.vscode("workbench.action.decreaseViewHeight")
-term shrink: user.vscode("workbench.action.increaseViewHeight")
-maximize | grow$:            user.vscode("workbench.action.toggleEditorWidths")
+term grow:                  user.vscode("workbench.action.decreaseViewHeight")
+term shrink:                user.vscode("workbench.action.increaseViewHeight")
+maximize | grow$:           user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
 # Terminal
 term (max | min | zen | zen mode):
     user.vscode("workbench.action.alignPanelCenter")
     user.vscode("workbench.action.toggleMaximizedPanel")
-term control:      user.vscode("workbench.panel.repl.view.focus")
-term output:       user.vscode("workbench.panel.output.focus")
-term problems:     user.vscode("workbench.panel.markers.view.focus")
+term control:               user.vscode("workbench.panel.repl.view.focus")
+term output:                user.vscode("workbench.panel.output.focus")
+term problems:              user.vscode("workbench.panel.markers.view.focus")
 term clear:                 key(ctrl-l)
 (pop term | term pop) <user.text>: "z {text}\n"
 (<user.show_list> term | term <user.show_list>) <user.text>: "z -l {text}\n"
@@ -291,7 +282,6 @@ fold all:                   user.vscode("editor.foldAll")
 unfold all:                 user.vscode("editor.unfoldAll")
 fold comments:              user.vscode("editor.foldAllBlockComments")
 
-
 # Find a symbol
 scout symbol [<user.text>]$:
     user.vscode("workbench.action.showAllSymbols")
@@ -321,8 +311,10 @@ disclose:
     sleep(150ms)
     key(ctrl-w)
 
+wrap dog:                   user.vscode("editor.action.toggleWordWrap")
+
 copy command id:            user.copy_command_id()
-scout again:          user.vscode("rerunSearchEditorSearch")
+scout again:                user.vscode("rerunSearchEditorSearch")
 generate range [from <number_small>]:
     user.vscode("andreas.generateRange", number_small or 1)
 
@@ -336,6 +328,10 @@ please [<user.text>]$:
     user.vscode("workbench.action.showCommands")
     "{user.text or ''}"
 
+jest:                       code.complete()
+jest <user.cursorless_target>:
+    user.cursorless_command("setSelectionAfter", cursorless_target)
+    code.complete()
 break <user.cursorless_target>:
     user.cursorless_command("setSelectionBefore", cursorless_target)
     user.vscode("hideSuggestWidget")
@@ -344,7 +340,14 @@ break:
     user.vscode("hideSuggestWidget")
     key("enter")
 
-wrap dog:                   user.vscode("editor.action.toggleWordWrap")
+# slice this past blue drum
+# slice past blue drum
+# take slice four - ok
+# pre slice four - ok
+# vertically is a good replacement word for slice
+# slice <user.cursorless_target>:
+#     mimic("take slice " + cursorless_target)
+# user.cursorless_command("setSelectionBefore", cursorless_target)
 
 # copilot
 pilot jest:                 user.vscode("editor.action.inlineSuggest.trigger")
@@ -376,10 +379,10 @@ tab yep:
     key(enter)
 
 # Save and restore tabs extension
-tab group (disk | save):                   user.vscode("saveRestoreEditors.cleanRestoreEditors")
-tab group update:                   user.vscode("saveRestoreEditors.resaveEditors")
+tab group (disk | save):    user.vscode("saveRestoreEditors.cleanRestoreEditors")
+tab group update:           user.vscode("saveRestoreEditors.resaveEditors")
 tab group (open | pop | load | list) [<user.text>]:
     user.vscode("saveRestoreEditors.restoreEditors")
     sleep(100ms)
     insert(text or "")
-tab group delete: user.vscode("saveRestoreEditors.cleanPopSavedEditors")
+tab group delete:           user.vscode("saveRestoreEditors.cleanPopSavedEditors")

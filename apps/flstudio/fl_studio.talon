@@ -7,26 +7,23 @@ settings():
     user.parrot_default_tag = "user.parrot_default_interactive"
 
 # tracks
-go <user.letters>:
-    user.fl_click_track(letters)
+go <user.letter>:
+    user.fl_click_track(letter)
     mouse_click(0)
-track <user.letters>:       user.fl_click_track(letters)
-track <user.letters> {user.fl_instrument}:
-    user.fl_track_add_instrument(fl_instrument, letters)
+track <user.letter>:        user.fl_click_track(letter)
+track <user.letter> {user.fl_instrument}:
+    user.fl_track_add_instrument(fl_instrument, letter)
 track [add] {user.fl_instrument} | add {user.fl_instrument}:
     user.fl_track_add_instrument(fl_instrument, "")
-track [<user.letters>] clone [<user.letters>]: user.fl_track_clone(letters or "")
-track [<user.letters>] delete [<user.letters>]: user.fl_track_delete(letters or "")
+track [<user.letter>] clone$: user.fl_track_clone(letter or "")
+track [<user.letter>] delete$: user.fl_track_delete(letter or "")
 track (add | make | new | insert):
     mouse_click(1)
     key(i)
 track (group | indent | dedent):
     mouse_click(1)
     key(g)
-track color:
-    mouse_click(1)
-    key(r)
-    mouse_click(0)
+track [<user.letter>] color: user.fl_track_color(letter or "")
 track color group:
     mouse_click(1)
     key(down down enter)

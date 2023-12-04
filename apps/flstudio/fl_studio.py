@@ -325,6 +325,14 @@ class Actions:
       ctrl.mouse_click(1)
       actions.key("e enter enter")
 
+    def fl_track_color(letter: str = None):
+      """color a track"""
+      if letter:
+        actions.user.fl_click_track(letter)
+      ctrl.mouse_click(1)
+      actions.key("r")
+      ctrl.mouse_click(0)
+
     def fl_track_move_mouse(letter: str):
       """Move mouse to rack"""
       position = ctx.lists["user.fl_track_positions"][letter]
@@ -378,36 +386,57 @@ def win_event_handler(window):
 
   print("current_vst", current_vst)
 
+view = None
+
 def ui_event(event_name, v):
+  global view
   # print(type(event_name), type(v))
   if event_name == "win_title" and ("Windows" in v.title or "Asus" in v.title):
     return
   print(event_name, v)
-  return
   if event_name == "win_show":
     if "Phase Plant" in v.title:
       print("Showing phase plant")
       print(v.rect)
-    if "Vital" in v.title:
+      view = "phase_plant"
+      actions.user.hud_add_log('event', '<*View: Phase Plant />')
+    elif "Vital" in v.title:
       print("Showing vital")
       print(v.rect)
-    if "Serum" in v.title:
+      view = "vital"
+      actions.user.hud_add_log('warning', '<*View: Vital />')
+    elif "Serum" in v.title:
       print("Showing serum")
       print(v.rect)
+      view = "serum"
+      actions.user.hud_add_log('error', '<*View: Serum />')
+    elif "Piano roll" in v.title:
+      print("Showing piano roll")
+      print(v.rect)
+      view = "piano_roll"
+      actions.user.hud_add_log('success', '<*View: Piano roll />')
+    elif "Playlist" in v.title:
+      print("Showing Playlist")
+      print(v.rect)
+      view = "playlist"
+      actions.user.hud_add_log('success', '<*View: Playlist />')
 
-  # if event_name == "win_title":
-  #   window = v
-  #   print(event_name, window)
-  #   print(dir(window))
-  #   print(window.rect)
-  #   # window = ui.active_window()
-  #   # rect = window.rect
-  #   print(f"Window Title Changed: {window.title} in application {window.app.name} (PID: {window.app.pid})")
-  #   print(dir(window.app))
+listening = False
+def on_app_switch(application):
+    global listening
+    if application.name == "FL Studio":
+      if listening == True:
+        return
+      listening = True
+      ui.register("", ui_event)
+    else:
+      if listening == False:
+        return
+      listening = False
+      ui.unregister("", ui_event)
+      #
 
-# ui.register("", ui_event)
-# ui.register("win_focus", win_event_handler)
-# ui.register("win_title", win_event_handler)
+ui.register("app_activate", on_app_switch)
 
 global noise
 
@@ -598,11 +627,3 @@ class UserActions:
 #     actions.user.hud_set_virtual_keyboard_visibility(0)
 
 # app.register('ready', register_regions)
-
-# def on_app_switch(application):
-#     if application.name == "fl studio":
-
-#     else:
-
-
-# ui.register("app_activate", on_app_switch)

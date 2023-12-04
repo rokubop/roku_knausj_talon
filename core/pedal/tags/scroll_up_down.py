@@ -21,7 +21,7 @@ class Actions:
 @ctx.action_class("user")
 class Actions:
     def pedal_on_tag_enable():
-        actions.user.hud_add_log('event', '<*Pedal: Scrolling />')
+        actions.user.hud_add_log('warning', '<*Pedal: Scrolling />')
 
     def pedal_left_down():
         actions.user.pause_eye_tracking()

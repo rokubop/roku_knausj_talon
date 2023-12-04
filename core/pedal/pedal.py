@@ -12,7 +12,7 @@ open_menu_cron = None
 class Actions:
     def pedal_available_tags():
         """Returns a list of available tags for the given context, starting with the one that should be active first"""
-        return ["user.pedal_scroll_up_down", "user.pedal_click_mute"]
+        return ["user.pedal_scroll_up_down", "user.pedal_click_mute", "user.pedal_head_gaze"]
 
     def pedal_on_tag_enable():
         """Triggered when a tag is enabled"""
@@ -47,13 +47,13 @@ class Actions:
     def pedal_right_up():
         """Right pedal up"""
         global open_menu, open_menu_cron
+        if open_menu_cron:
+            cron.cancel(open_menu_cron)
+            open_menu_cron = None
         if open_menu:
-            if open_menu_cron:
-                cron.cancel(open_menu_cron)
-                open_menu_cron = None
-                open_menu = False
+            open_menu = False
         else:
-            actions.user.toggle_last_tag()
+            actions.user.tag_switch()
 
     def pedal_open_menu():
         """Pedal open menu"""
@@ -63,25 +63,19 @@ class Actions:
         open_menu = True
         open_menu_cron = None
 
-    def toggle_last_tag():
+    def tag_switch():
         """Toggle last tag for the current context"""
         global recent_tags
         available_tags = actions.user.pedal_available_tags()
 
-        print("available_tags", available_tags)
-        print("recent_tags", recent_tags)
-
         if set(recent_tags) != set(available_tags):
-            # tags different = new context setting
-            # initialize recent_tags
             print('setting tags')
             recent_tags = available_tags
-        elif len(recent_tags) > 1:
-            # swap tags if we have more than one
-            recent_tags[0], recent_tags[1] = recent_tags[1], recent_tags[0]
 
-        new_tags = recent_tags[0] if recent_tags else []
-        actions.user.pedal_set_tag(new_tags)
+        first = recent_tags.pop(0)
+        recent_tags.append(first)
+        print('switching to tag', recent_tags[0])
+        actions.user.pedal_set_tag(recent_tags[0])
 
     def pedal_set_tag(user_tag: str):
         """Set the current pedal tag"""

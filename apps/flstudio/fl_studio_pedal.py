@@ -21,12 +21,12 @@ tag: user.fl_studio_pedal_play
 @ctx.action_class("user")
 class Actions:
     def pedal_available_tags():
-        return ["user.fl_studio_pedal_zoom_horizontally", "user.fl_studio_pedal_play"]
+        return ["user.fl_studio_pedal_zoom_horizontally", "user.fl_studio_pedal_play", "user.pedal_head_gaze", "user.fl_studio_ui"]
 
 @ctx_pedal_zoom.action_class("user")
 class Actions:
     def pedal_on_tag_enable():
-        actions.user.hud_add_log('event', '<*Pedal: Zoom horizontally />')
+        actions.user.hud_add_log('warning', '<*Pedal: Zoom horizontally />')
 
     def pedal_left_down():
         actions.user.pause_eye_tracking()
@@ -49,7 +49,7 @@ class Actions:
 @ctx_pedal_play.action_class("user")
 class Actions:
     def pedal_on_tag_enable():
-        actions.user.hud_add_log('event', '<*Pedal: Play />')
+        actions.user.hud_add_log('error', '<*Pedal: Play />')
 
     def pedal_left_down():
         actions.key("space")
