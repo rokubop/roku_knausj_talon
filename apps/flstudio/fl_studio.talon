@@ -117,8 +117,8 @@ preview | view:
     key(alt:up)
 copy midi:                  key(f6 ctrl-c)
 paste midi:                 key(f6 ctrl-v)
-octave up:                  key(f7 ctrl-up escape)
-octave down:                key(f7 ctrl-down escape)
+octave up:                  user.fl_octave_up()
+octave down:                user.fl_octave_down()
 make unique:
     mouse_click(0)
     key(m)

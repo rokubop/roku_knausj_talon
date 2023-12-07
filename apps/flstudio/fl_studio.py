@@ -310,6 +310,20 @@ class Actions:
       actions.user.fl_track_move_mouse(letter)
       ctrl.mouse_click(0)
 
+    def fl_octave_down():
+      """Octave down"""
+      if view == "piano_roll":
+        actions.key("ctrl-down")
+      else:
+        actions.key("f7 ctrl-down escape")
+
+    def fl_octave_up():
+      """Octave up"""
+      if view == "piano_roll":
+        actions.key("ctrl-up")
+      else:
+        actions.key("f7 ctrl-up escape")
+
     def fl_track_clone(letter: str = None):
       """clone a track"""
       if letter:
