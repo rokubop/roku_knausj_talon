@@ -333,10 +333,6 @@ jest:                       code.complete()
 jest <user.cursorless_target>:
     user.cursorless_command("setSelectionAfter", cursorless_target)
     code.complete()
-break <user.cursorless_target>:
-    user.cursorless_command("setSelectionBefore", cursorless_target)
-    user.vscode("hideSuggestWidget")
-    key("enter")
 break:
     user.vscode("hideSuggestWidget")
     key("enter")
