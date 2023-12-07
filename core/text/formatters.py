@@ -388,7 +388,7 @@ ctx.lists["self.prose_formatter"] = {
     "say": "NOOP",
     "state": "CAPITALIZE_FIRST_WORD",
     "more": "SPACE_FIRST_WORD",
-    "make": "SPACE_SURROUND",
+    # "make": "SPACE_SURROUND",
     "trench": "SPACE_CAPITALIZE_FIRST_WORD",
 }
 

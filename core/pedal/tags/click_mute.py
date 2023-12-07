@@ -22,16 +22,17 @@ class Actions:
         global speech_toggle_flag
         if speech_toggle_flag:
             actions.user.hud_publish_mouse_particle('float_up', '30F343')
-            actions.speech.toggle(True)
-            actions.user.talon_wake()
+            # actions.speech.toggle(True)
+            # actions.user.talon_wake()
             actions.sound.set_microphone("Microphone (Yeti X)")
-            actions.user.hud_add_log('event', '<*Using Talon Voice/>')
+            actions.user.hud_add_log('event', '<*Voice: on/>')
         else:
-            actions.speech.toggle(False)
+            # actions.speech.toggle(False)
             actions.user.hud_publish_mouse_particle('float_up', 'ff0000')
             actions.sleep("1s")
             actions.sound.set_microphone("None")
-            actions.user.talon_sleep()
+            actions.user.hud_add_log('error', '<*Voice: off />')
+            # actions.user.talon_sleep()
         speech_toggle_flag = not speech_toggle_flag
 
     def pedal_center_up():
