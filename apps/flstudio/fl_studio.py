@@ -434,7 +434,6 @@ def on_app_switch(application):
         return
       listening = False
       ui.unregister("", ui_event)
-      #
 
 ui.register("app_activate", on_app_switch)
 

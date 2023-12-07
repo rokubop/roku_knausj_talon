@@ -20,6 +20,7 @@ make dear <user.text>:      "mkdir {text}"
 show settings:              key(ctrl-,)
 grep [<user.text>]:         user.insert_between('grep -iE \'{text or ""}', '\'')
 grep exclude [<user.text>]: user.insert_between('grep -ivE \'{text or ""}', '\'')
+history:                    "history -n 20 | code -\n"
 
 copy paste:
     edit.copy()

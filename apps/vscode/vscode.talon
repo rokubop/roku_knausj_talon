@@ -198,6 +198,7 @@ katie <user.text>:          "cd {text}\n"
 try katie <user.text>:      "cd {text}\t\n"
 katie try <user.text>:      "cd {text}\t\n"
 lisa:                       "ls\n"
+history [<number>]: "history | tail -{number or 20} | tac | code -\n"
 
 # Hide sidebar and panel
 zen mode:
@@ -308,7 +309,7 @@ diswap:
 disclose:
     key(esc:5)
     edit.save()
-    sleep(150ms)
+    sleep(200ms)
     key(ctrl-w)
 
 wrap dog:                   user.vscode("editor.action.toggleWordWrap")

@@ -136,8 +136,8 @@ def on_app_deactivate(deactivated_app):
         GameModeHelper.game_hud_remove_icons()
 
 
-ui.register("app_activate", on_app_activate)
-ui.register("app_deactivate", on_app_deactivate)
+# ui.register("app_activate", on_app_activate)
+# ui.register("app_deactivate", on_app_deactivate)
 
 
 def on_app_launch(app):
@@ -145,4 +145,4 @@ def on_app_launch(app):
         GameModeHelper._current_game = GameModeHelper._games[app.name]
 
 
-ui.register("app_launch", on_app_launch)
+# ui.register("app_launch", on_app_launch)

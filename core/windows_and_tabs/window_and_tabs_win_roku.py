@@ -32,4 +32,4 @@ class Actions:
         actions.key(f"tab:{index}")
         actions.sleep("50ms")
         actions.key("alt:up")
-        actions.sleep("300ms")
+        # actions.sleep("300ms")
