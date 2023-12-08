@@ -576,7 +576,7 @@ def fps_turn_tick():
     global fps_turn_dir, fps_turn_ts, fps_turn_multiplier_linear, fps_turn_multiplier_dynamic, fps_turn_job, fps_turn_stop, compass_north_offset
     dx = int(fps_turn_dir * fps_turn_multiplier_dynamic)
     compass_north_offset += dx
-    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx / 2), 0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx), 0)
     if fps_turn_stop and fps_turn_multiplier_linear > 0:
         fps_update_val_multiplier(fps_turn_multiplier_linear - 1)
     if fps_turn_multiplier_linear <= 0:
