@@ -55,6 +55,10 @@ settings():
 
     user.cursorless_settings_directory = "roku_talon/cursorless-settings"
 
+    # Uncomment the below line to add a directory (relative to the Talon user dir) with additional .snippet files
+    # Changing this setting requires a restart of Talon
+    # user.snippets_dir = "snippets"
+
     # Uncomment the below to insert text longer than 10 characters (customizable) by
     # pasting from the clipboard. This is often faster than typing.
     #user.paste_to_insert_threshold = 10
