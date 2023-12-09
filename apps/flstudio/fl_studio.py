@@ -413,6 +413,9 @@ def ui_event(event_name, v):
       print("Showing phase plant")
       print(v.rect)
       view = "phase_plant"
+      tags = set(ctx.tags)
+      tags.add("user.fl_studio_phase_plant")
+      ctx.tags = tags
       actions.user.hud_add_log('event', '<*View: Phase Plant />')
     elif "Vital" in v.title:
       print("Showing vital")
