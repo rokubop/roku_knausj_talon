@@ -23,7 +23,6 @@ class Actions:
         actions.skip()
 
     def pedal_center_down():
-        actions.skip()
         actions.tracking.control_gaze_toggle(False)
         actions.tracking.control_head_toggle(True)
 
@@ -35,6 +34,7 @@ class Actions:
             actions.tracking.control_gaze_toggle(False)
         else:
             tracking_flag = True
-            actions.tracking.control_enabled()
+            if not actions.tracking.control_enabled():
+                actions.tracking.control_toggle(True)
             actions.tracking.control_head_toggle(True)
             actions.tracking.control_gaze_toggle(True)
