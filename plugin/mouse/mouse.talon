@@ -1,4 +1,8 @@
-track (on | off | yes | no | dog): tracking.control_toggle()
+track yes:
+    tracking.control_toggle(true)
+    tracking.control_head_toggle(true)
+    tracking.control_gaze_toggle(true)
+track no:                   tracking.control_toggle(false)
 zoom mouse:                 tracking.control_zoom_toggle()
 track debug:                tracking.control_debug_toggle()
 calibrate:                  tracking.calibrate()

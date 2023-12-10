@@ -36,9 +36,8 @@ ctx.lists["user.prose_modifiers"] = {
     "no space": "no_space",
 }
 ctx.lists["user.prose_snippets"] = {
-    "word boom": "boom",
     "word space": "space",
-    "boom": ". ",
+    "pace": ". ",
     "spam": ", ",
     "dot": ".",
     "space": " ",

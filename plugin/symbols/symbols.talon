@@ -2,6 +2,7 @@ double dash:                "--"
 trip (quote | single):      "'''"
 trip (quad | double):       '"""'
 trip (ski | brick):         '```'
+trip equal:                 '==='
 pebbles:                    "..."
 # Add symbol at end of line and then insert line below
 # From https://github.com/AndreasArvidsson/andreas-talon/blob/master/misc/keys/keys.talon#L28
@@ -11,7 +12,7 @@ patch {user.symbol_key}:
     edit.line_insert_down()
 spam:                       ", "
 pipe gap:                   " | "
-boom:                       ". "
+pace:                       ". "
 small arrow:                "-> "
 arrow:                      "=> "
 # new line:                   "\n"
@@ -101,11 +102,3 @@ stacker:
     edit.line_end()
     insert(":")
     key(enter)
-
-stackade:
-    edit.line_end()
-    insert(": ")
-
-equate:
-    edit.line_end()
-    insert(" = ")

@@ -1,4 +1,4 @@
-from talon import Context, Module, actions, app, ctrl
+from talon import Context, Module, actions, app
 
 from ..user_settings import get_list_from_csv
 
@@ -132,7 +132,6 @@ modifier_keys = {
 # roku additions
 modifier_keys.update({
     "king": "ctrl",
-    "troll": "ctrl",
     "ship": "shift"
 })
 
@@ -153,35 +152,35 @@ punctuation_words = {
     "comma": ",",
     # Workaround for issue with conformer b-series; see #946
     "coma": ",",
-    "period": ".",
-    "full stop": ".",
-    "semicolon": ";",
-    "colon": ":",
-    "forward slash": "/",
-    "question mark": "?",
-    "exclamation mark": "!",
-    "exclamation point": "!",
-    "asterisk": "*",
-    "hash sign": "#",
-    "number sign": "#",
-    "percent sign": "%",
+    # "period": ".",
+    # "full stop": ".",
+    # "semicolon": ";",
+    # "colon": ":",
+    # "forward slash": "/",
+    # "question mark": "?",
+    # "exclamation mark": "!",
+    # "exclamation point": "!",
+    # "asterisk": "*",
+    # "hash sign": "#",
+    # "number sign": "#",
+    # "percent sign": "%",
     "at sign": "@",
     "and sign": "&",
     "ampersand": "&",
     # Currencies
-    "dollar sign": "$",
+    # "dollar sign": "$",
     "pound sign": "£",
-    "hyphen": "-",
-    "L paren": "(",
-    "left paren": "(",
-    "R paren": ")",
-    "right paren": ")",
+    # "hyphen": "-",
+    # "L paren": "(",
+    # "left paren": "(",
+    # "R paren": ")",
+    # "right paren": ")",
 }
 symbol_key_words = {
     "dot": ".",
     "point": ".",
     "quote": "'",
-    "question": "?",
+    # "question": "?",
     "apostrophe": "'",
     # "L square": "[",
     # "left square": "[",
@@ -202,25 +201,25 @@ symbol_key_words = {
     "paren": "(",
     "brace": "{",
     "left brace": "{",
-    "brack": "{",
-    "bracket": "{",
-    "left bracket": "{",
-    "r brace": "}",
-    "right brace": "}",
-    "r brack": "}",
-    "r bracket": "}",
-    "right bracket": "}",
-    "angle": "<",
-    "left angle": "<",
+    # "brack": "{",
+    # "bracket": "{",
+    # "left bracket": "{",
+    # "r brace": "}",
+    # "right brace": "}",
+    # "r brack": "}",
+    # "r bracket": "}",
+    # "right bracket": "}",
+    # "angle": "<",
+    # "left angle": "<",
     "less than": "<",
     "rangle": ">",
-    "R angle": ">",
-    "right angle": ">",
+    # "R angle": ">",
+    # "right angle": ">",
     "greater than": ">",
     "star": "*",
     "hash": "#",
     # "percent": "%",
-    "caret": "^",
+    # "caret": "^",
     "amper": "&",
     "pipe": "|",
     "dub quote": '"',
@@ -287,20 +286,15 @@ simple_keys = [
 ]
 
 alternate_keys = {
-    # "wipe": "backspace",
     "delete": "backspace",
-    #'junk': 'backspace',
-    # "forward delete": "delete",
     "page up": "pageup",
     "page down": "pagedown",
 }
 
 # roku additions
 alternate_keys.update({
-    "clap": "enter",
     "lap": "enter",
     "yep": "enter",
-    # "slap": "enter",
     "drill": "delete",
     "scratch": "backspace",
     "scrape": "escape",
@@ -317,9 +311,6 @@ if app.platform in ("windows", "linux"):
 special_keys = {k: k for k in simple_keys}
 special_keys.update(alternate_keys)
 ctx.lists["self.special_key"] = special_keys
-# ctx.lists["self.function_key"] = {
-#     f"F {name}": f"f{i}" for i, name in enumerate(f_digits, start=1)
-# }
 ctx.lists["self.function_key"] = {
     f"fun {name}": f"f{i}" for i, name in enumerate(f_digits, start=1)
 }

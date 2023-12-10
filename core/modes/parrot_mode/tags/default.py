@@ -23,11 +23,14 @@ class ParrotCommands:
     def parrot_ah(): actions.user.parrot_mouse_drag(0)
     def parrot_oh(): actions.user.parrot_mouse_drag(2)
     def parrot_t():
-        actions.user.parrot_mouse_move_previous_position()
-        # actions.user.kingfisher_parrot_trigger_virtual_key()
-    def parrot_nn():
         actions.user.parrot_activate_side_b_briefly()
         actions.user.parrot_set_modifier('shift')
+        # actions.user.parrot_mouse_move_previous_position()
+        # actions.user.kingfisher_parrot_trigger_virtual_key()
+    def parrot_nn():
+        actions.user.parrot_mouse_click(0)
+        # actions.user.parrot_activate_side_b_briefly()
+        # actions.user.parrot_set_modifier('shift')
     def parrot_eh(): actions.user.parrot_position_mode_enable()
     def parrot_ee(): actions.user.parrot_mouse_and_scroll_stop()
     def parrot_guh():
