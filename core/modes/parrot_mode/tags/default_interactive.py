@@ -1,4 +1,4 @@
-from talon import Context, Module, actions
+from talon import Context, Module, actions, ctrl
 
 mod = Module()
 ctx = Context()
@@ -9,7 +9,9 @@ ctx.matches = "tag: user.parrot_default_interactive"
 @ctx.action_class("user")
 class ParrotCommands:
     def parrot_cluck(): actions.user.parrot_mode_disable()
-    def parrot_pop(): actions.user.parrot_mouse_click(0)
+    def parrot_pop():
+        actions.user.parrot_mouse_click(0)
+        # ctrl.mouse_click()
     def parrot_palate(): actions.core.repeat_phrase()
     def parrot_ah(): actions.user.parrot_mouse_drag(0)
     def parrot_oh(): actions.user.parrot_pan_mode_enable()

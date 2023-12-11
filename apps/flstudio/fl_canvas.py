@@ -18,6 +18,8 @@ def draw_center_text(c: SkiaCanvas, text: str, x: int, y: int):
         y - text_rect.y - text_rect.height / 2,
     )
 
+
+
 def on_draw(c: SkiaCanvas):
     c.paint.color = "ffffff"
     c.paint.textsize = 15
@@ -53,6 +55,16 @@ class Actions:
             canvas.unregister("draw", on_draw)
             canvas.hide()
             canvas.close()
+
+    def draw_something(text: str, x: int, y: int):
+        """draw something"""
+        global canvas
+        text_rect = canvas.paint.measure_text(text)[1]
+        canvas.draw_text(
+            text,
+            x + text_rect.x - text_rect.width / 2,
+            y - text_rect.y - text_rect.height / 2,
+        )
 
 def on_app_switch(application):
     if application.name == "FL Studio":

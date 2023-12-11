@@ -48,5 +48,10 @@ swap twice:                 user.app_switch(2)
 swap thrice:                user.app_switch(3)
 swap next:                  key(alt-escape)
 swap last:                  key(alt-shift-escape)
+^swap <user.text>:
+    user.fluent_search("process")
+    sleep(0.1)
+    key(tab)
+    insert(text)
 
 side here:                  user.resize_window_side_to_cursor_position()

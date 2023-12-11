@@ -54,3 +54,17 @@ useEffect(() => {
     $0
 }, []);
 ---
+
+name: constStatement
+phrase: const
+insertionScope: statement
+-
+const $1 = $0
+---
+
+name: letStatement
+phrase: let
+insertionScope: statement
+-
+let $1 = $0
+---

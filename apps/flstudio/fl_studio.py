@@ -380,6 +380,12 @@ class Actions:
 
 # def win_event_handler(event, s):
 #   print(event, s)
+@mod.action_class
+class Actions:
+  def show_tag():
+    """show tag"""
+    actions.user.draw_something("fl studio pan mode", 100, 100)
+
 
 # ui.register("", win_event_handler)
 current_vst = None
@@ -415,6 +421,7 @@ def ui_event(event_name, v):
       view = "phase_plant"
       tags = set(ctx.tags)
       tags.add("user.fl_studio_phase_plant")
+      actions.user.show_tag()
       ctx.tags = tags
       actions.user.hud_add_log('event', '<*View: Phase Plant />')
     elif "Vital" in v.title:

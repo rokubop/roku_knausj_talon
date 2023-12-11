@@ -15,10 +15,10 @@ dictate [<phrase>]$:
     print("command mode")
     mode.disable("sleep")
     mode.disable("dictation")
-    mode.disable("user.game")
+    # mode.disable("user.game")
     mode.enable("command")
 ^mixed mode$:
-    mode.disable("user.game")
+    # mode.disable("user.game")
     mode.disable("sleep")
     mode.enable("dictation")
     mode.enable("command")
@@ -37,4 +37,4 @@ dictate [<phrase>]$:
     user.release_held_game_keys()
     # user.game_sprint_state_reset()
     user.game_movement_state_reset()
-    mode.enable("user.game")
+    # mode.enable("user.game")
