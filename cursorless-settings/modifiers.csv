@@ -3,7 +3,7 @@ backward, backward
 bounds | bounding, excludeInterior
 content, keepContentFilter
 empty, keepEmptyFilter
-every, every
+a | every, every
 first, first
 forward, forward
 head, extendThroughStartOf
