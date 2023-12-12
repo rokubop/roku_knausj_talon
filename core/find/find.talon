@@ -2,10 +2,15 @@ tag: user.find
 -
 
 <user.find> clip:           edit.find(clip.text())
-<user.find> [<user.text>]$: edit.find(text or "")
+# scout [<user.text>]$: edit.find(text or "")
+scout [{user.prose_formatter}] <user.prose>$:
+      key("ctrl-f")
+      user.insert_formatted(prose, prose_formatter or "NOOP")
+scout all [{user.prose_formatter}] <user.prose>$:
+    key("ctrl-shift-f")
+    user.insert_formatted(prose, prose_formatter or "NOOP")
 
 <user.find> (all | ale) clip: user.find_everywhere(clip.text())
-<user.find> (all | ale) [<user.text>]$: user.find_everywhere(text or "")
 
 replace [<user.text>]$:     user.find_replace(text or "")
 replace (all | ale) [<user.text>]$: user.find_replace_everywhere(text or "")

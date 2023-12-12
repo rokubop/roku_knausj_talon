@@ -409,7 +409,6 @@ class UserActions:
             actions.key("cmd-f")
         else:
             actions.key("ctrl-f")
-
         if text:
             actions.insert(text)
 

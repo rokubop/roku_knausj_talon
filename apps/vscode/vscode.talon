@@ -112,12 +112,12 @@ pop next:
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
 # Find and replace
-scout (doc | folder | file) [<user.text>]:
-    user.vscode("list.find")
-    sleep(100ms)
-    insert(text or "")
-    insert(file_extension or "")
-    sleep(300ms)
+# scout (doc | folder | file) [<user.text>]:
+#     user.vscode("list.find")
+#     sleep(100ms)
+#     insert(text or "")
+#     insert(file_extension or "")
+#     sleep(300ms)
 
 (focus | show ) results:    user.vscode("search.action.focusSearchList")
 search next:                user.vscode("search.action.focusNextSearchResult")
