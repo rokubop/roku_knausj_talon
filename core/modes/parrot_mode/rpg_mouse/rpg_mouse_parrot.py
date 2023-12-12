@@ -9,16 +9,16 @@ mode: user.parrot
 tag: user.rpg_mouse
 """
 
-ctx.settings = {
-    "user.rpg_mouse_interaction_axis_y_pos": 140,
-}
-
 @ctx.action_class("user")
 class ParrotCommands:
     def parrot_cluck(): actions.user.parrot_rpg_mouse_mode_disable_full()
+    def parrot_nn():
+        actions.user.rpg_mouse_stop()
+        actions.user.mouse_click()
     def parrot_pop():
         actions.user.rpg_mouse_stop()
         actions.user.mouse_click()
+        actions.user.parrot_rpg_mouse_mode_disable_full()
     def parrot_ah(): actions.user.rpg_mouse_move_left()
     def parrot_oh(): actions.user.rpg_mouse_move_right()
     def parrot_hiss(): actions.user.rpg_mouse_move_down()
@@ -30,7 +30,6 @@ class ParrotCommands:
         actions.user.parrot_rpg_mouse_mode_disable()
         actions.user.parrot_mode_enable()
         actions.user.parrot_teleport_mouse_soft()
-    def parrot_nn(): actions.user.rpg_mouse_move_slow()
-    def parrot_t(): actions.user.rpg_mouse_move_to_interaction_axis()
-    def parrot_er(): actions.user.parrot_rpg_mouse_mode_disable()
+    def parrot_t(): actions.user.rpg_mouse_move_slow()
     def parrot_guh(): actions.user.rpg_mouse_move_fast()
+    def parrot_er(): actions.user.parrot_rpg_mouse_mode_disable()

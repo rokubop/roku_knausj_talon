@@ -106,8 +106,8 @@
             ">probability": 0.91
         },
         "throttle": {
-            "nn": 0.5,
-            "guh": 0.5
+            "nn": 0.3,
+            "guh": 0.3
         }
     },
     "oh": {
