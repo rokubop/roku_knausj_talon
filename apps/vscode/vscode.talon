@@ -46,9 +46,6 @@ bar outline:
 bar debug:
     user.vscode("workbench.view.debug")
     mouse_move(207, 425)
-bar search:
-    user.vscode("workbench.view.search")
-    mouse_move(207, 425)
 bar source:
     user.vscode("workbench.view.scm")
     mouse_move(207, 425)
@@ -57,6 +54,11 @@ bar file:
     mouse_move(207, 425)
 bar (grow | expand):        user.vscode("workbench.action.decreaseViewWidth")
 bar shrink:                 user.vscode("workbench.action.increaseViewWidth")
+(bar | explore) scout [{user.prose_formatter}] [<user.prose>]:
+    user.vscode_focus_files()
+    mouse_move(263, 101)
+    key("ctrl-f")
+    user.insert_formatted(prose or "", prose_formatter or "NO_SPACES")
 rack (show | open | yes):
     user.vscode("workbench.action.toggleAuxiliaryBar")
     mouse_move(1752, 245)

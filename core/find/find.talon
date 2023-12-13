@@ -1,7 +1,7 @@
 tag: user.find
 -
 
-<user.find> clip:           edit.find(clip.text())
+scout clip:           edit.find(clip.text())
 # scout [<user.text>]$: edit.find(text or "")
 scout [{user.prose_formatter}] <user.prose>$:
       key("ctrl-f")
@@ -10,20 +10,20 @@ scout all [{user.prose_formatter}] <user.prose>$:
     key("ctrl-shift-f")
     user.insert_formatted(prose, prose_formatter or "NOOP")
 
-<user.find> (all | ale) clip: user.find_everywhere(clip.text())
+scout (all | ale) clip: user.find_everywhere(clip.text())
 
 replace [<user.text>]$:     user.find_replace(text or "")
 replace (all | ale) [<user.text>]$: user.find_replace_everywhere(text or "")
 
-<user.find> case:           user.find_toggle_match_by_case()
-<user.find> whole:          user.find_toggle_match_by_word()
-<user.find> (expression | regex): user.find_toggle_match_by_regex()
+scout case:           user.find_toggle_match_by_case()
+scout whole:          user.find_toggle_match_by_word()
+scout (expression | regex): user.find_toggle_match_by_regex()
 replace case:               user.find_replace_toggle_preserve_case()
 
-<user.find> last:           edit.find_previous()
-<user.find> next:           edit.find_next()
+scout last:           edit.find_previous()
+scout next:           edit.find_next()
 
-<user.find> hide:
+scout hide:
     edit.find("")
     sleep(100ms)
     key(escape)
@@ -31,11 +31,11 @@ replace case:               user.find_replace_toggle_preserve_case()
 replace confirm:            user.find_replace_confirm()
 replace confirm (all | ale): user.find_replace_confirm_all()
 
-<user.find> file clip:      user.find_file(clip.text())
-<user.find> file [<user.filename>]$:
+scout file clip:      user.find_file(clip.text())
+scout file [<user.filename>]$:
     user.find_file(filename or "")
 
-<user.find> this:
+scout this:
     key(ctrl-c)
     sleep(100ms)
     edit.find(clip.text())
