@@ -23,5 +23,4 @@ mock date [<number>]:
     insert(3)
     key(tab)
     insert(number or "1999")
-    key(tab)
 
