@@ -18,6 +18,12 @@ mock address:
     key(down tab)
     "12345"
 
+mock short address:
+    key(down tab)
+    "1234 Main St\t\tCity\t"
+    key(down tab)
+    "12345"
+
 mock date [<number>]:
     key(down tab)
     insert(3)
