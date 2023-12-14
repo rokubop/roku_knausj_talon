@@ -102,8 +102,8 @@
     "nn": {
         "sounds": ["nn"],
         "threshold": {
-            ">power": 5,
-            ">probability": 0.91
+            ">power": 1,
+            ">probability": 0.90
         },
         "throttle": {
             "nn": 0.3,

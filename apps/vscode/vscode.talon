@@ -348,19 +348,19 @@ break:
 #     mimic("take slice " + cursorless_target)
 # user.cursorless_command("setSelectionBefore", cursorless_target)
 
-# copilot
-pilot jest:                 user.vscode("editor.action.inlineSuggest.trigger")
-pilot next:                 user.vscode("editor.action.inlineSuggest.showNext")
-pilot last:                 user.vscode("editor.action.inlineSuggest.showPrevious")
-[pilot] yep:                user.vscode("editor.action.inlineSuggest.commit")
-pilot word:                 user.vscode("editor.action.inlineSuggest.acceptNextWord")
-pilot nope:                 user.vscode("editor.action.inlineSuggest.undo")
-pilot cancel:               user.vscode("editor.action.inlineSuggest.hide")
-pilot (no | yes):
-    user.vscode("github.copilot.toggleCopilot")
-    mouse_move(1683, 954)
-    sleep(300ms)
-    mouse_click(0)
+# # copilot
+# pilot jest:                 user.vscode("editor.action.inlineSuggest.trigger")
+# pilot next:                 user.vscode("editor.action.inlineSuggest.showNext")
+# pilot last:                 user.vscode("editor.action.inlineSuggest.showPrevious")
+# [pilot] yep:                user.vscode("editor.action.inlineSuggest.commit")
+# pilot word:                 user.vscode("editor.action.inlineSuggest.acceptNextWord")
+# pilot nope:                 user.vscode("editor.action.inlineSuggest.undo")
+# pilot cancel:               user.vscode("editor.action.inlineSuggest.hide")
+# pilot (no | yes):
+#     user.vscode("github.copilot.toggleCopilot")
+#     mouse_move(1683, 954)
+#     sleep(300ms)
+#     mouse_click(0)
 
 dismiss:
     user.vscode("notifications.hideList")
