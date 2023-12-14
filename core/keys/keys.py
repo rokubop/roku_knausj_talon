@@ -29,11 +29,11 @@ mod.list("letter", desc="The spoken phonetic alphabet")
 mod.list("symbol_key", desc="All symbols from the keyboard")
 mod.list("arrow_key", desc="All arrow keys")
 mod.list("number_key", desc="All number keys")
+mod.list("numpad_key", desc="All numpad keys")
 mod.list("modifier_key", desc="All modifier keys")
 mod.list("function_key", desc="All function keys")
 mod.list("special_key", desc="All special keys")
 mod.list("punctuation", desc="words for inserting punctuation into text")
-
 
 @mod.capture(rule="{self.modifier_key}+")
 def modifiers(m) -> str:
@@ -81,6 +81,11 @@ def symbol_key(m) -> str:
 def function_key(m) -> str:
     "One function key"
     return m.function_key
+
+@mod.capture(rule="{self.numpad_key}")
+def numpad_key(m) -> str:
+    "One numpad key"
+    return m.numpad_key
 
 
 @mod.capture(rule="( <self.letter> | <self.number_key> | <self.symbol_key> )")
@@ -314,7 +319,9 @@ ctx.lists["self.special_key"] = special_keys
 ctx.lists["self.function_key"] = {
     f"fun {name}": f"f{i}" for i, name in enumerate(f_digits, start=1)
 }
-
+ctx.lists["self.numpad_key"] = {
+    f"numpad {name}": f"keypad_{i}" for i, name in enumerate(digits, start=0)
+}
 
 @mod.action_class
 class Actions:
