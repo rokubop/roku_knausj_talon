@@ -4,9 +4,13 @@ and not mode: sleep
 -
 # parrot(pop):
 #     user.parrot_hiss_pop_mouse_click()
-# # parrot(hiss):               user.parrot_hiss_pop_mouse_and_scroll_start()
-# # parrot(hiss:stop):          user.parrot_hiss_pop_mouse_and_scroll_stop_soft()
-# # parrot(shush):              user.parrot_hiss_pop_mouse_set_default_tracking()
+parrot(hiss):               user.fps_turn_left()
+parrot(hiss_stop):          user.fps_turn_left_stop()
+parrot(shush):              user.fps_turn_right()
+parrot(shush_stop):         user.fps_turn_right_stop()
+parrot(ee):
+    user.fps_stop_layer()
+    user.fps_turn_halt()
 # parrot(tut):
 #     key(escape)
 # parrot(cluck):
