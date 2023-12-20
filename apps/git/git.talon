@@ -32,6 +32,12 @@ git checkout branch clip:
     insert("git checkout -b ")
     edit.paste()
     key(enter)
+git checkout <user.cursorless_target>:
+    text = user.cursorless_get_text(cursorless_target)
+    app.tab_close()
+    user.vscode("workbench.action.terminal.focus")
+    key("ctrl-c")
+    insert("git checkout {text}\n")
 git checkout branch <user.text>: "git checkout -b {text}\n"
 git checkout master:        "git checkout master\n"
 git checkout main:          "git checkout main\n"

@@ -51,10 +51,10 @@ class ParrotModeActions:
         global use_active_mouse
         return use_active_mouse
 
-    def parrot_toggle_active_mouse():
+    def parrot_toggle_active_mouse(val: bool = None):
         """Toggle active mouse"""
         global use_active_mouse
-        use_active_mouse = not use_active_mouse
+        use_active_mouse = val or not use_active_mouse
         print(f"use active mouse: {use_active_mouse}")
         if use_active_mouse:
             actions.user.hud_publish_mouse_particle('float_up', '30F343')
