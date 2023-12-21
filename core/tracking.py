@@ -6,11 +6,6 @@ gaze = False
 head = False
 last_gaze = False
 last_head = False
-is_moving = False
-
-def set_is_moving():
-    global is_moving
-    is_moving = gaze or head
 
 @mod.action_class
 class Actions:
@@ -22,7 +17,6 @@ class Actions:
             actions.tracking.control_toggle(True)
         actions.tracking.control_gaze_toggle(value)
         gaze = value
-        set_is_moving()
 
     def tracking_control_head_toggle(value: bool):
         """Toggle head tracking"""
@@ -32,7 +26,6 @@ class Actions:
             actions.tracking.control_toggle(True)
         actions.tracking.control_head_toggle(value)
         head = value
-        set_is_moving()
 
     def tracking_control_pause():
         """Pause tracking"""
@@ -54,5 +47,10 @@ class Actions:
 
     def tracking_control_is_moving():
         """Return is_moving value"""
-        return is_moving
+        return gaze or head
+
+    def tracking_control_was_moving():
+        """Return is_moving value"""
+        return last_gaze or last_head
+
 

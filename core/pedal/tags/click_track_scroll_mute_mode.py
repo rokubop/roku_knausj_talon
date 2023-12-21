@@ -17,6 +17,7 @@ speech_toggle_flag = True
 def set_left_side_b():
     global left_side_b
     left_side_b = True
+    actions.user.hud_publish_mouse_particle('float_up', '20b2aa')
 
 def unset_center_side_b():
     global center_side_b
@@ -25,6 +26,7 @@ def unset_center_side_b():
 def set_right_side_b():
     global right_side_b
     right_side_b = True
+    actions.user.hud_publish_mouse_particle('float_up', '20b2aa')
 
 def start_left_hold_timer():
     global left_hold_timer
@@ -88,8 +90,9 @@ class Actions:
         start_left_hold_timer()
 
     def pedal_left_up():
+        global left_side_b
         if left_side_b:
-            if actions.user.tracking_control_is_moving():
+            if actions.user.tracking_control_was_moving():
                 actions.user.tracking_control_head_toggle(False)
                 actions.user.tracking_control_gaze_toggle(False)
             else:
