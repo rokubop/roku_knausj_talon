@@ -215,13 +215,35 @@ test_config = Config(
 
 @mod.action_class
 class Actions:
-    def manage(command: str):
-        """manage"""
-        print(f"manage: {command}")
+    def flex_action(command: str):
+        """
+        Manage a command through FlexActions. Only define this once per command.
 
-    def test_config():
-        """test config"""
-        return test_config
+        Suitable for parrot/noises, foot pedals,
+        gamepads, and anything with a fixed amount of inputs
+
+        ```
+        parrot(pop): user.flex_action("pop")
+        parrot(hiss): user.flex_action("hiss")
+        parrot(hiss:stop): user.flex_action("hiss_stop")
+
+        pedal(left): user.flex_action("left_pedal")
+
+        gamepad(a): user.flex_action("gamepad_a")
+        """
+        print(f"manage: {command}")
+        config = actions.user.flex_config()
+        if config.activation_type == "auto":
+            print("use the context first")
+            return
+        elif config.activation_type == "manual":
+            print("use the global first")
+            return
+
+
+    # def test_config():
+    #     """test config"""
+    #     return test_config
 
 config = {
     "name": "default",
