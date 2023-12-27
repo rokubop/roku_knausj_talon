@@ -79,5 +79,4 @@ over:
     print("command mode")
     mode.disable("sleep")
     mode.disable("dictation")
-    mode.disable("user.game")
     mode.enable("command")

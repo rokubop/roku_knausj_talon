@@ -113,14 +113,6 @@ pop last:
 pop next:
     user.vscode("workbench.action.openNextRecentlyUsedEditorInGroup")
 
-# Find and replace
-# scout (doc | folder | file) [<user.text>]:
-#     user.vscode("list.find")
-#     sleep(100ms)
-#     insert(text or "")
-#     insert(file_extension or "")
-#     sleep(300ms)
-
 (focus | show ) results:    user.vscode("search.action.focusSearchList")
 search next:                user.vscode("search.action.focusNextSearchResult")
 search last:                user.vscode("search.action.focusPreviousSearchResult")
@@ -200,7 +192,7 @@ katie <user.text>:          "cd {text}\n"
 try katie <user.text>:      "cd {text}\t\n"
 katie try <user.text>:      "cd {text}\t\n"
 lisa:                       "ls\n"
-history [<number>]: "history | tail -{number or 20} | tac | code -\n"
+history [<number>]:         "history | tail -{number or 20} | tac | code -\n"
 
 # Hide sidebar and panel
 zen mode:
@@ -338,29 +330,6 @@ jest <user.cursorless_target>:
 break:
     user.vscode("hideSuggestWidget")
     key("enter")
-
-# slice this past blue drum
-# slice past blue drum
-# take slice four - ok
-# pre slice four - ok
-# vertically is a good replacement word for slice
-# slice <user.cursorless_target>:
-#     mimic("take slice " + cursorless_target)
-# user.cursorless_command("setSelectionBefore", cursorless_target)
-
-# # copilot
-# pilot jest:                 user.vscode("editor.action.inlineSuggest.trigger")
-# pilot next:                 user.vscode("editor.action.inlineSuggest.showNext")
-# pilot last:                 user.vscode("editor.action.inlineSuggest.showPrevious")
-# [pilot] yep:                user.vscode("editor.action.inlineSuggest.commit")
-# pilot word:                 user.vscode("editor.action.inlineSuggest.acceptNextWord")
-# pilot nope:                 user.vscode("editor.action.inlineSuggest.undo")
-# pilot cancel:               user.vscode("editor.action.inlineSuggest.hide")
-# pilot (no | yes):
-#     user.vscode("github.copilot.toggleCopilot")
-#     mouse_move(1683, 954)
-#     sleep(300ms)
-#     mouse_click(0)
 
 dismiss:
     user.vscode("notifications.hideList")
