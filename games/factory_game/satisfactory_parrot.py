@@ -3,7 +3,6 @@
 # o right
 # pop click
 # n click
-@continuoustrigger
 # SS scroll Down
 # sh scroll up
 # cluck exit
