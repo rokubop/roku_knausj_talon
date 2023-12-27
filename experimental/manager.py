@@ -1,4 +1,7 @@
+from talon import Module, actions
 from dataclasses import dataclass
+
+mod = Module()
 
 def mouse_hold():
     pass
@@ -18,17 +21,17 @@ def scroll_down_stop():
 def scroll_up_stop():
     pass
 
-# mock data
-actions = {
-    "user": {
-        "mouse_hold": mouse_hold,
-        "mouse_click": mouse_click,
-        "scroll_down": scroll_down,
-        "scroll_up": scroll_up,
-        "scroll_down_stop": scroll_down_stop,
-        "scroll_up_stop": scroll_up_stop,
-    },
-}
+# # mock data
+# actions = {
+#     "user": {
+#         "mouse_hold": mouse_hold,
+#         "mouse_click": mouse_click,
+#         "scroll_down": scroll_down,
+#         "scroll_up": scroll_up,
+#         "scroll_down_stop": scroll_down_stop,
+#         "scroll_up_stop": scroll_up_stop,
+#     },
+# }
 
 
 config = {
@@ -37,10 +40,10 @@ config = {
     "nn": mouse_click
 }
 
-config.register("ah", mouse_hold)
-config.register_continuous("hiss", scroll_down, scroll_down_stop)
-config.register("nn", mouse_click)
-config.register_combo(["nn", "ah"], mouse_click)
+# config.register("ah", mouse_hold)
+# config.register_continuous("hiss", scroll_down, scroll_down_stop)
+# config.register("nn", mouse_click)
+# config.register_combo(["nn", "ah"], mouse_click)
 
 config = {
     'ah': {
@@ -53,12 +56,12 @@ config = {
     },
 }
 
-config.cmd("ah", actions.user.mouse_hold)
-config.cmd("hiss", actions.user.scroll_down, actions.user.scroll_down_stop),
-config.cmd("hiss", actions.user.scroll_down, actions.user.scroll_down_stop),
-config.cmd("shush", actions.user.scroll_up, actions.user.scroll_up_stop,),
-config.cmd("nn nh", actions.user.mouse_click, timeout=0.5),
-config.cmd("t cluck", actions.user.mode_switch),
+# config.cmd("ah", actions.user.mouse_hold)
+# config.cmd("hiss", actions.user.scroll_down, actions.user.scroll_down_stop),
+# config.cmd("hiss", actions.user.scroll_down, actions.user.scroll_down_stop),
+# config.cmd("shush", actions.user.scroll_up, actions.user.scroll_up_stop,),
+# config.cmd("nn nh", actions.user.mouse_click, timeout=0.5),
+# config.cmd("t cluck", actions.user.mode_switch),
 
 def on_start():
     print("hello world start")
@@ -66,42 +69,27 @@ def on_start():
 def on_stop():
     print("hello world stop")
 
-config = {
-    "on_start": on_start,
-    "on_stop": on_stop,
-    "commands": {
-        "ah": actions.user.mouse_hold,
-        "hiss": {
-            "start": actions.user.scroll_down,
-            "stop": actions.user.scroll_down_stop,
-            "debounce_start": '300ms',
-        },
-        "hiss2": {
-            "start": actions.user.scroll_down,
-            "stop": actions.user.scroll_down_stop,
-            "debounce_end": '150ms',
-        },
-        "nn nh": {
-            "action": actions.user.mouse_click,
-            "timeout": '0.5s',
-        }
-    }
-}
-
-class Config:
-    def __init__(self, name, on_start, on_stop, commands):
-        self.name = name
-        self.commands = commands
-        self.on_start = on_start
-        self.on_stop = on_stop
-        self.active_tags = set()
-        self.active_commands = set()
-        self.context = None
-        self.state = {}
-
-
-
-
+# config = {
+#     "on_start": on_start,
+#     "on_stop": on_stop,
+#     "commands": {
+#         "ah": actions.user.mouse_hold,
+#         "hiss": {
+#             "start": actions.user.scroll_down,
+#             "stop": actions.user.scroll_down_stop,
+#             "debounce_start": '300ms',
+#         },
+#         "hiss2": {
+#             "start": actions.user.scroll_down,
+#             "stop": actions.user.scroll_down_stop,
+#             "debounce_stop": '150ms',
+#         },
+#         "nn nh": {
+#             "action": actions.user.mouse_click,
+#             "timeout": '0.5s',
+#         }
+#     }
+# }
 
 @dataclass
 class Tag:
@@ -113,7 +101,7 @@ class Tag:
 @dataclass
 class Command:
     name: str
-    action: callable
+    action: callable = None
     action_start: callable = None
     action_stop: callable = None
     debounce_start: str | int = None
@@ -151,14 +139,14 @@ command_drag_down = Command(
     name="drag down",
     action_start=actions.user.drag_down,
     action_stop=actions.user.drag_down_stop,
-    debounce_end='150ms',
+    debounce_stop='150ms',
 )
 
 command_drag_up = Command(
     name="drag up",
     action_start=actions.user.drag_up,
     action_stop=actions.user.drag_up_stop,
-    debounce_end='150ms',
+    debounce_stop='150ms',
 )
 
 
@@ -192,6 +180,49 @@ dragger = Tag(
     }
 )
 
+class Config:
+    def __init__(self, name, on_start, on_stop, commands):
+        self.name = name
+        self.commands = commands
+        self.on_start = on_start
+        self.on_stop = on_stop
+        self.active_tags = set()
+        self.active_commands = set()
+        self.context = None
+        self.state = {}
+
+test_config = Config(
+    name="default",
+    on_start=on_start,
+    on_stop=on_stop,
+    commands={
+        "nn": Command(
+            name="click",
+            action=actions.user.mouse_click
+        ),
+        "hiss": Command(
+            name="scroll down",
+            action_start=actions.user.scroll_down,
+            action_stop=actions.user.scroll_down_stop,
+        ),
+        "shush": Command(
+            name="scroll up",
+            action_start=actions.user.scroll_up,
+            action_stop=actions.user.scroll_up_stop,
+        )
+    }
+)
+
+@mod.action_class
+class Actions:
+    def manage(command: str):
+        """manage"""
+        print(f"manage: {command}")
+
+    def test_config():
+        """test config"""
+        return test_config
+
 config = {
     "name": "default",
     "on_start": on_start,
@@ -206,6 +237,18 @@ config = {
             "tags": [scroller, shift_scroller, dragger]
         },
         "shush": [command_scroll_up, command_shift_scroll_up, command_drag_up],
+        "hiss2": {
+           "name": "scroll down",
+           "actions": [{
+                "action_start": actions.user.scroll_down,
+                "action_stop": actions.user.scroll_down_stop,
+                "threshold": "500ms"
+           }, {
+                "action_start": actions.user.scroll_down,
+                "action_stop": actions.user.scroll_down_stop,
+                "threshold": "1s"
+           }]
+        },
         "nn cluck": {
             "name": "mode_switch",
             "action": actions.user.mode_switch,
