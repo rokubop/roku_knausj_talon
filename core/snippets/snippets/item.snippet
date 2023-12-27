@@ -1,5 +1,5 @@
 name: item
-phrase: item
+phrase: item | key
 insertionScope: collectionItem
 ---
 
@@ -9,6 +9,8 @@ $1: $0,
 ---
 
 language: python
+
+$1.insertionFormatter: SNAKE_CASE
 -
 "$1": $0,
 ---

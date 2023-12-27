@@ -45,3 +45,23 @@ insertionScope: class | statement
 class $2Actions:
     $0
 ---
+
+name: fromImport
+phrase: from
+insertionScope: statement
+
+$1.insertionFormatter: SNAKE_CASE
+-
+from $1 import $0
+---
+
+name: dataClass
+phrase: data class
+insertionScope: class
+
+$1.insertionFormatter: PUBLIC_CAMEL_CASE
+-
+@dataclass
+class $1:
+    $0
+---
