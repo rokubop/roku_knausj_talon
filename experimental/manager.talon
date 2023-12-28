@@ -1,5 +1,0 @@
-parrot(hiss):               user.flex_action('hiss')
-parrot(hiss:stop):          user.flex_action('hiss_stop')
-parrot(shush):              user.flex_action('shush')
-parrot(shush:stop):         user.flex_action('shush_stop')
-parrot(nn):                 user.flex_action('nn')

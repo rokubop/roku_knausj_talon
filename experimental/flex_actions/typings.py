@@ -1,3 +1,4 @@
+from typing import Optional, Callable
 from dataclasses import dataclass
 
 class Config:
@@ -15,15 +16,21 @@ class Config:
 @dataclass
 class Command:
     name: str
-    action: callable = None
-    action_start: callable = None
-    action_stop: callable = None
-    debounce_start: str | int = None
-    debounce_stop: str | int = None
+    action: Callable = None
+    group_name: Optional[str] = None
+
+@dataclass
+class CommandContinuous:
+    name: str
+    action_start: Callable
+    action_stop: Callable
+    debounce_start: Optional[str | int] = None
+    debounce_stop: Optional[str | int] = None
+    group_name: Optional[str] = None
 
 @dataclass
 class Tag:
     name: str
-    on_start: callable
-    on_stop: callable
+    on_start: Callable
+    on_stop: Callable
     commands: dict

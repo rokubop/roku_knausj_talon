@@ -1,0 +1,6 @@
+parrot(hiss):               user.flex_action('hiss', 'parrot')
+parrot(hiss:stop):          user.flex_action('hiss_stop', 'parrot')
+parrot(shush):              user.flex_action('shush', 'parrot')
+parrot(shush:stop):         user.flex_action('shush_stop', 'parrot')
+parrot(nn):                 user.flex_action('nn', 'parrot')
+parrot(eh):                 user.flex_action('eh', 'parrot')
