@@ -1,7 +1,7 @@
 from typing import Optional, Callable
 from dataclasses import dataclass
 
-class Config:
+class Profile:
     def __init__(self, name, activation_type, on_start, on_stop, commands):
         self.name = name
         self.commands = commands

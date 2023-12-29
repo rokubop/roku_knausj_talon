@@ -1,5 +1,5 @@
-from talon import Context
-from ..typings import Config, Command, CommandContinuous
+from talon import actions, Context
+from ..typings import Profile, Command, CommandContinuous
 
 ctx = Context()
 
@@ -28,13 +28,18 @@ click = Command(
     action=lambda: print("executing: click")
 )
 
-default_mode = Command(
-    name="default mode",
-    action=lambda: print("changing to default mode")
+position_mode = Command(
+    name="position mode",
+    action=lambda: (
+        print("changing to position mode"),
+        actions.user.flex_profile_push("position")
+    )
 )
 
-config_position = Config(
-    name="position",
+# idea: profile_global = Profile(
+profile_global = Profile(
+    name="default",
+    # idea: use_immediately, use_on_contact_switch, auto_activate
     activation_type="auto",
     on_start=on_start,
     on_stop=on_stop,
@@ -42,6 +47,11 @@ config_position = Config(
         "nn": click,
         "hiss": [scroll_down],
         "shush": [scroll_up],
-        "eh": default_mode
+        "eh": position_mode
     }
 )
+
+@ctx.action_class("user")
+class GlobalActions:
+    def flex_profile():
+        return profile_global
