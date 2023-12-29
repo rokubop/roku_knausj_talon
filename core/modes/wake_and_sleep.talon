@@ -1,4 +1,4 @@
-b)#defines the commands that sleep/wake Talon
+# defines the commands that sleep/wake Talon
 mode: all
 -
 # ^(welcome back)+$:
@@ -12,16 +12,21 @@ mode: all
 #     user.mouse_sleep()
 #     speech.disable()
 #     user.engine_sleep()
-
+^wake up$:
+    speech.enable()
+    user.unset_hard_sleep()
+    user.hud_publish_mouse_particle('float_up', '36d96a')
 ^sleep [<phrase>]$:
-    user.hud_publish_mouse_particle('float_up', '493fd9')
     user.history_disable()
     user.mouse_sleep()
     speech.disable()
     user.engine_sleep()
     user.set_hard_sleep()
+    user.hud_publish_mouse_particle('float_up', '493fd9')
+    sleep(1s)
+    user.hud_clear_screen_regions()
 
-^(drowse | ((go | hard) sleep)) [<phrase>]$:
+^(drowse) [<phrase>]$:
     user.hud_publish_mouse_particle('float_up', '493fd9')
     user.history_disable()
     user.mouse_sleep()

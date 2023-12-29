@@ -15,7 +15,7 @@ settings():
 hide term | term (hide | no | dog): user.vscode("workbench.action.togglePanel")
 show (files | folders):
     user.vscode_focus_files()
-    mouse_move(197, 426)
+    user.mouse_move_relative_window(197, 426)
 show extensions:            user.vscode("workbench.view.extensions")
 show outline:               user.vscode("outline.focus")
 show run:                   user.vscode("workbench.view.debug")
@@ -31,37 +31,37 @@ show changes:               user.vscode_focus_changes()
 # Sidebar
 bar (show | open | yes):
     user.vscode("workbench.action.toggleSidebarVisibility")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar (hide | close | no):
     user.vscode("workbench.action.toggleSidebarVisibility")
 bar explore:
     user.vscode("workbench.view.explorer")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar extensions:
     user.vscode("workbench.view.extensions")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar outline:
     user.vscode("outline.focus")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar debug:
     user.vscode("workbench.view.debug")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar source:
     user.vscode("workbench.view.scm")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar file:
     user.vscode("workbench.files.action.showActiveFileInExplorer")
-    mouse_move(207, 425)
+    user.mouse_move_relative_window(207, 425)
 bar (grow | expand):        user.vscode("workbench.action.decreaseViewWidth")
 bar shrink:                 user.vscode("workbench.action.increaseViewWidth")
 (bar | explore) scout [{user.prose_formatter}] [<user.prose>]:
     user.vscode_focus_files()
-    mouse_move(263, 101)
+    user.mouse_move_relative_window(263, 101)
     key("ctrl-f")
     user.insert_formatted(prose or "", prose_formatter or "NO_SPACES")
 rack (show | open | yes):
     user.vscode("workbench.action.toggleAuxiliaryBar")
-    mouse_move(1752, 245)
+    user.mouse_move_relative_window(1752, 245)
 rack (hide | close | no):
     user.vscode("workbench.action.toggleAuxiliaryBar")
 (top | tabs | tab) (show | hide | yes | no): user.vscode("workbench.action.toggleTabsVisibility")

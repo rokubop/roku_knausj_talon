@@ -1,4 +1,4 @@
-from talon import actions, Context
+from talon import Context
 from ..typings import Config, Command, CommandContinuous
 
 ctx = Context()
@@ -28,13 +28,13 @@ click = Command(
     action=lambda: print("executing: click")
 )
 
-position_mode = Command(
-    name="position mode",
-    action=lambda: print("changing to position mode")
+default_mode = Command(
+    name="default mode",
+    action=lambda: print("changing to default mode")
 )
 
-config_global = Config(
-    name="default",
+config_position = Config(
+    name="position",
     activation_type="auto",
     on_start=on_start,
     on_stop=on_stop,
@@ -42,11 +42,6 @@ config_global = Config(
         "nn": click,
         "hiss": [scroll_down],
         "shush": [scroll_up],
-        "eh": position_mode
+        "eh": default_mode
     }
 )
-
-@ctx.action_class("user")
-class GlobalActions:
-    def flex_config():
-        return config_global

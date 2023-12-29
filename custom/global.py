@@ -50,18 +50,3 @@ class Actions:
             time = f'{timeout}000ms'
             cron_repeat_job = cron.interval(time, actions.user.repeat_last_command)
             actions.user.repeat_last_command()
-
-
-    def open_powershell_and_tail_log():
-        """Opens PowerShell and tails a log file"""
-        actions.key("win-r")
-        actions.sleep("100ms")
-        # Faster load with no profile
-        actions.insert("powershell.exe -NoProfile")
-        actions.key("enter")
-        actions.sleep("1s")
-
-        path = str(TALON_HOME / 'talon.log')
-        tail_command = f'Get-Content -Path "{path}" -Tail 100 -Wait'
-        actions.insert(tail_command)
-        actions.key("enter")

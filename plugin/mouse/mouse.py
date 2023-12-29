@@ -130,6 +130,13 @@ def gui_wheel(gui: imgui.GUI):
 is_dragging = True
 
 @mod.action_class
+class RokuActions:
+    def mouse_move_relative_window(x: int, y: int):
+        """move the mouse cursor relative to the current window"""
+        rect = ui.active_window().rect
+        ctrl.mouse_move(rect.left + (x * rect.width / 1920), rect.top + (y * rect.height / 1080))
+
+@mod.action_class
 class Actions:
     def mouse_click(action: str = "left", button: int = 0):
         """Click mouse button - left, right, middle, ctrl-shift-left, double"""
