@@ -1,6 +1,6 @@
 from talon import actions, Context
 from ..typings import Profile, Command, CommandContinuous
-
+from .profile_position import profile_position
 ctx = Context()
 
 def on_start():
@@ -32,7 +32,7 @@ position_mode = Command(
     name="position mode",
     action=lambda: (
         print("changing to position mode"),
-        actions.user.flex_profile_push("position")
+        actions.user.flex_profile_activate("position")
     )
 )
 
@@ -54,4 +54,4 @@ profile_global = Profile(
 @ctx.action_class("user")
 class GlobalActions:
     def flex_profile():
-        return profile_global
+        return [profile_global, profile_position]

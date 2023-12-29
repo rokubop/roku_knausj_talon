@@ -1,4 +1,4 @@
-from talon import Context
+from talon import Context, actions
 from ..typings import Profile, Command, CommandContinuous
 
 ctx = Context()
@@ -30,7 +30,10 @@ click = Command(
 
 default_mode = Command(
     name="default mode",
-    action=lambda: print("changing to default mode")
+    action=lambda: (
+    print("changing to default mode"),
+    actions.user.flex_profile_activate("default")
+)
 )
 
 profile_position = Profile(
