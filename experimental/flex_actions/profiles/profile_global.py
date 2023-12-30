@@ -36,11 +36,9 @@ position_mode = Command(
     )
 )
 
-# idea: profile_global = Profile(
 profile_global = Profile(
     name="default",
-    # idea: use_immediately, use_on_contact_switch, auto_activate
-    activation_type="auto",
+    auto_activate=True,
     on_start=on_start,
     on_stop=on_stop,
     commands={

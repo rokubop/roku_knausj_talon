@@ -38,7 +38,7 @@ default_mode = Command(
 
 profile_position = Profile(
     name="position",
-    activation_type="auto",
+    auto_activate=True,
     on_start=on_start,
     on_stop=on_stop,
     commands={

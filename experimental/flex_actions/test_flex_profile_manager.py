@@ -5,7 +5,7 @@ mod = Module()
 
 test_profile = Profile(
     name="test_profile",
-    activation_type="auto",
+    auto_activate=True,
     commands={
         "x": {
             "name": "x1",
@@ -16,7 +16,6 @@ test_profile = Profile(
 
 test_profile2 = {
     "name": "test_profile2",
-    "activation_type": "auto",
     "commands": {
         "x": {
             "name": "x2",
@@ -72,12 +71,14 @@ def run_test_suite():
     assert_equal(manager.profile_name_stack, ["test_profile"])
     assert_equal(manager.profiles["test_profile"].name, "test_profile")
 
-    test_title = "I should be able to switch profiles"
+    test_title = "A context change should change profiles"
     set_ctx_profile(manager, test_profile2)
     assert_equal(manager.execute_flex_action("x"), "x2")
     assert_equal(manager.profile_name_stack, ["test_profile", "test_profile2"])
     assert_equal(manager.profiles["test_profile"].name, "test_profile")
     assert_equal(manager.profiles["test_profile2"].name, "test_profile2")
+
+
 
 @mod.action_class
 class Actions:

@@ -18,7 +18,7 @@ class FlexProfileManager:
             profile = profile if isinstance(profile, Profile) else Profile(**profile)
             self.profiles[profile_name] = profile
 
-        if profile.activation_type == "auto":
+        if profile.auto_activate:
             self.profile_name_stack.append(profile_name)
 
     def ctx_profile(self):
@@ -81,13 +81,13 @@ class FlexProfileManager:
         profile = self.profiles[self.current_profile_name()]
 
         print(f"profile.name: {profile.name}")
-        print(f"activation_type: {profile.activation_type}")
+        print(f"auto_activate: {profile.auto_activate}")
 
         # make sure the profile is on the stack and bring to front if needed
         if profile.name not in self.profiles:
             self.profiles[profile.name] = profile
 
-        if profile.activation_type == "auto":
+        if profile.auto_activate:
             self.profile_activate(profile.name)
 
         current_profile_name = self.profiles[self.current_profile_name()]
