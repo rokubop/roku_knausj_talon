@@ -2,7 +2,7 @@ from typing import Optional, Callable
 from dataclasses import dataclass
 
 class Profile:
-    def __init__(self, name, activation_type, on_start, on_stop, commands):
+    def __init__(self, name, activation_type, commands, on_start: Optional[Callable] = None, on_stop: Optional[Callable] = None):
         self.name = name
         self.commands = commands
         self.activation_type = activation_type
