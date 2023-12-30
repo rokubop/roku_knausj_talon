@@ -136,6 +136,13 @@ class RokuActions:
         rect = ui.active_window().rect
         ctrl.mouse_move(rect.left + (x * rect.width / 1920), rect.top + (y * rect.height / 1080))
 
+    def mouse_move_relative_screen(screen: int, x: int, y: int):
+        """move the mouse cursor relative to the current window"""
+        rect = ui.screens()[screen - 1].rect
+
+        # rect = ui.active_window().rect
+        ctrl.mouse_move(rect.left + (x * rect.width / 1920), rect.top + (y * rect.height / 1080))
+
 @mod.action_class
 class Actions:
     def mouse_click(action: str = "left", button: int = 0):

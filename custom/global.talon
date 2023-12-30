@@ -11,6 +11,15 @@ confetti:                   user.vscode('cursorless.toggleDecorations')
 ^mouse (right | two):       user.mouse_move_relative_window(1293, 468)
 ^mouse rack:                user.mouse_move_relative_window(1717, 459)
 
+^screen <number> (mid | five): user.mouse_move_relative_screen(number, 960, 540)
+^screen <number> bar:       user.mouse_move_relative_screen(number, 190, 338)
+^screen <number> ledge:     user.mouse_move_relative_screen(number, 28, 478)
+^screen <number> ridge:     user.mouse_move_relative_screen(number, 1911, 487)
+^screen <number> (term | base): user.mouse_move_relative_screen(number, 924, 939)
+^screen <number> (left | one): user.mouse_move_relative_screen(number, 709, 419)
+^screen <number> (right | two): user.mouse_move_relative_screen(number, 1293, 468)
+^screen <number> rack:      user.mouse_move_relative_screen(number, 1717, 459)
+
 smart paste | show clip:    key(win-v)
 screenshot:                 key(win-shift-s)
 
@@ -44,7 +53,7 @@ explore {user.system_paths}:
     user.file_manager_open_directory(system_paths)
 explore this:               key(shift-alt-r)
 
-desktop new:                kepy(win-ctrl-d)
+desktop new:                key(win-ctrl-d)
 desktop (right | next):     key(win-ctrl-right)
 desktop (left | last):      key(win-ctrl-left)
 desktop close:              key(win-ctrl-f4)

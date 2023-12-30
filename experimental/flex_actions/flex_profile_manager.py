@@ -19,7 +19,13 @@ class FlexProfileManager:
             self.profiles[profile_name] = profile
 
         if profile.auto_activate:
-            self.profile_name_stack.append(profile_name)
+            self.use_profile(profile_name)
+            # self.profile_name_stack.append(profile_name)
+
+    def use_profile(self, profile_name: str):
+        """Alias for profile_activate"""
+        self.profile_activate(profile_name)
+
 
     def ctx_profile(self):
         return actions.user.flex_profile()
@@ -29,42 +35,7 @@ class FlexProfileManager:
             return self.profile_name_stack[-1]
         return None
 
-    def profile_activate(self, profile_name: str):
-        print(f"self.profiles.keys(): {self.profiles.keys()}")
-        if profile_name not in self.profiles:
-            print(f"Profile {profile_name} not found")
-            return
-
-        if self.profile_name_stack:
-            current_profile_name = self.current_profile_name()
-            if current_profile_name == profile_name:
-                return
-
-            if self.profiles[current_profile_name].on_stop:
-                print(f"stopping profile: {current_profile_name}")
-                self.profiles[current_profile_name].on_stop()
-
-        if profile_name in self.profile_name_stack:
-            self.profile_name_stack.remove(profile_name)
-
-        self.profile_name_stack.append(profile_name)
-        print(f"starting profile: {profile_name}")
-        if self.profiles[profile_name].on_start:
-            self.profiles[profile_name].on_start()
-
-        print(f"self.profile_name_stack: {self.profile_name_stack}")
-
-    def execute_flex_action(self, command_name):
-        """Determine which profile to use and execute the action"""
-        print("********************")
-        print(f"flex_action: {command_name}")
-        profile_name = None
-        profile = self.ctx_profile()
-
-        if not profile:
-            print(f"profile not found for {command_name}")
-            return
-
+    def try_init_profile(self, profile):
         if isinstance(profile, list):
             for p in profile:
                 profile_name = self.get_name(p)
@@ -75,6 +46,53 @@ class FlexProfileManager:
             if profile_name not in self.profiles:
                 self.add_profile(profile)
 
+
+    def profile_activate(self, profile_name: str):
+        print(f"self.profiles.keys(): {self.profiles.keys()}")
+        print(f"profile_named: ", profile_name)
+        if profile_name not in self.profiles:
+            print(f"Profile {profile_name} not found")
+            return
+
+        if self.profile_name_stack:
+            current_profile_name = self.current_profile_name()
+            print(current_profile_name, profile_name)
+            if current_profile_name == profile_name:
+                return
+
+            profile = self.profiles[current_profile_name]
+            on_stop = profile.on_stop if isinstance(profile, Profile) else profile.get('on_stop')
+
+            if on_stop:
+                print(f"stopping profile: {current_profile_name}")
+                on_stop()
+
+        if profile_name in self.profile_name_stack:
+            self.profile_name_stack.remove(profile_name)
+
+
+        self.profile_name_stack.append(profile_name)
+        profile = self.profiles[profile_name]
+        on_start = profile.on_start if isinstance(profile, Profile) else profile.get('on_start')
+
+        if on_start:
+            print(f"starting profile: {profile_name}")
+            on_start()
+
+        print(f"self.profile_name_stack: {self.profile_name_stack}")
+
+    def execute_flex_action(self, command_name):
+        """Determine which profile to use and execute the action"""
+        print("********************")
+        print(f"flex_action: {command_name}")
+        profile = self.ctx_profile()
+
+        if not profile:
+            print(f"profile not found for {command_name}")
+            return
+
+        self.try_init_profile(profile)
+
         # we're getting the wrong profile here
         # we should be looking at the stack instead
         print(f"self.profile_name_stack: {self.profile_name_stack}")
@@ -84,11 +102,12 @@ class FlexProfileManager:
         print(f"auto_activate: {profile.auto_activate}")
 
         # make sure the profile is on the stack and bring to front if needed
-        if profile.name not in self.profiles:
-            self.profiles[profile.name] = profile
+        # if profile.name not in self.profiles:
+        #     self.profiles[profile.name] = profile
 
-        if profile.auto_activate:
-            self.profile_activate(profile.name)
+        # print(f"Starting to activate {profile.auto_activate}")
+        # if profile.auto_activate:
+        #     self.profile_activate(profile.name)
 
         current_profile_name = self.profiles[self.current_profile_name()]
 
