@@ -1,41 +1,26 @@
-from typing import Optional, Callable
-from dataclasses import dataclass
+from typing import Optional, Callable, TypedDict
 
-class Profile:
-    def __init__(self,
-            name: str,
-            commands,
-            auto_activate: Optional[bool] = True,
-            on_start: Optional[Callable] = None,
-            on_stop: Optional[Callable] = None
-        ):
-        self.name = name
-        self.commands = commands
-        self.auto_activate = auto_activate
-        self.on_start = on_start
-        self.on_stop = on_stop
-        self.active_tags = set()
-        self.active_commands = set()
-        self.context = None
-        self.state = {}
-
-@dataclass
-class Command:
+class Profile(TypedDict):
     name: str
-    action: Callable = None
-    group_name: Optional[str] = None
+    commands: list["Command"]
+    auto_activate: Optional[bool]
+    on_start: Optional[Callable]
+    on_stop: Optional[Callable]
 
-@dataclass
-class CommandContinuous:
+class Command(TypedDict):
+    name: str
+    action: Callable
+    group_name: Optional[str]
+
+class CommandContinuous(TypedDict):
     name: str
     action_start: Callable
     action_stop: Callable
-    debounce_start: Optional[str | int] = None
-    debounce_stop: Optional[str | int] = None
-    group_name: Optional[str] = None
+    debounce_start: Optional[str | int]
+    debounce_stop: Optional[str | int]
+    group_name: Optional[str]
 
-@dataclass
-class Tag:
+class Tag(TypedDict):
     name: str
     on_start: Callable
     on_stop: Callable

@@ -1,4 +1,3 @@
-from typing import Union
 from .typings import Profile, Command, CommandContinuous
 from talon import actions
 
@@ -6,28 +5,14 @@ class FlexProfileManager:
 
     def __init__(self, name):
         self.name: str = name
-        self.profile_name_stack: list(str) = []
+        self.profile_name_stack: list[str] = []
         self.profiles: dict[str, Profile] = {}
-
-    def get_name(self, profile):
-        return profile['name'] if isinstance(profile, dict) else profile.name
-
-    def add_profile(self, profile: Union[Profile, dict]):
-        profile_name = self.get_name(profile)
-        if profile_name not in self.profiles:
-            profile = profile if isinstance(profile, Profile) else Profile(**profile)
-            self.profiles[profile_name] = profile
-
-        if profile.auto_activate:
-            self.use_profile(profile_name)
-            # self.profile_name_stack.append(profile_name)
 
     def use_profile(self, profile_name: str):
         """Alias for profile_activate"""
         self.profile_activate(profile_name)
 
-
-    def ctx_profile(self):
+    def ctx_profile(self) -> Profile | list[Profile]:
         return actions.user.flex_profile()
 
     def current_profile_name(self):
@@ -35,20 +20,27 @@ class FlexProfileManager:
             return self.profile_name_stack[-1]
         return None
 
-    def try_init_profile(self, profile):
+    def get_active_profile(self):
+        if self.profile_name_stack:
+            profile_name = self.profile_name_stack[-1]
+            return self.profiles[profile_name]
+        return None
+
+
+    def _add_new_profiles(self, profile):
         if isinstance(profile, list):
             for p in profile:
-                profile_name = self.get_name(p)
+                profile_name = p["name"]
                 if profile_name not in self.profiles:
-                    self.add_profile(p)
+                    self.profiles[profile_name] = p
         else:
-            profile_name = self.get_name(profile)
+            profile_name = profile["name"]
             if profile_name not in self.profiles:
-                self.add_profile(profile)
+                self.profiles[profile_name] = profile
 
 
     def profile_activate(self, profile_name: str):
-        print(f"self.profiles.keys(): {self.profiles.keys()}")
+        # print(f"self.profiles.keys(): {self.profiles.keys()}")
         print(f"profile_named: ", profile_name)
         if profile_name not in self.profiles:
             print(f"Profile {profile_name} not found")
@@ -61,11 +53,10 @@ class FlexProfileManager:
                 return
 
             profile = self.profiles[current_profile_name]
-            on_stop = profile.on_stop if isinstance(profile, Profile) else profile.get('on_stop')
 
-            if on_stop:
+            if profile.get('on_stop'):
                 print(f"stopping profile: {current_profile_name}")
-                on_stop()
+                profile["on_stop"]
 
         if profile_name in self.profile_name_stack:
             self.profile_name_stack.remove(profile_name)
@@ -73,11 +64,9 @@ class FlexProfileManager:
 
         self.profile_name_stack.append(profile_name)
         profile = self.profiles[profile_name]
-        on_start = profile.on_start if isinstance(profile, Profile) else profile.get('on_start')
-
-        if on_start:
-            print(f"starting profile: {profile_name}")
-            on_start()
+        if profile.get('on_start'):
+            print(f"starting profile: {current_profile_name}")
+            profile["on_stop"]
 
         print(f"self.profile_name_stack: {self.profile_name_stack}")
 
@@ -91,53 +80,41 @@ class FlexProfileManager:
             print(f"profile not found for {command_name}")
             return
 
-        self.try_init_profile(profile)
+        # First, we need to check if we should add the profile.
+        self._add_new_profiles(profile)
 
-        # we're getting the wrong profile here
-        # we should be looking at the stack instead
-        print(f"self.profile_name_stack: {self.profile_name_stack}")
-        profile = self.profiles[self.current_profile_name()]
+        # Next we need to determine if we should add it to the stack
+        #  Basically, we just check for auto-activate.
+        relevant_profile = profile[0] if isinstance(profile, list) else profile
+        if relevant_profile.get('auto_activate'):
+            self.use_profile(relevant_profile.get('name'))
 
-        print(f"profile.name: {profile.name}")
-        print(f"auto_activate: {profile.auto_activate}")
+        active_profile = self.get_active_profile()
 
-        # make sure the profile is on the stack and bring to front if needed
-        # if profile.name not in self.profiles:
-        #     self.profiles[profile.name] = profile
+        #  Once the stack is all set up, we just execute the action
 
-        # print(f"Starting to activate {profile.auto_activate}")
-        # if profile.auto_activate:
-        #     self.profile_activate(profile.name)
 
-        current_profile_name = self.profiles[self.current_profile_name()]
+        # print(f"self.profile_name_stack: {self.profile_name_stack}")
+        # profile = self.profiles[self.current_profile_name()]
+
+        # print(f"profile.name: {profile['name']}")
+        # print(f"auto_activate: {profile['auto_activate']}")
+
+        # current_profile_name = self.profiles[self.current_profile_name()]
 
         command_name_root = command_name.split("_")[0]
 
-        command = current_profile_name.commands[command_name_root]
-        if isinstance(current_profile_name.commands[command_name_root], list):
-            command = current_profile_name.commands[command_name_root][0]
+        command = active_profile['commands'][command_name_root]
+        if isinstance(command, list):
+            command = command[0]
 
-        if isinstance(command, Command):
-            print("The object is an instance of Command")
-            if command.action:
-                return command.action()
-        elif isinstance(command, CommandContinuous):
-            print("The object is an instance of CommandContinuous")
-            if "_stop" in command_name:
-                return command.action_stop()
-                return
-            if command.action_start:
-                return command.action_start()
-        elif isinstance(command, dict):
-            print("The object is an instance of dict")
-            if command["action"]:
-                print("Attempting to run action")
-                return command["action"]()
-            elif "_stop" in command_name:
-                return command["action_stop"]()
-                return
-            elif command["action_start"]:
-                return command["action_start"]()
+        if command.get('action'):
+            return command["action"]()
+        elif "_stop" in command_name:
+            return command["action_stop"]()
+            return
+        elif command.get('action_start'):
+            return command["action_start"]()
 
 
 flex_profile_manager = FlexProfileManager("flex_profile_manager")
