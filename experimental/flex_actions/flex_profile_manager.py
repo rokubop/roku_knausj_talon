@@ -27,7 +27,7 @@ class FlexProfileManager:
         return None
 
 
-    def _add_new_profiles(self, profile):
+    def _add_new_profiles(self, profile: Profile | list[Profile]):
         if isinstance(profile, list):
             for p in profile:
                 profile_name = p["name"]
@@ -46,27 +46,23 @@ class FlexProfileManager:
             print(f"Profile {profile_name} not found")
             return
 
-        if self.profile_name_stack:
-            current_profile_name = self.current_profile_name()
-            print(current_profile_name, profile_name)
-            if current_profile_name == profile_name:
+        active_profile = self.get_active_profile()
+        if active_profile:
+            if active_profile.get('name') == profile_name:
                 return
 
-            profile = self.profiles[current_profile_name]
-
-            if profile.get('on_stop'):
-                print(f"stopping profile: {current_profile_name}")
-                profile["on_stop"]
+            if active_profile.get('on_stop'):
+                print(f"stopping profile: {active_profile.get('name')}")
+                active_profile["on_stop"]()
 
         if profile_name in self.profile_name_stack:
             self.profile_name_stack.remove(profile_name)
 
-
         self.profile_name_stack.append(profile_name)
         profile = self.profiles[profile_name]
         if profile.get('on_start'):
-            print(f"starting profile: {current_profile_name}")
-            profile["on_stop"]
+            print(f"starting profile: {profile_name}")
+            profile["on_start"]()
 
         print(f"self.profile_name_stack: {self.profile_name_stack}")
 
@@ -86,7 +82,7 @@ class FlexProfileManager:
         # Next we need to determine if we should add it to the stack
         #  Basically, we just check for auto-activate.
         relevant_profile = profile[0] if isinstance(profile, list) else profile
-        if relevant_profile.get('auto_activate'):
+        if relevant_profile.get('auto_activate') is not False:
             self.use_profile(relevant_profile.get('name'))
 
         active_profile = self.get_active_profile()
