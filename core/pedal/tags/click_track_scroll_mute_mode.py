@@ -31,7 +31,7 @@ def set_right_side_b():
 def start_left_hold_timer():
     global left_hold_timer
     reset_left_hold_timer()
-    left_hold_timer = cron.after("1s", set_left_side_b)
+    left_hold_timer = cron.after("300ms", set_left_side_b)
 
 def reset_left_hold_timer():
     global left_side_b, left_hold_timer
@@ -44,7 +44,7 @@ def start_center_double_tap_timer():
     global center_double_tap_timer, center_side_b
     reset_center_double_tap_timer()
     center_side_b = True
-    center_double_tap_timer = cron.after("1s", unset_center_side_b)
+    center_double_tap_timer = cron.after("500ms", unset_center_side_b)
 
 def reset_center_double_tap_timer():
     global center_side_b, center_double_tap_timer
@@ -56,7 +56,7 @@ def reset_center_double_tap_timer():
 def start_right_hold_timer():
     global right_hold_timer
     reset_right_hold_timer()
-    right_hold_timer = cron.after("1s", set_right_side_b)
+    right_hold_timer = cron.after("500ms", set_right_side_b)
 
 def reset_right_hold_timer():
     global right_side_b, right_hold_timer
@@ -127,5 +127,3 @@ class Actions:
             microphone_toggle()
 
         reset_right_hold_timer()
-
-
