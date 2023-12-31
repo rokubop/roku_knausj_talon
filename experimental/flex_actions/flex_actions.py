@@ -31,14 +31,14 @@ class Actions:
         """Flex profile"""
         print("flex_profile not implemented")
 
-    def flex_profile_activate(profile_name: str):
+    def flex_use_profile(profile_name: str):
         """
         Push a profile to the top of the stack
 
         AKA make it the active profile
         """
         print("do flex_profile_push")
-        flex_profile_manager.profile_activate(profile_name)
+        flex_profile_manager.use_profile(profile_name)
 
     def flex_profile_pop():
         """ Pop a profile off the stack """

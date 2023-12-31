@@ -32,7 +32,7 @@ position_mode = Command(
     name="position mode",
     action=lambda: (
         print("changing to position mode"),
-        actions.user.flex_profile_activate("position")
+        actions.user.flex_use_profile("position")
     )
 )
 

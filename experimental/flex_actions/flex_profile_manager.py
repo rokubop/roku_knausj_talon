@@ -1,4 +1,4 @@
-from .typings import Profile, Command, CommandContinuous
+from .typings import Profile
 from talon import actions
 
 class FlexProfileManager:
@@ -8,24 +8,14 @@ class FlexProfileManager:
         self.profile_name_stack: list[str] = []
         self.profiles: dict[str, Profile] = {}
 
-    def use_profile(self, profile_name: str):
-        """Alias for profile_activate"""
-        self.profile_activate(profile_name)
-
-    def ctx_profile(self) -> Profile | list[Profile]:
+    def _ctx_profile(self) -> Profile | list[Profile]:
         return actions.user.flex_profile()
-
-    def current_profile_name(self):
-        if self.profile_name_stack:
-            return self.profile_name_stack[-1]
-        return None
 
     def get_active_profile(self):
         if self.profile_name_stack:
             profile_name = self.profile_name_stack[-1]
             return self.profiles[profile_name]
         return None
-
 
     def _add_new_profiles(self, profile: Profile | list[Profile]):
         if isinstance(profile, list):
@@ -38,10 +28,29 @@ class FlexProfileManager:
             if profile_name not in self.profiles:
                 self.profiles[profile_name] = profile
 
+    def _attempt_use_new_profile(self, profile: Profile | list[Profile]):
+        relevant_profile = profile[0] if isinstance(profile, list) else profile
+        if relevant_profile.get('auto_activate') is not False:
+            self.use_profile(relevant_profile.get('name'))
 
-    def profile_activate(self, profile_name: str):
-        # print(f"self.profiles.keys(): {self.profiles.keys()}")
-        print(f"profile_named: ", profile_name)
+    def _trigger_active_action(self, command_name: str):
+        active_profile = self.get_active_profile()
+        command_name_root = command_name.split("_")[0]
+        command = active_profile['commands'][command_name_root]
+
+        if isinstance(command, list):
+            command = command[0]
+
+        if command.get('action'):
+            return command["action"]()
+        elif "_stop" in command_name:
+            return command["action_stop"]()
+            return
+        elif command.get('action_start'):
+            return command["action_start"]()
+
+    def use_profile(self, profile_name: str):
+        """Alias for profile_activate"""
         if profile_name not in self.profiles:
             print(f"Profile {profile_name} not found")
             return
@@ -70,47 +79,15 @@ class FlexProfileManager:
         """Determine which profile to use and execute the action"""
         print("********************")
         print(f"flex_action: {command_name}")
-        profile = self.ctx_profile()
+        profile = self._ctx_profile()
 
         if not profile:
             print(f"profile not found for {command_name}")
             return
 
-        # First, we need to check if we should add the profile.
         self._add_new_profiles(profile)
-
-        # Next we need to determine if we should add it to the stack
-        #  Basically, we just check for auto-activate.
-        relevant_profile = profile[0] if isinstance(profile, list) else profile
-        if relevant_profile.get('auto_activate') is not False:
-            self.use_profile(relevant_profile.get('name'))
-
-        active_profile = self.get_active_profile()
-
-        #  Once the stack is all set up, we just execute the action
-
-
-        # print(f"self.profile_name_stack: {self.profile_name_stack}")
-        # profile = self.profiles[self.current_profile_name()]
-
-        # print(f"profile.name: {profile['name']}")
-        # print(f"auto_activate: {profile['auto_activate']}")
-
-        # current_profile_name = self.profiles[self.current_profile_name()]
-
-        command_name_root = command_name.split("_")[0]
-
-        command = active_profile['commands'][command_name_root]
-        if isinstance(command, list):
-            command = command[0]
-
-        if command.get('action'):
-            return command["action"]()
-        elif "_stop" in command_name:
-            return command["action_stop"]()
-            return
-        elif command.get('action_start'):
-            return command["action_start"]()
+        self._attempt_use_new_profile(profile)
+        return self._trigger_active_action(command_name)
 
 
 flex_profile_manager = FlexProfileManager("flex_profile_manager")

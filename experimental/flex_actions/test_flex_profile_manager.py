@@ -81,7 +81,7 @@ test_profile3 = Profile(
 test_title = ""
 
 def set_mock_ctx_profile(manager: FlexProfileManager, profile: Profile):
-    manager.ctx_profile = lambda: profile
+    manager._ctx_profile = lambda: profile
 
 i = 0
 success_count = 0

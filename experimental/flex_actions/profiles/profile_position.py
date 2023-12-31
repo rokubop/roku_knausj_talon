@@ -32,7 +32,7 @@ default_mode = Command(
     name="default mode",
     action=lambda: (
     print("changing to default mode"),
-    actions.user.flex_profile_activate("default")
+    actions.user.flex_use_profile("default")
 )
 )
 
