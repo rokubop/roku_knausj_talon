@@ -24,7 +24,7 @@ mode: all
     user.set_hard_sleep()
     user.hud_publish_mouse_particle('float_up', '493fd9')
     sleep(1s)
-    user.hud_clear_screen_regions()
+    user.clear_screen_regions()
 
 ^(drowse) [<phrase>]$:
     user.hud_publish_mouse_particle('float_up', '493fd9')
