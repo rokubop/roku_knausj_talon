@@ -474,13 +474,13 @@ class UserActions:
 
     def virtual_region_one():
         """Virtual region one"""
-        actions.user.parrot_set_flex_macro()
+        # actions.user.parrot_set_flex_macro()
         print('region one')
 
     def virtual_region_two():
         """Virtual region two"""
-        actions.user.parrot_track_toggle()
-        actions.user.parrot_use_default_tracking()
+        # actions.user.parrot_track_toggle()
+        # actions.user.parrot_use_default_tracking()
         print('region two')
 
     def virtual_region_three():
@@ -489,7 +489,7 @@ class UserActions:
 
     def virtual_region_four():
         """Virtual region four"""
-        actions.user.parrot_toggle_active_mouse()
+        # actions.user.parrot_toggle_active_mouse()
         print('region four')
 
     def virtual_region_five():
@@ -507,23 +507,24 @@ class UserActions:
 
     def virtual_region_seven():
         """Virtual region seven"""
-        actions.user.parrot_set_modifier('ctrl')
+        # actions.user.parrot_set_modifier('ctrl')
         print('region seven')
         print('holding ctrl')
 
     def virtual_region_eight():
         """Virtual region eight"""
-        actions.user.parrot_set_modifier('shift')
+        # actions.user.parrot_set_modifier('shift')
         print('region eight')
         print('holding shift')
 
     def virtual_region_nine():
         """Virtual region nine"""
-        actions.user.parrot_set_modifier('alt')
+        # actions.user.parrot_set_modifier('alt')
         print('region nine')
         print('holding alt')
 
-def register_regions():
+
+def create_virtual_keys():
     keys = [
 	    actions.user.hud_create_virtual_key(actions.user.virtual_region_one, 'One'),
 	    actions.user.hud_create_virtual_key(actions.user.virtual_region_two, 'Two'),
@@ -538,5 +539,9 @@ def register_regions():
     actions.user.hud_register_virtual_keyboard('virtual_keyboard', keys)
     actions.user.hud_set_virtual_keyboard('virtual_keyboard')
     actions.user.hud_set_virtual_keyboard_visibility(0)
+
+def register_regions():
+    # allow time for talon hud to be ready
+    cron.after("1s", create_virtual_keys)
 
 app.register('ready', register_regions)

@@ -13,5 +13,26 @@ os: windows
 app: factory_game
 """
 
-# @mod.action_class
-# class Actions:
+# game_profile = {
+#     "name": "game",
+#     "auto_activate": False,
+#     "commands": {
+#         'hiss': {
+#             "name": "turn left",
+#             "action": actions.user.fps_turn_left
+#         },
+#         'shush': {
+#             "name": "turn right",
+#             "action": actions.user.fps_turn_right
+#         },
+#         'ee': {
+#             "name": "stop",
+#             "action": actions.user.fps_stop_layer
+#         }
+#     },
+# }
+
+@ctx.action_class("user")
+class Actions:
+    # def flex_profile():
+    #     return game_profile

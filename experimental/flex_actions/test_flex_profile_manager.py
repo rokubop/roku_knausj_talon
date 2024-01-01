@@ -165,13 +165,13 @@ def run_test_suite():
     assert_equal(manager.profile_name_stack, ["test_profile", "test_profile3", "test_profile2"])
     assert_equal(manager.execute_flex_action("x"), "x2")
 
-    # test_title = "We can use a previous profile by switching context"
-    # mock_event_history.reset()
-    # set_mock_ctx_profile(manager, test_profile)
-    # assert_equal(manager.execute_flex_action("x"), "x1")
-    # assert_equal(mock_event_history.was_called(EVENT_ON_STOP_PROFILE2), True)
-    # assert_equal(manager.profile_name_stack, ["test_profile3", "test_profile2", "test_profile"])
-    # assert_equal(manager.profiles["test_profile"].get('name'), "test_profile")
+    test_title = "We can use a previous profile by switching context"
+    mock_event_history.reset()
+    set_mock_ctx_profile(manager, test_profile)
+    assert_equal(manager.execute_flex_action("x"), "x1")
+    assert_equal(mock_event_history.was_called(EVENT_ON_STOP_PROFILE2), True)
+    assert_equal(manager.profile_name_stack, ["test_profile3", "test_profile2", "test_profile"])
+    assert_equal(manager.profiles["test_profile"].get('name'), "test_profile")
 
 
 

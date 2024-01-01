@@ -17,7 +17,7 @@ class FlexProfileManager:
             return self.profiles[profile_name]
         return None
 
-    def _add_new_profiles(self, profile: Profile | list[Profile]):
+    def _register_new_profiles(self, profile: Profile | list[Profile]):
         if isinstance(profile, list):
             for p in profile:
                 profile_name = p["name"]
@@ -85,7 +85,7 @@ class FlexProfileManager:
             print(f"profile not found for {command_name}")
             return
 
-        self._add_new_profiles(profile)
+        self._register_new_profiles(profile)
         self._attempt_use_new_profile(profile)
         return self._trigger_active_action(command_name)
 
