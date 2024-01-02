@@ -233,10 +233,7 @@ ctx.lists["self.arrow_key"] = {
 }
 
 simple_keys = [
-    # "end",
-    # "enter",
     "escape",
-    # "home",
     "insert",
     "pagedown",
     "pageup",
@@ -246,13 +243,10 @@ simple_keys = [
 
 alternate_keys = {
     "delete": "backspace",
+    "end key": "end",
+    "home key": "home",
     "page up": "pageup",
     "page down": "pagedown",
-}
-
-# roku additions
-alternate_keys.update({
-    "lap": "enter",
     "yep": "enter",
     "drill": "delete",
     "scratch": "backspace",
@@ -260,11 +254,13 @@ alternate_keys.update({
     "void": "space",
     "page up": "pageup",
     "page down": "pagedown",
-})
+    "menu key": "menu",
+    "print screen": "printscr",
+}
 
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
-    alternate_keys["menu"] = "menu"
+    alternate_keys["menu key"] = "menu"
     alternate_keys["print screen"] = "printscr"
 
 special_keys = {k: k for k in simple_keys}
