@@ -5,7 +5,6 @@ import win32api, win32con
 from .interactive.core.continuous_trigger import ContinuousTrigger
 
 def mouse_move(dx, dy):
-    # Replace with your actual mouse moving code
     print(f"Moving mouse by dx: {dx}, dy: {dy}")
     win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx), 0)
 
@@ -59,15 +58,18 @@ class MouseMovementGenerator:
             cron.cancel(self.cron_job)
             self.cron_job = None
 
+    def is_running(self):
+        return self.running
+
 # Example usage
 def ease_in_out_cubic(t):
     return t * t * (3 - 2 * t)
 
 mod = Module()
 
-def mouse_move(dx, dy):
-    # Implement the actual mouse movement here
-    pass
+# def mouse_move(dx, dy):
+#     # Implement the actual mouse movement here
+#     pass
 
 class DurationBasedMovementGenerator:
     def __init__(self, easing_function, min_speed, max_speed):
@@ -118,6 +120,9 @@ class DurationBasedMovementGenerator:
             cron.cancel(self.cron_job)
             self.cron_job = None
 
+    def is_running(self):
+        return self.running
+
 # Example of an easing function
 def linear_ease(t):
     return t
@@ -134,6 +139,19 @@ class Actions:
         """Move the mouse in a curve"""
         global movement_generator
         movement_generator.start_movement(degree, duration, distance)
+
+    def mouse_move_curve_stop():
+        """Stop the mouse in a curve"""
+        global movement_generator
+        movement_generator.stop()
+
+    def mouse_move_curve_is_moving():
+        """check if the mouse is moving"""
+        global movement_generator
+        return movement_generator.is_running()
+
+
+
 # movement_generator.start_movement(45, 2, 100)  # Move 45 degrees for 2 seconds, distance 100
 
 def ease_in_cubic(t):
@@ -163,45 +181,45 @@ def flick_with_bounce(t, overshoot=1.25, stiffness=2.5):
     else:
         return -0.5 * (2 * t - overshoot) ** (2 * stiffness) + 1
 
-def on_trigger_start():
-    """
-    Function to be called when the noise or keypress is detected.
-    """
-    global start_time
-    start_time = time.time()
-    initial_curve = ease_in_cubic
-    movement_generator = MouseMovementGenerator(initial_curve)
-    movement_generator.start_movement(degree=45, duration=2, distance=100)
+# def on_trigger_start():
+#     """
+#     Function to be called when the noise or keypress is detected.
+#     """
+#     global start_time
+#     start_time = time.time()
+#     initial_curve = ease_in_cubic
+#     movement_generator = MouseMovementGenerator(initial_curve)
+#     movement_generator.start_movement(degree=45, duration=2, distance=100)
 
-def on_trigger_end():
-    """
-    Function to be called when the noise or keypress ends.
-    """
-    global start_time
-    duration = time.time() - start_time
-    final_curve = ease_out_cubic
-    movement_generator = MouseMovementGenerator(final_curve)
-    movement_generator.start_movement(degree=45, duration=duration, distance=100)
+# def on_trigger_end():
+#     """
+#     Function to be called when the noise or keypress ends.
+#     """
+#     global start_time
+#     duration = time.time() - start_time
+#     final_curve = ease_out_cubic
+#     movement_generator = MouseMovementGenerator(final_curve)
+#     movement_generator.start_movement(degree=45, duration=duration, distance=100)
 
-ctx = Context()
-ctx.matches = r"""
-mode: user.parrot
-os: windows
-"""
+# ctx = Context()
+# ctx.matches = r"""
+# mode: user.parrot
+# os: windows
+# """
 
-movement_generator = MouseMovementGenerator(ease_in_cubic)
-generator = DurationBasedMovementGenerator(linear_ease, min_speed=1, max_speed=10)
-generator.start_movement(duration=5, direction_degree=45)  # 5 seconds movement at 45 degrees
-def on_start():
-    print("on_start")
-    # movement_generator.start_movement(degree=45, duration=1, distance=500)
-    generator.start_movement(duration=5, direction_degree=45)  # 5 seconds movement at 45 degrees
+# movement_generator = MouseMovementGenerator(ease_in_cubic)
+# generator = DurationBasedMovementGenerator(linear_ease, min_speed=1, max_speed=10)
+# generator.start_movement(duration=5, direction_degree=45)  # 5 seconds movement at 45 degrees
+# def on_start():
+#     print("on_start")
+#     # movement_generator.start_movement(degree=45, duration=1, distance=500)
+#     generator.start_movement(duration=5, direction_degree=45)  # 5 seconds movement at 45 degrees
 
-def on_stop():
-    print("on_stop")
-    movement_generator.stop()
+# def on_stop():
+#     print("on_stop")
+#     movement_generator.stop()
 
-hiss = ContinuousTrigger(on_start, on_stop)
+# hiss = ContinuousTrigger(on_start, on_stop)
 
 # @ctx.action_class("user")
 # class Actions:

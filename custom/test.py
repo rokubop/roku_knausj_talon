@@ -23,9 +23,15 @@ class Actions:
         # actions.core.repeat_phrase()
         print(ui.active_window())
 
-    def test_two():
+    def test_two(ts: float, power: float, f0: float, f1: float, f2: float):
         """test"""
-        actions.key('down')
+        if f0 > 145:
+            print("high sound")
+        else:
+            print("low sound")
+        print(f"f0:{f0} f1:{f1} f2:{f2}")
+        # print(f"{ts} {power} {f0} {f1} {f2}")
+        # actions.key('down')
 
 # @ctx.action_class("user")
 # class UserActions:

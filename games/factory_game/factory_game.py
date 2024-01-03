@@ -1,4 +1,4 @@
-from talon import Module, Context, actions
+from talon import Module, Context, actions, ctrl, ui
 
 mod = Module()
 ctx = Context()
@@ -12,6 +12,39 @@ ctx.matches = r"""
 os: windows
 app: factory_game
 """
+
+@mod.action_class
+class Actions:
+    def virtual_keys_3x3(grid: dict):
+        """Virtual keys"""
+        x, y = ctrl.mouse_pos()
+        screens = ui.screens()
+        tile_width = screens[0].rect.width // 3
+        tile_height = screens[0].rect.height // 3
+        tile_index_x = x // tile_width + 1
+        tile_index_y = y // tile_height + 1
+        tile_key = str(int(tile_index_y * 3 - (3 - tile_index_x)))
+        if grid.get(tile_key):
+            grid[tile_key]()
+
+@ctx.action_class("user")
+class Actions:
+    def parrot_nn():
+        print("'to execute parrot command'")
+        if actions.user.mouse_move_curve_is_moving():
+            actions.user.mouse_move_curve_stop()
+        else:
+            actions.user.virtual_keys_3x3({
+                '1': lambda: actions.user.mouse_move_curve(180, 2, 700),
+                '2': lambda: actions.user.mouse_move_curve(270, 1, 500),
+                '3': lambda: actions.user.mouse_move_curve(0, 2, 700),
+                '4': lambda: actions.user.mouse_move_curve(180, 2, 300),
+                '5': lambda: actions.user.fps_move_forward_toggle(),
+                '6': lambda: actions.user.mouse_move_curve(0, 2, 300),
+                '7': lambda: actions.user.mouse_move_curve(180, 4, 200),
+                '8': lambda: actions.user.mouse_move_curve(90, 1, 500),
+                '9': lambda: actions.user.mouse_move_curve(0, 4, 200),
+            })
 
 # def turn_left_soft():
 #     return {
