@@ -25,13 +25,13 @@ import * as $0 from "$0";
 ---
 
 name: importFromStatement
-phrase: import from
+phrase: import from | import
 -
 import $0 from "$0";
 ---
 
 name: namedLambdaExpression
-phrase: arrow funk
+phrase: arrow funk | con lambda
 insertionScope: statement
 -
 const $1 = ($2) => {
@@ -56,7 +56,7 @@ useEffect(() => {
 ---
 
 name: constStatement
-phrase: const
+phrase: const | con
 insertionScope: statement
 -
 const $1 = $0
@@ -67,4 +67,14 @@ phrase: let
 insertionScope: statement
 -
 let $1 = $0
+---
+
+name: reactComponent
+phrase: component
+insertionScope: statement
+$1.insertionFormatter: PUBLIC_CAMEL_CASE
+-
+const $1 = ({ $2 }) => {
+    $0
+}
 ---
