@@ -2,6 +2,8 @@ import inspect
 from dataclasses import dataclass
 from typing import List, Optional
 from talon import Module, Context, actions, ui, cron, ctrl
+# from talon_plugins import eye_zoom_mouse, eye_mouse
+# from talon.track import tobii
 
 mod = Module()
 ctx = Context()
@@ -21,7 +23,8 @@ class Actions:
     def test_one():
         """test"""
         # actions.core.repeat_phrase()
-        print(ui.active_window())
+        # print(dir(eye_mouse.tracker))
+        # print(ui.active_window())
 
     def test_two(ts: float, power: float, f0: float, f1: float, f2: float):
         """test"""
