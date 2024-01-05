@@ -13,8 +13,8 @@ def _on_app_launch_close(app):
         actions.user.game_noise_control_reset()
 
 
-ui.register("app_close", _on_app_launch_close)
-ui.register("app_launch", _on_app_launch_close)
+# ui.register("app_close", _on_app_launch_close)
+# ui.register("app_launch", _on_app_launch_close)
 
 
 def on_app_activate(app):
@@ -27,5 +27,5 @@ def on_app_deactivate(deactivated_app):
         actions.user.custom_game_cleanup()
 
 
-ui.register("app_activate", on_app_activate)
-ui.register("app_deactivate", on_app_deactivate)
+# ui.register("app_activate", on_app_activate)
+# ui.register("app_deactivate", on_app_deactivate)

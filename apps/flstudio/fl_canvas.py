@@ -66,13 +66,13 @@ class Actions:
             y - text_rect.y - text_rect.height / 2,
         )
 
-def on_app_switch(application):
-    if application.name == "FL Studio":
-        actions.user.fl_canvas_show()
-    else:
-        actions.user.fl_canvas_hide()
+# def on_app_switch(application):
+#     if application.name == "FL Studio":
+#         actions.user.fl_canvas_show()
+#     else:
+#         actions.user.fl_canvas_hide()
 
-ui.register("app_activate", on_app_switch)
+# ui.register("app_activate", on_app_switch)
 # os: windows
 # and app.name: FL Studio
 # os: windows

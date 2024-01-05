@@ -36,11 +36,6 @@ then:                       skip()
 ^continue [<number_small>]: user.start_repeat_repeatedly(number_small or 1)
 ^stop:                      user.cancel_repeat_repeatedly()
 
-windows <user.find> [<user.text>]:
-    key(win)
-    sleep(100ms)
-    insert(user.text or "")
-
 reload it:
     sleep(100ms)
     key(f5)

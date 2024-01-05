@@ -446,20 +446,20 @@ def ui_event(event_name, v):
       actions.user.hud_add_log('success', '<*View: Playlist />')
 
 listening = False
-def on_app_switch(application):
-    global listening
-    if application.name == "FL Studio":
-      if listening == True:
-        return
-      listening = True
-      ui.register("", ui_event)
-    else:
-      if listening == False:
-        return
-      listening = False
-      ui.unregister("", ui_event)
+# def on_app_switch(application):
+#     global listening
+#     if application.name == "FL Studio":
+#       if listening == True:
+#         return
+#       listening = True
+#       ui.register("", ui_event)
+#     else:
+#       if listening == False:
+#         return
+#       listening = False
+#       ui.unregister("", ui_event)
 
-ui.register("app_activate", on_app_switch)
+# ui.register("app_activate", on_app_switch)
 
 global noise
 

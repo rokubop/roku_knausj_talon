@@ -43,6 +43,12 @@ snap <user.running_applications> [screen] right:
     user.switcher_focus("VB-AUDIO Virtual Audio Device Mixing Console Application")
     sleep(200ms)
     user.parse_phrase(phrase or "")
+
+windows <user.find> [<user.text>]:
+    key(win)
+    sleep(100ms)
+    insert(user.text or "")
+
 swap:                       user.app_switch()
 swap twice:                 user.app_switch(2)
 swap thrice:                user.app_switch(3)
@@ -55,3 +61,18 @@ swap last:                  key(alt-shift-escape)
     insert(text)
 
 side here:                  user.resize_window_side_to_cursor_position()
+
+view one:                   key(win-1)
+view two:
+    key(win:down)
+    key(2:down)
+    sleep(100ms)
+    key(win:up)
+    key(2:up)
+view three:                 key(win-3)
+view four:                  key(win-4)
+view five:                  key(win-5)
+view six:                   key(win-6)
+view next:                  app.window_next()
+view last:                  app.window_previous()
+view <user.running_applications>: user.switcher_focus(running_applications)

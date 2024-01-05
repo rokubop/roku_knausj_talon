@@ -53,13 +53,13 @@ class UserActions:
 
         actions.user.code_insert_function(result, None)
 
-    def code_interface(text: str):
-        """Inserts interface declaration"""
-        type_name = actions.user.formatted_text(
-            text, settings.get("user.code_typename_formatter")
-        )
-        actions.insert(f"interface {type_name} {{}}")
-        actions.key("left enter")
+    # def code_interface(text: str):
+    #     """Inserts interface declaration"""
+    #     type_name = actions.user.formatted_text(
+    #         text, settings.get("user.code_typename_formatter")
+    #     )
+    #     actions.insert(f"interface {type_name} {{}}")
+    #     actions.key("left enter")
 
     def code_protected_function(text: str):
         result = "protected function {}".format(

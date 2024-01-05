@@ -38,7 +38,7 @@ ctx.lists["self.file_extension"] = {
 mod.list("domain", desc="List of top level domains")
 ctx.lists["self.domain"] = {
     "com":            "com",
-    "net":            "net",
+    # "net":            "net",
     "org":            "org",
     "gov":            "gov"
 }
@@ -46,9 +46,9 @@ ctx.lists["self.domain"] = {
 extension_siblings = {
     "talon":        "py",
     "py":           "talon",
-    "c":            "h",
-    "cpp":          "h",
-    "h":            "c",
+    # "c":            "h",
+    # "cpp":          "h",
+    # "h":            "c",
     "tsx":          "ts",
     "jsx":          "js",
     "ts":           "tsx",
