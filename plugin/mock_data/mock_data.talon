@@ -8,19 +8,26 @@ mock first:                 "Person"
 mock middle:                "Middle"
 mock last:                  "LastName"
 mock [full] name:            "Person\tMiddle\tLastName"
-mock street:                "1234 Main St"
+    mock street:                "1234 Main St"
 mock city:                  "City"
 mock (zip | postal):        "12345"
 
-mock address:
+mock address full:
     key(down tab)
     "1234 Main St\t\t\tCity\t"
     key(down tab)
     "12345"
 
-mock short address:
+mock address mid:
     key(down tab)
     "1234 Main St\t\tCity\t"
+    key(down tab)
+    "12345"
+
+mock address:
+    key(down tab)
+    "1234 Main St\tCity\t"
+    sleep(200ms)
     key(down tab)
     "12345"
 
