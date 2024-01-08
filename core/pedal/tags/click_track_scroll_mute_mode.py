@@ -69,11 +69,14 @@ class Actions:
         actions.user.hud_add_log('event', '<*Pedal: Dynamic 1 />')
 
     def pedal_left_down():
-        actions.user.tracking_control_gaze_toggle(False)
-        actions.user.tracking_control_head_toggle(False)
-        start_left_hold_timer()
+        ctrl.mouse_click(button=0, down=True)
+        # actions.user.tracking_control_gaze_toggle(False)
+        # actions.user.tracking_control_head_toggle(False)
+        # start_left_hold_timer()
 
     def pedal_left_up():
+        ctrl.mouse_click(button=0, up=True)
+        return
         global left_side_b
         if left_side_b:
             if actions.user.tracking_control_was_moving():
