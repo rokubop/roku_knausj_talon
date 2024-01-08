@@ -7,11 +7,8 @@ ctx.matches = "tag: user.pedal_dynamic_1"
 
 left_side_b = False
 left_hold_timer = None
-center_side_b = False
-center_double_tap_timer = None
 right_side_b = False
 right_hold_timer = None
-scroll_dir = "down"
 speech_toggle_flag = True
 
 def set_left_side_b():
@@ -39,19 +36,6 @@ def reset_left_hold_timer():
     if left_hold_timer:
         cron.cancel(left_hold_timer)
         left_hold_timer = None
-
-def start_center_double_tap_timer():
-    global center_double_tap_timer, center_side_b
-    reset_center_double_tap_timer()
-    center_side_b = True
-    center_double_tap_timer = cron.after("500ms", unset_center_side_b)
-
-def reset_center_double_tap_timer():
-    global center_side_b, center_double_tap_timer
-    center_side_b = False
-    if center_double_tap_timer:
-        cron.cancel(center_double_tap_timer)
-        center_double_tap_timer = None
 
 def start_right_hold_timer():
     global right_hold_timer
@@ -105,16 +89,10 @@ class Actions:
         reset_left_hold_timer()
 
     def pedal_center_down():
-        global center_side_b, scroll_dir
-
-        if center_side_b:
-            scroll_dir = "up" if scroll_dir == "down" else "down"
-
-        actions.user.mouse_scrolling(scroll_dir)
-        start_center_double_tap_timer()
+        actions.user.pedal_scroll_up_or_down_dbl_tap()
 
     def pedal_center_up():
-        actions.user.mouse_scroll_stop()
+        actions.user.pedal_scroll_up_or_down_dbl_tap_stop()
 
     def pedal_right_down():
         start_right_hold_timer()

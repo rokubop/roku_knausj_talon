@@ -187,7 +187,8 @@ code_formatter_names = {
     "slasher": "SLASH_SEPARATED",
     "smash": "NO_SPACES",
     "snake": "SNAKE_CASE",
-    "string": "SINGLE_QUOTED_STRING",
+    "state": "CAPITALIZE_FIRST_WORD",
+    # "string": "SINGLE_QUOTED_STRING",
 }
 
 prose_formatter_names = {
@@ -215,7 +216,7 @@ formatters_words = {
     "state": formatters_dict["CAPITALIZE_FIRST_WORD"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],
-    "string": formatters_dict["SINGLE_QUOTED_STRING"],
+    # "string": formatters_dict["SINGLE_QUOTED_STRING"],
     "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
 }
 # Mapping from spoken phrases to formatters
