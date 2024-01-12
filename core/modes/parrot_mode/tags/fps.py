@@ -167,7 +167,8 @@ class FpsWorld:
         if not actions.user.fps_check_cluck_should_exit_parrot_mode():
             actions.key("shift")
     def parrot_palate(): actions.user.fps_compass_snap_to_closest_90()
-    def parrot_tut(): actions.user.fps_compass_set_north_anchor()
+    def parrot_tut(): actions.user.fps_center_mouse()
+    # def parrot_tut(): actions.user.fps_compass_set_north_anchor()
 
 @ctx.action_class("user")
 class FpsDefault:
@@ -176,7 +177,9 @@ class FpsDefault:
         actions.user.toggle_world_or_room_tag('world')
         actions.user.hud_publish_content("pop=align\ncluck=click\ntut=right click\npalate=look down", "example", "World mode")
         actions.user.hud_add_log('success', '<*Note:/> Parrot mode enabled')
-    def parrot_eh(): actions.user.fps_move_forward()
+    # def parrot_eh(): actions.user.fps_move_forward()
+    # def parrot_eh():
+    #     actions.user.mouse_stay_in_place(1)
     def parrot_guh(): actions.user.fps_move_backward()
     def parrot_ah(): actions.user.fps_turn_left_soft_continuous()
     def parrot_oh(): actions.user.fps_turn_right_soft_continuous()
@@ -187,9 +190,11 @@ class FpsDefault:
     def parrot_ee():
         actions.user.fps_stop_layer()
         actions.user.fps_turn_halt()
+        actions.user.mouse_stay_in_place(0)
 
     # modes
-    def parrot_nn(): actions.user.enable_fps_side_b_briefly()
+    def parrot_nn(): actions.user.fps_move_forward()
+    # def parrot_nn(): actions.user.enable_fps_side_b_briefly()
     def parrot_er(): actions.user.enable_fps_side_c_briefly()
     def parrot_t(): actions.user.toggle_world_or_room_tag()
 
@@ -895,6 +900,16 @@ class MouseActions:
 
 @mod.action_class
 class FpsCompassActions:
+    def fps_center_mouse():
+        """Center mouse"""
+        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 0, 400)
+        actions.sleep("10ms")
+        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 0, 400)
+        actions.sleep("10ms")
+        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 0, 400)
+        actions.sleep("10ms")
+        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, 0, -550)
+
     def fps_compass_set_north_anchor():
         """Set north anchor"""
         global compass_north_offset

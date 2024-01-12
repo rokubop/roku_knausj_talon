@@ -27,24 +27,24 @@ class Actions:
         if grid.get(tile_key):
             grid[tile_key]()
 
-@ctx.action_class("user")
-class Actions:
-    def parrot_nn():
-        print("'to execute parrot command'")
-        if actions.user.mouse_move_curve_is_moving():
-            actions.user.mouse_move_curve_stop()
-        else:
-            actions.user.virtual_keys_3x3({
-                '1': lambda: actions.user.mouse_move_curve(180, 2, 700),
-                '2': lambda: actions.user.mouse_move_curve(270, 1, 500),
-                '3': lambda: actions.user.mouse_move_curve(0, 2, 700),
-                '4': lambda: actions.user.mouse_move_curve(180, 2, 300),
-                '5': lambda: actions.user.fps_move_forward_toggle(),
-                '6': lambda: actions.user.mouse_move_curve(0, 2, 300),
-                '7': lambda: actions.user.mouse_move_curve(180, 4, 200),
-                '8': lambda: actions.user.mouse_move_curve(90, 1, 500),
-                '9': lambda: actions.user.mouse_move_curve(0, 4, 200),
-            })
+# @ctx.action_class("user")
+# class Actions:
+    # def parrot_nn():
+    #     print("'to execute parrot command'")
+    #     if actions.user.mouse_move_curve_is_moving():
+    #         actions.user.mouse_move_curve_stop()
+    #     else:
+    #         actions.user.virtual_keys_3x3({
+    #             '1': lambda: actions.user.mouse_move_curve(180, 2, 700),
+    #             '2': lambda: actions.user.mouse_move_curve(270, 1, 500),
+    #             '3': lambda: actions.user.mouse_move_curve(0, 2, 700),
+    #             '4': lambda: actions.user.mouse_move_curve(180, 2, 300),
+    #             '5': lambda: actions.user.fps_move_forward_toggle(),
+    #             '6': lambda: actions.user.mouse_move_curve(0, 2, 300),
+    #             '7': lambda: actions.user.mouse_move_curve(180, 4, 200),
+    #             '8': lambda: actions.user.mouse_move_curve(90, 1, 500),
+    #             '9': lambda: actions.user.mouse_move_curve(0, 4, 200),
+    #         })
 
 # def turn_left_soft():
 #     return {
@@ -128,10 +128,10 @@ class Actions:
 # # I should be able to activate all modes with a manual command
 # # flex none
 # # flex global
-# # flex context
+# # flex contextp
 
 # @mod.action_class
-# class Actions:
+# class Actions:_
 #     def flex_profile_game_satisfactory():
 #         """Game profile for Satisfactory"""
 #         return game_profile
@@ -139,4 +139,4 @@ class Actions:
 # @ctx.action_class("user")
 # class Actions:
 #     def flex_profile():
-#         return actions.user.flex_profile_game_satisfactory()
+#         return actions.user.flex_profile_game_satisfactory()Bluetooth
