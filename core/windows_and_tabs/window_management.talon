@@ -76,3 +76,19 @@ view six:                   key(win-6)
 view next:                  app.window_next()
 view last:                  app.window_previous()
 view <user.running_applications>: user.switcher_focus(running_applications)
+
+portal [<phrase>]$:
+    user.switcher_focus("Google Chrome")
+    sleep(200ms)
+    user.mouse_move_center_active_window()
+    user.parse_phrase(phrase or "")
+coder [<phrase>]$:
+    user.switcher_focus("Code")
+    sleep(300ms)
+    user.mouse_move_center_active_window()
+    user.parse_phrase(phrase or "")
+slacker [<phrase>]$:
+    user.switcher_focus("Slack")
+    sleep(200ms)
+    user.mouse_move_center_active_window()
+    user.parse_phrase(phrase or "")

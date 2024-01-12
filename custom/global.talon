@@ -2,14 +2,14 @@ again:                      core.repeat_phrase()
 
 confetti:                   user.vscode('cursorless.toggleDecorations')
 
-^mouse (mid | five):        user.mouse_move_center_active_window()
-^mouse bar:                 user.mouse_move_relative_window(190, 338)
-^mouse ledge:               user.mouse_move_relative_window(28, 478)
-^mouse ridge:               user.mouse_move_relative_window(1911, 487)
-^mouse (term | base):       user.mouse_move_relative_window(924, 939)
-^mouse (left | one):        user.mouse_move_relative_window(709, 419)
-^mouse (right | two):       user.mouse_move_relative_window(1293, 468)
-^mouse rack:                user.mouse_move_relative_window(1717, 459)
+spot (mid | five):        user.mouse_move_center_active_window()
+spot bar:                 user.mouse_move_relative_window(190, 338)
+spot ledge:               user.mouse_move_relative_window(28, 478)
+spot ridge:               user.mouse_move_relative_window(1911, 487)
+spot (term | base):       user.mouse_move_relative_window(924, 939)
+spot (left | one):        user.mouse_move_relative_window(709, 419)
+spot (right | two):       user.mouse_move_relative_window(1293, 468)
+spot rack:                user.mouse_move_relative_window(1717, 459)
 
 ^screen <number> (mid | five): user.mouse_move_relative_screen(number, 960, 540)
 ^screen <number> bar:       user.mouse_move_relative_screen(number, 190, 338)
@@ -61,3 +61,5 @@ tracker:                    user.parrot_use_default_tracking()
     key(capslock:down)
     key(s)
     key(capslock:up)
+
+coder: 

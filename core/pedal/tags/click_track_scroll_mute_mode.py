@@ -49,11 +49,17 @@ def reset_right_hold_timer():
         cron.cancel(right_hold_timer)
         right_hold_timer = None
 
+last_active_microphone = None
+
 def microphone_toggle():
-    global speech_toggle_flag
+    global speech_toggle_flag, last_active_microphone
+    current_microphone = actions.sound.active_microphone()
+    if current_microphone and current_microphone != "None":
+        last_active_microphone = current_microphone
+
     if speech_toggle_flag:
         actions.user.hud_publish_mouse_particle('float_up', '30F343')
-        actions.sound.set_microphone("Microphone (Yeti X)")
+        actions.sound.set_microphone(last_active_microphone)
         actions.user.hud_add_log('event', '<*Voice: on/>')
     else:
         actions.user.hud_publish_mouse_particle('float_up', 'ff0000')
@@ -62,6 +68,25 @@ def microphone_toggle():
         actions.user.hud_add_log('error', '<*Voice: off />')
     speech_toggle_flag = not speech_toggle_flag
 
+double_tap_timeout_setting = "500ms"
+
+double_tap_timer = None
+double_tap_enabled = False
+
+def start_double_tap_timer():
+    global double_tap_timer, double_tap_enabled
+    clear_double_tap_timer()
+    double_tap_enabled = True
+    double_tap_timer = cron.after(double_tap_timeout_setting, clear_double_tap_timer)
+
+def clear_double_tap_timer():
+    global double_tap_enabled, double_tap_timer
+    double_tap_enabled = False
+    if double_tap_timer:
+        cron.cancel(double_tap_timer)
+        double_tap_timer = None
+
+use_click = False
 
 @ctx.action_class("user")
 class Actions:
@@ -69,54 +94,50 @@ class Actions:
         actions.user.hud_add_log('event', '<*Pedal: Dynamic 1 />')
 
     def pedal_left_down():
-        # actions.user.pedal_motion_controller_down()
-        # return
+        global use_click, double_tap_enabled
 
-        # ctrl.mouse_click(button=0, down=True)
+        if double_tap_enabled:
+            use_click = not use_click
+            if use_click:
+                actions.user.hud_add_log('warning', '<*Click mode/>')
+            else:
+                actions.user.hud_add_log('event', '<*Scroll mode/>')
+
+            color = 'd4a000' if use_click else 'ff5500'
+            actions.user.hud_publish_mouse_particle('float_up', color)
+            return
+
+        start_double_tap_timer()
+
         actions.user.tracking_control_gaze_toggle(True)
         actions.user.tracking_control_head_toggle(False)
         actions.sleep("50ms")
         actions.user.tracking_control_gaze_toggle(False)
         actions.user.tracking_control_head_toggle(True)
-        # actions.user.tracking_control_gaze_toggle(False)
-        # actions.user.tracking_control_head_toggle(False)
-        # start_left_hold_timer()
 
     def pedal_left_up():
-        # actions.user.pedal_motion_controller_up()
-        # return
         actions.user.tracking_control_gaze_toggle(False)
         actions.user.tracking_control_head_toggle(False)
-        # ctrl.mouse_click(button=0, up=True)
         return
-        global left_side_b
-        if left_side_b:
-            if actions.user.tracking_control_was_moving():
-                actions.user.tracking_control_head_toggle(False)
-                actions.user.tracking_control_gaze_toggle(False)
-            else:
-                actions.user.tracking_control_head_toggle(True)
-                actions.user.tracking_control_gaze_toggle(True)
-        else:
-            ctrl.mouse_click()
-            actions.user.tracking_control_resume()
-
-        reset_left_hold_timer()
 
     def pedal_center_down():
-        actions.user.pedal_scroll_up_or_down_dbl_tap()
+        global use_click
+        if use_click:
+            ctrl.mouse_click(button=0, down=True)
+        else:
+            actions.user.pedal_scroll_up_or_down_dbl_tap()
+
 
     def pedal_center_up():
-        actions.user.pedal_scroll_up_or_down_dbl_tap_stop()
+        global use_click
+        if use_click:
+            ctrl.mouse_click(button=0, up=True)
+        else:
+            actions.user.pedal_scroll_up_or_down_dbl_tap_stop()
+
 
     def pedal_right_down():
-        start_right_hold_timer()
+        microphone_toggle()
 
     def pedal_right_up():
-        global right_side_b
-        if right_side_b:
-            actions.user.pedal_tag_switch()
-        else:
-            microphone_toggle()
-
-        reset_right_hold_timer()
+        actions.skip()

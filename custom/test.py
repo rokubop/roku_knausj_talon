@@ -26,6 +26,7 @@ class Actions:
         # print(dir(eye_mouse.tracker))
         # print(ui.active_window())
 
+    # def test_two(power: float, f0: float, f1: float, f2: float):
     def test_two(ts: float, power: float, f0: float, f1: float, f2: float):
         """test"""
         if f0 > 145:

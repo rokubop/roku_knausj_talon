@@ -12,7 +12,8 @@ open_menu_cron = None
 class Actions:
     def pedal_available_tags():
         """Returns a list of available tags for the given context, starting with the one that should be active first"""
-        return ["user.pedal_dynamic_1", "user.pedal_scroll_up_down", "user.pedal_click_mute", "user.pedal_head_gaze"]
+        return ["user.pedal_dynamic_1"]
+        # return ["user.pedal_dynamic_1", "user.pedal_scroll_up_down", "user.pedal_click_mute", "user.pedal_head_gaze"]
 
     def pedal_on_tag_enable():
         """Triggered when a tag is enabled"""
