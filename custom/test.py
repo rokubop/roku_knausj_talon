@@ -6,18 +6,14 @@ from talon import Module, Context, actions, ui, cron, ctrl
 # from talon.track import tobii
 
 mod = Module()
+mod.mode("test_mode", "test mode")
 ctx = Context()
+ctx_test_mode = Context()
+ctx_test_mode.matches = """
+mode: user.test_mode
+"""
 
-# ctx.matches = """
-# app: /steam/
-# """
 
-# @mod.scope
-# def scope():
-#     return { "flex_mode": True }
-# cron.interval("5s", scope.update)
-
-# @mod.action_class
 @mod.action_class
 class Actions:
     def test_one():
@@ -37,9 +33,28 @@ class Actions:
         # print(f"{ts} {power} {f0} {f1} {f2}")
         # actions.key('down')
 
-# @ctx.action_class("user")
-# class UserActions:
-#     def test_one():
-#         """test"""
+    def test_context():
+        """test context"""
+        # actions.insert("module context")
+        pass
 
-#         actions.insert('helloa')
+    def test_mode_enable():
+        """test mode enable"""
+        actions.mode.enable("user.test_mode")
+
+    def test_mode_disable():
+        """test mode disable"""
+        actions.mode.disable("user.test_mode")
+
+
+@ctx.action_class("user")
+class UserActions:
+    def test_context():
+        actions.insert("ctx context")
+        actions.next()
+
+@ctx_test_mode.action_class("user")
+class UserActions:
+    def test_context():
+        actions.insert("ctx test mode")
+        actions.next()
