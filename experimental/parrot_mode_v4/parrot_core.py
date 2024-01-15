@@ -4,6 +4,7 @@ mod = Module()
 ctx = Context()
 mod.mode("parrot_v4_global", "Global parrot mode")
 mod.mode("parrot_v4_app", "App parrot mode")
+mod.setting("parrot_v4_prefer_app_or_global", type=str, default="global", desc="Prefer global or app mode")
 mod.setting("parrot_v4_show_cursor_color", type=bool, default=False, desc="Show cursor or not")
 mod.setting("parrot_v4_cursor_color", type=str, desc="Cursor color")
 
@@ -19,7 +20,11 @@ class Actions:
         actions.mode.save()
         actions.mode.disable("command")
         actions.mode.disable("dictation")
-        actions.mode.enable("user.parrot_v4_global")
+        mode = settings.get("user.parrot_v4_prefer_app_or_global")
+        if mode == "app":
+            actions.mode.enable("user.parrot_v4_app")
+        else:
+            actions.mode.enable("user.parrot_v4_global")
         actions.user.parrot_v4_update_ui()
 
     def parrot_v4_mode_disable():
