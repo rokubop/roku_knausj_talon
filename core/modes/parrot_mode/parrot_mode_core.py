@@ -36,12 +36,12 @@ class ParrotMode:
         else:
             actions.user.add_red_cursor()
 
+        actions.mode.disable("command")
+        actions.mode.disable("dictation")
         actions.mode.enable("user.parrot")
         ctx.tags = [default_tag]
         enable_preserved_tag()
         print(ctx.tags)
-        actions.mode.disable("command")
-        actions.mode.disable("dictation")
         actions.user.parrot_mode_on_enable()
 
     def parrot_mode_disable(preserve_tag: str = None):
@@ -54,8 +54,8 @@ class ParrotMode:
             preserved_tag = preserve_tag
         ctx.tags = []
         actions.mode.disable("user.parrot")
-        actions.mode.enable("command")
         actions.mode.disable("dictation")
+        actions.mode.enable("command")
 
     def parrot_mode_enable_tag(tag: str):
         """Enable parrot mode with tag"""
