@@ -1,9 +1,12 @@
 from talon import actions, ctrl, Module, Context, cron
-
+# from .obs_websocket import toggle_virtual_camera
 mod = Module()
 mod.tag("pedal_dynamic_1", desc="track, scroll, mute, click")
 ctx = Context()
 ctx.matches = "tag: user.pedal_dynamic_1"
+
+
+
 
 left_side_b = False
 left_hold_timer = None
@@ -137,6 +140,10 @@ class Actions:
 
 
     def pedal_right_down():
+        # if I hold for one second
+        # toggle obs
+        # toggle mic- maybe virtual cable?
+        # toggle_virtual_camera()
         microphone_toggle()
 
     def pedal_right_up():
