@@ -25,13 +25,20 @@ mod.setting(
 nav_job = None
 direction = (0, 1)
 
-speeds = {"slow": 1, "medium": 5, "fast": 8, "fastest": 15}
+speeds = {"slow": 1, "medium": 5, "fast": 18}
 speed_default = "slow"
 speed = speeds[speed_default]
 
 def update_speed(new_speed):
     global speed
     speed = speeds.get(new_speed, speed_default)
+    if new_speed == "slow":
+        actions.user.add_yellow_cursor()
+    elif new_speed == "medium":
+        actions.user.add_color_cursor("ccff33")
+    elif new_speed == "fast":
+        actions.user.add_color_cursor("66ff33")
+
 
 def nav_tick():
     global direction
@@ -101,8 +108,6 @@ class RpgMouseActions:
         elif speed == speeds["medium"]:
             update_speed("fast")
         elif speed == speeds["fast"]:
-            update_speed("fastest")
-        elif speed == speeds["fastest"]:
             return
 
     def rpg_mouse_move_to_interaction_axis():
