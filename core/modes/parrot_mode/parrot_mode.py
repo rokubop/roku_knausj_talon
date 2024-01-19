@@ -173,8 +173,8 @@ class ParrotModeActions:
         actions.user.parrot_mouse_stop()
         actions.user.parrot_cancel_modifiers()
         actions.user.parrot_freeze_mouse()
-        actions.user.mouse_scroll_stop()
         shush_debouncer.stop()
+        actions.user.mouse_scroll_stop()
         hiss_debouncer.stop()
 
     def parrot_mouse_and_scroll_stop_keep_modifiers():
