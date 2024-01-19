@@ -178,9 +178,10 @@ code_formatter_names = {
     "all down": "ALL_LOWERCASE",
     "camel": "PRIVATE_CAMEL_CASE",
     "dotted": "DOT_SEPARATED",
-    "dub string": "DOUBLE_QUOTED_STRING",
+    "quad": "DOUBLE_QUOTED_STRING",
     "dunder": "DOUBLE_UNDERSCORE",
     "hammer": "PUBLIC_CAMEL_CASE",
+    "proud": "PUBLIC_CAMEL_CASE",
     "kebab": "DASH_SEPARATED",
     "packed": "DOUBLE_COLON_SEPARATED",
     "padded": "SPACE_SURROUNDED_STRING",
@@ -195,7 +196,7 @@ prose_formatter_names = {
     "say": "NOOP",
     "speak": "NOOP",
     "sentence": "CAPITALIZE_FIRST_WORD",
-    "title": "CAPITALIZE_ALL_WORDS",
+    # "title": "CAPITALIZE_ALL_WORDS",
 }
 
 # This is the mapping from spoken phrases to formatters
@@ -205,19 +206,20 @@ formatters_words = {
     # "lower": formatters_dict["ALL_LOWERCASE"],
     "camel": formatters_dict["PRIVATE_CAMEL_CASE"],
     "dotted": formatters_dict["DOT_SEPARATED"],
-    "dub string": formatters_dict["DOUBLE_QUOTED_STRING"],
+    "quad": formatters_dict["DOUBLE_QUOTED_STRING"],
     # "dunder": formatters_dict["DOUBLE_UNDERSCORE"],
     "hammer": formatters_dict["PUBLIC_CAMEL_CASE"],
+    "proud": formatters_dict["PUBLIC_CAMEL_CASE"],
     "kebab": formatters_dict["DASH_SEPARATED"],
     "dashes": formatters_dict["DASH_SEPARATED"],
     # "packed": formatters_dict["DOUBLE_COLON_SEPARATED"],
     "padded": formatters_dict["SPACE_SURROUNDED_STRING"],
     "slasher": formatters_dict["SLASH_SEPARATED"],
-    "state": formatters_dict["CAPITALIZE_FIRST_WORD"],
+    # "state": formatters_dict["CAPITALIZE_FIRST_WORD"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],
     # "string": formatters_dict["SINGLE_QUOTED_STRING"],
-    "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
+    # "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
 }
 # Mapping from spoken phrases to formatters
 formatter_words = {
@@ -388,8 +390,8 @@ ctx.lists["self.formatters"] = formatters_words.keys()
 ctx.lists["self.prose_formatter"] = {
     "say": "NOOP",
     "state": "CAPITALIZE_FIRST_WORD",
+    "title": "CAPITALIZE_ALL_WORDS",
     "more": "SPACE_FIRST_WORD",
-    # "make": "SPACE_SURROUND",
     "trench": "SPACE_CAPITALIZE_FIRST_WORD",
 }
 

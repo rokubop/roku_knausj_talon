@@ -303,7 +303,7 @@ diswap:
 disclose:
     key(esc:5)
     edit.save()
-    sleep(200ms)
+    sleep(300ms)
     key(ctrl-w)
 
 wrap dog:                   user.vscode("editor.action.toggleWordWrap")
