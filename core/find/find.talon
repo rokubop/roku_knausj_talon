@@ -2,13 +2,20 @@ tag: user.find
 -
 
 scout clip:                 edit.find(clip.text())
-# scout [<user.text>]$: edit.find(text or "")
-scout [{user.prose_formatter}] [<user.prose>]$:
+scout$:                     key("ctrl-f")
+scout {user.formatters} <user.prose>$:
     key("ctrl-f")
-    user.insert_formatted(prose or "", prose_formatter or "NOOP")
-scout all [{user.prose_formatter}] [<user.prose>]$:
+    user.insert_formatted(prose or "", formatters or "NOOP")
+scout phrase [<user.prose>]$:
+    key("ctrl-f")
+    user.insert_formatted(prose or "", "NOOP")
+scout all$:                 key("ctrl-shift-f")
+scout all {user.formatters} <user.prose>$:
     key("ctrl-shift-f")
-    user.insert_formatted(prose or "", prose_formatter or "NOOP")
+    user.insert_formatted(prose or "", formatters or "NOOP")
+scout all phrase [<user.prose>]$:
+    key("ctrl-shift-f")
+    user.insert_formatted(prose or "", "NOOP")
 
 scout (all | ale) clip:     user.find_everywhere(clip.text())
 

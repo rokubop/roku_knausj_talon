@@ -1,7 +1,18 @@
 from talon import Context, Module, actions, ctrl, settings
+from .utils.Debouncer import ContinuousHoldDebouncer
 
 mod = Module()
 ctx = Context()
+
+scroll_down_action = ContinuousHoldDebouncer(
+    150,
+    lambda: actions.user.parrot_v4_mouse_scrolling("down"),
+    actions.user.parrot_v4_mouse_scroll_stop)
+
+scroll_up_action = ContinuousHoldDebouncer(
+    150,
+    lambda: actions.user.parrot_v4_mouse_scrolling("up"),
+    actions.user.parrot_v4_mouse_scroll_stop)
 
 @mod.action_class
 class Tags:
@@ -69,14 +80,17 @@ class Actions:
     def parrot_v4_scroller_down():
         """Scroller down"""
         actions.user.parrot_v4_on_before_mouse_scroll()
+        scroll_down_action.start()
         print("scroll down")
 
     def parrot_v4_scroller_up():
         """Scroller up"""
         actions.user.parrot_v4_on_before_mouse_scroll()
+        scroll_up_action.start()
         print("scroll up")
 
     def parrot_v4_scroller_stop():
         """Scroller stop"""
         print("scroll stop")
-        actions.user.parrot_v4_on_before_mouse_scroll()
+        scroll_down_action.stop()
+        scroll_up_action.stop()

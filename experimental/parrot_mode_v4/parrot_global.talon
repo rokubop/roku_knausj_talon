@@ -1,7 +1,7 @@
 mode: user.parrot_v4_global
 -
 settings():
-    user.parrot_v4_scroll_speed_multiplier = 0.6
+    user.parrot_v4_scroll_speed_multiplier = 0.8
     user.parrot_v4_show_cursor_color = true
     user.parrot_v4_cursor_color = "d4287e"
 
