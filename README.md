@@ -3,6 +3,12 @@
 This is my personal repository of Talon commands, continually WIP.
 Fork of [talonhub/community](https://github.com/talonhub/community).
 
+## Custom Features
+- [Game v2 actions](https://github.com/rokubop/roku_talon/blob/main/experimental/game_v2/game_v2.py) (Camera movement, go, stop)
+- [Parrot mouse RPG mode]([core/mode/parrot_mode/rpg_mouse_mode.py](https://github.com/rokubop/roku_talon/blob/main/core/modes/parrot_mode/rpg_mouse/rpg_mouse.py)) (continuous mouse movement)
+- [Fix text (target by first and last character)](https://github.com/rokubop/roku_talon/tree/main/experimental/fix_text) (quickly fix text you wrote)
+- [Windows update all user repos](https://github.com/rokubop/roku_talon/blob/main/update-repos.ps1) runs git pull on sibling directories
+
 ## Custom Apps
 - [Audacity](apps/audacity/audacity.talon)
 - [Blender](apps/blender/blender.talon)
@@ -12,28 +18,3 @@ Fork of [talonhub/community](https://github.com/talonhub/community).
 - [MPC Player](apps/mpc/mpc.talon)
 - [Obsidian](apps/obsidian/obsidian.talon)
 - [YouTube](web/youtube.talon)
-
-## Custom Features
-- [Parrot mode WIP](core/mode/parrot_mode/parrot_mode.py)
-- [Parrot repeat and reverse repeat](custom/parrot.py)
-- [Parrot mouse RPG mode](core/mode/parrot_mode/rpg_mouse_mode.py)
-- [Talon restart](plugin/talon_helpers/talon_helpers.py)
-- [Windows powershell command](update-repos.ps1) or [shell command](update-repos.sh) to update all of repositories sibling to current directory
-- [window max/min/restore for windows](core/windows_and_tabs/window_and_tabs_win_roku.py)
-- [Inserting mock data into fields](plugin/mock_data/mock_data.talon)
-
-## Custom Games
-- WIP
-
-## Borrowed Features
-- pokey_talon style centralized [terms for select/teleport/delete/find/list](core/terms_roku.py)
-- [ziemus's game_mode](https://github.com/ziemus/knausj_talon/tree/main/core/modes/game_modehttps://github.com/ziemus/knausj_talon/tree/main/core/modes/game_mode)
-  - added [game_side_scroller](core/modes/game_mode/controls/control_scheme/game_side_scroller.py)
-  - added [automatic game mode switching](games/automatic_game_mode.py)
-- [Andreas' lorem ipsum generator](plugin/lorem_ipsum/)
-- [Andreas' mouse commands](plugin/mouse/mouse.py) which work nicely with dragging and using the pop sound to stop
-- pokey_talon based [line edit commands](core/edit/edit_roku.talon) (tug / drain / step / north / south / head / tail / pour / drink / disk) and [symbols](plugin/symbols/symbols.talon)
-
-## Code Features
-- [pokey based chain commands for javascript](lang/javascript/javascript.talon)
-- [cursorless snippets](cursorless-snippets/)
