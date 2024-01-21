@@ -35,10 +35,13 @@ step back [<number_small>]: user.game_v2_move_dir_step("s", number_small or 1)
 ^[turn] righter$:           user.game_v2_turn_right(60)
 
 # turn slowly
-# soft up:                    user.game_v2_soft_up()
-soft left:                  user.game_v2_soft_left(20)
-soft right:                 user.game_v2_soft_right(20)
-# soft down:                  user.game_v2_soft_down()
+(small | soft) up:          user.game_v2_soft_up(10)
+(small | soft) left:        user.game_v2_soft_left(10)
+(small | soft) right:       user.game_v2_soft_right(10)
+(small | soft) down:        user.game_v2_soft_down(10)
+
+[look] up:                  user.game_v2_turn_up(25)
+[look] down:                user.game_v2_turn_down(25)
 
 # continuously scan mode
 # once the mode is activated, say
@@ -57,10 +60,10 @@ snap right:                 user.game_v2_snap_right(90)
 # snap pop:                   user.game_v2_snap_last_position()
 
 # similar to snap, but keep your current movement direction
-[look] up:                  user.game_v2_look_up(30)
+# look up:                    user.game_v2_look_up(30)
 look left:                  user.game_v2_look_left(90)
 look right:                 user.game_v2_look_right(90)
-[look] down:                user.game_v2_look_down(30)
+# look down:                  user.game_v2_look_down(30)
 look (back | round):        user.game_v2_look_back(180)
 [look] pop:                 user.game_v2_look_reset()
 
@@ -68,7 +71,7 @@ set | reset:                user.game_v2_reset_center_y()
 
 jump:                       key(space)
 (stand | crouch):           key(ctrl)
-(walk | run | slow | fast): key(shift)
+(walk | run | slow | fast | sprint): key(shift)
 
 spam:                       user.game_v2_mouse_hold('left')
 spam <user.letter>:         user.game_v2_key_repeat(letter, "500ms")

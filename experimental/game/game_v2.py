@@ -30,14 +30,11 @@ def _mouse_move_snap(degrees_x, degrees_y):
     dy_angle = dy_90 / 90 * degrees_y
     _mouse_move(int(dx_angle), int(dy_angle))
 
-# total_x = 0
-
 def _mouse_move_natural(degrees_x, degrees_y, duration_ms, calibrate_x_override=0, calibrate_y_override=0):
     global mouse_job
 
     _mouse_stop()
 
-    # Initialize variables for the movement
     dx_360 = calibrate_x_override or settings.get("user.game_v2_calibrate_x_360")
     dy_90 = calibrate_y_override or settings.get("user.game_v2_calibrate_y_ground_to_center")
     dx_total = dx_360 / 360 * degrees_x
@@ -48,9 +45,8 @@ def _mouse_move_natural(degrees_x, degrees_y, duration_ms, calibrate_x_override=
     step_count = 0
 
     last_x, last_y = 0, 0
-    accumulated_dx, accumulated_dy = 0.0, 0.0  # Accumulators for fractional movements
+    accumulated_dx, accumulated_dy = 0.0, 0.0
 
-    # Define the update function
     def update_position():
         nonlocal step_count, last_x, last_y, accumulated_dx, accumulated_dy
 
@@ -59,25 +55,27 @@ def _mouse_move_natural(degrees_x, degrees_y, duration_ms, calibrate_x_override=
             _mouse_stop()
             return
 
-        # Calculate progress
         progress = step_count / steps
         eased_progress = math.sin(progress * math.pi / 2)
 
-        # Calculate the current target position
         current_x = dx_total * eased_progress
         current_y = dy_total * eased_progress
 
-        # Calculate the movement delta
-        dx_step = current_x - last_x + accumulated_dx
-        dy_step = current_y - last_y + accumulated_dy
+        dx_step = current_x - last_x
+        dy_step = current_y - last_y
 
-        # Update the accumulated deltas
-        accumulated_dx, accumulated_dy = dx_step % 1, dy_step % 1
+        accumulated_dx += dx_step - int(dx_step)
+        accumulated_dy += dy_step - int(dy_step)
 
-        # Move the mouse by the integer part of the delta
+        if abs(accumulated_dx) >= 1:
+            dx_step += int(accumulated_dx)
+            accumulated_dx -= int(accumulated_dx)
+
+        if abs(accumulated_dy) >= 1:
+            dy_step += int(accumulated_dy)
+            accumulated_dy -= int(accumulated_dy)
+
         _mouse_move(int(dx_step), int(dy_step))
-
-        # Update the last position
         last_x, last_y = current_x, current_y
 
     mouse_job = cron.interval("16ms", update_position)
@@ -192,21 +190,35 @@ class Actions:
 
     def game_v2_soft_left(degrees: int):
         """Turn left softly"""
-        _mouse_move_natural(-degrees, 0, 2000)
+        _mouse_move_natural(-degrees, 0, 1500)
 
     def game_v2_soft_right(degrees: int):
         """Turn right softly"""
-        _mouse_move_natural(degrees, 0, 2000)
+        _mouse_move_natural(degrees, 0, 1500)
+
+    def game_v2_soft_up(degrees: int):
+        """Turn up softly"""
+        _mouse_move_natural(0, -degrees, 1500)
+
+    def game_v2_soft_down(degrees: int):
+        """Turn right softly"""
+        _mouse_move_natural(0, degrees, 1500)
 
     def game_v2_turn_left(degrees: int):
         """Turn left"""
-        _mouse_move_natural(-degrees, 0, 800)
+        _mouse_move_natural(-degrees, 0, 600)
 
     def game_v2_turn_right(degrees: int):
         """Turn right"""
-        _mouse_move_natural(degrees, 0, 800)
+        _mouse_move_natural(degrees, 0, 600)
 
+    def game_v2_turn_up(degrees: int):
+        """Turn up"""
+        _mouse_move_natural(0, -degrees, 300)
 
+    def game_v2_turn_down(degrees: int):
+        """Turn down"""
+        _mouse_move_natural(0, degrees, 300)
 
     def game_v2_key_toggle_hold(key: str):
         """Toggle holding a key"""
