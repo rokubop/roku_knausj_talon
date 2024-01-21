@@ -1,3 +1,28 @@
+"""
+A generic set of game actions
+game_v2_move_dir
+game_v2_move_dir_step
+game_v2_stop_layer_by_layer
+game_v2_stop_all
+game_v2_calibrate_360
+game_v2_reset_center_y
+game_v2_calibrate_paste
+game_v2_calibrate_y_ground_to_center
+game_v2_calibrate_y_paste
+game_v2_snap_180
+game_v2_snap_left
+game_v2_snap_right
+game_v2_soft_left
+game_v2_soft_right
+game_v2_soft_up
+game_v2_soft_down
+game_v2_turn_left
+game_v2_turn_right
+game_v2_turn_up
+game_v2_turn_down
+game_v2_key_toggle_hold
+game_v2_key_toggle_once
+"""
 from talon import Module, actions, ctrl, settings, cron
 import platform
 import math
@@ -14,23 +39,23 @@ step_dir = None
 step_job = None
 held_keys = set()
 
-def _mouse_move(dx, dy):
+def _mouse_move(dx: int, dy: int):
     (x, y) = ctrl.mouse_pos()
-    ctrl.mouse_move(x + dx, y + dy, dx=dx, dy=dy)
+    ctrl.mouse_move(x + dx, y + dy)
 
 if os.startswith("windows"):
     import win32api, win32con
-    def _mouse_move(dx, dy):
+    def _mouse_move(dx: int, dy: int):
         win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, dx, dy)
 
-def _mouse_move_snap(degrees_x, degrees_y):
+def _mouse_move_snap(degrees_x: int, degrees_y: int):
     dx_360 = settings.get("user.game_v2_calibrate_x_360")
     dy_90 = settings.get("user.game_v2_calibrate_y_ground_to_center")
     dx_angle = dx_360 / 360 * degrees_x
     dy_angle = dy_90 / 90 * degrees_y
     _mouse_move(int(dx_angle), int(dy_angle))
 
-def _mouse_move_natural(degrees_x, degrees_y, duration_ms, calibrate_x_override=0, calibrate_y_override=0):
+def _mouse_move_natural(degrees_x: int, degrees_y: int, duration_ms: int, calibrate_x_override=0, calibrate_y_override=0):
     global mouse_job
 
     _mouse_stop()
@@ -39,11 +64,9 @@ def _mouse_move_natural(degrees_x, degrees_y, duration_ms, calibrate_x_override=
     dy_90 = calibrate_y_override or settings.get("user.game_v2_calibrate_y_ground_to_center")
     dx_total = dx_360 / 360 * degrees_x
     dy_total = dy_90 / 90 * degrees_y
-
     update_interval_ms = 16
     steps = max(1, duration_ms // update_interval_ms)
     step_count = 0
-
     last_x, last_y = 0, 0
     accumulated_dx, accumulated_dy = 0.0, 0.0
 
@@ -82,7 +105,6 @@ def _mouse_move_natural(degrees_x, degrees_y, duration_ms, calibrate_x_override=
 
 def _mouse_stop():
     global mouse_job
-    # total_x = 0
     if mouse_job:
         cron.cancel(mouse_job)
         mouse_job = None
@@ -92,7 +114,6 @@ def _move_dir_stop():
     if move_dir:
         actions.key(f"{move_dir}:up")
         move_dir = None
-
 
 def _step_start(key: str, duration: str):
     global step_dir, step_job
@@ -151,12 +172,10 @@ class Actions:
 
     def game_v2_reset_center_y(value: int = 0):
         """Reset the center"""
-        # _mouse_move_natural(0, 180, 50)
-        # actions.sleep("50ms")
-        # _mouse_move_natural(0, -90, 50)
-        _mouse_move_natural(0, 180, 100)
-        actions.sleep("100ms")
-        _mouse_move_natural(0, -90, 100)
+        time_ms = 100
+        _mouse_move_natural(0, 180, time_ms)
+        actions.sleep(f"{time_ms}ms")
+        _mouse_move_natural(0, -90, time_ms)
 
     def game_v2_calibrate_paste():
         """Paste the last attempted calibrate number"""
@@ -164,11 +183,10 @@ class Actions:
 
     def game_v2_calibrate_y_ground_to_center(number: int):
         """Calibrate y ground to center"""
-        global last_calibrate_value_y
-        last_calibrate_value_y = number
-        _mouse_move_natural(0, 180, 100, 0, number)
-        actions.sleep("100ms")
-        _mouse_move_natural(0, -90, 100, 0, number)
+        time_ms = 100
+        _mouse_move_natural(0, 180, time_ms, 0, number)
+        actions.sleep(f"{time_ms}ms")
+        _mouse_move_natural(0, -90, time_ms, 0, number)
 
     def game_v2_calibrate_y_paste():
         """Paste the last attempted calibrate number"""
