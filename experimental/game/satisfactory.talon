@@ -4,8 +4,8 @@ settings():
     speech.timeout = 0.05
     key_hold = 64.0
     key_wait = 16.0
-    user.game_v2_calibrate_x_360 = 2173
-    user.game_v2_calibrate_y_ground_to_center = 444
+    user.game_v2_calibrate_x_360 = 2139
+    user.game_v2_calibrate_y_ground_to_center = 542
 
 test x [<number>]:          user.game_v2_calibrate_360(number or 0)
 test y [<number>]:          user.game_v2_calibrate_y_ground_to_center(number or 0)
