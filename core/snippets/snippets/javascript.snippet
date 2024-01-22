@@ -10,12 +10,13 @@ for (const $1 in $2) {
 }
 ---
 
-name: anonymousFunctionDeclarationAndCall
-phrase: self calling
+name: forEachStatement
+phrase: for each
+insertionScope: statement
 -
-(() => {
+$1.forEach(($2) => {
     $0
-})();
+})
 ---
 
 name: importStarStatement
@@ -30,8 +31,14 @@ phrase: import from | import
 import $0 from "$0";
 ---
 
+name: importFromStatement
+phrase: import react
+-
+import React from "react";
+---
+
 name: namedLambdaExpression
-phrase: arrow funk | con lambda
+phrase: arrow funk | con lambda | con lamb
 insertionScope: statement
 -
 const $1 = ($2) => {
@@ -65,6 +72,8 @@ const $1 = $0
 name: letStatement
 phrase: let
 insertionScope: statement
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
 -
 let $1 = $0
 ---
@@ -72,9 +81,83 @@ let $1 = $0
 name: reactComponent
 phrase: component
 insertionScope: statement
+
 $1.insertionFormatter: PUBLIC_CAMEL_CASE
 -
-const $1 = ({ $2 }) => {
+const $1 = ($2) => {
     $0
 }
+---
+
+name: stringVarStatement
+phrase: string var
+insertionScope: statement
+-
+${$0}
+---
+
+name: reduce
+phrase: reduce
+insertionScope: statement
+-
+$1.reduce((acc, value) => {
+    $0
+}, $2)
+---
+
+name: filter
+phrase: filter
+insertionScope: statement
+-
+$1.filter(value => $0)
+---
+
+name: map
+phrase: map
+insertionScope: statement
+-
+$1.map(value => $0)
+---
+
+name: sort
+phrase: sort
+insertionScope: statement
+-
+$1.sort((a, b) => $0)
+---
+
+name: objectEntries
+phrase: object entries
+insertionScope: statement
+-
+Object.entries($1).forEach(([key, value]) => {
+    $0
+})
+---
+
+name: generator
+phrase: generator
+insertionScope: statement
+-
+function* $1() {
+    yield $0
+}
+---
+
+name: rjsfUiOptions
+phrase: UI options
+insertionScope: statement
+-
+'ui:options': {
+    $0
+}
+---
+
+name: rjsfUi
+phrase: UI
+insertionScope: statement
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+'ui:$1': $0
 ---

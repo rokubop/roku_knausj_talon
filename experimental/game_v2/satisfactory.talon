@@ -23,16 +23,20 @@ go right:                   user.game_v2_move_dir("d")
 [go] back:                  user.game_v2_move_dir("s")
 
 # movement discrete you can combo with continuous movement
-step [<number_small>]:      user.game_v2_move_dir_step("w", number_small or 1)
-step left [<number_small>]: user.game_v2_move_dir_step("a", number_small or 1)
-step right [<number_small>]: user.game_v2_move_dir_step("d", number_small or 1)
-step back [<number_small>]: user.game_v2_move_dir_step("s", number_small or 1)
+^step [<number_small>]$:    user.game_v2_move_dir_step("w", number_small or 1)
+^step left [<number_small>]$: user.game_v2_move_dir_step("a", number_small or 1)
+^step right [<number_small>]$: user.game_v2_move_dir_step("d", number_small or 1)
+^step back [<number_small>]$: user.game_v2_move_dir_step("s", number_small or 1)
 
 # turn natural
-^[turn] left$:              user.game_v2_turn_left(30)
-^[turn] lefter$:            user.game_v2_turn_left(60)
-^[turn] right$:             user.game_v2_turn_right(30)
-^[turn] righter$:           user.game_v2_turn_right(60)
+^leftish$:                  user.game_v2_turn_left(15)
+^lefty$:                    user.game_v2_turn_left(30)
+^left$:                     user.game_v2_turn_left(45)
+^lefter$:                   user.game_v2_turn_left(90)
+^rightish$:                 user.game_v2_turn_right(15)
+^righty$:                   user.game_v2_turn_right(30)
+^right$:                    user.game_v2_turn_right(45)
+^righter$:                  user.game_v2_turn_right(90)
 
 # turn slowly
 (small | soft) up:          user.game_v2_soft_up(10)

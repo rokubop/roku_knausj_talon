@@ -141,7 +141,7 @@ class Actions:
 
     def game_v2_move_dir_step(key: str, steps: int):
         """Step in direction"""
-        duration = f"{steps * 5}00ms"
+        duration = f"{steps * 2}00ms"
         _step_start(key, duration)
 
     def game_v2_stop_layer_by_layer():

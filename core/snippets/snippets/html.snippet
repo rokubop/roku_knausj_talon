@@ -2,14 +2,12 @@ language: html | javascript | typescript
 ---
 
 name: element
-phrase: element | tag
+phrase: elm | element | tag
 insertionScope: xmlElement
 
 $1.insertionFormatter: PRIVATE_CAMEL_CASE
 -
-<$1>
-    $0
-</$1>
+<$1>$0</$1>
 ---
 
 name: attribute
@@ -41,4 +39,16 @@ name: unorderedList
 phrase: list
 -
 <li>$0</li>
+---
+
+name: div
+phrase: div
+-
+<div>$0</div>
+---
+
+name: span
+phrase: span
+-
+<span>$0</span>
 ---

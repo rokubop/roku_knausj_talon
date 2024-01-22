@@ -50,6 +50,7 @@ class Actions:
         token, index = find_first_last_char_based_token(tokens, letter_1, letter_2)
 
         actions.edit.file_start()
+        # actions.sleep("100ms")
         # word_right won't behave correctly if it starts with a space
         if selected_text.startswith(" "):
             actions.key("delete")
