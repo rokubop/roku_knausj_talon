@@ -23,7 +23,7 @@ game_v2_turn_down
 game_v2_key_toggle_hold
 game_v2_key_toggle_once
 """
-from talon import Module, actions, ctrl, settings, cron
+from talon import Module, Context, actions, ctrl, settings, cron
 import platform
 import math
 os = platform.system().lower()
@@ -31,6 +31,9 @@ os = platform.system().lower()
 mod = Module()
 mod.setting("game_v2_calibrate_x_360", type=int, default=2000, desc="Arbitrary number amount that should be equivalent to 360 degrees")
 mod.setting("game_v2_calibrate_y_ground_to_center", type=int, default=500, desc="Arbitrary number amount that should be equivalent to 360 degrees")
+mod.tag("game_v2", 'Game tag v2')
+mod.tag("parrot_game_temp", 'Game tag v2 parrot')
+ctx = Context()
 mouse_job = None
 last_calibrate_value = 0
 last_calibrate_value_y = 0
@@ -136,6 +139,17 @@ class Actions:
         global move_dir
         if move_dir:
             actions.key(f"{move_dir}:up")
+        move_dir = key
+        actions.key(f"{move_dir}:down")
+
+    def game_v2_move_dir_toggle(key: str):
+        """Move in direction toggle"""
+        global move_dir
+        if move_dir:
+            actions.key(f"{move_dir}:up")
+            if move_dir == key:
+                move_dir = None
+                return
         move_dir = key
         actions.key(f"{move_dir}:down")
 
@@ -251,3 +265,16 @@ class Actions:
     def game_v2_key_toggle_once(key: str):
         """Toggle holding a key once"""
         actions.key(key)
+
+    def game_v2_enable_parrot():
+        """Enable parrot game mode"""
+        tags = set(ctx.tags)
+        if 'user.parrot_game_temp' in tags:
+            actions.user.game_v2_disable_parrot()
+        else:
+            actions.user.add_blue_cursor()
+            ctx.tags = ['user.parrot_game_temp']
+
+    def game_v2_disable_parrot():
+        """disabled parrot game mode"""
+        ctx.tags = []

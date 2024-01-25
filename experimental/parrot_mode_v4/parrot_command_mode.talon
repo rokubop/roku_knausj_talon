@@ -4,6 +4,8 @@ and not mode: user.parrot_v2
 and not mode: user.parrot_v4
 and not mode: user.parrot_v4_global
 and not mode: user.parrot_v4_app
+and not tag: user.parrot_game_temp
+and not tag: user.game_v2
 -
 # I need to figure out why `mode: command` doesn't work
 v four:                     user.parrot_v4_mode_enable()
