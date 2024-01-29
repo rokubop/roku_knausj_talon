@@ -1,6 +1,6 @@
-settings():
-    user.click_stops_tracking = true
-    user.scroll_stops_tracking = true
+# settings():
+#     user.click_stops_tracking = true
+#     user.scroll_stops_tracking = true
 
 zoom mouse:                 tracking.control_zoom_toggle()
 control mouse:              tracking.control_toggle()
@@ -35,4 +35,4 @@ track head:
     tracking.control_head_toggle(true)
     tracking.control_gaze_toggle(false)
 track debug:                tracking.control_debug_toggle()
-track calibrate:            tracking.calibrate()
+# track calibrate:            tracking.calibrate()
