@@ -1,11 +1,3 @@
-track yes:
-    tracking.control_toggle(true)
-    tracking.control_head_toggle(true)
-    tracking.control_gaze_toggle(true)
-track no:                   tracking.control_toggle(false)
-zoom mouse:                 tracking.control_zoom_toggle()
-track debug:                tracking.control_debug_toggle()
-calibrate:                  tracking.calibrate()
 touch | click it | ticket:
     mouse_click(0)
     user.grid_close()
@@ -87,12 +79,12 @@ wheel upper | upper start:  user.mouse_scroll_up_continuous()
 wheel upper here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up_continuous()
-^mouse gaze:                user.mouse_gaze_scroll()
-^mouse gaze here:
+^wheel gaze:                user.mouse_gaze_scroll()
+^wheel gaze here:
     user.mouse_move_center_active_window()
     user.mouse_gaze_scroll()
-^mouse stop:                user.mouse_scroll_stop()
-^mouse stop here:
+^wheel stop:                user.mouse_scroll_stop()
+^wheel stop here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_stop()
 wheel left:                 user.mouse_scroll_left()

@@ -58,6 +58,60 @@ def _mouse_move_snap(degrees_x: int, degrees_y: int):
     dy_angle = dy_90 / 90 * degrees_y
     _mouse_move(int(dx_angle), int(dy_angle))
 
+def _mouse_move_natural_hold_start(degrees: int = 0, speed: int = 100, acceleration: int = 5, min_speed: int = 100, max_speed: int = 200):
+    global mouse_job
+
+    _mouse_stop()
+
+    dx_360 = settings.get("user.game_v2_calibrate_x_360")
+    dy_90 = settings.get("user.game_v2_calibrate_y_ground_to_center")
+    dx_normalized = dx_360 / 360
+    dy_normalized = dy_90 / 90
+    update_interval_ms = 16
+    print("dx_normalized", dx_normalized)
+
+    def update_position():
+        _mouse_move(int(dx_normalized), 0)
+
+    mouse_job = cron.interval("16ms", update_position)
+
+
+def _mouse_move_natural_hold_release(duration_decay_ms: int = 300):
+    global mouse_job
+
+    _mouse_stop()
+
+    dx_360 = settings.get("user.game_v2_calibrate_x_360")
+    dy_90 = settings.get("user.game_v2_calibrate_y_ground_to_center")
+    dx_normalized = dx_360 / 360
+    dy_normalized = dy_90 / 90
+    update_interval_ms = 16
+    steps = max(1, duration_decay_ms // update_interval_ms)
+    step_count = 0
+    last_x, last_y = 0, 0
+    accumulated_dx, accumulated_dy = 0.0, 0.0
+    rad_90 = math.pi / 2
+
+    def update_position():
+        nonlocal step_count, last_x, last_y, accumulated_dx, accumulated_dy
+
+        step_count += 1
+        if step_count > steps:
+            _mouse_stop()
+            return
+
+        linear_progress_0_to_1 = step_count / steps
+        curved_progress_1_to_0 = math.sin(linear_progress_0_to_1 * rad_90 + rad_90)
+
+        current_dx = dx_normalized * curved_progress_1_to_0
+
+        _mouse_move(int(current_dx), 0)
+
+    mouse_job = cron.interval("16ms", update_position)
+
+# Examples:
+# _mouse_move_natural(30, 0, 2000) # 30 degrees right over 2 seconds
+# _mouse_move_natural(-30, 0, 500) # 30 degrees left over 500ms
 def _mouse_move_natural(degrees_x: int, degrees_y: int, duration_ms: int, calibrate_x_override=0, calibrate_y_override=0):
     global mouse_job
 
@@ -100,6 +154,9 @@ def _mouse_move_natural(degrees_x: int, degrees_y: int, duration_ms: int, calibr
         if abs(accumulated_dy) >= 1:
             dy_step += int(accumulated_dy)
             accumulated_dy -= int(accumulated_dy)
+        print("dx_step", dx_step)
+        print("dy_step", dy_step)
+
 
         _mouse_move(int(dx_step), int(dy_step))
         last_x, last_y = current_x, current_y
@@ -236,13 +293,29 @@ class Actions:
         """Turn right softly"""
         _mouse_move_natural(0, degrees, 1500)
 
-    def game_v2_turn_left(degrees: int):
+    def game_v2_turn_left(degrees: int, speed_ms: int = 600):
         """Turn left"""
-        _mouse_move_natural(-degrees, 0, 600)
+        _mouse_move_natural(-degrees, 0, speed_ms)
 
-    def game_v2_turn_right(degrees: int):
+    def game_v2_turn_right(degrees: int, speed_ms: int = 600):
         """Turn right"""
-        _mouse_move_natural(degrees, 0, 600)
+        _mouse_move_natural(degrees, 0, speed_ms)
+
+    def game_v2_turn_left_hold_start():
+        """Turn left hold"""
+        _mouse_move_natural_hold_start()
+
+    def game_v2_turn_left_hold_release():
+        """Turn left hold release"""
+        _mouse_move_natural_hold_release()
+
+    def game_v2_turn_right_hold_start():
+        """Turn right hold"""
+        _mouse_move_natural_hold_start()
+
+    def game_v2_turn_right_hold_release():
+        """Turn right hold release"""
+        _mouse_move_natural_hold_release()
 
     def game_v2_turn_up(degrees: int):
         """Turn up"""
