@@ -3,6 +3,6 @@
 <number_small> times:       core.repeat_command(number_small - 1)
 twice | second:             core.repeat_command(1)
 thrice | third:             core.repeat_command(2)
-fourth:                     core.repeat_command(3)
+quill | fourth:             core.repeat_command(3)
 fifth:                      core.repeat_command(4)
 sixth:                      core.repeat_command(5)
