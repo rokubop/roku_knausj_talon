@@ -90,6 +90,7 @@ def clear_double_tap_timer():
         double_tap_timer = None
 
 use_click = False
+use_active = False
 
 @ctx.action_class("user")
 class Actions:
@@ -97,7 +98,7 @@ class Actions:
         actions.user.hud_add_log('event', '<*Pedal: Dynamic 1 />')
 
     def pedal_left_down():
-        global use_click, double_tap_enabled
+        global use_click, double_tap_enabled, use_active
 
         if double_tap_enabled:
             use_click = not use_click
@@ -111,6 +112,17 @@ class Actions:
             return
 
         start_double_tap_timer()
+
+        # print(use_active)
+        # if use_active:
+        #     actions.tracking.control_gaze_toggle(True)
+        #     actions.tracking.control_head_toggle(True)
+        # else:
+        #     actions.tracking.control_gaze_toggle(False)
+        #     actions.tracking.control_head_toggle(False)
+
+        # use_active = not use_active
+
 
         actions.user.tracking_control_gaze_toggle(True)
         actions.user.tracking_control_head_toggle(False)
