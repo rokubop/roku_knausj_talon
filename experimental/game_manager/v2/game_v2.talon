@@ -7,8 +7,6 @@ settings():
 
 parrot(cluck):              user.game_v2_enable_parrot()
 
-game calibrate [x] [<number>]: user.game_v2_calibrate_360(number or 0)
-game calibrate y [<number>]: user.game_v2_calibrate_y_ground_to_center(number or 0)
 round:                      user.game_v2_snap_180()
 
 # menu stuff
