@@ -11,9 +11,9 @@ class MouseMover():
     def __init__(self):
         self.mouse_move_job = None
         if os.startswith("windows"):
-            self._mouse_move = self._windows_mouse_move
+            self._mouse_move = self._mouse_move_windows
         else:
-            self._mouse_move = self._generic_mouse_move
+            self._mouse_move = self._mouse_move_generic
 
     def _mouse_move_generic(self, dx: int, dy: int):
         (x, y) = ctrl.mouse_pos()
