@@ -62,7 +62,11 @@ app: {app_name}
 def get_talon_context(app_name: str) -> str:
     return f"""app: {app_name}
 -
+settings():
+    user.game_v2_calibrate_x_360 = 2139
+    user.game_v2_calibrate_y_ground_to_center = 542
 
+tag(): user.game_v2
 """
 
 

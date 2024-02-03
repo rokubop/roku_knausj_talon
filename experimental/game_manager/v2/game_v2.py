@@ -133,6 +133,7 @@ def _mouse_move_natural(degrees_x: int, degrees_y: int, duration_ms: int, calibr
         step_count += 1
         if step_count > steps:
             _mouse_stop()
+            # actions.user.game_v2_canvas_hide()
             return
 
         progress = step_count / steps
@@ -160,6 +161,9 @@ def _mouse_move_natural(degrees_x: int, degrees_y: int, duration_ms: int, calibr
 
         _mouse_move(int(dx_step), int(dy_step))
         last_x, last_y = current_x, current_y
+        if calibrate_x_override:
+            actions.user.game_v2_canvas_refresh(f"Calibrate x: {int(current_x)}")
+
 
     mouse_job = cron.interval("16ms", update_position)
 
@@ -239,6 +243,7 @@ class Actions:
         """Calibrate 360"""
         global last_calibrate_value
         last_calibrate_value = number
+        actions.user.game_v2_canvas_calibrate_x()
         _mouse_move_natural(360, 0, 2000, number)
 
     def game_v2_reset_center_y(value: int = 0):
