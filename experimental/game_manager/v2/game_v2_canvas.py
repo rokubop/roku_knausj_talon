@@ -47,19 +47,21 @@ class Actions:
     def game_v2_canvas_refresh(text: str):
         """Refresh canvas test1"""
         update(text)
-        # global canvas_clear_job
-        # if canvas_clear_job:
-        #     cron.cancel(canvas_clear_job)
-        # canvas_clear_job = cron.after("10s", actions.user.game_v2_canvas_hide)
+        global canvas_clear_job
+        if canvas_clear_job:
+            cron.cancel(canvas_clear_job)
+        canvas_clear_job = cron.after("5s", actions.user.game_v2_canvas_hide)
 
 
     def game_v2_canvas_hide():
         """canvas_test_stop"""
-        global canvas
+        global canvas, canvas_clear_job
         if canvas:
             canvas.unregister("draw", draw_x)
             canvas.hide()
             canvas.close()
+            canvas = None
+            canvas_clear_job = None
 
     # def draw_something(text: str, x: int, y: int):
     #     """draw something"""
