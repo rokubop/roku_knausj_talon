@@ -20,6 +20,7 @@ def draw_center_text(c: SkiaCanvas, text: str, x: int, y: int):
 
 counter = 0
 global_text = ""
+canvas_clear_job = None
 
 def draw_x(c: SkiaCanvas):
     global counter, global_text
@@ -46,6 +47,11 @@ class Actions:
     def game_v2_canvas_refresh(text: str):
         """Refresh canvas test1"""
         update(text)
+        # global canvas_clear_job
+        # if canvas_clear_job:
+        #     cron.cancel(canvas_clear_job)
+        # canvas_clear_job = cron.after("10s", actions.user.game_v2_canvas_hide)
+
 
     def game_v2_canvas_hide():
         """canvas_test_stop"""

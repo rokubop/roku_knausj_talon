@@ -148,16 +148,15 @@ def _mouse_move_natural(degrees_x: int, degrees_y: int, duration_ms: int, calibr
         accumulated_dx += dx_step - int(dx_step)
         accumulated_dy += dy_step - int(dy_step)
 
-        if abs(accumulated_dx) >= 1:
-            dx_step += int(accumulated_dx)
-            accumulated_dx -= int(accumulated_dx)
+        if abs(accumulated_dx) >= 0.5:
+            dx_step += int(math.copysign(1, accumulated_dx))
+        accumulated_dx -= int(math.copysign(1, accumulated_dx))
 
-        if abs(accumulated_dy) >= 1:
-            dy_step += int(accumulated_dy)
-            accumulated_dy -= int(accumulated_dy)
-        print("dx_step", dx_step)
-        print("dy_step", dy_step)
+        if abs(accumulated_dy) >= 0.5:
+            dy_step += int(math.copysign(1, accumulated_dy))
+            accumulated_dy -= int(math.copysign(1, accumulated_dy))
 
+        # print("dx_step", dx_step, "dy_step", dy_step, "accumulated_dx", accumulated_dx, "accumulated_dy")
 
         _mouse_move(int(dx_step), int(dy_step))
         last_x, last_y = current_x, current_y

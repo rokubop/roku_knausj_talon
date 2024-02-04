@@ -92,6 +92,8 @@ class ParrotInteractiveActions:
 
     def parrot_oh():
         print("oh from blender")
+        actions.user.parrot_mouse_drag(2)
+        return
         global move_mode, rotate_mode
         if move_mode or rotate_mode:
             actions.user.blender_parrot_debounced_move_key("y")
