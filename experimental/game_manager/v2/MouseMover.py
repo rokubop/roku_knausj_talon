@@ -50,6 +50,12 @@ class MouseMover():
             self._callbacks.add(callback_stop)
         self._mouse_move_natural(x, y, duration_ms, callback_tick=callback_tick)
 
+    def move_to_pos_relative_linear(self, x: int, y: int, duration_ms: int = 700, callback_stop: callable = None, callback_tick: callable = None):
+        """Move to a xy position relative to the cursor over a duration"""
+        if callback_stop:
+            self._callbacks.add(callback_stop)
+        self._mouse_move_linear(x, y, duration_ms, callback_tick=callback_tick)
+
     def _mouse_move_natural(self, x: int = None, y: int = None, duration_ms: int = 700, degrees_x: int = None, degrees_y: int = None, calibrate_x_override=0, calibrate_y_override=0, callback_tick=None):
         self.stop_transition()
 
@@ -99,6 +105,57 @@ class MouseMover():
         update_position()
         self.mouse_move_job = cron.interval("16ms", update_position)
 
+    def _mouse_move_linear(self, x: int, y: int, duration_ms: int = 700, callback_tick=None):
+        self.stop_transition()
+
+        update_interval_ms = 16
+        steps = max(1, duration_ms // update_interval_ms)
+        step_count = 0
+        start_x, start_y = 0, 0
+        expected_x, expected_y = start_x, start_y  # Initialize expected position to start position
+
+        dx_total = x - start_x
+        dy_total = y - start_y
+        actual_x, actual_y = start_x, start_y  # Track the actual position after each move
+
+        def update_position():
+            nonlocal step_count, actual_x, actual_y, expected_x, expected_y
+
+            step_count += 1
+            if step_count > steps:
+                self.stop_hard()
+                return
+
+            # Calculate the expected position at this step
+            progress = step_count / steps
+            expected_x = start_x + dx_total * progress
+            expected_y = start_y + dy_total * progress
+            print("expected_x", expected_x, "expected_y", expected_y, "actual_x", actual_x, "actual_y", actual_y, "dx_total", dx_total, "dy_total", dy_total, "progress", progress, "steps", steps)
+
+            # Determine the next step based on the difference between the expected and actual positions
+            dx_step = round(expected_x - actual_x)
+            dy_step = round(expected_y - actual_y)
+
+            # Move the mouse by the calculated step to correct any discrepancy
+            self._mouse_move(dx_step, dy_step)
+
+            # Update the actual position based on the movement made
+            actual_x += dx_step
+            actual_y += dy_step
+
+            if callback_tick:
+                callback_tick(actual_x, actual_y)
+
+            # If this is the last step, ensure the mouse is exactly at the target position
+            if step_count == steps:
+                self.stop_hard()  # Ensure the function stops after completing the movement
+
+        # Execute the first update immediately to start the movement
+        update_position()
+
+        # Schedule the rest of the updates
+        self.mouse_move_job = cron.interval("16ms", update_position)
+
     def stop_hard(self):
         if self.mouse_move_job:
             cron.cancel(self.mouse_move_job)
@@ -128,8 +185,12 @@ mouse_mover = MouseMover()
 @mod.action_class
 class Actions:
     def mouse_move_delta_ease_out(x: int, y: int, duration_ms: int = 700, callback_stop: callable=None):
-        """Move to a xy position relative to the cursor over a duration"""
+        """Move to a xy position relative bto the cursor over a duration"""
         mouse_mover.move_to_pos_relative(x, y, duration_ms, callback_stop)
+
+    def mouse_move_delta_linear(x: int, y: int, duration_ms: int = 700, callback_stop: callable=None):
+        """Move to a xy position relative to the cursor over a duration"""
+        mouse_mover.move_to_pos_relative_linear(x, y, duration_ms, callback_stop)
 
     def mouse_drag_delta_ease_out(button: int, x: int, y: int, duration_ms: int = 700):
         """Drag to a xy position relative to the cursor over a duration"""

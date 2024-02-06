@@ -9,11 +9,14 @@ scout [{user.formatters}] <user.prose>$:
 scout phrase [<user.prose>]$:
     key("ctrl-f")
     user.insert_formatted(prose or "", "NOOP")
+scout <user.prose>$:
+    key("ctrl-f")
+    user.insert_formatted(prose or "", "NOOP")
 scout all$:                 key("ctrl-shift-f")
 scout all {user.formatters} <user.prose>$:
     key("ctrl-shift-f")
     user.insert_formatted(prose or "", formatters or "NOOP")
-scout all phrase [<user.prose>]$:
+scout all <user.prose>$:
     key("ctrl-shift-f")
     user.insert_formatted(prose or "", "NOOP")
 
