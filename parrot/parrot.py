@@ -143,6 +143,9 @@ class Actions:
         """Do pop"""
         # check mouse.py for implementation
         # print("pop")
+        if actions.user.parrot_mode_is_disabled_permanent():
+            return
+
         actions.user.mouse_scroll_stop()
         if actions.user.mouse_is_dragging():
             print("pop as drag end")

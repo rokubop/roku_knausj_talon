@@ -421,6 +421,9 @@ class UserActions:
 
 @ctx.action("user.on_pop")
 def on_pop():
+    if actions.user.parrot_mode_is_disabled_permanent():
+        return
+
     actions.user.mouse_scroll_stop()
 
     if setting_mouse_enable_pop_stops_scroll.get() >= 1 and (gaze_job or scroll_job):

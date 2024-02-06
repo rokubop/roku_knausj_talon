@@ -5,6 +5,7 @@ ctx = Context()
 
 logging_enabled = False
 preserved_tag = None
+parrot_mode_disable_permanent = False
 
 def log(msg: str):
     if logging_enabled:
@@ -32,6 +33,9 @@ class ParrotMode:
 
     def parrot_mode_enable():
         """Enable parrot mode"""
+        if parrot_mode_disable_permanent:
+            return
+
         print("parrot mode enabled")
         actions.user.clear_screen_regions()
         default_tag = settings.get("user.parrot_default_tag")
@@ -90,6 +94,17 @@ class ParrotMode:
     def parrot_mode_reset_tags():
         """Enable parrot mode reset tags"""
         ctx.tags = [settings.get("user.parrot_default_tag")]
+
+    def parrot_mode_disable_permanent(state: bool):
+        """Toggle parrot mode permanently"""
+        global parrot_mode_disable_permanent
+        parrot_mode_disable_permanent = state if not None else not parrot_mode_disable_permanent
+
+    def parrot_mode_is_disabled_permanent():
+        """check if parrot mode disabled"""
+        global parrot_mode_disable_permanent
+        return parrot_mode_disable_permanent
+
 
 @mod.action_class
 class ParrotModeCommands:
