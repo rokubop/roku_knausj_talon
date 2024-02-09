@@ -192,6 +192,8 @@ def _step_stop():
         cron.cancel(step_job)
         step_job = None
 
+look_down_toggle = False
+
 @mod.action_class
 class Actions:
     def game_v2_move_dir(key: str):
@@ -279,6 +281,18 @@ class Actions:
     def game_v2_snap_right(degrees: int):
         """Snap right to angle in degrees"""
         _mouse_move_natural(degrees, 0, 100)
+        # _mouse_move_snap(degrees, 0)
+
+    def game_v2_look_down_toggle():
+        """Snap right to angle in degrees"""
+        global look_down_toggle
+        if look_down_toggle:
+            _mouse_move_natural(35, 0, 100)
+            look_down_toggle = False
+        else:
+            _mouse_move_natural(-35, 0, 100)
+            look_down_toggle = True
+
         # _mouse_move_snap(degrees, 0)
 
     def game_v2_soft_left(degrees: int):

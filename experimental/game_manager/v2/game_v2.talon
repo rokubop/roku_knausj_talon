@@ -5,7 +5,7 @@ settings():
     key_hold = 64.0
     key_wait = 16.0
 
-parrot(cluck):              user.game_v2_enable_parrot()
+# parrot(cluck):              user.game_v2_enable_parrot()
 
 round:                      user.game_v2_snap_180()
 

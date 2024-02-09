@@ -26,6 +26,10 @@ class ParrotMode:
         """Callback when parrot mode is enabled"""
         print("No callback for parrot_mode_on_enable")
 
+    def parrot_mode_on_disable():
+        """Callback when parrot mode is disabled"""
+        print("No callback for parrot_mode_on_disable")
+
     def parrot_mode_enable():
         """Enable parrot mode"""
         print("parrot mode enabled")
@@ -53,6 +57,7 @@ class ParrotMode:
         if preserve_tag:
             preserved_tag = preserve_tag
         ctx.tags = []
+        actions.user.parrot_mode_on_disable()
         actions.mode.disable("user.parrot")
         actions.mode.disable("dictation")
         actions.mode.enable("command")
