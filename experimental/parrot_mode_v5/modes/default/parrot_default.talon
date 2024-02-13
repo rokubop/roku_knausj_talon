@@ -1,12 +1,9 @@
 mode: user.parrot_v5
 and mode: user.parrot_v5_default
 -
-# settings():
-#     user.parrot_v5_scroll_speed_multiplier = 0.8
-#     user.parrot_v5_show_cursor_color = true
-#     user.parrot_v5_cursor_color = "d4287e"
+settings():
+    user.event_mouse_scroll_speed = 0.8
 
-^<phrase>:                  skip()
 parrot(cluck):              user.parrot_v5_mode_disable()
 parrot(nn):                 user.parrot_v5_click_primary()
 parrot(pop):
@@ -16,8 +13,8 @@ parrot(palate_click):       core.repeat_phrase()
 parrot(ah):                 user.parrot_v5_drag_primary()
 parrot(oh):                 user.parrot_v5_click_alternate()
 parrot(ee):                 user.parrot_v5_stopper()
-# parrot(eh):                 user.parrot_v5_positioner()
-# parrot(er):                 user.parrot_v5_mode_b_enable()
+parrot(eh):                 user.parrot_v5_positioner()
+parrot(er):                 user.parrot_v5_mode_b_enable()
 # parrot(t):
 #     user.parrot_v5_set_modifier('shift')
 #     user.parrot_v5_activate_side_b_briefly()
