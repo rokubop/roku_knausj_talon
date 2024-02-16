@@ -199,6 +199,7 @@ symbol_key_words.update({
     "score": "_",
     "quest": "?",
     "single": "'",
+    "curly single": "’",
     "double": '"',
     "leper": "(",
     "curve": "(",

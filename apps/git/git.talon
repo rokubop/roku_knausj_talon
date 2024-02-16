@@ -97,6 +97,7 @@ git remote set ural:        "git remote set-url "
 git remote set ural upstream: "git remote set-url upstream "
 git reset:                  "git reset\n"
 git reset head <number_small>: "git reset HEAD~{number_small}\n"
+git reset soft head <number_small>: "git reset --soft HEAD~{number_small}\n"
 yarn build:                 "yarn build\n"
 git status$:                "git status\n"
 git add patch$:             "git add --patch\n"
@@ -109,6 +110,7 @@ git diff tool clip$:
     key(enter)
 git diff$:                  "git diff\n"
 git diff (cached | cashed)$: "git diff --cached\n"
+git difftool (cached | cashed)$: "git diff --cached\n"
 
 # Convenience
 git clone (clip | paste):
