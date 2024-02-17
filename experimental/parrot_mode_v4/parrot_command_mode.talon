@@ -8,8 +8,9 @@ and not mode: user.parrot
 # and not tag: user.game_v2
 -
 # I need to figure out why `mode: command` doesn't work
-v four:                     user.parrot_v4_mode_enable()
-parrot(cluck):              user.parrot_mode_enable()
+# v four:                     user.parrot_v4_mode_enable()
+# parrot(cluck):              user.parrot_mode_enable()
+# parrot(cluck):              user.parrot_v4_mode_enable()
 parrot(tut):                user.on_tut()
 parrot(palate_click):       user.on_palate()
 parrot(pop):                user.on_pop()

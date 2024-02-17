@@ -78,6 +78,7 @@ class Scrolling:
 
         self.scroll_dir = new_scroll_dir
         self.scroll_start_ts = time.perf_counter()
+        self.event_bus.notify("scroll_start")
         self.scroll_tick()
         self.scroll_job = cron.interval("16ms", self.scroll_tick)
 
@@ -107,6 +108,7 @@ class Scrolling:
             self.scroll_start_ts = None
             self.scroll_stop_soft_ts = None
             self.scroll_job = None
+            self.event_bus.notify("scroll_stop")
 
 class Movement:
     def __init__(self, event_bus):

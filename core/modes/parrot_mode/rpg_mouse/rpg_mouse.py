@@ -123,6 +123,10 @@ class RpgMouseActions:
         if nav_job:
             cron.cancel(nav_job)
 
+    def rpg_mouse_reset_speed():
+        """Reset speed"""
+        update_speed(speed_default)
+
 @mod.action_class
 class ParrotRpgMouseActions:
     def parrot_rpg_mouse_mode_enable():

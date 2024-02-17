@@ -30,14 +30,18 @@ def freeze_tracking():
 
 @ctx.action_class("user")
 class Actions:
-    def parrot_v5_on_mode_enable():
+    def on_parrot_v5_mode_enable():
         actions.user.add_red_cursor()
 
-    def parrot_v5_on_mode_disable():
+    def on_parrot_v5_mode_disable():
         actions.user.clear_screen_regions()
         actions.user.parrot_v5_stopper()
 
     def on_event_mouse_button_down():
+        freeze_tracking()
+        actions.user.add_red_cursor()
+
+    def on_event_mouse_scroll_start():
         freeze_tracking()
         actions.user.add_red_cursor()
 
