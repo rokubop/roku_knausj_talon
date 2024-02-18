@@ -236,3 +236,5 @@ test:
     matches = user.mouse_helper_find_template_relative("2023-12-02_23.09.31.490836.png", 0, -12)
     user.marker_ui_show(matches)
 # test:                       user.fl_test()
+
+play (keys | notes):        user.parrot_v5_fl_studio_notes_enable()

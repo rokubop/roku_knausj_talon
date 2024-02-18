@@ -80,17 +80,12 @@ class ParrotModeActions:
         global is_dragging, use_active_mouse
 
         if is_dragging:
-            # if use_active_mouse:
             actions.user.parrot_mouse_and_scroll_stop_keep_modifiers()
-            # else:
-            #     actions.user.parrot_mouse_and_scroll_stop()
         else:
             for key in modifiers:
                 actions.key(f"{key}:down")
             for i in range(times):
                 ctrl.mouse_click(button=button, hold=16000)
-            # if not use_active_mouse:
-            #     actions.user.parrot_cancel_modifiers()
 
         print("setting for mouse freeze")
         print(settings.get("user.parrot_mode_mouse_freeze_on_click"))
@@ -235,19 +230,13 @@ class ParrotModeActions:
         global special
         special = False
         actions.user.parrot_side_b_disable()
-        # print(actions.user.parrot_mode_remove_tag("user.parrot_side_b"))
-        # print(actions.user.parrot_mode_has_tag("user.parrot_default_interactive"))
-        # print(actions.user.parrot_mode_has_tag("user.parrot_fps"))
-        # print(actions.user.parrot_mode_has_tag("user.parrot_pan"))
-        # actions.user.parrot_set_cursor_color()
+
 
     def parrot_activate_side_b_briefly():
         """Activate special briefly"""
         global special
         special = True
         actions.user.parrot_side_b_enable()
-        # actions.user.parrot_mode_append_tag("user.parrot_side_b")
-        # actions.user.add_color_cursor("FF00FF")
         cron.after("300ms", lambda : actions.user.parrot_deactivates_special())
 
 
@@ -282,13 +271,6 @@ class ParrotModeActions:
         """Toggle track"""
         actions.user.hud_publish_mouse_particle('float_up', '20b2aa')
         actions.tracking.control_toggle()
-
-    # hiss for speedup - gaze plus head
-    # shush for slowdown - head tracking only
-    # ee for stop or teleport
-    # pop for click
-    # tut for toggling movement
-    # eh for toggling on or off
 
     def parrot_control_mouse_on():
         """Control mouse on"""
@@ -374,7 +356,6 @@ class ParrotModeActions:
         actions.tracking.control_gaze_toggle(False)
         actions.tracking.control_head_toggle(True)
         is_mouse_moving = True
-        # current_tracking_mode = 'head'
 
     def parrot_use_default_tracking():
         """Use head tracking only"""
@@ -435,27 +416,6 @@ class ParrotModeActions:
 mod = Module()
 @mod.action_class
 class UserActions:
-    # def parrot_mode_enable():
-    #     """Enable parrot mode"""
-    #     print("parrot mode enabled")
-    #     actions.user.clear_screen_regions()
-    #     actions.user.add_red_cursor()
-    #     actions.mode.enable("user.parrot")
-    #     actions.mode.disable("command")
-    #     actions.mode.disable("dictation")
-
-    # def parrot_mode_disable():
-    #     """Disable parrot mode"""
-    #     print('parrot mode disabled')
-    #     actions.user.parrot_scroll_stop_soft()
-    #     actions.user.parrot_mouse_and_scroll_stop()
-    #     actions.user.clear_screen_regions()
-    #     actions.user.mouse_scroll_stop()
-    #     # is_eye_tracker_enabled = False
-    #     actions.mode.disable("user.parrot")
-    #     actions.mode.enable("command")
-    #     actions.mode.disable("dictation")
-
     def parrot_tracking_mode_enable():
         """Enable parrot tracking mode"""
         print("parrot tracking mode enabled")
@@ -468,19 +428,15 @@ class UserActions:
         print("parrot tracking mode disable")
         actions.user.clear_screen_regions()
         actions.user.add_red_cursor()
-        # actions.user.parrot_use_default_tracking()
         ctx.tags = []
 
 
     def virtual_region_one():
         """Virtual region one"""
-        # actions.user.parrot_set_flex_macro()
         print('region one')
 
     def virtual_region_two():
         """Virtual region two"""
-        # actions.user.parrot_track_toggle()
-        # actions.user.parrot_use_default_tracking()
         print('region two')
 
     def virtual_region_three():
@@ -489,16 +445,10 @@ class UserActions:
 
     def virtual_region_four():
         """Virtual region four"""
-        # actions.user.parrot_toggle_active_mouse()
         print('region four')
 
     def virtual_region_five():
         """Virtual region five"""
-        # if actions.user.parrot_mode_has_tag('user.parrot_side_b'):
-        #     actions.user.parrot_side_b_disable()
-        #     actions.user.parrot_mode_reset_tags()
-        # else:
-        #     actions.user.parrot_side_b_enable()
         print('region five')
 
     def virtual_region_six():
@@ -507,19 +457,16 @@ class UserActions:
 
     def virtual_region_seven():
         """Virtual region seven"""
-        # actions.user.parrot_set_modifier('ctrl')
         print('region seven')
         print('holding ctrl')
 
     def virtual_region_eight():
         """Virtual region eight"""
-        # actions.user.parrot_set_modifier('shift')
         print('region eight')
         print('holding shift')
 
     def virtual_region_nine():
         """Virtual region nine"""
-        # actions.user.parrot_set_modifier('alt')
         print('region nine')
         print('holding alt')
 

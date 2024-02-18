@@ -22,4 +22,4 @@ parrot(eh):
     user.parrot_v5_positioner()
 parrot(er):
     user.rpg_mouse_stop()
-    user.parrot_v5_mode_enable("user.parrot_v5_default")
+    user.parrot_v5_mode_switch("user.parrot_v5_default")

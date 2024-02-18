@@ -29,16 +29,13 @@ speeds = {"slow": 1, "medium": 5, "fast": 18}
 speed_default = "slow"
 speed = speeds[speed_default]
 
+def no_op():
+    pass
+
 def update_speed(new_speed):
     global speed
     speed = speeds.get(new_speed, speed_default)
-    if new_speed == "slow":
-        actions.user.add_yellow_cursor()
-    elif new_speed == "medium":
-        actions.user.add_color_cursor("ccff33")
-    elif new_speed == "fast":
-        actions.user.add_color_cursor("66ff33")
-
+    actions.user.on_rpg_mouse_speed_change(new_speed)
 
 def nav_tick():
     global direction
@@ -126,6 +123,11 @@ class RpgMouseActions:
     def rpg_mouse_reset_speed():
         """Reset speed"""
         update_speed(speed_default)
+
+    def on_rpg_mouse_speed_change(speed: str):
+        """Event called when speed changes"""
+        no_op()
+
 
 @mod.action_class
 class ParrotRpgMouseActions:
