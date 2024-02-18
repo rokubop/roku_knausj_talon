@@ -28,7 +28,16 @@ def freeze_tracking():
         actions.tracking.control_head_toggle(False)
         actions.tracking.control_gaze_toggle(False)
         is_tracking = False
-    actions.user.parrot_v5_ui_cursor_red()
+        actions.user.parrot_v5_ui_cursor_red()
+
+current_click_alternate = "right"
+
+click_alternate = {
+    "right": lambda: actions.user.event_mouse_click(1),
+    "right_drag": lambda: actions.user.event_mouse_drag(1),
+    "mid": lambda: actions.user.event_mouse_click(2),
+    "mid_drag": lambda: actions.user.event_mouse_drag(2),
+}
 
 @ctx.action_class("user")
 class Actions:
@@ -41,11 +50,14 @@ class Actions:
         actions.user.event_key_modifier_disable_all()
         actions.user.parrot_v5_ui_clear()
 
-    def on_parrot_v5_mode_disable_soft():
+    def on_parrot_v5_mode_disable_transition():
         actions.user.parrot_v5_stopper()
 
     def on_event_mouse_scroll_start():
         freeze_tracking()
+
+    def on_event_mouse_drag_start():
+        actions.user.parrot_v5_ui_cursor_blue()
 
     def on_event_mouse_drag_stop():
         actions.user.parrot_v5_ui_cursor_red()
@@ -74,12 +86,16 @@ class Actions:
         if ctrl.mouse_buttons_down():
             actions.user.event_mouse_drag_stop()
         else:
-            actions.user.event_mouse_click(1)
+            click_alternate[current_click_alternate]()
         freeze_tracking()
+
+    def parrot_v5_set_click_alternate(val: str):
+        """Set the alternate mouse button"""
+        global current_click_alternate
+        current_click_alternate = val
 
     def parrot_v5_drag_primary():
         """Drag primary mouse"""
-        actions.user.parrot_v5_ui_cursor_blue()
         actions.user.event_mouse_drag(0)
 
     def parrot_v5_scroller_down():

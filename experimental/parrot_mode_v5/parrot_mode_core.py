@@ -3,7 +3,6 @@ from talon import Module, Context, actions, settings
 mod = Module()
 mod.mode("parrot_v5", "base parrot mode v5 common to every parrot mode")
 mod.mode("parrot_v5_default", "default parrot mode v5")
-# mod.mode("parrot_v5_rpg_mouse", "rpg mouse parrot mode v5")
 ctx = Context()
 
 current_parrot_mode = None
@@ -29,7 +28,7 @@ class Actions:
         """Switch parrot mode"""
         global current_parrot_mode
         if current_parrot_mode:
-            actions.user.on_parrot_v5_mode_disable_soft()
+            actions.user.on_parrot_v5_mode_disable_transition()
             actions.mode.disable(current_parrot_mode)
         current_parrot_mode = parrot_mode
         actions.mode.enable(current_parrot_mode)
@@ -54,6 +53,6 @@ class Actions:
         """Callback when parrot mode is disabled"""
         no_op()
 
-    def on_parrot_v5_mode_disable_soft():
+    def on_parrot_v5_mode_disable_transition():
         """Callback when parrot mode is switched"""
         no_op()

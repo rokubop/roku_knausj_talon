@@ -23,10 +23,10 @@ class Events:
             actions.user.parrot_v5_ui_cursor_custom_color("66ff33")
 
     def on_parrot_v5_mode_disable():
-        actions.user.on_parrot_v5_mode_disable_soft()
+        actions.user.on_parrot_v5_mode_disable_transition()
         actions.user.parrot_v5_ui_clear()
 
-    def on_parrot_v5_mode_disable_soft():
+    def on_parrot_v5_mode_disable_transition():
         actions.user.rpg_mouse_stop()
         actions.user.rpg_mouse_reset_speed()
 
