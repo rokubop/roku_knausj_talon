@@ -62,8 +62,8 @@ class Actions:
         """Enable the cursor"""
         global canvas_cursor, canvas_cursor_job
         if not canvas_cursor:
-            screen: Screen = ui.main_screen()
-            canvas_cursor = Canvas.from_screen(screen)
+            current_screen = actions.user.ui_get_current_screen()
+            canvas_cursor = Canvas.from_screen(current_screen)
             canvas_cursor.register("draw", on_cursor_update)
             canvas_cursor_job = cron.interval("16ms", update_cursor)
 

@@ -3,7 +3,7 @@ from talon import Module, Context, actions, settings
 mod = Module()
 mod.mode("parrot_v5", "base parrot mode v5 common to every parrot mode")
 mod.mode("parrot_v5_default", "default parrot mode v5")
-mod.mode("parrot_v5_rpg_mouse", "rpg mouse parrot mode v5")
+# mod.mode("parrot_v5_rpg_mouse", "rpg mouse parrot mode v5")
 ctx = Context()
 
 current_parrot_mode = None
