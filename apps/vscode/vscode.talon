@@ -230,6 +230,7 @@ file clone [<user.filename>]:
 # most git commands in git.talon
 get rebase head <number_small>: "git rebase -i HEAD~{number_small}\n"
 git difftool head <number_small>: "git difftool HEAD~{number_small}\n"
+git difftool cached:        "git difftool --cached\n"
 git open file:              user.git_open_remote_file_url(false, false)
 git copy file:              user.git_copy_remote_file_url(false, false)
 git open branch:            user.git_open_remote_file_url(false, true)

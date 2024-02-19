@@ -110,7 +110,6 @@ git diff tool clip$:
     key(enter)
 git diff$:                  "git diff\n"
 git diff (cached | cashed)$: "git diff --cached\n"
-git difftool (cached | cashed)$: "git diff --cached\n"
 
 # Convenience
 git clone (clip | paste):
