@@ -118,7 +118,12 @@ class Actions:
         if not is_tracking and not is_dragging and not is_scrolling:
             actions.user.event_key_modifier_disable_all()
 
+        # I don't want to disable in transition
+        # but I do want to disable from the literal parrot command
+        # if is_dragging:
+        #     actions.user.event_mouse_drag_stop()
         actions.user.event_mouse_scroll_stop_hard()
+        actions.user.event_mouse_move_stop_hard()
         freeze_tracking()
 
     def parrot_v5_positioner():

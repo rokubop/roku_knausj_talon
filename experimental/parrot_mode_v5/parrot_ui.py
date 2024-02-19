@@ -57,7 +57,14 @@ def update_cursor():
         canvas_cursor.freeze()
 
 @mod.action_class
-class Actions:
+class GeneralUI:
+    def parrot_v5_ui_clear():
+        """Clear all ui"""
+        actions.user.parrot_v5_ui_cursor_disable()
+        actions.user.parrot_v5_ui_bar_disable()
+
+@mod.action_class
+class CursorUI:
     def parrot_v5_ui_cursor_enable():
         """Enable the cursor"""
         global canvas_cursor, canvas_cursor_job
@@ -75,11 +82,6 @@ class Actions:
             cron.cancel(canvas_cursor_job)
             canvas_cursor = None
             canvas_cursor_job = None
-
-    def parrot_v5_ui_clear():
-        """Clear all ui"""
-        actions.user.parrot_v5_ui_cursor_disable()
-        actions.user.parrot_v5_ui_bar_disable()
 
     def parrot_v5_ui_cursor_red():
         """Set the cursor to red"""
@@ -121,6 +123,8 @@ class Actions:
         global modifiers
         modifiers.discard(mod)
 
+@mod.action_class
+class BarUI:
     def parrot_v5_ui_bar_enable():
         """Enable the bar"""
         global canvas_bar
