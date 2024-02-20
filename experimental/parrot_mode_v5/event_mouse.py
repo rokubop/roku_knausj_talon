@@ -396,9 +396,6 @@ class EventMouse:
         self.scrolling = Scrolling(self.event_bus)
         self.movement = Movement(self.event_bus)
 
-        # self.event_bus.register("button_down", self.on_button_down)
-        # self.event_bus.register("scroll_start", self.on_scroll_start)
-
         self.click = self.buttons.click
         self.drag = self.buttons.drag
         self.drag_stop = self.buttons.drag_stop
@@ -413,13 +410,6 @@ class EventMouse:
         self.is_scrolling = self.scrolling.is_scrolling
         self.is_moving = self.movement.is_moving
 
-    # def on_button_down(self):
-    #     self.scrolling.scroll_stop_hard()
-    #     actions.user.tracking_control_freeze()
-
-    # def on_scroll_start(self):
-    #     actions.user.tracking_control_freeze()
-
 event_mouse = EventMouse(Buttons, Scrolling, Movement)
 
 def no_op():
@@ -427,7 +417,7 @@ def no_op():
 
 @mod.action_class
 class Actions:
-    def event_mouse_click(button: str = 0):
+    def event_mouse_click(button: int = 0):
         """Event mouse click""";
         event_mouse.click(button)
 
@@ -439,7 +429,7 @@ class Actions:
         """Event mouse drag stop"""
         event_mouse.drag_stop()
 
-    def event_mouse_scroll_start(direction: str = "down"):
+    def event_mouse_scroll_start(direction: Literal["down", "up"] = "down"):
         """Event mouse scroll start"""
         event_mouse.scroll_start(direction)
 
