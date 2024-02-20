@@ -67,6 +67,8 @@ class Scrolling:
         self.scroll_dir = 1
         self.scroll_start_ts = None
         self.scroll_stop_soft_ts = None
+        self.scroll_by_lines = True
+        self.scroll_by_lines_multiplier = 3
         self.debounce_start_duration = 0.0
         self.debounce_stop_duration = 0.170
         self.event_bus = event_bus
@@ -103,8 +105,9 @@ class Scrolling:
             settings.get("user.event_mouse_scroll_speed")
             * acceleration_speed
             * self.scroll_dir
+            * (1 if self.scroll_by_lines else 5)
         )
-        actions.mouse_scroll(y, by_lines=True)
+        actions.mouse_scroll(y, by_lines=self.scroll_by_lines)
 
     def scroll_stop_soft(self):
         self.scroll_stop_soft_ts = time.perf_counter()
@@ -119,6 +122,9 @@ class Scrolling:
 
     def is_scrolling(self):
         return self.scroll_job is not None
+
+    def scroll_by_lines_toggle(self):
+        self.scroll_by_lines = not self.scroll_by_lines
 
 xy_dir = {
     "up": (0, -1),
@@ -399,6 +405,7 @@ class EventMouse:
         self.scroll_start = self.scrolling.scroll_start
         self.scroll_stop_soft = self.scrolling.scroll_stop_soft
         self.scroll_stop_hard = self.scrolling.scroll_stop_hard
+        self.scroll_by_lines_toggle = self.scrolling.scroll_by_lines_toggle
         self.move_start = self.movement.move_start
         self.move_start_new = self.movement.move_start_new
         self.move_stop_soft = self.movement.move_stop_soft
@@ -463,6 +470,10 @@ class Actions:
     def event_mouse_is_moving():
         """Event mouse check is moving"""
         return event_mouse.is_moving()
+
+    def event_mouse_scroll_by_lines_toggle():
+        """Toggle scroll by lines"""
+        event_mouse.scroll_by_lines_toggle()
 
     def on_event_mouse_click():
         """On mouse click"""
