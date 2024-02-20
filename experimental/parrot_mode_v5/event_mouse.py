@@ -142,6 +142,10 @@ class Movement:
         self.move_start_ts = None
         self.move_stop_soft_ts = None
         self.debounce_stop_duration = 0.170
+        self.decay_start_ts = None
+        self.peak_dx = None
+        self.peak_dy = None
+        self.power = 15
 
         if os.startswith("windows"):
             self._mouse_move = self._mouse_move_windows
@@ -163,7 +167,7 @@ class Movement:
         self.move_stop_soft_ts = None
 
         if self.move_job:
-            if new_x_dir != self.x_dir and new_y_dir != self.y_dir:
+            if new_x_dir != self.x_dir or new_y_dir != self.y_dir:
                 self.x_dir = new_x_dir
                 self.y_dir = new_y_dir
                 self.move_start_ts = time.perf_counter()
@@ -176,18 +180,40 @@ class Movement:
         self._move_tick()
         self.move_job = cron.interval("16ms", self._move_tick)
 
+    def _decay_tick(self, ts: float):
+        if not self.decay_start_ts:
+            self.decay_start_ts = ts
+            speed = (1 + min((ts - self.move_start_ts) / 0.5, 1.3))
+            self.peak_dx = self.power * speed
+            self.peak_dy = self.power * speed
+
+        decay_elapsed = ts - self.decay_start_ts
+        decay_factor = decay_elapsed / (decay_elapsed + 1) ** 0.5
+
+        dx = self.peak_dx * (1 - decay_factor) ** 3
+        dy = self.peak_dy * (1 - decay_factor) ** 3
+
+        if dx < 1 and dy < 1:
+            self.move_stop_hard()
+            return
+
+        self._mouse_move(round(dx * self.x_dir), round(dy * self.y_dir))
+
+    def _accel_tick(self, ts: float):
+        self.decay_start_ts = None
+        acceleration_speed = 1 + min((ts - self.move_start_ts) / 0.5, 1.3)
+
+        dx = self.power * acceleration_speed * self.x_dir
+        dy = self.power * acceleration_speed * self.y_dir
+        self._mouse_move(round(dx), round(dy))
+
     def _move_tick(self):
         ts = time.perf_counter()
 
         if self.move_stop_soft_ts and ts - self.move_stop_soft_ts > self.debounce_stop_duration:
-            self.move_stop_hard()
-            return
-
-        acceleration_speed = 1 + min((ts - self.move_start_ts) / 0.5, 4)
-
-        dx = 5 * acceleration_speed * self.x_dir
-        dy = 5 * acceleration_speed * self.y_dir
-        self._mouse_move(round(dx), round(dy))
+            self._decay_tick(ts)
+        else:
+            self._accel_tick(ts)
 
     def move_stop_soft(self):
         self.move_stop_soft_ts = time.perf_counter()
@@ -198,6 +224,11 @@ class Movement:
             self.move_start_ts = None
             self.move_stop_soft_ts = None
             self.move_job = None
+            self.peak_dx = None
+            self.peak_dy = None
+            self.decay_start_ts = None
+            self.x_dir = None
+            self.y_dir = None
 
     # new code stop
 
@@ -350,7 +381,7 @@ class Movement:
         pass
 
     def is_moving(self):
-        return self.mouse_move_job is not None
+        return self.mouse_move_job is not None or self.move_job is not None
 
 class EventMouse:
     def __init__(self, Buttons, Scrolling, Movement):
@@ -373,6 +404,7 @@ class EventMouse:
         self.move_stop_soft = self.movement.move_stop_soft
         self.move_stop_hard = self.movement.move_stop_hard
         self.is_scrolling = self.scrolling.is_scrolling
+        self.is_moving = self.movement.is_moving
 
     # def on_button_down(self):
     #     self.scrolling.scroll_stop_hard()
@@ -426,7 +458,11 @@ class Actions:
 
     def event_mouse_is_scrolling():
         """Event mouse scroll stop hard"""
-        event_mouse.is_scrolling()
+        return event_mouse.is_scrolling()
+
+    def event_mouse_is_moving():
+        """Event mouse check is moving"""
+        return event_mouse.is_moving()
 
     def on_event_mouse_click():
         """On mouse click"""

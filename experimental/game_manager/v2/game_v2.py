@@ -223,7 +223,9 @@ class Actions:
     def game_v2_stop_layer_by_layer():
         """Perform stop based on a priority"""
         global move_dir
-        if mouse_job:
+        if actions.user.event_mouse_is_moving():
+            actions.user.event_mouse_move_stop_hard()
+        elif mouse_job:
             _mouse_stop()
         elif move_dir:
             _move_dir_stop()
@@ -233,7 +235,9 @@ class Actions:
     def game_v2_stop_all():
         """Stop all"""
         global move_dir
-        if mouse_job:
+        if actions.user.event_mouse_is_moving():
+            actions.user.event_mouse_move_stop_hard()
+        elif mouse_job:
             _mouse_stop()
         if step_job:
             _step_stop()
