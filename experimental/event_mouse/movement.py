@@ -1,130 +1,13 @@
-from talon import Module, actions, ctrl, settings, cron
-from collections import defaultdict
+from talon import ctrl, cron, settings
 from typing import Literal
-import platform
-import time
+from .typings import Profile, MovementBase
 import math
+import time
+import platform
 os = platform.system().lower()
 
 if os.startswith("windows"):
     import win32api, win32con
-
-mod = Module()
-mod.setting("event_mouse_scroll_speed", float, 1, "Setting for event mouse scroll speed")
-
-class EventBus:
-    def __init__(self):
-        self.events = defaultdict(list)
-
-    def register(self, event_name, callback):
-        self.events[event_name].append(callback)
-
-    def unregister(self, event_name, callback):
-        if event_name in self.events:
-            self.events[event_name] = list(filter(lambda c: c != callback, self.events[event_name]))
-
-    def notify(self, event_name):
-        for callback in self.events[event_name]:
-            callback()
-
-        method = getattr(actions.user, f"on_event_mouse_{event_name}", None)
-        if method:
-            method()
-
-
-class Buttons:
-    def __init__(self, event_bus):
-        self.held_buttons = []
-        self.event_bus = event_bus
-
-    def click(self, button: int = 0):
-        if self.held_buttons:
-            self.drag_stop()
-        else:
-            self.event_bus.notify("button_down")
-            ctrl.mouse_click(button=button, hold=16000)
-            self.event_bus.notify("button_up")
-            self.event_bus.notify("click")
-
-    def drag(self, button: int = 0):
-        if button not in self.held_buttons:
-            self.held_buttons.append(button)
-            self.event_bus.notify("button_down")
-            self.event_bus.notify("drag_start")
-            ctrl.mouse_click(button=button, down=True)
-
-    def drag_stop(self):
-        if self.held_buttons:
-            for button in self.held_buttons:
-                ctrl.mouse_click(button=button, up=True)
-            self.held_buttons.clear()
-            self.event_bus.notify("button_up")
-            self.event_bus.notify("drag_stop")
-
-class Scrolling:
-    def __init__(self, event_bus):
-        self.scroll_job = None
-        self.scroll_dir = 1
-        self.scroll_start_ts = None
-        self.scroll_stop_soft_ts = None
-        self.scroll_by_lines = True
-        self.scroll_by_lines_multiplier = 3
-        self.debounce_start_duration = 0.0
-        self.debounce_stop_duration = 0.170
-        self.event_bus = event_bus
-
-    def scroll_start(self, direction: str):
-        """Start scrolling until stop is called"""
-        new_scroll_dir = -1 if direction == "up" else 1
-        self.scroll_stop_soft_ts = None
-
-        if self.scroll_job:
-            if new_scroll_dir != self.scroll_dir:
-                self.scroll_dir = new_scroll_dir
-                self.scroll_start_ts = time.perf_counter()
-            # scroll_job already exists
-            return
-
-        self.scroll_dir = new_scroll_dir
-        self.scroll_start_ts = time.perf_counter()
-        self.event_bus.notify("scroll_start")
-        self.scroll_tick()
-        self.scroll_job = cron.interval("16ms", self.scroll_tick)
-
-    def scroll_tick(self):
-        ts = time.perf_counter()
-        if ts - self.scroll_start_ts < self.debounce_start_duration:
-            return
-
-        if self.scroll_stop_soft_ts and ts - self.scroll_stop_soft_ts > self.debounce_stop_duration:
-            self.scroll_stop_hard()
-            return
-
-        acceleration_speed = 1 + min((ts - self.scroll_start_ts) / 0.5, 4)
-        y = (
-            settings.get("user.event_mouse_scroll_speed")
-            * acceleration_speed
-            * self.scroll_dir
-            * (1 if self.scroll_by_lines else 5)
-        )
-        actions.mouse_scroll(y, by_lines=self.scroll_by_lines)
-
-    def scroll_stop_soft(self):
-        self.scroll_stop_soft_ts = time.perf_counter()
-
-    def scroll_stop_hard(self):
-        if self.scroll_job:
-            cron.cancel(self.scroll_job)
-            self.scroll_start_ts = None
-            self.scroll_stop_soft_ts = None
-            self.scroll_job = None
-            self.event_bus.notify("scroll_stop")
-
-    def is_scrolling(self):
-        return self.scroll_job is not None
-
-    def scroll_by_lines_toggle(self):
-        self.scroll_by_lines = not self.scroll_by_lines
 
 xy_dir = {
     "up": (0, -1),
@@ -133,8 +16,8 @@ xy_dir = {
     "right": (1, 0),
 }
 
-class Movement:
-    def __init__(self, event_bus):
+class MovementDefault(MovementBase):
+    def __init__(self, event_bus, profile):
         self.event_bus = event_bus
         self.mouse_move_job = None
         self.current_dx = 0
@@ -142,6 +25,8 @@ class Movement:
         self._callbacks = set()
 
         # new
+        self.profile: Profile = profile
+
         self.x_dir = None
         self.y_dir = None
         self.move_job = None
@@ -151,12 +36,14 @@ class Movement:
         self.decay_start_ts = None
         self.peak_dx = None
         self.peak_dy = None
-        self.power = 15
 
         if os.startswith("windows"):
             self._mouse_move = self._mouse_move_windows
         else:
             self._mouse_move = self._mouse_move_generic
+
+    def update_profile(self, new_profile):
+        self.profile = new_profile
 
     def _mouse_move_generic(self, dx: int, dy: int):
         (x, y) = ctrl.mouse_pos()
@@ -167,7 +54,7 @@ class Movement:
 
     # new code start
 
-    def move_start_new(self, direction: str):
+    def move_start_new(self, direction: Literal["up", "down", "left", "right"]):
         """Start moving until stop is called"""
         (new_x_dir, new_y_dir) = xy_dir[direction]
         self.move_stop_soft_ts = None
@@ -184,20 +71,26 @@ class Movement:
         self.y_dir = new_y_dir
         self.move_start_ts = time.perf_counter()
         self._move_tick()
-        self.move_job = cron.interval("16ms", self._move_tick)
+        ms = f"{settings.get('user.event_mouse_refresh_interval_ms')}ms"
+        self.move_job = cron.interval(ms, self._move_tick)
 
     def _decay_tick(self, ts: float):
         if not self.decay_start_ts:
             self.decay_start_ts = ts
             speed = (1 + min((ts - self.move_start_ts) / 0.5, 1.3))
-            self.peak_dx = self.power * speed
-            self.peak_dy = self.power * speed
+            self.peak_dx = self.profile["base_speed"] * speed
+            self.peak_dy = self.profile["base_speed"] * speed
 
         decay_elapsed = ts - self.decay_start_ts
-        decay_factor = decay_elapsed / (decay_elapsed + 1) ** 0.5
 
-        dx = self.peak_dx * (1 - decay_factor) ** 3
-        dy = self.peak_dy * (1 - decay_factor) ** 3
+        dx_decel = self.profile["deceleration_curve"](decay_elapsed)
+        dx = self.peak_dx * dx_decel
+        dy = self.peak_dy * dx_decel
+
+        # decay_factor = decay_elapsed / (decay_elapsed + 1) ** 0.5
+
+        # dx = self.peak_dx * (1 - decay_factor) ** 3
+        # dy = self.peak_dy * (1 - decay_factor) ** 3
 
         if dx < 1 and dy < 1:
             self.move_stop_hard()
@@ -209,8 +102,8 @@ class Movement:
         self.decay_start_ts = None
         acceleration_speed = 1 + min((ts - self.move_start_ts) / 0.5, 1.3)
 
-        dx = self.power * acceleration_speed * self.x_dir
-        dy = self.power * acceleration_speed * self.y_dir
+        dx = self.profile["base_speed"] * acceleration_speed * self.x_dir
+        dy = self.profile["base_speed"] * acceleration_speed * self.y_dir
         self._mouse_move(round(dx), round(dy))
 
     def _move_tick(self):
@@ -251,7 +144,8 @@ class Movement:
             self._mouse_move(self.current_dx, self.current_dy)
 
         update_position()
-        self.mouse_move_job = cron.interval("16ms", update_position)
+        ms = f"{settings.get('user.event_mouse_refresh_interval_ms')}ms"
+        self.mouse_move_job = cron.interval(ms, update_position)
 
     def move_to_pos_relative(self, x: int, y: int, duration_ms: int = 700, callback_stop: callable = None, callback_tick: callable = None):
         """Move to a xy position relative to the cursor over a duration"""
@@ -269,7 +163,7 @@ class Movement:
     def _mouse_move_natural(self, x: int = None, y: int = None, duration_ms: int = 700, degrees_x: int = None, degrees_y: int = None, calibrate_x_override=0, calibrate_y_override=0, callback_tick=None):
         self.stop_transition()
 
-        update_interval_ms = 16
+        update_interval_ms = settings.get("user.event_mouse_refresh_interval_ms")
         steps = max(1, duration_ms // update_interval_ms)
         step_count = 0
         last_x, last_y = 0, 0
@@ -313,7 +207,8 @@ class Movement:
                 callback_tick(last_x, last_y)
 
         update_position()
-        self.mouse_move_job = cron.interval("16ms", update_position)
+        ms = f"{settings.get('user.event_mouse_refresh_interval_ms')}ms"
+        self.mouse_move_job = cron.interval(ms, update_position)
 
     def _mouse_move_linear(self, x: int, y: int, duration_ms: int = 700, callback_tick=None):
         self.stop_transition()
@@ -364,7 +259,8 @@ class Movement:
         update_position()
 
         # Schedule the rest of the updates
-        self.mouse_move_job = cron.interval("16ms", update_position)
+        ms = f"{settings.get('user.event_mouse_refresh_interval_ms')}ms"
+        self.mouse_move_job = cron.interval(ms, update_position)
 
     def stop_hard(self):
         if self.mouse_move_job:
@@ -388,107 +284,3 @@ class Movement:
 
     def is_moving(self):
         return self.mouse_move_job is not None or self.move_job is not None
-
-class EventMouse:
-    def __init__(self, Buttons, Scrolling, Movement):
-        self.event_bus = EventBus()
-        self.buttons = Buttons(self.event_bus)
-        self.scrolling = Scrolling(self.event_bus)
-        self.movement = Movement(self.event_bus)
-
-        self.click = self.buttons.click
-        self.drag = self.buttons.drag
-        self.drag_stop = self.buttons.drag_stop
-        self.scroll_start = self.scrolling.scroll_start
-        self.scroll_stop_soft = self.scrolling.scroll_stop_soft
-        self.scroll_stop_hard = self.scrolling.scroll_stop_hard
-        self.scroll_by_lines_toggle = self.scrolling.scroll_by_lines_toggle
-        self.move_start = self.movement.move_start
-        self.move_start_new = self.movement.move_start_new
-        self.move_stop_soft = self.movement.move_stop_soft
-        self.move_stop_hard = self.movement.move_stop_hard
-        self.is_scrolling = self.scrolling.is_scrolling
-        self.is_moving = self.movement.is_moving
-
-event_mouse = EventMouse(Buttons, Scrolling, Movement)
-
-def no_op():
-    pass
-
-@mod.action_class
-class Actions:
-    def event_mouse_click(button: int = 0):
-        """Event mouse click""";
-        event_mouse.click(button)
-
-    def event_mouse_drag(button: int = 0):
-        """Event mouse drag"""
-        event_mouse.drag(button)
-
-    def event_mouse_drag_stop():
-        """Event mouse drag stop"""
-        event_mouse.drag_stop()
-
-    def event_mouse_scroll_start(direction: Literal["down", "up"] = "down"):
-        """Event mouse scroll start"""
-        event_mouse.scroll_start(direction)
-
-    def event_mouse_scroll_stop_soft():
-        """Event mouse scroll stop soft"""
-        event_mouse.scroll_stop_soft()
-
-    def event_mouse_scroll_stop_hard():
-        """Event mouse scroll stop hard"""
-        event_mouse.scroll_stop_hard()
-
-    def event_mouse_move_start(direction: Literal["up", "down", "left", "right"]):
-        """Start moving mouse in a direction"""
-        event_mouse.move_start_new(direction)
-
-    def event_mouse_move_stop_soft():
-        """Debounced stop moving the mouse"""
-        event_mouse.move_stop_soft()
-
-    def event_mouse_move_stop_hard():
-        """Immediately stop moving the mouse"""
-        event_mouse.move_stop_hard()
-
-    def event_mouse_is_scrolling():
-        """Event mouse scroll stop hard"""
-        return event_mouse.is_scrolling()
-
-    def event_mouse_is_moving():
-        """Event mouse check is moving"""
-        return event_mouse.is_moving()
-
-    def event_mouse_scroll_by_lines_toggle():
-        """Toggle scroll by lines"""
-        event_mouse.scroll_by_lines_toggle()
-
-    def on_event_mouse_click():
-        """On mouse click"""
-        no_op()
-
-    def on_event_mouse_button_down():
-        """On mouse down"""
-        no_op()
-
-    def on_event_mouse_button_up():
-        """On mouse up"""
-        no_op()
-
-    def on_event_mouse_drag_start():
-        """On drag start"""
-        no_op()
-
-    def on_event_mouse_drag_stop():
-        """On drag stop"""
-        no_op()
-
-    def on_event_mouse_scroll_start():
-        """On scroll start"""
-        no_op()
-
-    def on_event_mouse_scroll_stop():
-        """On scroll stop"""
-        no_op()
