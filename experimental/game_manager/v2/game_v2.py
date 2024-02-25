@@ -291,10 +291,10 @@ class Actions:
         """Snap right to angle in degrees"""
         global look_down_toggle
         if look_down_toggle:
-            _mouse_move_natural(35, 0, 100)
+            _mouse_move_natural(0, 35, 100)
             look_down_toggle = False
         else:
-            _mouse_move_natural(-35, 0, 100)
+            _mouse_move_natural(0, -35, 100)
             look_down_toggle = True
 
         # _mouse_move_snap(degrees, 0)

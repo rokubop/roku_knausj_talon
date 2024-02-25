@@ -2,6 +2,7 @@ from abc import abstractmethod, ABC
 from typing import Literal, TypedDict
 
 class Profile(TypedDict):
+    name: str
     acceleration_curve: callable
     deceleration_curve: callable
     base_speed: int

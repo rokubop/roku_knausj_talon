@@ -21,21 +21,27 @@ class Actions:
         """Enter game mode"""
         actions.mode.disable("command")
         actions.mode.enable("user.game_talos_2_parrot")
+        actions.user.game_v2_canvas_box_color("222666")
         actions.user.game_v2_canvas_status_enable()
         actions.user.game_v2_canvas_status_update("mode", "game")
 
     def game_v2_talos_2_game_parrot_mode_disable():
         """Enter game mode"""
+        actions.user.event_mouse_move_stop_hard()
+        actions.user.game_v2_stop_all()
         actions.mode.disable("user.game_talos_2_parrot")
         actions.user.game_v2_canvas_status_disable()
         actions.mode.enable("command")
 
 @ctx.action_class("user")
 class Actions:
-    def parrot_mode_on_enable():
+    def on_parrot_v5_mode_enable():
         print("hello world disk")
+        actions.user.game_v2_canvas_box_color("ff0000")
         actions.user.game_v2_canvas_status_enable()
         actions.user.game_v2_canvas_status_update("mode", "parrot global")
+        actions.next()
 
-    def parrot_mode_on_disable():
+    def on_parrot_v5_mode_disable():
         actions.user.game_v2_canvas_status_disable()
+        actions.next()

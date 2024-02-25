@@ -77,7 +77,9 @@ class MovementDefault(MovementBase):
     def _decay_tick(self, ts: float):
         if not self.decay_start_ts:
             self.decay_start_ts = ts
-            speed = (1 + min((ts - self.move_start_ts) / 0.5, 1.3))
+            time_elapsed = ts - self.move_start_ts
+            max_speed = self.profile["max_speed"]
+            speed = self.profile["acceleration_curve"](time_elapsed, max_speed)
             self.peak_dx = self.profile["base_speed"] * speed
             self.peak_dy = self.profile["base_speed"] * speed
 
@@ -87,11 +89,6 @@ class MovementDefault(MovementBase):
         dx = self.peak_dx * dx_decel
         dy = self.peak_dy * dx_decel
 
-        # decay_factor = decay_elapsed / (decay_elapsed + 1) ** 0.5
-
-        # dx = self.peak_dx * (1 - decay_factor) ** 3
-        # dy = self.peak_dy * (1 - decay_factor) ** 3
-
         if dx < 1 and dy < 1:
             self.move_stop_hard()
             return
@@ -100,7 +97,9 @@ class MovementDefault(MovementBase):
 
     def _accel_tick(self, ts: float):
         self.decay_start_ts = None
-        acceleration_speed = 1 + min((ts - self.move_start_ts) / 0.5, 1.3)
+        time_elapsed = ts - self.move_start_ts
+        max_speed = self.profile["max_speed"]
+        acceleration_speed = self.profile["acceleration_curve"](time_elapsed, max_speed)
 
         dx = self.profile["base_speed"] * acceleration_speed * self.x_dir
         dy = self.profile["base_speed"] * acceleration_speed * self.y_dir

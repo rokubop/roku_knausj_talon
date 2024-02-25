@@ -25,8 +25,8 @@
     "ee": {
         "sounds": ["yi"],
         "threshold": {
-            ">power": 4,
-            ">probability": 0.95
+            ">power": 10,
+            ">probability": 0.99
         },
         "graceperiod": 0.1,
         "grace_threshold": {
@@ -71,8 +71,8 @@
     "guh": {
         "sounds": ["guh"],
         "threshold": {
-            ">power": 5,
-            ">probability": 0.7
+            ">power": 20,
+            ">probability": 0.97
         },
         "throttle": {
             "guh": 0.3,

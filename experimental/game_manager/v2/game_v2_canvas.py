@@ -23,6 +23,7 @@ counter = 0
 global_text = ""
 canvas_clear_job = None
 statuses = {}
+box_color = "222666"
 
 def draw_x(c: SkiaCanvas):
     global counter, global_text
@@ -37,13 +38,19 @@ def update(text: str):
         canvas_info.freeze()
 
 def on_status_update(c: SkiaCanvas):
-    global statuses
-    c.paint.color = "ffffff"
-    c.paint.textsize = 16
+    global statuses, box_color
     y = 600
     x = 1800
+    c.paint.color = f"{box_color}dd"
+    c.paint.style = c.paint.Style.FILL
+    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 100)))
+
     for name, status in statuses.items():
-        draw_center_text(c, f"{name}: {status}", x, y)
+        text = f"{name}: {status}"
+        c.paint.color = "ffffff"
+        c.paint.textsize = 16
+        c.draw_text(text, x, y)
+        # draw_center_text(c, text, x, y)
         y += 30
 
 @mod.action_class
@@ -74,6 +81,11 @@ class Actions:
             canvas_info = None
             canvas_clear_job = None
 
+    def game_v2_canvas_box_color(color: str):
+        """The color of the canvas box"""
+        global box_color
+        box_color = color
+
     def game_v2_canvas_status_update(name: str, status: str):
         """Update status"""
         global statuses, canvas_status
@@ -85,6 +97,7 @@ class Actions:
         """Enable canvas that shows statuses"""
         global canvas_status
         actions.user.game_v2_canvas_hide()
+        actions.user.game_v2_canvas_status_disable()
         screen: Screen = ui.main_screen()
         canvas_status = Canvas.from_screen(screen)
         canvas_status.register("draw", on_status_update)

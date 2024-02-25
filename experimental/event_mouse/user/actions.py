@@ -1,5 +1,6 @@
 from talon import Module
 from ..event_mouse import event_mouse
+from .profiles import profile_dash, profile_nav
 
 def no_op():
     pass
@@ -34,6 +35,16 @@ class Actions:
 
     def event_mouse_move_start(direction: str):
         """Start moving mouse in a direction"""
+        event_mouse.move_start_new(direction)
+
+    def event_mouse_dash(direction: str):
+        """Dash in a direction"""
+        event_mouse.update_profile(profile_dash)
+        event_mouse.move_start_new(direction)
+
+    def event_mouse_nav(direction: str):
+        """Start navigating in a direction"""
+        event_mouse.update_profile(profile_nav)
         event_mouse.move_start_new(direction)
 
     def event_mouse_move_stop_soft():

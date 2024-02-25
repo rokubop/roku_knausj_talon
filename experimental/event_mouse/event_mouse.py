@@ -1,4 +1,3 @@
-from talon import Module
 from .typings import ButtonsBase, EventBusBase, ScrollingBase, MovementBase, Profile
 from .buttons import ButtonsDefault
 from .scrolling import ScrollingDefault
