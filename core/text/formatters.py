@@ -177,6 +177,7 @@ code_formatter_names = {
     "all cap": "ALL_CAPS",
     "all down": "ALL_LOWERCASE",
     "camel": "PRIVATE_CAMEL_CASE",
+    "can": "PRIVATE_CAMEL_CASE",
     "dotted": "DOT_SEPARATED",
     "quad": "DOUBLE_QUOTED_STRING",
     "dunder": "DOUBLE_UNDERSCORE",
@@ -205,6 +206,7 @@ formatters_words = {
     "all down": formatters_dict["ALL_LOWERCASE"],
     # "lower": formatters_dict["ALL_LOWERCASE"],
     "camel": formatters_dict["PRIVATE_CAMEL_CASE"],
+    "can": formatters_dict["PRIVATE_CAMEL_CASE"],
     "dotted": formatters_dict["DOT_SEPARATED"],
     "quad": formatters_dict["DOUBLE_QUOTED_STRING"],
     # "dunder": formatters_dict["DOUBLE_UNDERSCORE"],
@@ -402,6 +404,7 @@ ctx.lists["self.formatter_code"] = {
     # "twin": "SINGLE_QUOTED_STRING",
     # Splitting formatters
     "camel": "CAMEL_CASE",
+    "can": "CAMEL_CASE",
     "pascal": "PASCAL_CASE",
     "snake": "SNAKE_CASE",
     # "constant": "ALL_CAPS_SNAKE_CASE",
