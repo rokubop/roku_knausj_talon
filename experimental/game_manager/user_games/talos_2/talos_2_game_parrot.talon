@@ -15,9 +15,9 @@ parrot(shush:stop):         user.event_mouse_move_stop_soft()
 parrot(palate_click):       user.repeat()
 parrot(tut):                user.game_v2_reset_center_y()
 parrot(er):                 user.game_v2_nav_mode_enable()
-parrot(nn):                 user.game_v2_look_down_toggle()
+parrot(nn):                 user.event_mouse_click()
 parrot(t):                  key("shift")
-parrot(pop):                user.event_mouse_click()
+parrot(pop):                user.game_v2_look_down_toggle()
 # parrot(pop):                user.game_v2_look_down_toggle()
 
 # I need a way to look down

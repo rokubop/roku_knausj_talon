@@ -287,6 +287,16 @@ class Actions:
         _mouse_move_natural(degrees, 0, 100)
         # _mouse_move_snap(degrees, 0)
 
+    def game_v2_snap_up(degrees: int):
+        """Snap up to angle in degrees"""
+        _mouse_move_natural(0, -degrees, 100)
+        # _mouse_move_snap(0, -degrees)
+
+    def game_v2_snap_down(degrees: int):
+        """Snap down to angle in degrees"""
+        _mouse_move_natural(0, degrees, 100)
+        # _mouse_move_snap(0, degrees)
+
     def game_v2_look_down_toggle():
         """Snap right to angle in degrees"""
         global look_down_toggle

@@ -1,4 +1,6 @@
 tag: user.game_v2
+os: windows
+# or os: mac
 -
 settings():
     speech.timeout = 0.05
@@ -26,15 +28,44 @@ go right:                   user.game_v2_move_dir("d")
 ^step right [<number_small>]$: user.game_v2_move_dir_step("d", number_small or 1)
 ^step back [<number_small>]$: user.game_v2_move_dir_step("s", number_small or 1)
 
-# turn natural
-^leftish$:                  user.game_v2_turn_left(15)
-^lefty$:                    user.game_v2_turn_left(30)
-^left$:                     user.game_v2_turn_left(45)
-^lefter$:                   user.game_v2_turn_left(90)
-^rightish$:                 user.game_v2_turn_right(15)
-^righty$:                   user.game_v2_turn_right(30)
-^right$:                    user.game_v2_turn_right(45)
-^righter$:                  user.game_v2_turn_right(90)
+# movement discrete you can combo with continuous movement
+step [<number_small>]$:     user.game_v2_move_dir_step("w", number_small or 1)
+step left [<number_small>]$: user.game_v2_move_dir_step("a", number_small or 1)
+step right [<number_small>]$: user.game_v2_move_dir_step("d", number_small or 1)
+step back [<number_small>]$: user.game_v2_move_dir_step("s", number_small or 1)
+
+row | ro:                   user.game_v2_snap_right(60)
+low | lo:                   user.game_v2_snap_left(60)
+
+# boo | roo:                  user.game_v2_snap_right(45)
+# loo | moo:                  user.game_v2_snap_left(45)
+
+# ruh:                        user.game_v2_snap_right(30)
+# luh:                        user.game_v2_snap_left(30)
+
+# reh:                        user.game_v2_snap_right(30)
+# leh:                        user.game_v2_snap_left(30)
+
+# ah:                         user.game_v2_snap_left(30)
+# eh:                         user.game_v2_snap_right(30)
+ree:                        user.game_v2_snap_right(15)
+lee:                        user.game_v2_snap_left(15)
+
+# nee:                        user.game_v2_snap_up(90)
+# see:                        user.game_v2_snap_down(90)
+
+rah | ra:                   user.game_v2_snap_right(45)
+la | lah:                   user.game_v2_snap_left(45)
+
+stop left:
+    user.game_v2_stop_layer_by_layer()
+    user.game_v2_snap_left(90)
+
+^left$:                     user.game_v2_snap_left(90)
+^right$:                    user.game_v2_snap_right(90)
+
+left:                       user.game_v2_snap_left(90)
+right:                      user.game_v2_snap_right(90)
 
 # turn slowly
 (small | soft) up:          user.game_v2_soft_up(10)
@@ -63,7 +94,7 @@ snap right:                 user.game_v2_snap_right(90)
 look left:                  user.game_v2_look_left(90)
 look right:                 user.game_v2_look_right(90)
 look (back | round):        user.game_v2_look_back(180)
-[look] pop:                 user.game_v2_look_reset()
+# [look] pop:                 user.game_v2_look_reset()
 
 set | reset:                user.game_v2_reset_center_y()
 
@@ -77,4 +108,5 @@ spam stop:                  user.game_v2_spam_stop()
 long <user.letter>:         user.game_v2_key_hold(letter, "2s")
 
 ^stop$:                     user.game_v2_stop_layer_by_layer()
+# stop:                       user.game_v2_stop_layer_by_layer()
 ^stop all$:                 user.game_v2_stop_all()

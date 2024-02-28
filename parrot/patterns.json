@@ -64,6 +64,7 @@
             ">probability": 0.9
         },
         "throttle": {
+            "nn": 0.3,
             "er": 0.3,
             "eh": 0.3
         }
@@ -72,7 +73,7 @@
         "sounds": ["guh"],
         "threshold": {
             ">power": 5,
-            ">probability": 0.7
+            ">probability": 0.9
         },
         "throttle": {
             "guh": 0.3,
@@ -102,10 +103,12 @@
     "nn": {
         "sounds": ["nn"],
         "threshold": {
-            ">power": 1,
-            ">probability": 0.9
+            ">power": 15,
+            ">probability": 0.99
         },
         "throttle": {
+            "oh": 0.3,
+            "er": 0.3,
             "nn": 0.3,
             "guh": 0.3
         }
@@ -113,8 +116,8 @@
     "oh": {
         "sounds": ["oh", "oo"],
         "threshold": {
-            ">power": 5,
-            ">probability": 0.98
+            ">power": 10,
+            ">probability": 0.99
         },
         "throttle": {
             "eh": 0.3,
@@ -143,6 +146,7 @@
         },
         "throttle": {
             "pop": 0.15,
+            "oh": 0.3,
             "times": 3
         }
     },
