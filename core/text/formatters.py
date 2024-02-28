@@ -190,7 +190,9 @@ code_formatter_names = {
     "smash": "NO_SPACES",
     "snake": "SNAKE_CASE",
     "state": "CAPITALIZE_FIRST_WORD",
-    # "string": "SINGLE_QUOTED_STRING",
+    "stater": "CAPITALIZE_FIRST_WORD",
+    "stringer": "SINGLE_QUOTED_STRING",
+    "sayer": "NOOP",
 }
 
 prose_formatter_names = {
@@ -204,23 +206,22 @@ prose_formatter_names = {
 formatters_words = {
     "all cap": formatters_dict["ALL_CAPS"],
     "all down": formatters_dict["ALL_LOWERCASE"],
-    # "lower": formatters_dict["ALL_LOWERCASE"],
     "camel": formatters_dict["PRIVATE_CAMEL_CASE"],
     "can": formatters_dict["PRIVATE_CAMEL_CASE"],
     "dotted": formatters_dict["DOT_SEPARATED"],
     "quad": formatters_dict["DOUBLE_QUOTED_STRING"],
-    # "dunder": formatters_dict["DOUBLE_UNDERSCORE"],
+    "dunder": formatters_dict["DOUBLE_UNDERSCORE"],
     "hammer": formatters_dict["PUBLIC_CAMEL_CASE"],
     "proud": formatters_dict["PUBLIC_CAMEL_CASE"],
     "kebab": formatters_dict["DASH_SEPARATED"],
     "dashes": formatters_dict["DASH_SEPARATED"],
-    # "packed": formatters_dict["DOUBLE_COLON_SEPARATED"],
     "padded": formatters_dict["SPACE_SURROUNDED_STRING"],
     "slasher": formatters_dict["SLASH_SEPARATED"],
-    # "state": formatters_dict["CAPITALIZE_FIRST_WORD"],
+    "stater": formatters_dict["CAPITALIZE_FIRST_WORD"],
+    "sayer": formatters_dict["NOOP"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],
-    # "string": formatters_dict["SINGLE_QUOTED_STRING"],
+    "stringer": formatters_dict["SINGLE_QUOTED_STRING"],
     # "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
 }
 # Mapping from spoken phrases to formatters

@@ -85,10 +85,10 @@ show (markdown | preview):  user.vscode("markdown.showPreviewToSide")
     user.vscode("workbench.action.quickOpen")
     sleep(100ms)
 
-pop <user.text> [{user.file_extension}]:
+pop <user.prose> [{user.file_extension}]:
     user.vscode("workbench.action.quickOpen")
     sleep(100ms)
-    insert(text)
+    insert(prose)
     insert(file_extension or "")
     sleep(300ms)
 
