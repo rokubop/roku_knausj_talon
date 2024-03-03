@@ -4,7 +4,7 @@ This allows you to trigger 4 distinct actions (up, down, left, right) based on t
 
 ## Instructions
 
-1. Copy the `head_triggered_actions` folder to your `talon/user` directory.
+1. Copy the `head_triggered_actions.py` file to your `talon/user` directory, and also `user_example.py` and `user_example.talon`.
 
     To try out the functionality, you can say `head start`. This will enable head tracking only, and you should see a box appear on the screen, and a red line that indicates when you've passed the threshold for left, right, up, down. You must assign actions to these. Say `head stop` to stop the head-triggered actions. Say `head reset` to reset the position.
 
