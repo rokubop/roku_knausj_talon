@@ -6,11 +6,11 @@ This allows you to trigger 4 distinct actions (up, down, left, right) based on t
 
 1. Copy the `head_triggered_actions` folder to your `talon/user` directory.
 
-    To try out the functionality, you can uncomment `example.py` and `example.talon`, then go to Google Chrome and say `head start`. You should see a box appear on the screen that triggers "left", "right", "up", and "down" keys based on the position of your head. Say `head stop` to stop the head-triggered actions. Say `head reset` to reset the position.
+    To try out the functionality, you can say `head start`. This will enable head tracking only, and you should see a box appear on the screen, and a red line that indicates when you've passed the threshold for left, right, up, down. You must assign actions to these. Say `head stop` to stop the head-triggered actions. Say `head reset` to reset the position.
 
 ### User setup
 
-2. **Create a new Python file** for the context you want to to apply to
+2. **Copy user_example.py** for the context you want to to apply to
 
     ```python
     from talon import Context
@@ -57,3 +57,4 @@ This allows you to trigger 4 distinct actions (up, down, left, right) based on t
 - Sometimes the mouse jumps while in head tracking mode, so this tries to recalibrate the anchor point every time that happens.
 - Sometimes you will still need to manually reset the position
 - Defaults to frozen mouse after stopping
+- Does not work with mouse movement actions like turning a character in game, because every time you programmatically move the mouse, you lose head tracking ability for 1 second.

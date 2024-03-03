@@ -96,7 +96,6 @@ def check_did_mouse_jump():
     (x, y) = ctrl.mouse_pos()
     if last_xy is not None and (abs(x - last_xy[0]) > mouse_did_jump_threshold or abs(y - last_xy[1]) > mouse_did_jump_threshold):
         did_jump = True
-        print("Mouse jumped")
     return did_jump
 
 def trigger_update():
@@ -111,8 +110,6 @@ def trigger_update():
 def recalibrate_anchor_jumped():
     global anchor_center_xy, last_xy
     (x, y) = ctrl.mouse_pos()
-    print("x, y", x, y)
-    print("last_xy", last_xy)
 
     # hack to freeze tracking for 1 second
     # y = y - 1
@@ -122,9 +119,6 @@ def recalibrate_anchor_jumped():
     new_anchor = (x + current_offset[0], y + current_offset[1])
     anchor_center_xy = new_anchor
     last_xy = None
-    print("current_offset", current_offset)
-    print("new_anchor", new_anchor)
-    print('new_offset', (new_anchor[0] - x, new_anchor[1] - y))
     if canvas is not None:
         canvas.freeze()
 
@@ -153,7 +147,6 @@ def on_draw(c: SkiaCanvas):
 def set_anchor_and_poll():
     global anchor_center_xy, monitor_mouse_job, update_interval
     anchor_center_xy = ctrl.mouse_pos()
-    print("anchor_center_xy", anchor_center_xy)
     if monitor_mouse_job == None:
         monitor_mouse_job = cron.interval(update_interval, monitor_mouse_tick)
 
