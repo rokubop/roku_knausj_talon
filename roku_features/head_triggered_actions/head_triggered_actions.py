@@ -111,10 +111,6 @@ def recalibrate_anchor_jumped():
     global anchor_center_xy, last_xy
     (x, y) = ctrl.mouse_pos()
 
-    # hack to freeze tracking for 1 second
-    # y = y - 1
-    # ctrl.mouse_move(x, y)
-
     current_offset = (anchor_center_xy[0] - last_xy[0], anchor_center_xy[1] - last_xy[1])
     new_anchor = (x + current_offset[0], y + current_offset[1])
     anchor_center_xy = new_anchor
