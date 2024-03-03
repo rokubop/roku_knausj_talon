@@ -1,6 +1,20 @@
-from talon import cron, settings, actions
+from talon import Module, cron, settings, actions
 from .typings import ScrollingBase, Profile
 import time
+
+# mod = Module()
+# mod.setting(
+#     name="setting_event_mouse_base_scroll_speed",
+#     type=float,
+#     desc="Base scroll speed",
+#     default=1.0)
+
+# mod.setting(
+#     name="setting_event_mouse_scroll_by_lines",
+#     type=int,
+#     desc="Scroll by lines or not",
+#     default=True)
+
 
 class ScrollingDefault(ScrollingBase):
     def __init__(self, event_bus, profile):
@@ -14,7 +28,8 @@ class ScrollingDefault(ScrollingBase):
         self.profile: Profile = profile
 
     def update_profile(self, new_profile):
-        self.profile = new_profile
+        if self.profile.get("name") != new_profile["name"]:
+            self.profile = new_profile
 
     def scroll_start(self, direction: str):
         """Start scrolling until stop is called"""

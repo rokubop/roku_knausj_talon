@@ -1,8 +1,8 @@
+app: talos_2
 mode: user.game_talos_2_parrot
 -
 <phrase>:                   skip()
 parrot(cluck):              user.game_v2_talos_2_game_parrot_mode_disable()
-# parrot(er):                 user.game_v2_talos_2_game_parrot_mode_disable()
 parrot(eh):                 user.game_v2_move_dir("w")
 parrot(guh):                user.game_v2_move_dir("s")
 parrot(ee):                 user.game_v2_stop_layer_by_layer()
@@ -18,9 +18,3 @@ parrot(er):                 user.game_v2_nav_mode_enable()
 parrot(nn):                 user.event_mouse_click()
 parrot(t):                  key("shift")
 parrot(pop):                user.game_v2_look_down_toggle()
-# parrot(pop):                user.game_v2_look_down_toggle()
-
-# I need a way to look down
-# I need a way to click
-# I need to make sure my text is cleaned up
-# I want to see what mode I'm in

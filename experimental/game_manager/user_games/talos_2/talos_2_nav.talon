@@ -1,3 +1,4 @@
+app: talos_2
 mode: user.game_talos_2_parrot
 and mode: user.game_v2_nav_mode
 -
