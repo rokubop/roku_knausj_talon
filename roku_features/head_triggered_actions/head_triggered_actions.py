@@ -203,49 +203,39 @@ class Actions:
     def on_head_left_trigger():
         """Action fired on head triggered left"""
         print("on_head_left_trigger")
-        pass
 
     def on_head_right_trigger():
         """Action fired on head triggered right"""
         print("on_head_right_trigger")
-        pass
 
     def on_head_up_trigger():
         """Action fired on head triggered up"""
         print("on_head_up_trigger")
-        pass
 
     def on_head_down_trigger():
         """Action fired on head triggered down"""
         print("on_head_down_trigger")
-        pass
 
     def on_head_center_trigger():
         """Action fired on head triggered center"""
         print("on_head_center_trigger")
-        pass
 
     def on_head_left_leave():
         """Action fired on head triggered left"""
         print("on_head_left_leave")
-        pass
 
     def on_head_right_leave():
         """Action fired on head triggered right"""
         print("on_head_right_leave")
-        pass
 
     def on_head_up_leave():
         """Action fired on head triggered up"""
         print("on_head_up_leave")
-        pass
 
     def on_head_down_leave():
         """Action fired on head triggered down"""
         print("on_head_down_leave")
-        pass
 
     def on_head_center_leave():
         """Action fired on head triggered center"""
         print("on_head_center_leave")
-        pass
