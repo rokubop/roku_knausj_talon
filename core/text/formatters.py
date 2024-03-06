@@ -191,6 +191,7 @@ code_formatter_names = {
     "state": "CAPITALIZE_FIRST_WORD",
     "stater": "CAPITALIZE_FIRST_WORD",
     "stringer": "SINGLE_QUOTED_STRING",
+    "titler": "CAPITALIZE_ALL_WORDS",
     "sayer": "NOOP",
 }
 
@@ -220,7 +221,7 @@ formatters_words = {
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],
     "stringer": formatters_dict["SINGLE_QUOTED_STRING"],
-    # "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
+    "titler": formatters_dict["CAPITALIZE_ALL_WORDS"],
 }
 # Mapping from spoken phrases to formatters
 formatter_words = {
