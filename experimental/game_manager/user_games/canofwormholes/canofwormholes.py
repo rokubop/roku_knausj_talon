@@ -62,3 +62,19 @@ class Actions:
     def on_parrot_v5_mode_disable():
         actions.user.game_v2_canvas_status_disable()
         actions.next()
+
+    def on_head_left_trigger():
+        print("on_head_left_trigger")
+        actions.user.game_v2_move_dir_spam("a")
+
+    def on_head_right_trigger():
+        actions.user.game_v2_move_dir_spam("d")
+
+    def on_head_down_trigger():
+        actions.user.game_v2_move_dir_spam("s")
+
+    def on_head_up_trigger():
+        actions.user.game_v2_move_dir_spam("w")
+
+    def on_head_center_trigger():
+        actions.user.game_v2_stop_all()

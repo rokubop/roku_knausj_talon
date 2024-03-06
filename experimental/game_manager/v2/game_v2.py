@@ -38,6 +38,7 @@ mouse_job = None
 last_calibrate_value = 0
 last_calibrate_value_y = 0
 move_dir = None
+move_dir_spam_job = None
 step_dir = None
 step_job = None
 held_keys = set()
@@ -173,10 +174,14 @@ def _mouse_stop():
         mouse_job = None
 
 def _move_dir_stop():
-    global move_dir
+    global move_dir, move_dir_spam_job
     if move_dir:
         actions.key(f"{move_dir}:up")
         move_dir = None
+    if move_dir_spam_job:
+        cron.cancel(move_dir_spam_job)
+        move_dir_spam_job = None
+
 
 def _step_start(key: str, duration: str):
     global step_dir, step_job
@@ -219,6 +224,16 @@ class Actions:
         """Step in direction"""
         duration = f"{steps * 2}00ms"
         _step_start(key, duration)
+
+    def game_v2_move_dir_spam(key: str, interval_ms: int = 500):
+        """Continuously press a direction"""
+        global move_dir, move_dir_spam_job
+        if move_dir:
+            actions.key(f"{move_dir}:up")
+        move_dir = key
+        if not move_dir_spam_job:
+            actions.key(move_dir)
+            move_dir_spam_job = cron.interval(f"{interval_ms}ms", lambda: actions.key(move_dir))
 
     def game_v2_stop_layer_by_layer():
         """Perform stop based on a priority"""

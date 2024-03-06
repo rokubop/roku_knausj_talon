@@ -4,6 +4,9 @@ mod = Module()
 mod.mode("parrot_v5", "base parrot mode v5 common to every parrot mode")
 mod.mode("parrot_v5_default", "default parrot mode v5")
 ctx = Context()
+ctx.matches = """
+mode: user.parrot_v5
+"""
 
 current_parrot_mode = None
 
@@ -45,6 +48,28 @@ class Actions:
         actions.mode.disable("user.parrot_v5")
         actions.mode.enable("command")
 
+    def parrot_v5_tag_enable(parrot_tag: str):
+        """Enable parrot tag"""
+        tags = set(ctx.tags)
+        tags.add(parrot_tag)
+        ctx.tags = tags
+        actions.user.on_parrot_v5_tag_enable()
+
+    def parrot_v5_tag_disable(parrot_tag: str):
+        """Disable parrot tag"""
+        actions.user.on_parrot_v5_tag_disable()
+        tags = set(ctx.tags)
+        tags.discard(parrot_tag)
+        ctx.tags = tags
+
+    def parrot_v5_tag_toggle(parrot_tag: str):
+        """Toggle parrot tag"""
+        tags = set(ctx.tags)
+        if parrot_tag in tags:
+            actions.user.parrot_v5_tag_disable(parrot_tag)
+        else:
+            actions.user.parrot_v5_tag_enable(parrot_tag)
+
     def on_parrot_v5_mode_enable():
         """Callback when parrot mode is enabled"""
         no_op()
@@ -55,4 +80,12 @@ class Actions:
 
     def on_parrot_v5_mode_disable_transition():
         """Callback when parrot mode is switched"""
+        no_op()
+
+    def on_parrot_v5_tag_enable():
+        """Callback when parrot mode is enabled"""
+        no_op()
+
+    def on_parrot_v5_tag_disable():
+        """Callback when parrot mode is disabled"""
         no_op()
