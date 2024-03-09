@@ -3,33 +3,33 @@ from talon import Module, Context, actions
 mod = Module()
 ctx = Context()
 
-mod.apps.talos_2 = r"""
+mod.apps.islandsof_insight = r"""
 os: windows
-and app.exe: Talos2-Win64-Shipping.exe
+and app.exe: IslandsofInsight-Win64-Shipping.exe
 """
 
 ctx.matches = r"""
 os: windows
-app: talos_2
+app: islandsof_insight
 """
 
-mod.mode("game_talos_2_parrot", "Parrot mode for talos 2 game")
+mod.mode("islandsof_insight_parrot", "Parrot mode for talos 2 game")
 
 @mod.action_class
 class Actions:
-    def game_v2_talos_2_game_parrot_mode_enable():
+    def game_v2_islandsof_insight_parrot_mode_enable():
         """Enter game mode"""
         actions.mode.disable("command")
-        actions.mode.enable("user.game_talos_2_parrot")
+        actions.mode.enable("user.islandsof_insight_parrot")
         actions.user.game_v2_canvas_box_color("222666")
         actions.user.game_v2_canvas_status_enable()
         actions.user.game_v2_canvas_status_update("mode", "game")
 
-    def game_v2_talos_2_game_parrot_mode_disable():
+    def game_v2_islandsof_insight_parrot_mode_disable():
         """Enter game mode"""
         actions.user.event_mouse_move_stop_hard()
         actions.user.game_v2_stop_all()
-        actions.mode.disable("user.game_talos_2_parrot")
+        actions.mode.disable("user.islandsof_insight_parrot")
         actions.user.game_v2_canvas_status_disable()
         actions.mode.enable("command")
 
