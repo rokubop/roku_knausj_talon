@@ -17,7 +17,7 @@ mod.mode("game_talos_2_parrot", "Parrot mode for talos 2 game")
 
 @mod.action_class
 class Actions:
-    def game_v2_talos_2_game_parrot_mode_enable():
+    def game_v2_talos_2_game_parrot_mode_enable(ev: dict):
         """Enter game mode"""
         actions.mode.disable("command")
         actions.mode.enable("user.game_talos_2_parrot")
@@ -25,7 +25,7 @@ class Actions:
         actions.user.game_v2_canvas_status_enable()
         actions.user.game_v2_canvas_status_update("mode", "game")
 
-    def game_v2_talos_2_game_parrot_mode_disable():
+    def game_v2_talos_2_game_parrot_mode_disable(ev: dict):
         """Enter game mode"""
         actions.user.event_mouse_move_stop_hard()
         actions.user.game_v2_stop_all()
@@ -35,12 +35,12 @@ class Actions:
 
 @ctx.action_class("user")
 class Actions:
-    def on_parrot_v5_mode_enable():
+    def on_parrot_v5_mode_enable(ev: dict):
         actions.user.game_v2_canvas_box_color("ff0000")
         actions.user.game_v2_canvas_status_enable()
         actions.user.game_v2_canvas_status_update("mode", "parrot global")
         actions.next()
 
-    def on_parrot_v5_mode_disable():
+    def on_parrot_v5_mode_disable(ev: dict):
         actions.user.game_v2_canvas_status_disable()
         actions.next()

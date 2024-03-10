@@ -9,8 +9,8 @@ mod = Module()
 
 @mod.action_class
 class Actions:
-    def event_mouse_click(button: str = 0):
-        """Event mouse click""";
+    def event_mouse_click(button: int = 0):
+        """Event mouse click"""
         event_mouse.click(button)
 
     def event_mouse_drag(button: int = 0):

@@ -41,17 +41,18 @@ click_alternate = {
 
 @ctx.action_class("user")
 class Actions:
-    def on_parrot_v5_mode_enable():
+    def on_parrot_v5_mode_enable(ev: dict):
         actions.user.parrot_v5_ui_cursor_red()
 
-    def on_parrot_v5_mode_disable():
+    def on_parrot_v5_mode_disable(ev: dict):
+        if ev.get("transition", False):
+            actions.user.parrot_v5_stopper()
+            return
+
         actions.user.event_mouse_drag_stop()
         actions.user.parrot_v5_stopper()
         actions.user.event_key_modifier_disable_all()
         actions.user.parrot_v5_ui_clear()
-
-    def on_parrot_v5_mode_disable_transition():
-        actions.user.parrot_v5_stopper()
 
     def on_event_mouse_scroll_start():
         freeze_tracking()

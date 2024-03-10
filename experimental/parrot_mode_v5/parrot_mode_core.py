@@ -9,39 +9,63 @@ mode: user.parrot_v5
 """
 
 current_parrot_mode = None
+last_parrot_mode = None
 
 def no_op():
     return
 
 @mod.action_class
 class Actions:
-    def parrot_v5_mode_enable(parrot_mode: str = "user.parrot_v5_default"):
+    def parrot_v5_mode_enable(parrot_mode: str = None):
         """Enable parrot mode"""
-        global current_parrot_mode
+        global current_parrot_mode, last_parrot_mode
+
+        print("parrot_mode", parrot_mode)
+        print("last_parrot_mode", last_parrot_mode)
+
         if current_parrot_mode:
-            actions.user.on_parrot_v5_mode_disable()
+            actions.user.on_parrot_v5_mode_disable({
+                "mode": current_parrot_mode
+            })
             actions.mode.disable(current_parrot_mode)
-        current_parrot_mode = parrot_mode
+
+        if parrot_mode:
+            current_parrot_mode = parrot_mode
+        elif last_parrot_mode:
+            current_parrot_mode = last_parrot_mode
+        else:
+            current_parrot_mode = "user.parrot_v5_default"
+
         actions.mode.disable("command")
         actions.mode.enable("user.parrot_v5")
         actions.mode.enable(current_parrot_mode)
-        actions.user.on_parrot_v5_mode_enable()
+        actions.user.on_parrot_v5_mode_enable({
+            "mode": current_parrot_mode
+        })
 
     def parrot_v5_mode_switch(parrot_mode: str):
         """Switch parrot mode"""
         global current_parrot_mode
         if current_parrot_mode:
-            actions.user.on_parrot_v5_mode_disable_transition()
+            actions.user.on_parrot_v5_mode_disable({
+                "mode": current_parrot_mode,
+                "transition": True
+            })
             actions.mode.disable(current_parrot_mode)
         current_parrot_mode = parrot_mode
         actions.mode.enable(current_parrot_mode)
-        actions.user.on_parrot_v5_mode_enable()
+        actions.user.on_parrot_v5_mode_enable({
+            "mode": current_parrot_mode
+        })
 
     def parrot_v5_mode_disable():
         """Disable parrot mode"""
-        global current_parrot_mode
+        global current_parrot_mode, last_parrot_mode
         if current_parrot_mode:
-            actions.user.on_parrot_v5_mode_disable()
+            last_parrot_mode = current_parrot_mode
+            actions.user.on_parrot_v5_mode_disable({
+                "mode": current_parrot_mode
+            })
             actions.mode.disable(current_parrot_mode)
             print(f"Disabled {current_parrot_mode}")
             current_parrot_mode = None
@@ -70,16 +94,12 @@ class Actions:
         else:
             actions.user.parrot_v5_tag_enable(parrot_tag)
 
-    def on_parrot_v5_mode_enable():
+    def on_parrot_v5_mode_enable(ev: dict):
         """Callback when parrot mode is enabled"""
         no_op()
 
-    def on_parrot_v5_mode_disable():
+    def on_parrot_v5_mode_disable(ev: dict):
         """Callback when parrot mode is disabled"""
-        no_op()
-
-    def on_parrot_v5_mode_disable_transition():
-        """Callback when parrot mode is switched"""
         no_op()
 
     def on_parrot_v5_tag_enable():

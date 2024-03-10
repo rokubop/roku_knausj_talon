@@ -3,36 +3,42 @@ from talon import Module, Context, actions
 mod = Module()
 ctx = Context()
 
-mod.apps.islandsof_insight = r"""
+mod.apps.hi_fi_rush = r"""
 os: windows
-and app.exe: IslandsofInsight-Win64-Shipping.exe
+and app.exe: Hi-Fi-RUSH.exe
 """
 
 ctx.matches = r"""
 os: windows
-app: islandsof_insight
+app: hi_fi_rush
 """
 
-mod.mode("islandsof_insight_parrot", "Parrot mode for talos 2 game")
-
-@mod.action_class
-class Actions:
-    def game_v2_islandsof_insight_parrot_mode_enable():
-        """Enable game mode"""
-        actions.user.parrot_v5_mode_enable("user.islandsof_insight_parrot")
-
-    def game_v2_islandsof_insight_parrot_mode_disable():
-        """Disable game mode"""
-        actions.user.parrot_v5_mode_disable()
+mod.mode("hi_fi_rush_parrot", "Parrot mode for hi_fi_rush game")
 
 @ctx.action_class("user")
 class Actions:
     def on_parrot_v5_mode_enable(ev: dict):
-        if ev["mode"] == "user.islandsof_insight_parrot":
+        if ev["mode"] == "user.hi_fi_rush_parrot":
             actions.user.game_v2_canvas_box_color("222666")
             actions.user.game_v2_canvas_status_enable()
             actions.user.game_v2_canvas_status_update("mode", "game")
-        elif ev["mode"] == "user.islandsof_insight_nav_mode":
+            actions.user.game_v2_canvas_commands_enable()
+            actions.user.game_v2_canvas_commands_update([
+                "ah: left",
+                "eh: forward",
+                "oh: right",
+                "guh: back",
+                "pop: left click",
+                "cluck: right click",
+                "hiss: special",
+                "shush: jump",
+                "palate:  Q",
+                "tut: reset y",
+                "t: dash",
+                "nn: E",
+                "er: exit mode"
+            ])
+        elif ev["mode"] == "user.hi_fi_rush_nav_mode":
             actions.user.game_v2_canvas_box_color("FCD12A")
             actions.user.game_v2_canvas_status_enable()
             actions.user.game_v2_canvas_status_update("mode", "nav")
@@ -45,5 +51,5 @@ class Actions:
     def on_parrot_v5_mode_disable(ev: dict):
         actions.user.event_mouse_move_stop_hard()
         actions.user.game_v2_stop_all()
-        actions.user.game_v2_canvas_status_disable()
+        actions.user.game_v2_canvas_hide()
         actions.next(ev)

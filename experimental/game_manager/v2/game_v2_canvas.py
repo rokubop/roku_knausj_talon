@@ -10,6 +10,7 @@ ctx = Context()
 
 canvas_info: Canvas = None
 canvas_status: Canvas = None
+canvas_commands: Canvas = None
 
 def draw_center_text(c: SkiaCanvas, text: str, x: int, y: int):
     text_rect = c.paint.measure_text(text)[1]
@@ -24,6 +25,7 @@ global_text = ""
 canvas_clear_job = None
 statuses = {}
 box_color = "222666"
+commands_list = []
 
 def draw_x(c: SkiaCanvas):
     global counter, global_text
@@ -39,11 +41,11 @@ def update(text: str):
 
 def on_status_update(c: SkiaCanvas):
     global statuses, box_color
-    y = 600
+    y = 300
     x = 1800
     c.paint.color = f"{box_color}dd"
     c.paint.style = c.paint.Style.FILL
-    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 100)))
+    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 30)))
 
     for name, status in statuses.items():
         text = f"{name}: {status}"
@@ -51,6 +53,20 @@ def on_status_update(c: SkiaCanvas):
         c.paint.textsize = 16
         c.draw_text(text, x, y)
         # draw_center_text(c, text, x, y)
+        y += 30
+
+def on_commands_update(c: SkiaCanvas):
+    global commands_list, box_color
+    y = 330
+    x = 1800
+    c.paint.color = f"{box_color}aa"
+    c.paint.style = c.paint.Style.FILL
+    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 400)))
+
+    c.paint.color = "ffffff"
+    c.paint.textsize = 16
+    for command in commands_list:
+        c.draw_text(command, x, y)
         y += 30
 
 @mod.action_class
@@ -80,6 +96,8 @@ class Actions:
             canvas_info.close()
             canvas_info = None
             canvas_clear_job = None
+        actions.user.game_v2_canvas_status_disable()
+        actions.user.game_v2_canvas_commands_disable()
 
     def game_v2_canvas_box_color(color: str):
         """The color of the canvas box"""
@@ -110,6 +128,30 @@ class Actions:
             canvas_status.hide()
             canvas_status.close()
             canvas_status = None
+
+    def game_v2_canvas_commands_update(commands: list[str]):
+        """Update commands"""
+        global commands_list, canvas_commands
+        commands_list = commands
+        if canvas_commands:
+            canvas_commands.freeze()
+
+    def game_v2_canvas_commands_enable():
+        """Enable canvas that shows commands_list"""
+        global canvas_commands
+        actions.user.game_v2_canvas_commands_disable()
+        screen: Screen = ui.main_screen()
+        canvas_commands = Canvas.from_screen(screen)
+        canvas_commands.register("draw", on_commands_update)
+
+    def game_v2_canvas_commands_disable():
+        """Disable canvas that shows commands_list"""
+        global canvas_commands
+        if canvas_commands:
+            canvas_commands.unregister("draw", on_commands_update)
+            canvas_commands.hide()
+            canvas_commands.close()
+            canvas_commands = None
 
 
     # def draw_something(text: str, x: int, y: int):

@@ -1,6 +1,4 @@
 Spoken form, VSCode command
-increment, andreas.increment
-decrement, andreas.decrement
 update tag, editor.emmet.action.updateTag
 split tag | join tag | join tags, editor.emmet.action.splitJoinTag
 bubble, editor.action.moveLinesUpAction

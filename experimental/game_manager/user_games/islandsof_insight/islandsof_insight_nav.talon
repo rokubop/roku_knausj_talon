@@ -1,5 +1,5 @@
-app: talos_2
-mode: user.islandsof_insight_parrot
+app: islandsof_insight
+mode: user.parrot_v5
 and mode: user.islandsof_insight_nav_mode
 -
 parrot(ee):                 user.game_v2_stop_layer_by_layer()

@@ -1,8 +1,8 @@
 app: islandsof_insight
-mode: user.islandsof_insight_parrot
+mode: user.parrot_v5
+and mode: user.islandsof_insight_parrot
 -
 <phrase>:                   skip()
-parrot(cluck):              user.game_v2_islandsof_insight_parrot_mode_disable()
 parrot(eh):                 user.game_v2_move_dir("w")
 parrot(guh):                user.game_v2_move_dir("s")
 parrot(ee):                 user.game_v2_stop_layer_by_layer()

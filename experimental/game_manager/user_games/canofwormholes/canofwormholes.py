@@ -52,16 +52,15 @@ class Actions:
 
 @ctx.action_class("user")
 class Actions:
-    def on_parrot_v5_mode_enable():
-        print("hello world disk")
+    def on_parrot_v5_mode_enable(ev: dict):
         actions.user.game_v2_canvas_box_color("ff0000")
         actions.user.game_v2_canvas_status_enable()
         actions.user.game_v2_canvas_status_update("mode", "parrot global")
-        actions.next()
+        actions.next(ev)
 
-    def on_parrot_v5_mode_disable():
+    def on_parrot_v5_mode_disable(ev: dict):
         actions.user.game_v2_canvas_status_disable()
-        actions.next()
+        actions.next(ev)
 
     def on_head_left_trigger():
         print("on_head_left_trigger")
