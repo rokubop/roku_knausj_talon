@@ -266,7 +266,7 @@ class Actions:
         actions.user.game_v2_canvas_calibrate_x()
         _mouse_move_natural(360, 0, 2000, number)
 
-    def game_v2_reset_center_y(value: int = 0):
+    def game_v2_reset_center_y():
         """Reset the center"""
         time_ms = 100
         _mouse_move_natural(0, 180, time_ms)

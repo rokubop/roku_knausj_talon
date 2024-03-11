@@ -61,7 +61,7 @@ def on_commands_update(c: SkiaCanvas):
     x = 1800
     c.paint.color = f"{box_color}aa"
     c.paint.style = c.paint.Style.FILL
-    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 400)))
+    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 450)))
 
     c.paint.color = "ffffff"
     c.paint.textsize = 16
