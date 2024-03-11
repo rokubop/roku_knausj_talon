@@ -110,6 +110,12 @@ def _mouse_move_natural_hold_release(duration_decay_ms: int = 300):
 
     mouse_job = cron.interval("16ms", update_position)
 
+queue = []
+
+def _mouse_move_queue(fn: callable):
+    global queue
+    queue.append(fn)
+
 # Examples:
 # _mouse_move_natural(30, 0, 2000) # 30 degrees right over 2 seconds
 # _mouse_move_natural(-30, 0, 500) # 30 degrees left over 500ms
@@ -172,6 +178,10 @@ def _mouse_stop():
     if mouse_job:
         cron.cancel(mouse_job)
         mouse_job = None
+    if len(queue) > 0:
+        fn = queue.pop(0)
+        fn()
+
 
 def _move_dir_stop():
     global move_dir, move_dir_spam_job
@@ -249,10 +259,11 @@ class Actions:
 
     def game_v2_stop_all():
         """Stop all"""
-        global move_dir
+        global move_dir, queue
         if actions.user.event_mouse_is_moving():
             actions.user.event_mouse_move_stop_hard()
         elif mouse_job:
+            queue = []
             _mouse_stop()
         if step_job:
             _step_stop()
@@ -270,8 +281,7 @@ class Actions:
         """Reset the center"""
         time_ms = 100
         _mouse_move_natural(0, 180, time_ms)
-        actions.sleep(f"{time_ms}ms")
-        _mouse_move_natural(0, -90, time_ms)
+        _mouse_move_queue(lambda: _mouse_move_natural(0, -90, time_ms))
 
     def game_v2_calibrate_paste():
         """Paste the last attempted calibrate number"""
