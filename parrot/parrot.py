@@ -141,8 +141,6 @@ class Actions:
 
     def on_pop():
         """Do pop"""
-        # check mouse.py for implementation
-        # print("pop")
         if actions.user.parrot_mode_is_disabled_permanent():
             return
 
@@ -156,37 +154,27 @@ class Actions:
 
     def on_shush_start():
         """Do shush start"""
-        # print("on_shush_start called")
         shush_debouncer.start()
-        # actions.user.noise_debounce("shush", True)
 
     def on_shush_stop():
         """Do shush stop"""
-        # print("on_shush_stop called")
         shush_debouncer.stop()
-        # actions.user.noise_debounce("shush", False)
 
     def on_hiss_start():
         """Do hiss start"""
-        # actions.user.noise_debounce("hiss", True)
-        # print("on_hiss_start called")
         hiss_debouncer.start()
 
     def on_hiss_stop():
         """Do hiss stop"""
-        # print("on_hiss_stop called")
         hiss_debouncer.stop()
-        # actions.user.noise_debounce("hiss", False)
 
     def on_oo_start():
         """Do oo start"""
         oo_debouncer.start()
-        # actions.user.noise_debounce("oo", True)
 
     def on_oo_stop():
         """Do oo stop"""
         oo_debouncer.stop()
-        # actions.user.noise_debounce("oo", False)
 
     def on_force_scroll_stop():
         """Do force scroll stop"""
@@ -326,27 +314,3 @@ callbacks["shush"] = on_shush
 callbacks["hiss"] = on_hiss
 callbacks["ee"] = on_ee
 callbacks["oo"] = on_oo
-
-# chrome_ctx = Context()
-# ctx.matches = """
-# app: Chrome
-# """
-
-# @ctx.action_class("user")
-# class ChromeActions:
-    # def noise_shush_start():
-    #     global shush_start
-    #     shush_start = time.perf_counter()
-    #     actions.user.mouse_scrolling("up")
-
-    # def noise_shush_stop():
-    #     actions.user.abort_specific_phrases(
-    #         ["hash", "ssh", "oo", "ee", "ch"], shush_start, time.perf_counter()
-    #     )
-    #     actions.user.mouse_scroll_stop()
-
-    # def noise_hiss_start():
-    #     actions.user.mouse_scrolling("down")
-
-    # def noise_hiss_stop():
-    #     actions.user.mouse_scroll_stop()

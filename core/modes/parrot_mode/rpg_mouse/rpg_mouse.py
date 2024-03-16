@@ -1,4 +1,9 @@
 from talon import Module, Context, actions, ctrl, cron, settings
+import platform
+os = platform.system().lower()
+
+if os.startswith("windows"):
+    import win32api, win32con
 
 mod = Module()
 ctx = Context()
@@ -25,7 +30,7 @@ mod.setting(
 nav_job = None
 direction = (0, 1)
 
-speeds = {"slow": 1, "medium": 5, "fast": 18}
+speeds = {"slow": 1, "medium": 5, "fast": 15}
 speed_default = "slow"
 speed = speeds[speed_default]
 
@@ -37,12 +42,20 @@ def update_speed(new_speed):
     speed = speeds.get(new_speed, speed_default)
     actions.user.on_rpg_mouse_speed_change(new_speed)
 
+def mouse_move_windows(dx: int, dy: int):
+    win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, int(dx * 2), int(dy * 2))
+
+def mouse_move_generic(dx: int, dy: int):
+    (x, y) = ctrl.mouse_pos()
+    ctrl.mouse_move(x + dx, y + dy)
+
+mouse_move = mouse_move_windows if os.startswith("windows") else mouse_move_generic
+
 def nav_tick():
     global direction
     if direction:
-        x, y = ctrl.mouse_pos()
         dx, dy = direction
-        ctrl.mouse_move(x + dx * speed, y + dy * speed)
+        mouse_move(dx * speed, dy * speed)
 
 def start_moving(dx, dy):
     global nav_job, direction
@@ -71,7 +84,6 @@ class RpgMouseActions:
 
     def rpg_mouse_repeat_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
-        x, y = ctrl.mouse_pos()
         increment_x = settings.get("user.rpg_mouse_increment_x")
         increment_y = settings.get("user.rpg_mouse_increment_y")
 
@@ -79,18 +91,17 @@ class RpgMouseActions:
         dy = direction[1] * increment_y
 
         if direction:
-            ctrl.mouse_move(x + dx, y + dy)
+            mouse_move(dx, dy)
 
     def rpg_mouse_repeat_reverse_dir_by_increment():
         """Repeat previous direction by the increment defined by the settings"""
-        x, y = ctrl.mouse_pos()
         increment_x = settings.get("user.rpg_mouse_increment_x")
         increment_y = settings.get("user.rpg_mouse_increment_y")
         dx = direction[0] * increment_x * -1
         dy = direction[1] * increment_y * -1
 
         if direction:
-            ctrl.mouse_move(x + dx, y + dy)
+            mouse_move(dx, dy)
 
     def rpg_mouse_move_slow():
         """Move mouse slower"""

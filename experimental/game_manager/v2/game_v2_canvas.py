@@ -41,11 +41,11 @@ def update(text: str):
 
 def on_status_update(c: SkiaCanvas):
     global statuses, box_color
-    y = 300
-    x = 1800
+    y = 200
+    x = 1750
     c.paint.color = f"{box_color}dd"
     c.paint.style = c.paint.Style.FILL
-    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 30)))
+    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 250, 30)))
 
     for name, status in statuses.items():
         text = f"{name}: {status}"
@@ -57,11 +57,11 @@ def on_status_update(c: SkiaCanvas):
 
 def on_commands_update(c: SkiaCanvas):
     global commands_list, box_color
-    y = 330
-    x = 1800
+    y = 230
+    x = 1750
     c.paint.color = f"{box_color}aa"
     c.paint.style = c.paint.Style.FILL
-    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 200, 450)))
+    c.draw_rrect(RoundRect.from_rect(Rect(x - 20, y - 20, 250, 600)))
 
     c.paint.color = "ffffff"
     c.paint.textsize = 16
