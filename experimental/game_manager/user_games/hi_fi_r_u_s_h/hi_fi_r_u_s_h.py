@@ -165,7 +165,7 @@ parrot_commands = {
     "guh":        ("back", user.game_v2_move_dir_s),
     "ah":         ("left", user.game_v2_move_dir_a),
     "oh":         ("right", user.game_v2_move_dir_d),
-    'ee':         ("stop", user.game_v2_stop_layer_by_layer),
+    "ee":         ("stop", user.game_v2_stop_layer_by_layer),
     "pop":        ("L click", lambda: user.event_mouse_click(0)),
     "cluck":      ("R click", lambda: user.event_mouse_click(1)),
     "nn":         ("E", lambda: key("e")),
@@ -186,6 +186,9 @@ parrot_commands = {
     "tut tut":    ("alt", lambda: key("alt")),
     "tut tut tut":("alt hold", peppermint_mode),
 }
+
+# actions.user.parrot_config_overrides()
+# actions.user.parrot_config_update("hiss", ("spam space", lambda: key("space")))
 
 parrot_config = {
     "mode": "game",
