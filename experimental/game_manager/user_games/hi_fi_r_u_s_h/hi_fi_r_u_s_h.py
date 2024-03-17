@@ -145,43 +145,55 @@ ctx_parrot.settings = {
     "user.game_v2_calibrate_y_ground_to_center" : 542
 }
 
+user = actions.user
+key = actions.key
+
+def toggle_spam():
+    global spam
+    spam = not spam
+    show_default_game_commands()
+
+def peppermint_mode():
+    key("alt:down"),
+    user.parrot_v5_mode_enable("user.hi_fi_rush_peppermint")
+
+def rpg_mode():
+    user.parrot_v5_mode_enable("user.rpg_mouse")
+
+parrot_commands = {
+    "eh":         ('forward', user.game_v2_move_dir_w),
+    "guh":        ("back", user.game_v2_move_dir_s),
+    "ah":         ("left", user.game_v2_move_dir_a),
+    "oh":         ("right", user.game_v2_move_dir_d),
+    'ee':         ("stop", user.game_v2_stop_layer_by_layer),
+    "pop":        ("L click", lambda: user.event_mouse_click(0)),
+    "cluck":      ("R click", lambda: user.event_mouse_click(1)),
+    "nn":         ("E", lambda: key("e")),
+    "palate":     ("Q", lambda: key("q")),
+    "t":          ("shift", lambda: key("shift")),
+    "hiss":       ("R", lambda: key("r") if not spam else key("space")),
+    "shush":      ("space", lambda: key("space")),
+    "er":         ("exit", user.parrot_v5_mode_disable),
+    "tut":        ("reset y", user.game_v2_reset_center_y),
+    "tut er":     ("look mode", rpg_mode),
+    "tut ah":     ("turn left", lambda: user.game_v2_turn_left(90, 300)),
+    "tut oh":     ("turn right", lambda: user.game_v2_turn_right(90, 300)),
+    "tut guh":    ("turn around", user.game_v2_snap_180),
+    "tut hiss":   ("toggle spam", toggle_spam),
+    "tut pop":    ("L click hold", lambda: user.event_mouse_drag(0)),
+    "tut shush":  ("space hold", lambda: key("space:down")),
+    "tut palate": ("Q hold", lambda: key("q:down")),
+    "tut tut":    ("alt", lambda: key("alt")),
+    "tut tut tut":("alt hold", peppermint_mode),
+}
+
+parrot_config = {
+    "mode": "game",
+    "color": "222666",
+    "commands" : parrot_commands
+}
+
 @ctx_parrot.action_class("user")
 class Actions:
-    def on_parrot_combo(ev: dict):
-        global spam
-        if ev["combo"] == "er":
-            actions.user.parrot_v5_mode_disable()
-        elif "shush" in ev["combo"] and not "tut" in ev["combo"]:
-            actions.key("space")
-        elif "hiss" in ev["combo"] and not "tut" in ev["combo"]:
-            if spam:
-                actions.key("space")
-            else:
-                actions.key("r")
-        elif ev["combo"] == "palate":
-            actions.key("q")
-        elif ev["combo"] == "tut shush":
-            actions.key("space:down")
-        elif ev["combo"] == "tut palate":
-            actions.key("q:down")
-        elif ev["combo"] == "tut tut tut":
-            actions.key("alt:down")
-            actions.user.parrot_v5_mode_enable("user.hi_fi_rush_peppermint")
-        elif "pop" in ev["combo"] and not "tut" in ev["combo"]:
-            actions.user.event_mouse_click(0)
-        elif ev["combo"] == "tut pop":
-            actions.user.event_mouse_drag(0)
-        elif ev["combo"] == "tut hiss":
-            spam = not spam
-            actions.user.game_v2_canvas_hide()
-            show_default_game_commands()
-
-
-    def on_parrot_combo_stop(ev: dict):
-        print("on_parrot_combo_stop", ev["combo"])
-        if ev["combo"] == "tut":
-            actions.user.game_v2_reset_center_y()
-        elif ev["combo"] == "tut er":
-            actions.user.parrot_v5_mode_enable("user.rpg_mouse")
-        elif ev["combo"] == "tut tut":
-            actions.key("alt")
+    def parrot_config():
+        return parrot_config

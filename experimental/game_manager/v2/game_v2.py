@@ -219,6 +219,22 @@ class Actions:
         move_dir = key
         actions.key(f"{move_dir}:down")
 
+    def game_v2_move_dir_a():
+        """Start holding direction 'a'"""
+        actions.user.game_v2_move_dir('a')
+
+    def game_v2_move_dir_d():
+        """Start holding direction 'd'"""
+        actions.user.game_v2_move_dir('d')
+
+    def game_v2_move_dir_s():
+        """Start holding direction 's'"""
+        actions.user.game_v2_move_dir('s')
+
+    def game_v2_move_dir_w():
+        """Start holding direction 'w'"""
+        actions.user.game_v2_move_dir('w')
+
     def game_v2_move_dir_toggle(key: str):
         """Move in direction toggle"""
         global move_dir
