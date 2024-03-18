@@ -1,6 +1,8 @@
 app: hi_fi_rush
+mode: user.hi_fi_rush_parrot
+mode: user.hi_fi_rush_peppermint
+mode: user.rpg_mouse
 and mode: user.parrot_v5
-and mode: user.hi_fi_rush_parrot
 -
 <phrase>:                   skip()
 parrot(eh):                 user.use_parrot_config("eh")
