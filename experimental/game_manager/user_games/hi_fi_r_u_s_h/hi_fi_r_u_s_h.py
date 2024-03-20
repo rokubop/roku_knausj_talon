@@ -81,15 +81,13 @@ parrot_commands = {
     "tut ee":     ("switch char", lambda: key("f")),
     "tut hiss":   ("toggle spam", toggle_spam),
     "tut pop":    ("L click hold", lambda: user.event_mouse_drag(0)),
+    "tut cluck":  ("R click hold", lambda: user.event_mouse_drag(1)),
     "tut shush":  ("space hold", lambda: key("space:down")),
     "tut nn":     ("E hold", lambda: key("e:down")),
     "tut palate": ("Q hold", lambda: key("q:down")),
     "tut tut":    ("alt", lambda: key("alt")),
     "tut tut tut":("alt hold", peppermint_mode),
 }
-
-# "tut tut er" ?
-# "tut" with no command ?
 
 # actions.user.parrot_config_overrides()
 # actions.user.parrot_config_update("hiss", ("spam space", lambda: key("space")))

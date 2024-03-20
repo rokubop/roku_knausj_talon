@@ -1,5 +1,4 @@
 from talon import Module, actions, cron
-
 mod = Module()
 
 def categorize_commands(commands):
@@ -19,7 +18,7 @@ def categorize_commands(commands):
 
 class ParrotConfig():
     def __init__(self):
-        self.mode = ""
+        self.parrot_config_ref = None
         self.immediate_commands = {}
         self.delayed_commands = {}
         self.combo_chain = ""
@@ -30,8 +29,9 @@ class ParrotConfig():
         if self.combo_job:
             cron.cancel(self.combo_job)
             self.combo_job = None
-            self.pending_combo = None
-        self.mode = parrot_config.get("mode", "")
+        self.combo_chain = ""
+        self.pending_combo = None
+        self.parrot_config_ref = parrot_config
         self.immediate_commands, self.delayed_commands = categorize_commands(parrot_config.get("commands", {}))
 
     def _delayed_combo_execute(self):
@@ -70,7 +70,7 @@ class Actions:
     def use_parrot_config(sound: str):
         """Enable or disable the parrot mode"""
         config = actions.user.parrot_config()
-        if parrot_config_saved.mode != config.get("mode", ""):
+        if parrot_config_saved.parrot_config_ref != config:
             parrot_config_saved.setup(config)
 
         parrot_config_saved.execute(sound)
