@@ -65,6 +65,12 @@ class ParrotConfig():
 # todo: try using the user's direct reference instead
 parrot_config_saved = ParrotConfig()
 
+parrot_throttle_busy = {}
+
+def parrot_throttle_disable(id):
+    global parrot_throttle_busy
+    parrot_throttle_busy[id] = False
+
 @mod.action_class
 class Actions:
     def use_parrot_config(sound: str):
@@ -98,3 +104,12 @@ class Actions:
     def parrot_config_hide_commands():
         """Hide the commands for the current parrot mode"""
         actions.user.ui_textarea_hide()
+
+    def parrot_throttle(time_ms: int, id: str, command: callable):
+        """Throttle the command once every time_ms"""
+        global parrot_throttle_busy
+        if parrot_throttle_busy.get(id):
+            return
+        parrot_throttle_busy[id] = True
+        command()
+        cron.after(f"{time_ms}ms", lambda: parrot_throttle_disable(id))

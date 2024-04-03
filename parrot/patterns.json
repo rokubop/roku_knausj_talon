@@ -8,7 +8,7 @@
         "throttle": {
             "eh": 0.2,
             "oh": 0.2,
-            "ah": 0.3
+            "ah": 0.2
         }
     },
     "cluck": {
@@ -35,6 +35,7 @@
         },
         "times": 4,
         "throttle": {
+            "ee": 0.2,
             "tut": 0.2,
             "eh": 0.3,
             "er": 0.3,
@@ -73,7 +74,7 @@
         "sounds": ["guh"],
         "threshold": {
             ">power": 5,
-            ">probability": 0.9
+            ">probability": 0.95
         },
         "throttle": {
             "guh": 0.3,
@@ -120,10 +121,10 @@
             ">probability": 0.99
         },
         "throttle": {
-            "eh": 0.3,
-            "oh": 0.7,
-            "oo": 0.7,
-            "ah": 0.3
+            "eh": 0.2,
+            "oh": 0.2,
+            "oo": 0.2,
+            "ah": 0.2
         }
     },
     "palate_click": {

@@ -26,7 +26,6 @@ game_v2_key_toggle_once
 from talon import Module, Context, actions, ctrl, settings, cron
 import platform
 import math
-os = platform.system().lower()
 
 mod = Module()
 mod.setting("game_v2_calibrate_x_360", type=int, default=2000, desc="Arbitrary number amount that should be equivalent to 360 degrees")
@@ -47,17 +46,17 @@ def _mouse_move(dx: int, dy: int):
     (x, y) = ctrl.mouse_pos()
     ctrl.mouse_move(x + dx, y + dy)
 
-if os.startswith("windows"):
+if platform.system() == "Windows":
     import win32api, win32con
     def _mouse_move(dx: int, dy: int):
         win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, dx, dy)
 
-def _mouse_move_snap(degrees_x: int, degrees_y: int):
-    dx_360 = settings.get("user.game_v2_calibrate_x_360")
-    dy_90 = settings.get("user.game_v2_calibrate_y_ground_to_center")
-    dx_angle = dx_360 / 360 * degrees_x
-    dy_angle = dy_90 / 90 * degrees_y
-    _mouse_move(int(dx_angle), int(dy_angle))
+# def _mouse_move_snap(degrees_x: int, degrees_y: int):
+#     dx_360 = settings.get("user.game_v2_calibrate_x_360")
+#     dy_90 = settings.get("user.game_v2_calibrate_y_ground_to_center")
+#     dx_angle = dx_360 / 360 * degrees_x
+#     dy_angle = dy_90 / 90 * degrees_y
+#     _mouse_move(int(dx_angle), int(dy_angle))
 
 def _mouse_move_natural_hold_start(degrees: int = 0, speed: int = 100, acceleration: int = 5, min_speed: int = 100, max_speed: int = 200):
     global mouse_job
@@ -211,6 +210,10 @@ look_down_toggle = False
 
 @mod.action_class
 class Actions:
+    def game_v3_mouse_move_degrees(degrees_x: int, degrees_y: int, duration_ms: int):
+        """Move the mouse a certain number of degrees"""
+        _mouse_move_natural(degrees_x, degrees_y, duration_ms)
+
     def game_v2_move_dir(key: str):
         """Move in direction"""
         global move_dir

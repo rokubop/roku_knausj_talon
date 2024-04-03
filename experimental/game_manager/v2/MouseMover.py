@@ -271,8 +271,8 @@ class Actions:
 
 
 
-@ctx.action_class("user")
-class Actions:
-    def parrot_pop():
-        actions.user.mouse_drag_stop()
-        actions.next()
+# @ctx.action_class("user")
+# class Actions:
+#     def parrot_pop():
+#         actions.user.mouse_drag_stop()
+#         actions.next()

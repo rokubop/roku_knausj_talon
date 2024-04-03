@@ -59,6 +59,9 @@ def peppermint_mode():
 def rpg_mode():
     user.parrot_v5_mode_enable("user.rpg_mouse")
 
+def throttled_jump():
+    user.parrot_throttle(100, "jump", lambda: key("space"))
+
 parrot_commands = {
     "eh":         ('forward', user.game_v2_move_dir_w),
     "guh":        ("back", user.game_v2_move_dir_s),
@@ -71,7 +74,7 @@ parrot_commands = {
     "palate":     ("Q", lambda: key("q")),
     "t":          ("shift", lambda: key("shift")),
     "hiss":       ("R", lambda: key("r") if not spam else key("space")),
-    "shush":      ("space", lambda: key("space")),
+    "shush":      ("space", throttled_jump),
     "er":         ("exit mode", user.parrot_v5_mode_disable),
     "tut":        ("reset y", user.game_v2_reset_center_y),
     "tut er":     ("look mode", rpg_mode),

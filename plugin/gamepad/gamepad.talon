@@ -11,9 +11,10 @@
 # gamepad(north:down):        mouse_drag(1)
 # gamepad(north:up):          mouse_release(1)
 # gamepad(east):              user.mouse_click("control")
-# gamepad(south:down):        user.gamepad_mouse_freeze(true)
-# gamepad(south:up):          user.gamepad_mouse_freeze(false)
-
+# gamepad(south:down):        "hi"
+#     # user.gamepad_mouse_freeze(true)
+# gamepad(south:up):
+#     # user.gamepad_mouse_freeze(false)
 # gamepad(select):            user.quick_pick_show()
 # gamepad(start):             user.command_dictation_mode_toggle()
 
