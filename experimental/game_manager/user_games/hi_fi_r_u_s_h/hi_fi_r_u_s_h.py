@@ -76,7 +76,7 @@ parrot_commands = {
     "hiss":       ("R", lambda: key("r") if not spam else key("space")),
     "shush":      ("space", throttled_jump),
     "er":         ("exit mode", user.parrot_v5_mode_disable),
-    "tut":        ("reset y", user.game_v2_reset_center_y),
+    "tut":        ("alt", lambda: key("alt")),
     "tut er":     ("look mode", rpg_mode),
     "tut ah":     ("turn left", lambda: user.game_v2_turn_left(90, 200)),
     "tut oh":     ("turn right", lambda: user.game_v2_turn_right(90, 200)),
@@ -88,7 +88,7 @@ parrot_commands = {
     "tut shush":  ("space hold", lambda: key("space:down")),
     "tut nn":     ("E hold", lambda: key("e:down")),
     "tut palate": ("Q hold", lambda: key("q:down")),
-    "tut tut":    ("alt", lambda: key("alt")),
+    "tut tut":    ("reset y", user.game_v2_reset_center_y),
     "tut tut tut":("alt hold", peppermint_mode),
 }
 
