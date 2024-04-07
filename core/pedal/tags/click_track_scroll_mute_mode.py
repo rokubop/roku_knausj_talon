@@ -76,6 +76,10 @@ double_tap_timeout_setting = "500ms"
 double_tap_timer = None
 double_tap_enabled = False
 
+triple_tap_timeout_setting = "500ms"
+triple_tap_enabled = False
+triple_tap_timer = None
+
 def start_double_tap_timer():
     global double_tap_timer, double_tap_enabled
     clear_double_tap_timer()
@@ -89,8 +93,23 @@ def clear_double_tap_timer():
         cron.cancel(double_tap_timer)
         double_tap_timer = None
 
+def start_triple_tap_timer():
+    global triple_tap_timer, triple_tap_enabled
+    clear_triple_tap_timer()
+    triple_tap_enabled = True
+    triple_tap_timer = cron.after(triple_tap_timeout_setting, clear_triple_tap_timer)
+
+def clear_triple_tap_timer():
+    global triple_tap_enabled, triple_tap_timer
+    triple_tap_enabled = False
+    if triple_tap_timer:
+        cron.cancel(triple_tap_timer)
+        triple_tap_timer = None
+
 use_click = False
+use_mute = False
 use_active = False
+mute_toggle = False
 
 @ctx.action_class("user")
 class Actions:
@@ -98,10 +117,17 @@ class Actions:
         actions.user.hud_add_log('event', '<*Pedal: Dynamic 1 />')
 
     def pedal_left_down():
-        global use_click, double_tap_enabled, use_active
+        global use_mute, use_click, double_tap_enabled, use_active, triple_tap_enabled
+
+        if triple_tap_enabled:
+            use_mute = True
+            actions.user.hud_add_log('success', '<*Zoom mute mode/>')
+            return
 
         if double_tap_enabled:
             use_click = not use_click
+            use_mute = False
+            start_triple_tap_timer()
             if use_click:
                 actions.user.hud_add_log('warning', '<*Click mode/>')
             else:
@@ -136,8 +162,13 @@ class Actions:
         return
 
     def pedal_center_down():
-        global use_click
-        if use_click:
+        global use_click, use_mute, mute_toggle
+        if use_mute:
+            actions.key('alt-a')
+            color = '0000FF' if mute_toggle else '800080'
+            mute_toggle = not mute_toggle
+            actions.user.hud_publish_mouse_particle('float_up', color)
+        elif use_click:
             ctrl.mouse_click(button=0, down=True)
         else:
             actions.user.pedal_scroll_up_or_down_dbl_tap()
