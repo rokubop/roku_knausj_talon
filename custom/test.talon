@@ -13,4 +13,8 @@
 # Example 2- my cursor is inside of the square brackets, and I want to clear the tail starting from the word pick
 # actions.user.flex_pick([])
 
-test timing:                user.test_timing()
+# test timing:                user.test_timing()
+# zoom:                       user.zoom_custom()
+
+# user.noise_trigger_pop()
+# mouse_click()

@@ -95,6 +95,8 @@ def timing_action():
     print("second do_something time start", time.perf_counter())
     do_something('BBB')
 
+
+
 @mod.action_class
 class Actions:
     def test_timing():
@@ -102,6 +104,14 @@ class Actions:
         global job_1
         # timing_action()
         job_1 = cron.after("100ms", timing_action)
+
+    def zoom_custom():
+        """Custom action"""
+        if not actions.tracking.control_zoom_enabled():
+            actions.tracking.control_zoom_toggle(True)
+            actions.sleep("50ms")
+        actions.tracking.zoom()
+
 
 @ctx.action_class("user")
 class UserActions:

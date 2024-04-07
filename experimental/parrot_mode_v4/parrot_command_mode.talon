@@ -14,6 +14,4 @@ and not mode: user.parrot
 parrot(tut):                user.on_tut()
 parrot(palate_click):       user.on_palate()
 parrot(pop):
-    # user.parrot_v5_mode_enable()
-    # user.parrot_v5_positioner()
     user.on_pop()
