@@ -1,4 +1,5 @@
-from talon import Module, actions, cron
+from talon import Module, actions, cron, ui, ctrl
+import re
 mod = Module()
 
 def get_base_noise(noise):
@@ -6,8 +7,30 @@ def get_base_noise(noise):
     base_noise = noise.split(':')[0].split('@')[0]
     return base_noise.strip()
 
+def get_base_with_location_noise(noise):
+    """The part before colon or @ e.g.'pop' in 'pop:debounce-170' or 'pop@top'"""
+    base_noise = noise.split(':')[0]
+    return base_noise.strip()
+
+
 def is_prefix_of_other(cmd):
     return any(other_cmd.startswith(f"{cmd} ") and other_cmd != cmd for other_cmd in commands)
+
+def get_modified_action(noise, action):
+    if "@" in noise:
+        noise, location = noise.split('@')
+        rect = ui.main_screen().rect
+        (x, y) = ctrl.mouse_pos()
+        cur_location = "bottom"
+        if y < rect.height / 2:
+            cur_location = "top"
+        if location == cur_location:
+            return action
+    if "th" in noise:
+        match = re.search(r':th_(\d+)', noise)
+        throttle_amount = int(match.group(1)) if match else 100
+        return (action[0], lambda: parrot_throttle(throttle_amount, noise, action[1]))
+    return action
 
 def categorize_commands(commands):
     """Determine immediate vs delayed commands"""
@@ -18,15 +41,23 @@ def categorize_commands(commands):
 
     for noise in commands.keys():
         base_noise = get_base_noise(noise)
+        base_with_location = get_base_with_location_noise(noise)
         base_noise_set.add(base_noise)
         base_noise_map[noise] = base_noise
 
     for noise, action in commands.items():
+        # how do I solve the problem of
+        # "hiss@top" and "hiss@bottom" being separate commands?
+        # I need some better terminology for this
+        # They are definitely unique commands
+        # For immediate versus delay I need to look at the base
+        # But for execution I need to look at location
+        modified_action = get_modified_action(noise, action)
         base = base_noise_map[noise]
         if any(other_noise.startswith(f"{base} ") and other_noise != base for other_noise in base_noise_set):
-            delayed_commands[noise] = action
+            delayed_commands[base] = modified_action
         else:
-            immediate_commands[noise] = action
+            immediate_commands[base] = modified_action
 
     return immediate_commands, delayed_commands
 
@@ -63,8 +94,7 @@ class ParrotConfig():
         self.combo_chain = ""
         self.pending_combo = None
 
-    def execute(self, sound):
-        (noise, modifiers, locations) = parse_modifiers(sound)
+    def execute(self, noise: str):
         if self.combo_job:
             cron.cancel(self.combo_job)
             self.combo_job = None
@@ -92,6 +122,15 @@ parrot_throttle_busy = {}
 def parrot_throttle_disable(id):
     global parrot_throttle_busy
     parrot_throttle_busy[id] = False
+
+def parrot_throttle(time_ms: int, id: str, command: callable):
+    """Throttle the command once every time_ms"""
+    global parrot_throttle_busy
+    if parrot_throttle_busy.get(id):
+        return
+    parrot_throttle_busy[id] = True
+    command()
+    cron.after(f"{time_ms}ms", lambda: parrot_throttle_disable(id))
 
 @mod.action_class
 class Actions:
@@ -126,12 +165,3 @@ class Actions:
     def parrot_config_hide_commands():
         """Hide the commands for the current parrot mode"""
         actions.user.ui_textarea_hide()
-
-    def parrot_throttle(time_ms: int, id: str, command: callable):
-        """Throttle the command once every time_ms"""
-        global parrot_throttle_busy
-        if parrot_throttle_busy.get(id):
-            return
-        parrot_throttle_busy[id] = True
-        command()
-        cron.after(f"{time_ms}ms", lambda: parrot_throttle_disable(id))

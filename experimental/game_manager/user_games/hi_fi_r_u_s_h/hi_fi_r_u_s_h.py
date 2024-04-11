@@ -59,8 +59,8 @@ def peppermint_mode():
 def rpg_mode():
     user.parrot_v5_mode_enable("user.rpg_mouse")
 
-def throttled_jump():
-    user.parrot_throttle(100, "jump", lambda: key("space"))
+# def throttled_jump():
+#     user.parrot_throttle(100, "jump", lambda: key("space"))
 
 parrot_commands = {
     "eh":         ('forward', user.game_v2_move_dir_w),
@@ -73,8 +73,8 @@ parrot_commands = {
     "nn":         ("E", lambda: key("e")),
     "palate":     ("Q", lambda: key("q")),
     "t":          ("shift", lambda: key("shift")),
-    "hiss":       ("R", lambda: key("r") if not spam else key("space")),
-    "shush":      ("space", throttled_jump),
+    # "hiss":       ("R", lambda: key("r") if not spam else key("space")),
+    "shush:th_100": ("space", lambda: key("space")),
     "er":         ("exit mode", user.parrot_v5_mode_disable),
     "tut":        ("alt", lambda: key("alt")),
     "tut er":     ("look mode", rpg_mode),
@@ -82,8 +82,8 @@ parrot_commands = {
     "tut oh":     ("turn right", lambda: user.game_v2_turn_right(90, 200)),
     "tut guh":    ("turn around", user.game_v2_snap_180),
     "tut ee":     ("switch char", lambda: key("f")),
-    # "hiss@top":   ("scroll up", lambda: user.game_v2_scroll(1)),
-    # "hiss@bottom":("scroll down", lambda: user.game_v2_scroll(-1)),
+    "hiss@top":   ("scroll up", lambda: actions.user.scroll_up()),
+    "hiss@bottom":("scroll down", lambda: actions.user.scroll_down()),
     "tut hiss":   ("toggle spam", toggle_spam),
     "tut pop":    ("L click hold", lambda: user.event_mouse_drag(0)),
     "tut cluck":  ("R click hold", lambda: user.event_mouse_drag(1)),
