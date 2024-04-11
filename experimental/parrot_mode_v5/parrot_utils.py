@@ -12,20 +12,21 @@ def get_base_with_location_noise(noise):
     base_noise = noise.split(':')[0]
     return base_noise.strip()
 
-
 def is_prefix_of_other(cmd):
     return any(other_cmd.startswith(f"{cmd} ") and other_cmd != cmd for other_cmd in commands)
 
-def get_modified_action(noise, action):
-    if "@" in noise:
-        noise, location = noise.split('@')
+def executeActionOrLocationAction(action):
+    if isinstance(action, dict):
         rect = ui.main_screen().rect
         (x, y) = ctrl.mouse_pos()
         cur_location = "bottom"
         if y < rect.height / 2:
             cur_location = "top"
-        if location == cur_location:
-            return action
+        action[cur_location]()
+    else:
+        action()
+
+def get_modified_action(noise, action):
     if "th" in noise:
         match = re.search(r':th_(\d+)', noise)
         throttle_amount = int(match.group(1)) if match else 100
@@ -41,32 +42,47 @@ def categorize_commands(commands):
 
     for noise in commands.keys():
         base_noise = get_base_noise(noise)
-        base_with_location = get_base_with_location_noise(noise)
+
         base_noise_set.add(base_noise)
         base_noise_map[noise] = base_noise
 
     for noise, action in commands.items():
-        # how do I solve the problem of
-        # "hiss@top" and "hiss@bottom" being separate commands?
-        # I need some better terminology for this
-        # They are definitely unique commands
-        # For immediate versus delay I need to look at the base
-        # But for execution I need to look at location
+        (_base_noise, _modifiers, location) = parse_modifiers(noise)
+        print("location", location)
         modified_action = get_modified_action(noise, action)
         base = base_noise_map[noise]
         if any(other_noise.startswith(f"{base} ") and other_noise != base for other_noise in base_noise_set):
-            delayed_commands[base] = modified_action
+            if location:
+                if not base in delayed_commands:
+                    delayed_commands[base] = (action[0], {})
+                delayed_commands[base][1][location] = modified_action[1]
+            else:
+                delayed_commands[base] = modified_action
         else:
-            immediate_commands[base] = modified_action
+            print("location", location)
+            print("base", base)
+            if location:
+                if not base in immediate_commands:
+                    immediate_commands[base] = (action[0], {})
+                immediate_commands[base][1][location] = modified_action[1]
+            else:
+                immediate_commands[base] = modified_action
 
     return immediate_commands, delayed_commands
 
 def parse_modifiers(sound: str):
-    noise, rest = sound.split(':', 1) if ':' in sound else (sound, None)
-    modifiers, locations = None, None
-    if rest:
-        modifiers, locations = rest.split('@', 1) if '@' in rest else (rest, None)
-    return noise, modifiers, locations
+    base_noise, location, modifiers = sound, None, None
+
+    if '@' in sound:
+        base_noise, rest = sound.split('@', 1)
+        if ':' in rest:
+            location, modifiers = rest.split(':', 1)
+        else:
+            location = rest
+    elif ':' in sound:
+        base_noise, modifiers = sound.split(':', 1)
+
+    return base_noise, modifiers, location
 
 class ParrotConfig():
     def __init__(self):
@@ -90,7 +106,8 @@ class ParrotConfig():
         if self.combo_job:
             cron.cancel(self.combo_job)
             self.combo_job = None
-        self.delayed_commands[self.pending_combo][1]()
+        action = self.delayed_commands[self.pending_combo][1]
+        executeActionOrLocationAction(action)
         self.combo_chain = ""
         self.pending_combo = None
 
@@ -105,14 +122,17 @@ class ParrotConfig():
             self.pending_combo = self.combo_chain
             self.combo_job = cron.after("300ms", self._delayed_combo_execute)
         elif self.combo_chain in self.immediate_commands:
-            self.immediate_commands[self.combo_chain][1]()
+            action = self.immediate_commands[self.combo_chain][1]
+            executeActionOrLocationAction(action)
             self.combo_chain = ""
             self.pending_combo = None
         elif noise in self.immediate_commands:
             if self.pending_combo:
                 self._delayed_combo_execute()
                 actions.sleep("20ms")
-            self.immediate_commands[noise][1]()
+            action = self.immediate_commands[noise][1]
+            print("self.immediate_commands[noise]", self.immediate_commands[noise])
+            executeActionOrLocationAction(action)
 
 # todo: try using the user's direct reference instead
 parrot_config_saved = ParrotConfig()
