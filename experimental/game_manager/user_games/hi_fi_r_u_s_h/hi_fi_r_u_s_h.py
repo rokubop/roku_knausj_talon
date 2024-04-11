@@ -82,6 +82,8 @@ parrot_commands = {
     "tut oh":     ("turn right", lambda: user.game_v2_turn_right(90, 200)),
     "tut guh":    ("turn around", user.game_v2_snap_180),
     "tut ee":     ("switch char", lambda: key("f")),
+    # "hiss@top":   ("scroll up", lambda: user.game_v2_scroll(1)),
+    # "hiss@bottom":("scroll down", lambda: user.game_v2_scroll(-1)),
     "tut hiss":   ("toggle spam", toggle_spam),
     "tut pop":    ("L click hold", lambda: user.event_mouse_drag(0)),
     "tut cluck":  ("R click hold", lambda: user.event_mouse_drag(1)),

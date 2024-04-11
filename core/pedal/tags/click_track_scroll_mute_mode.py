@@ -121,7 +121,7 @@ class Actions:
 
         if triple_tap_enabled:
             use_mute = True
-            actions.user.hud_add_log('success', '<*Zoom mute mode/>')
+            actions.user.hud_add_log('success', '<*Call mute mode/>')
             return
 
         if double_tap_enabled:
@@ -165,6 +165,7 @@ class Actions:
         global use_click, use_mute, mute_toggle
         if use_mute:
             actions.key('alt-a')
+            actions.key('ctrl-shift-m')
             color = '0000FF' if mute_toggle else '800080'
             mute_toggle = not mute_toggle
             actions.user.hud_publish_mouse_particle('float_up', color)

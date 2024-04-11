@@ -1,20 +1,41 @@
 from talon import Module, actions, cron
 mod = Module()
 
-def categorize_commands(commands):
-    def is_prefix_of_other(cmd):
-        return any(other_cmd.startswith(f"{cmd} ") and other_cmd != cmd for other_cmd in commands)
+def get_base_noise(noise):
+    """The part before colon or @ e.g.'pop' in 'pop:debounce-170' or 'pop@top'"""
+    base_noise = noise.split(':')[0].split('@')[0]
+    return base_noise.strip()
 
+def is_prefix_of_other(cmd):
+    return any(other_cmd.startswith(f"{cmd} ") and other_cmd != cmd for other_cmd in commands)
+
+def categorize_commands(commands):
+    """Determine immediate vs delayed commands"""
     immediate_commands = {}
     delayed_commands = {}
+    base_noise_set = set()
+    base_noise_map = {}
 
-    for command, action in commands.items():
-        if is_prefix_of_other(command):
-            delayed_commands[command] = action
+    for noise in commands.keys():
+        base_noise = get_base_noise(noise)
+        base_noise_set.add(base_noise)
+        base_noise_map[noise] = base_noise
+
+    for noise, action in commands.items():
+        base = base_noise_map[noise]
+        if any(other_noise.startswith(f"{base} ") and other_noise != base for other_noise in base_noise_set):
+            delayed_commands[noise] = action
         else:
-            immediate_commands[command] = action
+            immediate_commands[noise] = action
 
     return immediate_commands, delayed_commands
+
+def parse_modifiers(sound: str):
+    noise, rest = sound.split(':', 1) if ':' in sound else (sound, None)
+    modifiers, locations = None, None
+    if rest:
+        modifiers, locations = rest.split('@', 1) if '@' in rest else (rest, None)
+    return noise, modifiers, locations
 
 class ParrotConfig():
     def __init__(self):
@@ -43,11 +64,12 @@ class ParrotConfig():
         self.pending_combo = None
 
     def execute(self, sound):
+        (noise, modifiers, locations) = parse_modifiers(sound)
         if self.combo_job:
             cron.cancel(self.combo_job)
             self.combo_job = None
 
-        self.combo_chain = self.combo_chain + f" {sound}" if self.combo_chain else sound
+        self.combo_chain = self.combo_chain + f" {noise}" if self.combo_chain else noise
 
         if self.combo_chain in self.delayed_commands:
             self.pending_combo = self.combo_chain
@@ -56,11 +78,11 @@ class ParrotConfig():
             self.immediate_commands[self.combo_chain][1]()
             self.combo_chain = ""
             self.pending_combo = None
-        elif sound in self.immediate_commands:
+        elif noise in self.immediate_commands:
             if self.pending_combo:
                 self._delayed_combo_execute()
                 actions.sleep("20ms")
-            self.immediate_commands[sound][1]()
+            self.immediate_commands[noise][1]()
 
 # todo: try using the user's direct reference instead
 parrot_config_saved = ParrotConfig()
