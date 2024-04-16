@@ -13,6 +13,7 @@ cancel_scroll_on_pop = True
 control_mouse_forced = False
 hiss_scroll_up = False
 
+
 default_cursor = {
     "AppStarting": r"%SystemRoot%\Cursors\aero_working.ani",
     "Arrow": r"%SystemRoot%\Cursors\aero_arrow.cur",
@@ -302,15 +303,16 @@ class UserActions:
             if should_click:
                 ctrl.mouse_click(button=0, hold=16000)
 
-    def noise_trigger_hiss(active: bool):
-        if settings.get("user.mouse_enable_hiss_scroll"):
-            if active:
-                if hiss_scroll_up:
-                    actions.user.mouse_scroll_up_continuous()
-                else:
-                    actions.user.mouse_scroll_down_continuous()
-            else:
-                actions.user.mouse_scroll_stop()
+    # def noise_trigger_hiss(active: bool):
+    #     if settings.get("user.mouse_enable_hiss_scroll"):
+    #         if active:
+    #             if hiss_scroll_up:
+
+    #                 actions.user.mouse_scroll_up_continuous()
+    #             else:
+    #                 actions.user.mouse_scroll_down_continuous()
+    #         else:
+    #             actions.user.mouse_scroll_stop()
 
 
 def mouse_scroll(amount):

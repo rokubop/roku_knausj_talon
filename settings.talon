@@ -7,7 +7,6 @@ settings():
 
     # Set the number of command lines to display per help page
     user.help_max_command_lines_per_page = 50
-
     # Set the number of contexts to display per help page
     user.help_max_contexts_per_page = 20
 
