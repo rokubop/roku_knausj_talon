@@ -3,12 +3,12 @@ import re
 mod = Module()
 
 def get_base_noise(noise):
-    """The part before colon or @ e.g.'pop' in 'pop:debounce-170' or 'pop@top'"""
+    """The part before colon or @ e.g.'pop' in 'pop:db_170' or 'pop@top'"""
     base_noise = noise.split(':')[0].split('@')[0]
     return base_noise.strip()
 
 def get_base_with_location_noise(noise):
-    """The part before colon or @ e.g.'pop' in 'pop:debounce-170' or 'pop@top'"""
+    """The part before colon or @ e.g.'pop' in 'pop:db_170' or 'pop@top'"""
     base_noise = noise.split(':')[0]
     return base_noise.strip()
 
@@ -48,7 +48,6 @@ def categorize_commands(commands):
 
     for noise, action in commands.items():
         (_base_noise, _modifiers, location) = parse_modifiers(noise)
-        print("location", location)
         modified_action = get_modified_action(noise, action)
         base = base_noise_map[noise]
         if any(other_noise.startswith(f"{base} ") and other_noise != base for other_noise in base_noise_set):
@@ -59,8 +58,6 @@ def categorize_commands(commands):
             else:
                 delayed_commands[base] = modified_action
         else:
-            print("location", location)
-            print("base", base)
             if location:
                 if not base in immediate_commands:
                     immediate_commands[base] = (action[0], {})
@@ -100,7 +97,8 @@ class ParrotConfig():
         self.combo_chain = ""
         self.pending_combo = None
         self.parrot_config_ref = parrot_config
-        self.immediate_commands, self.delayed_commands = categorize_commands(parrot_config.get("commands", {}))
+        commands = parrot_config.get("commands", {}) if "commands" in parrot_config else parrot_config
+        self.immediate_commands, self.delayed_commands = categorize_commands(commands)
 
     def _delayed_combo_execute(self):
         if self.combo_job:
@@ -131,7 +129,6 @@ class ParrotConfig():
                 self._delayed_combo_execute()
                 actions.sleep("20ms")
             action = self.immediate_commands[noise][1]
-            print("self.immediate_commands[noise]", self.immediate_commands[noise])
             executeActionOrLocationAction(action)
 
 # todo: try using the user's direct reference instead
@@ -169,7 +166,7 @@ class Actions:
     def parrot_config_get_commands_text():
         """Get text of commands formatted in a list"""
         config = actions.user.parrot_config()
-        commands = config.get("commands", {})
+        commands = config.get("commands", {}) if "commands" in config else {k: v for k, v in config.items() if k != "options"}
         return [f"{command}: {action[0]}" for command, action in commands.items()]
 
     def parrot_config_show_commands():
