@@ -1,0 +1,34 @@
+language: html | javascript | typescript
+---
+
+name: jsdocsParam
+phrase: param
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+@param {$1} $0
+---
+
+name: jsdocsReturns
+phrase: returns
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+@param {$1} $0
+---
+
+name: jsdocsProperty
+phrase: property
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+@property {$1} $0
+---
+
+name: jsdocsTypeDef
+phrase: typedef
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+@typedef {$1} $0
+---

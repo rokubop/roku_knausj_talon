@@ -51,12 +51,17 @@ import React from "react";
 ---
 
 name: namedLambdaExpression
-phrase: arrow funk | con lambda | con lamb
+phrase: arrow funk | con lambda | con lamb | con funk
 insertionScope: statement
 -
-const $1 = ($2) => {
-    $0
-}
+const $1 = ($2) => $0
+---
+
+name: namedLambdaExpressionExport
+phrase: export arrow funk | export con lambda | export con lamb | export con funk
+insertionScope: statement
+-
+export const $1 = ($2) => $0
 ---
 
 name: reactUseState
@@ -84,6 +89,15 @@ $1.insertionFormatter: PRIVATE_CAMEL_CASE
 const $1 = $0
 ---
 
+name: constStatementExport
+phrase: export const | export con
+insertionScope: statement
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+export const $1 = $0
+---
+
 name: letStatement
 phrase: let
 insertionScope: statement
@@ -91,17 +105,6 @@ insertionScope: statement
 $1.insertionFormatter: PRIVATE_CAMEL_CASE
 -
 let $1 = $0
----
-
-name: reactComponent
-phrase: component
-insertionScope: statement
-
-$1.insertionFormatter: PUBLIC_CAMEL_CASE
--
-const $1 = ($2) => {
-    $0
-}
 ---
 
 name: stringVarStatement
@@ -168,11 +171,22 @@ insertionScope: statement
 }
 ---
 
-name: rjsfUi
-phrase: UI
-insertionScope: statement
-
-$1.insertionFormatter: PRIVATE_CAMEL_CASE
+name: docBlock
+phrase: dock
 -
-'ui:$1': $0
+/** $0 */
+---
+
+name: lambdaArrow
+phrase: arrow
+-
+$0 => $1
+---
+
+name: functionExport
+phrase: export funk
+-
+export function $1($2) {
+    $0
+}
 ---

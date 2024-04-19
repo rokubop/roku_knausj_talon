@@ -10,12 +10,22 @@ $1.insertionFormatter: PRIVATE_CAMEL_CASE
 <$1>$0</$1>
 ---
 
-name: attribute
-phrase: attribute
+name: elementWith
+phrase: elm with | element with | tag with
+insertionScope: xmlElement
 
 $1.insertionFormatter: PRIVATE_CAMEL_CASE
 -
-$1=$0
+<$1 $2>$0</$1>
+---
+
+name: voidElement
+phrase: void elm | void element | void tag
+insertionScope: xmlElement
+
+$0.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+<$0 />
 ---
 
 name: table
@@ -35,10 +45,28 @@ phrase: table
 </table>
 ---
 
-name: unorderedList
-phrase: list
+name: listElement
+phrase: list | el eye
 -
 <li>$0</li>
+---
+
+name: listElementWith
+phrase: list with | el eye with
+-
+<li $1>$0</li>
+---
+
+name: unorderedListElement
+phrase: you el
+-
+<ul>$0</ul>
+---
+
+name: unorderedListElementWith
+phrase: you el with
+-
+<ul $1>$0</ul>
 ---
 
 name: div
@@ -47,20 +75,92 @@ phrase: div
 <div>$0</div>
 ---
 
+name: divWith
+phrase: div with
+-
+<div $1>$0</div>
+---
+
 name: span
 phrase: span
 -
 <span>$0</span>
 ---
 
+name: spanWith
+phrase: span with
+-
+<span $1>$0</span>
+---
+
 name: className
 phrase: class name
 -
-className="$0"
+className=$0
 ---
 
 name: href
 phrase: ref
 -
 href="$0"
+---
+
+name: h1
+phrase: h one
+-
+<h1>$0</h1>
+---
+
+name: h1With
+phrase: h one with
+-
+<h1 $1>$0</h1>
+---
+
+name: h2
+phrase: h two
+-
+<h2>$0</h2>
+---
+
+name: h2With
+phrase: h two with
+-
+<h2 $1>$0</h2>
+---
+
+name: h3
+phrase: h three
+-
+<h3>$0</h3>
+---
+
+name: h3With
+phrase: h three with
+-
+<h3 $1>$0</h3>
+---
+
+name: h4
+phrase: h four
+-
+<h4>$0</h4>
+---
+
+name: h4With
+phrase: h four with
+-
+<h4 $1>$0</h4>
+---
+
+name: h5
+phrase: h five
+-
+<h5>$0</h5>
+---
+
+name: h5With
+phrase: h five with
+-
+<h5 $1>$0</h5>
 ---
