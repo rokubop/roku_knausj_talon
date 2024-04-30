@@ -194,7 +194,8 @@
         "sounds": ["t"],
         "threshold": {
             ">power": 2,
-            ">probability": 0.98
+            ">probability": 0.98,
+            ">frequency": 100
         },
         "throttle": {
             "t": 0.3,

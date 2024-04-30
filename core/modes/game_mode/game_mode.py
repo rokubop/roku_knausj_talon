@@ -5,7 +5,7 @@ from user.talon_hud.content.programming_language_poller import (
 from .GameModeHelper import GameModeHelper
 
 game_mode_module = Module()
-game_mode_module.mode("game", "Gaming Mode that doesn't accept regular commands")
+# game_mode_module.mode("game", "Gaming Mode that doesn't accept regular commands")
 
 
 @game_mode_module.action_class
