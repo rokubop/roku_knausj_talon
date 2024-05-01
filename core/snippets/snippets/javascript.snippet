@@ -1,4 +1,4 @@
-language: html | javascript | typescript
+language: html | javascript | typescript | react
 ---
 
 name: forInLoopStatement
@@ -189,4 +189,12 @@ phrase: export funk
 export function $1($2) {
     $0
 }
+---
+
+name: setTimeout
+phrase: set time out | timeout
+-
+setTimeout(() => {
+    $0
+}, $1)
 ---

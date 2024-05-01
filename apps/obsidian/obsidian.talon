@@ -5,14 +5,13 @@ tag(): user.find
 tag(): user.line_commands
 tag(): user.splits
 tag(): user.emoji
-tag(): user.ocr_cursorless
 
-<user.teleport> daily note:
+pop daily note:
     key(ctrl-p)
     insert('today daily note')
     key(enter)
 
-<user.teleport> [<user.text>] [{user.file_extension}]:
+pop [<user.text>] [{user.file_extension}]:
     key(ctrl-o)
     edit.delete_line()
     sleep(100ms)
@@ -40,15 +39,15 @@ add H four [<user.text>]:
 add H five [<user.text>]:
     insert("##### ")
     user.insert_formatted(text or "", "CAPITALIZE_FIRST_WORD")
-add list: insert("- ")
-add task: insert("- [ ] ")
+add list:                   insert("- ")
+add task:                   insert("- [ ] ")
 
-task (yes | no): key(ctrl-l)
+task (yes | no):            key(ctrl-l)
 
-form task [at this]: key(ctrl-l)
-form bold [at this]: key(ctrl-b)
-form italic [at this]: key(ctrl-i)
-form strike [at this]: key(ctrl-shift-x)
+form task [at this]:        key(ctrl-l)
+form bold [at this]:        key(ctrl-b)
+form italic [at this]:      key(ctrl-i)
+form strike [at this]:      key(ctrl-shift-x)
 
 bar (show | hide | dog) | (show | hide) (bar | files):
     key(alt-b)
@@ -59,5 +58,5 @@ rack (show | hide | dog) | (show | hide) (rack | calendar):
 task (dog | check | uncheck | complete):
     key(ctrl-l)
 
-show (help | settings): key(ctrl-,)
-add (prop | tag): key(ctrl-;)
+show (help | settings):     key(ctrl-,)
+add (prop | tag):           key(ctrl-;)
