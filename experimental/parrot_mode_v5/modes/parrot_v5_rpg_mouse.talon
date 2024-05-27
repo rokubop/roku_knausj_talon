@@ -1,6 +1,10 @@
 mode: user.parrot_v5
 and mode: user.parrot_v5_rpg_mouse
 -
+settings():
+    user.rpg_mouse_increment_x = 9
+    user.rpg_mouse_increment_y = 9
+
 parrot(cluck):              user.parrot_v5_mode_disable()
 parrot(nn):                 user.parrot_v5_click_primary()
 parrot(pop):

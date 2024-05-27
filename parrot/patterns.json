@@ -2,8 +2,8 @@
     "ah": {
         "sounds": ["ah"],
         "threshold": {
-            ">power": 3,
-            ">probability": 0.9
+            ">power": 5,
+            ">probability": 0.93
         },
         "throttle": {
             "eh": 0.2,
@@ -30,12 +30,12 @@
     "ee": {
         "sounds": ["yi"],
         "threshold": {
-            ">power": 4,
-            ">probability": 0.95
+            ">power": 8,
+            ">probability": 0.96
         },
         "graceperiod": 0.1,
         "grace_threshold": {
-            ">power": 5,
+            ">power": 7,
             ">probability": 0.6
         },
         "times": 4,
@@ -78,15 +78,15 @@
     "guh": {
         "sounds": ["guh"],
         "threshold": {
-            ">power": 5,
-            ">probability": 0.95
+            ">power": 12,
+            ">probability": 0.99
         },
         "throttle": {
-            "guh": 0.3,
+            "guh": 0.1,
             "eh": 0.3,
-            "ay": 0.3,
-            "ah": 0.3,
-            "oo": 0.3,
+            "ay": 0.1,
+            "ah": 0.1,
+            "oo": 0.1,
             "k": 0.3
         }
     },
@@ -109,13 +109,12 @@
     "nn": {
         "sounds": ["nn"],
         "threshold": {
-            ">power": 15,
-            ">probability": 0.99
+            ">power": 14,
+            ">probability": 0.8
         },
         "throttle": {
-            "oh": 0.3,
             "er": 0.3,
-            "nn": 0.2,
+            "nn": 0.15,
             "guh": 0.3
         }
     },
@@ -123,7 +122,7 @@
         "sounds": ["oh", "oo"],
         "threshold": {
             ">power": 10,
-            ">probability": 0.99
+            ">probability": 0.98
         },
         "throttle": {
             "eh": 0.2,
@@ -135,8 +134,8 @@
     "palate_click": {
         "sounds": ["Palate"],
         "threshold": {
-            ">power": 15,
-            ">probability": 0.96
+            ">power": 10,
+            ">probability": 0.9
         },
         "throttle": {
             "palate_click": 0.12,
@@ -200,7 +199,8 @@
         "throttle": {
             "t": 0.3,
             "shush": 0.3,
-            "hiss": 0.3
+            "hiss": 0.3,
+            "guh": 0.1
         }
     }
 }
