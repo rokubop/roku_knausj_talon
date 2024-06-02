@@ -163,6 +163,10 @@ vscode_view = "files"
 
 @mod.action_class
 class Actions:
+    def vscode_log_full(text: str):
+        """console log"""
+        actions.user.paste(f"console.log('{text}', {text});")
+
     def vscode_terminal(number: int):
         """Activate a terminal by number"""
         actions.user.vscode(f"workbench.action.terminal.focusAtIndex{number}")
