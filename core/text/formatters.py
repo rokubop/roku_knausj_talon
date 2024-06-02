@@ -148,6 +148,7 @@ formatters_dict = {
     ),
     "NO_SPACES": (NOSEP, every_word(lambda w: w)),
     "DASH_SEPARATED": words_with_joiner("-"),
+    "COMMA_SEPARATED": words_with_joiner(", "),
     "TERMINAL_DASH_SEPARATED": (
         NOSEP,
         first_vs_rest(lambda w: " --" + w.lower(), lambda w: "-" + w.lower()),
@@ -193,6 +194,7 @@ code_formatter_names = {
     "stringer": "SINGLE_QUOTED_STRING",
     "titler": "CAPITALIZE_ALL_WORDS",
     "sayer": "NOOP",
+    "oxford": "COMMA_SEPARATED",
 }
 
 prose_formatter_names = {
@@ -222,6 +224,7 @@ formatters_words = {
     "snake": formatters_dict["SNAKE_CASE"],
     "stringer": formatters_dict["SINGLE_QUOTED_STRING"],
     "titler": formatters_dict["CAPITALIZE_ALL_WORDS"],
+    "oxford": formatters_dict["COMMA_SEPARATED"],
 }
 # Mapping from spoken phrases to formatters
 formatter_words = {
@@ -413,4 +416,5 @@ ctx.lists["self.formatter_code"] = {
     # "dunder": "DOUBLE_UNDERSCORE",
     # "packed": "DOUBLE_COLON_SEPARATED",
     "smash": "NO_SPACES",
+    "oxford": "COMMA_SEPARATED",
 }
