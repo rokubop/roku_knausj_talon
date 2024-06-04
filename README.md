@@ -4,7 +4,16 @@ This is my personal repository of Talon commands, continually WIP.
 Fork of [talonhub/community](https://github.com/talonhub/community).
 
 ## Custom Features
-- [Game v2 actions](https://github.com/rokubop/roku_talon/blob/main/experimental/game_v2/game_v2.py) (Camera movement, go, stop)
+
+### Shared scripts repo
+[roku-talon-shared](https://github.com/rokubop/roku-talon-shared)
+- game tools/actions
+- games
+- smooth mouse movement
+- HTML-like (object oriented) UI builder
+- drag grid.
+
+### Other Misc
 - [Parrot mouse RPG mode](https://github.com/rokubop/roku_talon/blob/main/core/modes/parrot_mode/rpg_mouse/rpg_mouse.py) (continuous mouse movement)
 - [Fix text (target by first and last character)](https://github.com/rokubop/roku_talon/tree/main/experimental/fix_text) (quickly fix text you wrote)
 - [Windows update all user repos](https://github.com/rokubop/roku_talon/blob/main/update-repos.ps1) runs git pull on sibling directories
