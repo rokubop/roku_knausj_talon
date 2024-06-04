@@ -331,9 +331,7 @@ jest <user.cursorless_target>:
     user.cursorless_command("setSelectionAfter", cursorless_target)
     code.complete()
 log <user.cursorless_target>:
-    user.cursorless_command("copyToClipboard", cursorless_target)
-    text = clip.text()
-    user.vscode_log_full(text)
+    user.insert_snippet_with_cursorless_target("printFullStatement", "0", cursorless_target)
 break:
     user.vscode("hideSuggestWidget")
     key("enter")

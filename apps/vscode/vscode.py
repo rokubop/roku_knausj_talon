@@ -2,6 +2,7 @@ import json
 import os
 from talon import Context, Module, actions, app, clip
 import re
+from typing import Any
 
 PATTERN_RE = re.compile(r"Untitled-\d$")
 
@@ -163,6 +164,15 @@ vscode_view = "files"
 
 @mod.action_class
 class Actions:
+    def insert_snippet_with_cursorless_target(
+        name: str, variable_name: str, target: Any
+    ):
+        """Insert snippet <name> with cursorless target <target>"""
+        actions.user.insert_snippet_by_name(
+            name,
+            {variable_name: actions.user.cursorless_get_text(target)},
+        )
+
     def vscode_log_full(text: str):
         """console log"""
         actions.user.paste(f"console.log('{text}', {text});")
