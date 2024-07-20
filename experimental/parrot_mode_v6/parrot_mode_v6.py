@@ -29,7 +29,7 @@
 #         global builder
 #         actions.mode.enable("user.parrot_v6")
 #         actions.mode.disable("command")
-#         builder = actions.user.ui_html_builder_screen(id="parrot_mode_v6")
+#         builder = actions.user.ui_elements_screen(id="parrot_mode_v6")
 #         box = builder.add_div()
 #         box.add_text("Parrot Mode V6")
 #         builder.show()
