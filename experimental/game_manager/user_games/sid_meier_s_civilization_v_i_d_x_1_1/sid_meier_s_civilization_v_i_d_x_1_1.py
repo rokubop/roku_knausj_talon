@@ -13,7 +13,7 @@ ctx = Context()
 
 mod.apps.sid_meier_s_civilization_v_i_d_x_1_1 = r"""
 os: windows
-and app.exe: CivilizationVI.exe
+and app.exe: /CivilizationVI.exe/i
 """
 
 ctx.matches = r"""

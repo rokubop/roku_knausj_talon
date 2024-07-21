@@ -3,7 +3,7 @@ mod = Module()
 ctx = Context()
 mod.apps.manifold_garden = r"""
 os: windows
-and app.exe: ManifoldGarden.exe
+and app.exe: /ManifoldGarden.exe/i
 """
 ctx.matches = r"""
 os: windows

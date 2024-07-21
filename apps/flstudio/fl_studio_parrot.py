@@ -5,7 +5,7 @@ ctx_parrot = Context()
 ctx_parrot_default = Context()
 
 mod.apps.f_l_studio = r"""
-app.exe: FL64.exe
+app.exe: /FL64.exe/i
 """
 
 ctx.matches = r"""

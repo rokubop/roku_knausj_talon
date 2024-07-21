@@ -6,7 +6,7 @@ ctx_parrot_default = Context()
 ctx_parrot_side_b = Context()
 
 mod.apps.the_forgotten_city = r"""
-app.exe: ModernStoryteller01-Win64-Shipping.exe
+app.exe: /ModernStoryteller01-Win64-Shipping.exe/i
 """
 
 ctx.matches = r"""

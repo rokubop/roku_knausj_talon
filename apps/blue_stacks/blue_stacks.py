@@ -5,7 +5,7 @@ ctx = Context()
 
 mod.apps.blue_stacks = r"""
 os: windows
-and app.exe: HD-Player.exe
+and app.exe: /HD-Player.exe/i
 """
 
 ctx.matches = r"""

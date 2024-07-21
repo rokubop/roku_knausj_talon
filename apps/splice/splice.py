@@ -5,7 +5,7 @@ ctx = Context()
 
 mod.apps.splice = r"""
 os: windows
-and app.exe: Splice.exe
+and app.exe: /Splice.exe/i
 """
 
 ctx.matches = r"""

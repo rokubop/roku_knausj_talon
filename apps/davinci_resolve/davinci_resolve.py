@@ -5,7 +5,7 @@ mod.list("davinci_mouse_location", desc="Mouse locations")
 
 mod.apps.davinci_resolve = r"""
 os: windows
-and app.exe: Resolve.exe
+and app.exe: /Resolve.exe/i
 """
 
 ctx = Context()

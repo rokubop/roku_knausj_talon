@@ -63,7 +63,7 @@ and app.exe: cmd.exe
 
 apps.windows_terminal = """
 os: windows
-and app.exe: WindowsTerminal.exe
+and app.exe: /WindowsTerminal.exe/i
 """
 
 mod.apps.windows_power_shell = """

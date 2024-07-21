@@ -3,7 +3,7 @@ mod = Module()
 ctx = Context()
 mod.apps.octopath_traveler_2 = r"""
 os: windows
-and app.exe: Octopath_Traveler2-Win64-Shipping.exe
+and app.exe: /Octopath_Traveler2-Win64-Shipping.exe/i
 """
 ctx.matches = r"""
 os: windows

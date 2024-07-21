@@ -5,7 +5,7 @@ ctx_parrot = Context()
 ctx_parrot_default = Context()
 
 mod.apps.chants_of_sennaar = r"""
-app.exe: Chants Of Sennaar.exe
+app.exe: /Chants Of Sennaar.exe/i
 """
 
 ctx_parrot.matches = r"""

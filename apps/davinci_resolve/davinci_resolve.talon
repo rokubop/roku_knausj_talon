@@ -4,14 +4,14 @@ settings():
     speech.timeout = 0.20
     user.parrot_default_tag = "user.parrot_default_interactive"
 
-hand:                       user.mouse_drag(2)
-tail:                       key(down)
-head:                       key(up)
-tail (file | time):         key(end)
-head (file | time):         key(home)
-take next:                  key(alt-right)
-take last:                  key(alt-left)
-snap:                       key(n)
+hand: user.mouse_drag(2)
+tail: key(down)
+head: key(up)
+tail (file | time): key(end)
+head (file | time): key(home)
+take next: key(alt-right)
+take last: key(alt-left)
+snap: key(n)
 track clone | clone [this]:
     key(ctrl-c)
     key(down)
@@ -31,7 +31,7 @@ clone reverse:
     insert(-100)
     key(enter)
 
-sprint:                     key(shift-l)
+sprint: key(shift-l)
 
 zoom [in]:
     key(alt:down)

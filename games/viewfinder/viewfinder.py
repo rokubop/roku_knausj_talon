@@ -5,7 +5,7 @@ mod = Module()
 ctx = Context()
 mod.apps.viewfinder = r"""
 os: windows
-and app.exe: Viewfinder.exe
+and app.exe: /Viewfinder.exe/i
 """
 ctx.matches = r"""
 os: windows

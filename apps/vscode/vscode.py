@@ -40,7 +40,7 @@ and app.name: Visual Studio Code Insiders
 os: windows
 and app.name: Visual Studio Code - Insiders
 os: windows
-and app.exe: Code.exe
+and app.exe: /Code.exe/i
 os: windows
 and app.exe: Code-Insiders.exe
 os: windows
