@@ -122,8 +122,8 @@
     "oh": {
         "sounds": ["oh", "oo"],
         "threshold": {
-            ">power": 10,
-            ">probability": 0.98,
+            ">power": 16,
+            ">probability": 0.99,
             "times": 2
         },
         "throttle": {
