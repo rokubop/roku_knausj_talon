@@ -2,7 +2,7 @@
 from talon import Module, actions, cron, Context
 from datetime import datetime
 import time
-from ..plugin.debouncer import Debouncer
+from ...plugin.debouncer import Debouncer
 
 mod = Module()
 ctx = Context()

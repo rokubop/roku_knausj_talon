@@ -158,8 +158,6 @@ group reset:                user.vscode("workbench.action.evenEditorWidths")
 
 term right:                 user.vscode("workbench.action.positionPanelRight")
 term (bottom | low | down | bot): user.vscode("workbench.action.positionPanelBottom")
-term grow:                  user.vscode("workbench.action.decreaseViewHeight")
-term shrink:                user.vscode("workbench.action.increaseViewHeight")
 maximize | grow$:           user.vscode("workbench.action.toggleEditorWidths")
 bridge:                     user.vscode("workbench.action.focusNextGroup")
 
