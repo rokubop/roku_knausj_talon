@@ -221,6 +221,8 @@ formatter_list = [
     CustomFormatter("ALL_LOWERCASE", lambda text: text.lower()),
     CustomFormatter("COMMA_SEPARATED", lambda text: re.sub(r"\s+", ", ", text)),
     CustomFormatter("REMOVE_FORMATTING", remove_code_formatting),
+    CustomFormatter("SPACE_FIRST_WORD", lambda text: f" {text}"),
+    CustomFormatter("SPACE_CAPITALIZE_FIRST_WORD", lambda text: f" {capitalize_first(text)}"),
     TitleFormatter("CAPITALIZE_ALL_WORDS"),
     # The sentence formatter being called `CAPITALIZE_FIRST_WORD` is a bit of a misnomer, but kept for backward compatibility.
     SentenceFormatter("CAPITALIZE_FIRST_WORD"),
@@ -236,8 +238,6 @@ formatter_list = [
     CodeFormatter("ALL_SLASHES", "/", lambda text: f"/{text.lower()}", lower),
     CodeFormatter("DOUBLE_UNDERSCORE", "__", lower, lower),
     CodeFormatter("DOUBLE_COLON_SEPARATED", "::", lower, lower),
-    CodeFormatter("SPACE_FIRST_WORD", " ", lambda text: f" {text}"),
-    CodeFormatter("SPACE_CAPITALIZE_FIRST_WORD", " ", lambda text: f" {capitalize_first(text)}"),
 ]
 
 formatters_dict = {f.id: f for f in formatter_list}
@@ -245,8 +245,8 @@ formatters_dict = {f.id: f for f in formatter_list}
 
 # Mapping from spoken phrases to formatter names
 code_formatter_names = {
-    "camel": "CAMEL_CASE",
-    "pascal": "PASCAL_CASE",
+    "camel": "PRIVATE_CAMEL_CASE",
+    "pascal": "PUBLIC_CAMEL_CASE",
     "snake": "SNAKE_CASE",
     "kebab": "DASH_SEPARATED",
     "dotted": "DOT_SEPARATED",

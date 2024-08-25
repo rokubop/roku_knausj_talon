@@ -9,10 +9,10 @@ def extension(m) -> str:
     return f".{m[-1]}"
 
 
-@mod.capture(rule="[{user.formatter_code}] <user.text> [<user.extension>]")
+@mod.capture(rule="[{user.code_formatter}] <user.text> [<user.extension>]")
 def filename(m) -> str:
     try:
-        text = actions.user.format_text(m.text, m.formatter_code)
+        text = actions.user.format_text(m.text, m.code_formatter)
     except AttributeError:
         text = m.text
     try:

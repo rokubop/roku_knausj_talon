@@ -5,7 +5,3 @@ app: vscode
 win.title: /focus:\[Terminal\]/
 -
 tag(): terminal
-app: vscode
-win.title: /focus:\[Terminal\]/
--
-tag(): terminal

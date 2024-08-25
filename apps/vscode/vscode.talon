@@ -304,7 +304,7 @@ fold comments:              user.vscode("editor.foldAllBlockComments")
 scout symbol [<user.text>]$:
     user.vscode("workbench.action.showAllSymbols")
     sleep(50ms)
-    user.insert_formatted(text or "", "CAMEL_CASE")
+    user.insert_formatted(text or "", "PRIVATE_CAMEL_CASE")
 
 # CSV
 align columns:              user.vscode("rainbow-csv.Align")

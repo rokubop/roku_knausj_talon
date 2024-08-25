@@ -101,4 +101,4 @@ tag(): user.mouse_cursor_commands_enable
 # By default saying "one" would write "1", however many users find this behavior
 # prone to false positives. If you uncomment this, you will need to say
 # "numb one" to write "1". Note that this tag will eventually be activated by default
-# tag(): user.prefixed_numbers
+tag(): user.prefixed_numbers
