@@ -1,3 +1,7 @@
+# Compound of action(select, clear, copy, cut, paste, etc.) and modifier(word, line, etc.) commands for editing text.
+# eg: "select line", "clear all"
+<user.edit_action> <user.edit_modifier>: user.edit_command(edit_action, edit_modifier)
+
 # Navigation
 tug: edit.left()
 drain: edit.word_left()
@@ -80,7 +84,7 @@ clear up:
 clear down:
     edit.extend_line_down()
     edit.delete()
-clear word: edit.delete_word()
+
 clear word left:
     edit.extend_word_left()
     edit.delete()
@@ -171,11 +175,6 @@ carve tail file:
     edit.paste()
     key(enter)
 paste match: edit.paste_match_style()
-(pace | paste) all: user.paste_all()
-(pace | paste) line: user.paste_line()
-(pace | paste) line start: user.paste_line_start()
-(pace | paste) line end: user.paste_line_end()
-(pace | paste) word: user.paste_word()
 
 # Duplication
 clone that: edit.selection_clone()

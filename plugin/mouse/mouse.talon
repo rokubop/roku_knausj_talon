@@ -9,10 +9,14 @@ touch | click it | ticket:
     user.mouse_drag_end()
 
 ^right:
+    # close zoom if open
+    user.zoom_close()
     mouse_click(1)
     user.grid_close()
 
 ^mid click | mick it:
+    # close zoom if open
+    user.zoom_close()
     mouse_click(2)
     user.grid_close()
 
@@ -117,3 +121,6 @@ curse stay:
     user.mouse_stay_in_place(1)
 curse come:
     user.mouse_stay_in_place(0)
+
+mouse hiss up: user.hiss_scroll_up()
+mouse hiss down: user.hiss_scroll_down()

@@ -2,7 +2,7 @@ from talon import Module
 
 # --- App definition ---
 mod = Module()
-mod.apps.adobe_acrobat_reader_dc = """
+mod.apps.adobe_acrobat_reader_dc = r"""
 os: windows
 and app.name: Adobe Acrobat DC
 os: windows

@@ -19,6 +19,8 @@ os: mac
 and app.bundle: com.microsoft.VSCodeInsiders
 os: mac
 and app.bundle: com.visualstudio.code.oss
+os: mac
+and app.bundle: com.todesktop.230313mzl4w4u92
 """
 mod.apps.vscode = """
 os: linux
@@ -31,8 +33,10 @@ os: linux
 and app.name: VSCodium
 os: linux
 and app.name: Codium
+os: linux
+and app.name: Cursor
 """
-mod.apps.vscode = """
+mod.apps.vscode = r"""
 os: windows
 and app.name: Visual Studio Code
 os: windows
@@ -40,13 +44,17 @@ and app.name: Visual Studio Code Insiders
 os: windows
 and app.name: Visual Studio Code - Insiders
 os: windows
-and app.exe: /Code.exe/i
+and app.exe: /^code\.exe$/i
 os: windows
-and app.exe: Code-Insiders.exe
+and app.exe: /^code-insiders\.exe$/i
 os: windows
 and app.name: VSCodium
 os: windows
-and app.exe: VSCodium.exe
+and app.exe: /^vscodium\.exe$/i
+os: windows
+and app.name: Azure Data Studio
+os: windows
+and app.exe: azuredatastudio.exe
 """
 
 ctx.matches = r"""
@@ -111,13 +119,11 @@ class EditActions:
     def save_all():
         actions.user.vscode("workbench.action.files.saveAll")
 
-    def find(text=None):
-        if is_mac:
-            actions.key("cmd-f")
-        else:
-            actions.key("ctrl-f")
-        if text is not None:
-            actions.insert(text)
+    def find_next():
+        actions.user.vscode("editor.action.nextMatchFindAction")
+
+    def find_previous():
+        actions.user.vscode("editor.action.previousMatchFindAction")
 
     def line_swap_up():
         actions.key("alt-up")
@@ -139,6 +145,9 @@ class EditActions:
         actions.insert(str(n))
         actions.key("enter")
         actions.edit.line_start()
+
+    def zoom_reset():
+        actions.user.vscode("workbench.action.zoomReset")
 
 
 @ctx.action_class("win")
@@ -213,15 +222,6 @@ class Actions:
         if re.search("roku_talon", title):
             print("I got it")
 
-        # actions.user.vscode("workbench.action.quickOpen")
-        # actions.sleep("100ms")
-        # actions.insert(",")
-        # actions.insert(text or "")
-        # # actions.insert(file_extension or "")
-        # actions.sleep("400ms")
-        # actions.key("enter")
-        # actions.sleep("150ms")
-
     def vscode_file_next():
         """Go to next file"""
         if vscode_view == "scm":
@@ -238,27 +238,6 @@ class Actions:
             actions.user.vscode("workbench.files.action.focusFilesExplorer")
         actions.key("up space")
 
-    # argument for passing a file type is not working
-    # def find_sibling_file(file_type: str = None):
-    #     """Find sibling file based on file name"""
-    #     full_name = actions.user.vscode_get("andreas.getFilename")
-    #     index = full_name.rfind(".")
-    #     print("full_name", full_name)
-    #     if index < 0:
-    #         return
-    #     short_name = full_name[:index]
-
-    #     # not working
-    #     if file_type:
-    #         sibling_extension = file_type
-    #     else:
-    #         extension = full_name[index + 1 :]
-    #         sibling_extension = actions.user.get_extension_sibling(extension)
-    #         if not sibling_extension:
-    #             return
-
-    #     sibling_full_name = f"{short_name}.{sibling_extension}"
-    #     actions.user.find_file(sibling_full_name)
 
     def copy_command_id():
         """Copy the command id of the focused menu item"""
@@ -294,6 +273,13 @@ class Actions:
             "editor.action.sourceAction",
             {"kind": "source.addMissingImports", "apply": "first"},
         )
+
+@mac_ctx.action_class("edit")
+class MacEditActions:
+    def find(text: str = None):
+        actions.key("cmd-f")
+        if text:
+            actions.insert(text)
 
 @mac_ctx.action_class("user")
 class MacUserActions:
@@ -416,21 +402,6 @@ class UserActions:
     # splits.py support end
 
     # find_and_replace.py support begin
-
-    def find(text: str):
-        """Triggers find in current editor"""
-        if is_mac:
-            actions.key("cmd-f")
-        else:
-            actions.key("ctrl-f")
-        if text:
-            actions.insert(text)
-
-    def find_next():
-        actions.user.vscode("editor.action.nextMatchFindAction")
-
-    def find_previous():
-        actions.user.vscode("editor.action.previousMatchFindAction")
 
     def find_everywhere(text: str):
         """Triggers find across project"""

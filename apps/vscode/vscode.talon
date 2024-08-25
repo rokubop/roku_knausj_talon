@@ -28,6 +28,17 @@ show changes:               user.vscode_focus_changes()
 (show | focus) editor:      user.vscode("workbench.action.focusActiveEditorGroup")
 (show | focus | hide | toggle) bar: user.vscode("workbench.action.toggleSidebarVisibility")
 
+go view [<user.text>]:
+    user.vscode("workbench.action.openView")
+    insert(user.text or "")
+
+window close: user.vscode("workbench.action.closeWindow")
+#multiple_cursor.py support end
+
+please [<user.text>]:
+    user.vscode("workbench.action.showCommands")
+    insert(user.text or "")
+
 # Sidebar
 bar (show | open | yes):
     user.vscode("workbench.action.toggleSidebarVisibility")
@@ -68,17 +79,28 @@ rack (hide | close | no):
 (file | files | bar) collapse: user.vscode("workbench.files.action.collapseExplorerFolders")
 
 # Settings
-show settings (json | jason):
-    user.vscode("workbench.action.openSettingsJson")
-show settings:
-    user.vscode("workbench.action.openSettings2")
-show settings <user.text>:
-    user.vscode("workbench.action.openSettings2")
-    sleep(200ms)
-    "{text}"
-show [key board] shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
-show [key board] shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
+show settings: user.vscode("workbench.action.openGlobalSettings")
+show settings json: user.vscode("workbench.action.openSettingsJson")
+show settings folder: user.vscode("workbench.action.openFolderSettings")
+show settings folder json: user.vscode("workbench.action.openFolderSettingsFile")
+show settings workspace: user.vscode("workbench.action.openWorkspaceSettings")
+show settings workspace json: user.vscode("workbench.action.openWorkspaceSettingsFile")
+show shortcuts: user.vscode("workbench.action.openGlobalKeybindings")
+show shortcuts json: user.vscode("workbench.action.openGlobalKeybindingsFile")
+show snippets: user.vscode("workbench.action.openSnippets")
+
 show (markdown | preview):  user.vscode("markdown.showPreviewToSide")
+
+# VSCode Snippets
+snip (last | previous): user.vscode("jumpToPrevSnippetPlaceholder")
+snip next: user.vscode("jumpToNextSnippetPlaceholder")
+
+# Display
+centered switch: user.vscode("workbench.action.toggleCenteredLayout")
+fullscreen switch: user.vscode("workbench.action.toggleFullScreen")
+theme switch: user.vscode("workbench.action.selectTheme")
+wrap switch: user.vscode("editor.action.toggleWordWrap")
+zen switch: user.vscode("workbench.action.toggleZenMode")
 
 # Navigating files
 ^pop$:

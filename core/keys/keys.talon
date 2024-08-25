@@ -1,5 +1,4 @@
-# go <user.arrow_keys>:       user.move_cursor(arrow_keys)
-<user.letter>:              key(letter)
+<user.letter>: key(letter)
 (ship | uppercase) <user.letters> [(lowercase | sunk)]:
     user.insert_formatted(letters, "ALL_CAPS")
 <user.symbol_key>:          key(symbol_key)
@@ -18,13 +17,3 @@ release <user.keys>:        key("{keys}:up")
 release <user.modifiers>:   key("{modifiers}:up")
 caps lock:                  key(capslock)
 num lock:                   key(numlock)
-# doesn't work
-# key(alt-l): key(right)
-# key(alt-j): key(down)
-# key(alt-k): key(up)
-# key(alt-h): key(left)
-
-# key(alt-shift-l): key(shift-right)
-# key(alt-shift-j): key(shift-down)
-# key(alt-shift-k): key(shift-up)
-# key(alt-shift-h): key(shift-left)

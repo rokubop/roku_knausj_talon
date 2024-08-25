@@ -1,6 +1,7 @@
 tag: browser
 -
-# tag(): user.parrot_browser
+tag(): user.navigation
+
 address bar | go address | go url | focus url: browser.focus_address()
 go page | page focus:       browser.focus_page()
 address copy | url copy | copy address | copy url:

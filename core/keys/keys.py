@@ -1,4 +1,4 @@
-from talon import Context, Module, actions, app
+from talon import Context, Module, app
 
 from ..user_settings import get_list_from_csv
 
@@ -275,13 +275,3 @@ ctx.lists["self.function_key"] = {
 ctx.lists["self.numpad_key"] = {
     f"numpad {name}": f"keypad_{i}" for i, name in enumerate(digits, start=0)
 }
-
-@mod.action_class
-class Actions:
-    def move_cursor(s: str):
-        """Given a sequence of directions, eg. 'left left up', moves the cursor accordingly using edit.{left,right,up,down}."""
-        for d in s.split():
-            if d in ("left", "right", "up", "down"):
-                getattr(actions.edit, d)()
-            else:
-                raise RuntimeError(f"invalid arrow key: {d}")

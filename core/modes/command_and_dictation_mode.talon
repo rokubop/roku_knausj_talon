@@ -1,4 +1,5 @@
-not mode: sleep
+mode: command
+mode: dictation
 -
 dictate [<phrase>]$:
     print("dictate")
