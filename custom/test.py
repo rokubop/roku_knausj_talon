@@ -2,30 +2,30 @@ from talon import Module, actions, ui
 
 mod = Module()
 
-ui = None
-
 @mod.action_class
 class Actions:
-    def test_whatever():
-        """w"""
-        print(ui.active_app())
-
     def test_ui():
         """test"""
         global ui
-        (screen, div, text, button) = actions.user.ui_elements(["screen", "div", "text", "button"])
+        (screen, div, text, button, input_text) = actions.user.ui_elements(["screen", "div", "text", "button", "input_text"])
 
         ui = screen(justify_content="center", align_items="center")[
-            div(background_color="333333", padding=16, border_radius=16)[
-                div(justify_content="flex_end", width=200, align_items="flex_end")[
-                    button("X", border_radius=16, on_click=actions.user.test_ui_hide)
-                ],
+            div(background_color="222222", padding=16, border_radius=16)[
                 text("hello world"),
-                button("hello world", margin_top=16, on_click=actions.user.test_ui_hide),
+                input_text(
+                    id="the_input",
+                    margin_top=16,
+                    on_change=lambda e: print(f"input {e}")
+                ),
+                button("submit", margin_top=16, on_click=actions.user.test_ui_hide),
             ]]
         ui.show()
 
     def test_ui_hide():
         """test hide"""
-        global ui
-        ui.hide()
+        actions.user.ui_elements_hide_all()
+
+    def test_ui_value():
+        """test hide"""
+        value = actions.user.ui_elements_get_value("the_input")
+        print(value)
