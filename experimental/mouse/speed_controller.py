@@ -53,14 +53,14 @@ class SpeedController:
 
 speed_controller = SpeedController()
 
-mod = Module()
+# mod = Module()
 
-@mod.action_class
-class Actions:
-    def pedal_speed_controller_down():
-        """pedal_speed_controller_down"""
-        speed_controller.go()
+# @mod.action_class
+# class Actions:
+#     def pedal_speed_controller_down():
+#         """pedal_speed_controller_down"""
+#         speed_controller.go()
 
-    def pedal_speed_controller_up():
-        """pedal_speed_controller_up"""
-        speed_controller.release()
+#     def pedal_speed_controller_up():
+#         """pedal_speed_controller_up"""
+#         speed_controller.release()

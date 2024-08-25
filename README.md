@@ -1,19 +1,22 @@
 # roku_talon
 
-This is my personal repository of Talon commands, continually WIP.
+This is my personal repository of Talon commands, continually WIP. Not recommended for cloning for yourself.
 Fork of [talonhub/community](https://github.com/talonhub/community).
 
-## Custom Features
+Instead see below:
 
-### Shared scripts repo
+## roku-talon-shared
 [roku-talon-shared](https://github.com/rokubop/roku-talon-shared)
-- game tools/actions
-- games
+- dynamic noises
+- game tools and actions
+- my games
+- parrot_config for parrot combos
 - smooth mouse movement
-- HTML-like (object oriented) UI builder
-- drag grid.
+- ui_elements for building HTML-like UIs
+- drag grid
+- xbox emulation support
 
-### Other Misc
+## Other Misc
 - [Parrot mouse RPG mode](https://github.com/rokubop/roku_talon/blob/main/core/modes/parrot_mode/rpg_mouse/rpg_mouse.py) (continuous mouse movement)
 - [Fix text (target by first and last character)](https://github.com/rokubop/roku_talon/tree/main/experimental/fix_text) (quickly fix text you wrote)
 - [Windows update all user repos](https://github.com/rokubop/roku_talon/blob/main/update-repos.ps1) runs git pull on sibling directories
