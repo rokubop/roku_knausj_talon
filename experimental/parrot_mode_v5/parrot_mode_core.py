@@ -1,5 +1,4 @@
 from talon import Module, Context, actions, settings
-
 mod = Module()
 mod.mode("parrot_v5", "base parrot mode v5 common to every parrot mode")
 mod.mode("parrot_v5_default", "default parrot mode v5")
@@ -19,9 +18,7 @@ class Actions:
     def parrot_v5_mode_enable(parrot_mode: str = None):
         """Enable parrot mode"""
         global current_parrot_mode, last_parrot_mode
-
-        print("parrot_mode", parrot_mode)
-        print("last_parrot_mode", last_parrot_mode)
+        print("Enabled parrot_mode v5")
 
         if current_parrot_mode:
             actions.user.on_parrot_v5_mode_disable({

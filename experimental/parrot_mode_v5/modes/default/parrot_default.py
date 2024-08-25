@@ -64,11 +64,9 @@ class Actions:
         actions.user.parrot_v5_ui_cursor_red()
 
     def on_event_key_modifier_enabled(key: str):
-        print(f"key modifier enabled {key}")
         actions.user.parrot_v5_ui_cursor_mod_enable(key)
 
     def on_event_key_modifier_disabled(key: str):
-        print(f"key modifier disabled {key}")
         actions.user.parrot_v5_ui_cursor_mod_disable(key)
 
 
