@@ -11,7 +11,6 @@ mode: all
 #     user.history_disable()
 #     user.mouse_sleep()
 #     speech.disable()
-#     user.engine_sleep()
 ^wake up$:
     speech.enable()
     user.unset_hard_sleep()
@@ -20,7 +19,6 @@ mode: all
     user.history_disable()
     user.mouse_sleep()
     speech.disable()
-    user.engine_sleep()
     user.set_hard_sleep()
     user.hud_publish_mouse_particle('float_up', '493fd9')
     sleep(1s)
@@ -31,7 +29,6 @@ mode: all
 #     user.history_disable()
 #     user.mouse_sleep()
 #     speech.disable()
-#     user.engine_sleep()
 #     user.set_hard_sleep()
 # ^talon sleep [<phrase>]$:   speech.disable()
 # ^(talon wake)+$:            speech.enable()
