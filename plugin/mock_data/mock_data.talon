@@ -1,15 +1,15 @@
-mock text:                  "Lorem ipsum dolor sit amet"
-mock phone:                 "345-345-3455"
-mock email:                 "person.name@testmail.com"
-mock social:                "454-54-4545"
-mock VA [file] [number]:    "111223333"
-mock first:                 "Person"
-mock middle:                "Middle"
-mock last:                  "LastName"
-mock [full] name:           "Person\tMiddle\tLastName"
-mock street:                "1234 Main St"
-mock city:                  "City"
-mock (zip | postal):        "12345"
+mock text: "Lorem ipsum dolor sit amet"
+mock phone: "345-345-3455"
+mock email: "person.name@testmail.com"
+mock social: "454-54-4545"
+mock VA [file] [number]: "111223333"
+mock first: "Person"
+mock middle: "Middle"
+mock last: "LastName"
+mock [full] name: "Person\tMiddle\tLastName"
+mock street: "1234 Main St"
+mock city: "City"
+mock (zip | postal): "12345"
 
 mock address full:
     key(down tab)
@@ -23,9 +23,27 @@ mock address mid:
     key(down tab)
     "12345"
 
-mock address:
+mock address [one]:
     key(down tab)
     "1234 Main St\tCity"
+    sleep(400ms)
+    key(tab)
+    sleep(400ms)
+    key(down tab)
+    "12345"
+
+mock address two:
+    key(down tab)
+    "1234 Main St\t\tCity"
+    sleep(400ms)
+    key(tab)
+    sleep(400ms)
+    key(down tab)
+    "12345"
+
+mock address three:
+    key(down tab)
+    "1234 Main St\t\t\tCity"
     sleep(400ms)
     key(tab)
     sleep(400ms)

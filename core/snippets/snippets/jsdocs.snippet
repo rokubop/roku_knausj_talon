@@ -30,5 +30,39 @@ phrase: typedef
 
 $1.insertionFormatter: PRIVATE_CAMEL_CASE
 -
-@typedef {$1} $0
+/** @typedef {$1} $0 */
+---
+
+name: jsdocsType
+phrase: type
+
+$1.insertionFormatter: PRIVATE_CAMEL_CASE
+-
+/** @type {$1} $0 */
+---
+
+name: jsdocsPublic
+phrase: public
+-
+@public
+---
+
+name: jsdocsExample
+phrase: example
+-
+@example
+---
+
+name: uiSchemaOptionsType
+phrase: UI schema options
+insertionScope: statement
+-
+/** @type {UISchemaOptions} */$0
+---
+
+name: schemaOptionsType
+phrase: schema options
+insertionScope: statement
+-
+/** @type {SchemaOptions} */$0
 ---
