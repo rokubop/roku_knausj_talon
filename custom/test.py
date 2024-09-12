@@ -1,22 +1,26 @@
-from talon import Module, actions, ui
+from talon import Module, actions, ui, app
 
 mod = Module()
 
 @mod.action_class
 class Actions:
+    def test_ui_move():
+        """move the text"""
+        actions.user.ui_elements_move("blah", 5, 5)
+
     def test_ui():
         """test"""
         global ui
         (screen, div, text, button, input_text) = actions.user.ui_elements(["screen", "div", "text", "button", "input_text"])
 
-        ui = screen(justify_content="center", align_items="center")[
+        ui = screen(id="blah", justify_content="center", align_items="center")[
             div(background_color="222222", padding=16, border_radius=16)[
                 text("hello world"),
-                input_text(
-                    id="the_input",
-                    margin_top=16,
-                    on_change=lambda e: print(f"input {e}")
-                ),
+                # input_text(
+                #     id="the_input",
+                #     margin_top=16,
+                #     on_change=lambda e: print(f"input {e}")
+                # ),
                 button("submit", margin_top=16, on_click=actions.user.test_ui_hide),
             ]]
         ui.show()

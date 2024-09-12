@@ -4,7 +4,7 @@ from talon.canvas import Canvas, MouseEvent
 from talon.skia.canvas import Canvas as SkiaCanvas
 from talon.skia import RoundRect
 from talon.types import Rect, Point2d
-
+import time
 
 mod = Module()
 ctx = Context()
@@ -67,6 +67,7 @@ def on_draw_2(c: SkiaCanvas):
     blender_style_popup(c)
 
 def on_draw(c: SkiaCanvas):
+    global t
     # circle
     c.paint.style = c.paint.Style.STROKE
     c.draw_circle(100, 100, 100)
@@ -99,14 +100,18 @@ def on_draw(c: SkiaCanvas):
     )
     c.paint.style = c.paint.Style.STROKE
     c.draw_circle(500, 500, 100)
+    print("Time taken: ", time.perf_counter() - t)
+    t = time.perf_counter()
+
+    # c.clip_path(skia.Path.circle(500, 500, 100))
 
     # gradient text
-    c.paint.shader = skia.linear_gradient(
-        (500, 300), (500, 700), ["0000ff", "000000"], None
-    )
-    c.paint.style = c.paint.Style.STROKE
-    c.draw_text("C I R C L E", 500, 500)
-    c.draw_circle(500, 500, 100)
+    # c.paint.shader = skia.linear_gradient(
+    #     (500, 300), (500, 700), ["0000ff", "000000"], None
+    # )
+    # c.paint.style = c.paint.Style.STROKE
+    # c.draw_text("C I R C L E", 500, 500)
+    # c.draw_circle(500, 500, 100)
 
 def on_draw_3(c: SkiaCanvas):
     # circle
@@ -150,22 +155,36 @@ def on_draw_3(c: SkiaCanvas):
     c.draw_text("C I R C L E", 500, 500)
     c.draw_circle(500, 500, 100)
 
+    # c.draw_path(skia.Path.add_rect(Rect(100, 100, 100, 100), c.p
+
+t = None
 
 @mod.action_class
 class Actions:
     def canvas_test_one():
         """canvas_test_one"""
-        global canvas
-        screen: Screen = ui.main_screen()
-        canvas = Canvas.from_screen(screen)
+        global canvas, t
+        t = time.perf_counter()
+        # screen: Screen = ui.main_screen()
+        # canvas = Canvas.from_screen(screen)
+        canvas = Canvas.from_rect(Rect(0, 0, 1000, 500))
         canvas.register("draw", on_draw)
+        # for step in canvas.dispatch_iter("draw"):
+        #         print(f"Processing step: {step}")
+
+        canvas.freeze()
 
     def canvas_test_two():
         """canvas_test_two"""
         global canvas
-        screen: Screen = ui.main_screen()
-        canvas = Canvas.from_screen(screen)
-        canvas.register("draw2", on_draw_2)
+        if canvas:
+            # canvas.resize(800, 900)
+            for step in canvas.dispatch_iter("draw"):
+                print(f"Processing step: {step}")
+            canvas.freeze()
+        # screen: Screen = ui.main_screen()
+        # canvas = Canvas.from_screen(screen)
+        # canvas.register("draw2", on_draw_2)
 
     def canvas_test_three():
         """canvas_test_three"""
