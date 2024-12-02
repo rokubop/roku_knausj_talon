@@ -379,3 +379,15 @@ tab group (open | pop | load | list) [<user.text>]:
     sleep(100ms)
     insert(text or "")
 tab group delete:           user.vscode("saveRestoreEditors.cleanPopSavedEditors")
+
+# chuck bounding gust
+# and fine
+
+# take three tokens gust
+# and fine
+
+# chuck block gust
+# and fine
+
+# ^and <cursorless_target>:
+#     user.cursorless_command("setSelectionAfter", cursorless_target)

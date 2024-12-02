@@ -55,11 +55,7 @@ desktop close: key(win-ctrl-f4)
 desktop (show | revert | hide): key(win-d)
 show desktop: key(win-d)
 
-# tracker:                    user.parrot_use_default_tracking()
-
 (reader | speech) (yes | no):
     key(capslock:down)
     key(s)
     key(capslock:up)
-
-# coder:

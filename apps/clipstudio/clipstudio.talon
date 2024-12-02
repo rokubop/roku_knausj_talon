@@ -1,15 +1,22 @@
 app: clip_studio_paint
 -
-settings():
-    speech.timeout = 0.20
-    user.parrot_default_tag = "user.parrot_default_interactive"
 
 move | hand:                key(m)
 pen | brush:                key(d)
 paint:                      key(g)
-take:                       mouse_click(1)
+take:
+    key(f)
+    mouse_drag()
 box:                        key(f)
-# parrot(pop):                mouse_click(1)
 show shortcuts:             key(ctrl-shift-alt-k)
 small:                      key(q)
 big:                        key(w)
+export [<phrase>]:
+    key(alt-f r r right p)
+    sleep(0.2)
+    insert(user.formatted_text(phrase, 'SNAKE_CASE'))
+new [from] clip [board]:
+    key(alt-f down enter)
+crop:
+    key(alt-e z)
+wand: key(k)
