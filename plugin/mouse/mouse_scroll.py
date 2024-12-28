@@ -12,6 +12,10 @@ scroll_start_ts: float = 0
 hiss_scroll_up = False
 control_mouse_forced = False
 
+gaze_origin_y = None
+scroll_speed_dynamic = 1
+scroll_ts = None
+
 mod = Module()
 ctx = Context()
 
@@ -51,6 +55,18 @@ mod.setting(
     type=bool,
     default=False,
     desc="When enabled, the 'Scroll Mouse' GUI will not be shown.",
+)
+setting_scroll_speed = mod.setting(
+    "scroll_speed",
+    type=float,
+    default=1,
+    desc="Base scroll speed",
+)
+setting_scroll_speed_multiplier = mod.setting(
+    "scroll_speed_multiplier",
+    type=float,
+    default=1,
+    desc="Context specific scroll speed multiplier",
 )
 
 
@@ -230,45 +246,21 @@ def get_window_containing(x: float, y: float):
             return window
 
     return None
-from talon import Module, actions, app, ui, cron, ctrl
-import time
-
-mod = Module()
-
-setting_scroll_speed = mod.setting(
-    "scroll_speed",
-    type=float,
-    default=1,
-    desc="Base scroll speed",
-)
-setting_scroll_speed_multiplier = mod.setting(
-    "scroll_speed_multiplier",
-    type=float,
-    default=1,
-    desc="Context specific scroll speed multiplier",
-)
-
-gaze_job = None
-gaze_origin_y = None
-scroll_job = None
-scroll_speed_dynamic = 1
-scroll_dir = 1
-scroll_ts = None
 
 
 @mod.action_class
 class Actions:
-    def mouse_scroll_stop():
-        """Stop mouse scroll"""
-        global scroll_job, gaze_job
-        return_value = scroll_job or gaze_job
-        if scroll_job:
-            cron.cancel(scroll_job)
-            scroll_job = None
-        if gaze_job:
-            cron.cancel(gaze_job)
-            gaze_job = None
-        return return_value
+    # def mouse_scroll_stop():
+    #     """Stop mouse scroll"""
+    #     global scroll_job, gaze_job
+    #     return_value = scroll_job or gaze_job
+    #     if scroll_job:
+    #         cron.cancel(scroll_job)
+    #         scroll_job = None
+    #     if gaze_job:
+    #         cron.cancel(gaze_job)
+    #         gaze_job = None
+    #     return return_value
 
     def mouse_scroll_stop_for_click():
         """Stop mouse scroll and wait"""
@@ -326,35 +318,32 @@ class Actions:
         """Notify scroll speed"""
         actions.user.notify(f"Mouse scroll speed: {int(scroll_speed_dynamic*100)}%")
 
-    def mouse_gaze_scroll():
-        """Starts gaze scroll"""
-        global gaze_job, gaze_origin_y
-        actions.user.mouse_scroll_stop()
-        _, gaze_origin_y = ctrl.mouse_pos()
-        gaze_job = cron.interval("16ms", scroll_gaze_helper)
+    # def mouse_gaze_scroll():
+    #     """Starts gaze scroll"""
+    #     global gaze_job, gaze_origin_y
+    #     actions.user.mouse_scroll_stop()
+    #     _, gaze_origin_y = ctrl.mouse_pos()
+    #     gaze_job = cron.interval("16ms", scroll_gaze_helper)
 
+# def scroll_continuous_helper():
+#     acceleration_speed = 1 + min((time.perf_counter() - scroll_ts) / 0.5, 4)
+#     y = (
+#         setting_scroll_speed.get()
+#         * setting_scroll_speed_multiplier.get()
+#         * scroll_speed_dynamic
+#         * acceleration_speed
+#         * scroll_dir
+#     )
+#     actions.mouse_scroll(y, by_lines=True)
 
-def scroll_continuous_helper():
-    acceleration_speed = 1 + min((time.perf_counter() - scroll_ts) / 0.5, 4)
-    y = (
-        setting_scroll_speed.get()
-        * setting_scroll_speed_multiplier.get()
-        * scroll_speed_dynamic
-        * acceleration_speed
-        * scroll_dir
-    )
-    actions.mouse_scroll(y, by_lines=True)
-
-
-def scroll_gaze_helper():
-    x, y = ctrl.mouse_pos()
-    window = get_window_for_cursor(x, y)
-    if window is None:
-        return
-    rect = window.rect
-    y = ((y - gaze_origin_y) / (rect.height / 3)) ** 3
-    actions.mouse_scroll(y, by_lines=True)
-
+# def scroll_gaze_helper():
+#     x, y = ctrl.mouse_pos()
+#     window = get_window_for_cursor(x, y)
+#     if window is None:
+#         return
+#     rect = window.rect
+#     y = ((y - gaze_origin_y) / (rect.height / 3)) ** 3
+#     actions.mouse_scroll(y, by_lines=True)
 
 def get_window_for_cursor(x: float, y: float):
     # on windows, check the active_window first since ui.windows() is not z-ordered
