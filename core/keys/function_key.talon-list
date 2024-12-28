@@ -1,25 +1,26 @@
 list: user.function_key
 -
-f one: f1
-f two: f2
-f three: f3
-f four: f4
-f five: f5
-f six: f6
-f seven: f7
-f eight: f8
-f nine: f9
-f ten: f10
-f eleven: f11
-f twelve: f12
-f thirteen: f13
-f fourteen: f14
-f fifteen: f15
-f sixteen: f16
-f seventeen: f17
-f eighteen: f18
-f nineteen: f19
-f twenty: f20
+
+fun one: f1
+fun two: f2
+fun three: f3
+fun four: f4
+fun five: f5
+fun six: f6
+fun seven: f7
+fun eight: f8
+fun nine: f9
+fun ten: f10
+fun eleven: f11
+fun twelve: f12
+fun thirteen: f13
+fun fourteen: f14
+fun fifteen: f15
+fun sixteen: f16
+fun seventeen: f17
+fun eighteen: f18
+fun nineteen: f19
+fun twenty: f20
 # these f keys are not supported by all platforms (eg Mac) and are disabled by default
 #f twenty one: f21
 #f twenty two: f22

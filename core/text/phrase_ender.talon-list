@@ -2,3 +2,10 @@ list: user.phrase_ender
 -
 
 over: ""
+quest: "?"
+yep: "\n"
+spam: ", "
+void: " "
+score: "_"
+dash: "-"
+stack: ":"

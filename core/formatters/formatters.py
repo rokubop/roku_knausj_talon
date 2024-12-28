@@ -19,7 +19,6 @@ class Formatter(ABC):
     def unformat(self, text: str) -> str:
         pass
 
-
 class CustomFormatter(Formatter):
     def __init__(
         self,

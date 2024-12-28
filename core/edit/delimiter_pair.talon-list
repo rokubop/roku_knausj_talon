@@ -8,7 +8,6 @@ list: user.delimiter_pair
 # Examples:
 # round: ( )
 # pad: space space
-
 round: ( )
 box: [ ]
 diamond: < >
@@ -20,6 +19,6 @@ percentages: % %
 pad: space space
 
 escaped quad: '\\" \\"'
-escaped twin:  "\\' \\'"
+escaped twin: "\\' \\'"
 escaped round: \( \)
 escaped box: \[ \]

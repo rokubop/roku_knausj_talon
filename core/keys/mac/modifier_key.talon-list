@@ -4,9 +4,9 @@ os: mac
 
 alt: alt
 control: ctrl
+ship: shift
 shift: shift
-super: cmd
-command: cmd
+king: cmd
 option: alt
 function: fn
 globe: fn

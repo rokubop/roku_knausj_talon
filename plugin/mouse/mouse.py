@@ -1,5 +1,6 @@
-from talon import Context, Module, actions, ctrl, settings, ui
+from talon import Context, Module, actions, ctrl, settings, ui, imgui
 from talon_plugins import eye_zoom_mouse
+import os
 
 key = actions.key
 self = actions.self

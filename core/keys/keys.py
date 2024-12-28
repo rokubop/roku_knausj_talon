@@ -5,7 +5,6 @@ mod.list("letter", desc="The spoken phonetic alphabet")
 mod.list("symbol_key", desc="All symbols from the keyboard")
 mod.list("arrow_key", desc="All arrow keys")
 mod.list("number_key", desc="All number keys")
-mod.list("numpad_key", desc="All numpad keys")
 mod.list("modifier_key", desc="All modifier keys")
 mod.list("function_key", desc="All function keys")
 mod.list("special_key", desc="All special keys")
@@ -65,10 +64,10 @@ def function_key(m) -> str:
     "One function key"
     return m.function_key
 
-@mod.capture(rule="{self.numpad_key}")
-def numpad_key(m) -> str:
+@mod.capture(rule="{self.keypad_key}")
+def keypad_key(m) -> str:
     "One numpad key"
-    return m.numpad_key
+    return m.keypad_key
 
 
 @mod.capture(rule="( <self.letter> | <self.number_key> | <self.symbol_key> )")
@@ -109,25 +108,6 @@ def letters(m) -> str:
 
 
 ctx = Context()
-modifier_keys = {
-    # If you find 'alt' is often misrecognized, try using 'alter'.
-    "alt": "alt",  #'alter': 'alt',
-    "control": "ctrl",  #'troll':   'ctrl',
-    "shift": "shift",  #'sky':     'shift',
-    "super": "super",
-}
-
-# roku additions
-modifier_keys.update({
-    "king": "ctrl",
-    "ship": "shift"
-})
-
-if app.platform == "mac":
-    modifier_keys["command"] = "cmd"
-    modifier_keys["option"] = "alt"
-ctx.lists["self.modifier_key"] = modifier_keys
-ctx.lists["self.letter"] = alphabet_list
 
 # `punctuation_words` is for words you want available BOTH in dictation and as key names in command mode.
 # `symbol_key_words` is for key names that should be available in command mode, but NOT during dictation.
@@ -208,53 +188,6 @@ symbol_key_words.update({
 
 # make punctuation words also included in {user.symbol_keys}
 symbol_key_words.update(punctuation_words)
+
 ctx.lists["self.punctuation"] = punctuation_words
 ctx.lists["self.symbol_key"] = symbol_key_words
-ctx.lists["self.number_key"] = {name: str(i) for i, name in enumerate(digits)}
-ctx.lists["self.arrow_key"] = {
-    "south": "down",
-    "tug": "left",
-    "push": "right",
-    "north": "up",
-}
-
-simple_keys = [
-    "escape",
-    "insert",
-    "pagedown",
-    "pageup",
-    "space",
-    "tab",
-]
-
-alternate_keys = {
-    "delete": "backspace",
-    "end key": "end",
-    "home key": "home",
-    "page up": "pageup",
-    "page down": "pagedown",
-    "yep": "enter",
-    "drill": "delete",
-    "scratch": "backspace",
-    "scrape": "escape",
-    "void": "space",
-    "page up": "pageup",
-    "page down": "pagedown",
-    "menu key": "menu",
-    "print screen": "printscr",
-}
-
-# mac apparently doesn't have the menu key.
-if app.platform in ("windows", "linux"):
-    alternate_keys["menu key"] = "menu"
-    alternate_keys["print screen"] = "printscr"
-
-special_keys = {k: k for k in simple_keys}
-special_keys.update(alternate_keys)
-ctx.lists["self.special_key"] = special_keys
-ctx.lists["self.function_key"] = {
-    f"fun {name}": f"f{i}" for i, name in enumerate(f_digits, start=1)
-}
-ctx.lists["self.numpad_key"] = {
-    f"numpad {name}": f"keypad_{i}" for i, name in enumerate(digits, start=0)
-}

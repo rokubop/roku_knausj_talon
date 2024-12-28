@@ -1,10 +1,7 @@
 # Descended from https://github.com/dwiel/talon_community/blob/master/misc/dictation.py
 import re
 from typing import Callable, Optional
-
 from talon import Context, Module, actions, grammar, settings, ui
-
-from ..numbers.numbers import get_spoken_form_under_one_hundred
 
 mod = Module()
 
@@ -27,18 +24,12 @@ mod.list(
 )
 
 ctx = Context()
+ctx_dragon = Context()
+ctx_dragon.matches = r"""
+speech.engine: dragon
+"""
 
 mod.list("phrase_ender", "List of commands that can be used to end a phrase")
-ctx.lists["self.phrase_ender"] = {
-    "over": "",
-    "quest": "?",
-    "yep": "\n",
-    "spam": ", ",
-    "void": " ",
-    "score": "_",
-    "dash": "-",
-    "stack": ":",
-}
 # Maps spoken forms to DictationFormat method names (see DictationFormat below).
 ctx.lists["user.prose_modifiers"] = {
     "cap": "cap",
@@ -119,7 +110,6 @@ prose_role = f"({'|'.join(prose_rule_parts)})+"
 @mod.capture(rule="{user.prose_modifiers}")
 def prose_modifier(m) -> Callable:
     return getattr(DictationFormat, m.prose_modifiers)
-
 
 @mod.capture(
     rule="<user.number_string> [(dot | point) <digit_string>] percent [sign|sine]"

@@ -1,5 +1,6 @@
 list: user.letter
 -
+
 # for common alternative spoken forms for letters, visit
 # https://talon.wiki/quickstart/improving_recognition_accuracy/#collected-alternatives-to-the-default-alphabet
 air: a
@@ -11,12 +12,12 @@ fine: f
 gust: g
 harp: h
 sit: i
-jury: j
-crunch: k
+jane: j
+kick: k
 look: l
 made: m
 near: n
-odd: o
+oats: o
 pit: p
 quench: q
 red: r

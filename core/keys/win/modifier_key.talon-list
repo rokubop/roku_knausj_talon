@@ -2,10 +2,10 @@ list: user.modifier_key
 os: windows
 os: linux
 -
+
 alt: alt
+king: ctrl
 control: ctrl
+ship: shift
 shift: shift
-# super is the windows key
 super: super
-command: ctrl
-option: alt

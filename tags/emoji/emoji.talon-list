@@ -3,12 +3,15 @@ list: user.emoji
 angry: 😠
 blushing: 😊
 broken heart: 💔
+check mark: ✅
 clapping: 👏
 cool: 😎
 crying: 😭
 dancing: 💃
 disappointed: 😞
 eyes: 👀
+graph: 📈
+hands up: 🙌
 happy: 😀
 heart: ❤
 heart eyes: 😍
@@ -16,7 +19,9 @@ hugging: 🤗
 kissing: 😗
 monocle: 🧐
 party: 🎉
+parrot: 🦜
 pleading: 🥺
+ex: ❌
 poop: 💩
 rofl: 🤣
 roll eyes: 🙄
@@ -27,4 +32,5 @@ star eyes: 🤩
 thinking: 🤔
 thumbs down: 👎
 thumbs up: 👍
+quest: ❓
 worried: 😟

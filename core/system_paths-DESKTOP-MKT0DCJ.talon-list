@@ -1,0 +1,16 @@
+list: user.system_paths
+hostname: DESKTOP-MKT0DCJ
+-
+user: C:\Users\Rokubop
+desktop: C:\Users\Rokubop\Desktop
+desk: C:\Users\Rokubop\Desktop
+documents: C:\Users\Rokubop\Documents
+docks: C:\Users\Rokubop\Documents
+downloads: C:\Users\Rokubop\Downloads
+music: C:\Users\Rokubop\Music
+pictures: C:\Users\Rokubop\Pictures
+videos: C:\Users\Rokubop\Videos
+talon home: C:\Users\Rokubop\AppData\Roaming\talon
+talon recordings: C:\Users\Rokubop\AppData\Roaming\talon\recordings
+talon user: C:\Users\Rokubop\AppData\Roaming\talon\user
+profile: C:\Users\Rokubop
