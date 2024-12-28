@@ -227,6 +227,8 @@ formatter_list = [
     CustomFormatter("ALL_LOWERCASE", lambda text: text.lower()),
     CustomFormatter("COMMA_SEPARATED", lambda text: re.sub(r"\s+", ", ", text)),
     CustomFormatter("REMOVE_FORMATTING", remove_code_formatting),
+    CustomFormatter("SPACE_FIRST_WORD", lambda text: f" {text}"),
+    CustomFormatter("SPACE_CAPITALIZE_FIRST_WORD", lambda text: f" {capitalize_first(text)}"),
     TitleFormatter("CAPITALIZE_ALL_WORDS"),
     # The sentence formatter being called `CAPITALIZE_FIRST_WORD` is a bit of a misnomer, but kept for backward compatibility.
     SentenceFormatter("CAPITALIZE_FIRST_WORD"),

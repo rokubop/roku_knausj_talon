@@ -99,11 +99,11 @@ prose_rule_parts = [
     # "<user.placeholder>",
     "<user.format_text>",
     "<user.prose_modifier>",
-    "<user.prose_number>",
+    # "<user.prose_number>",
     "<phrase>",
 ]
 
-prose_rule_original = "({user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <phrase> | <user.prose_number> | <user.prose_modifier>)+"
+prose_rule_original = "({user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <phrase> | <user.prose_modifier>)+"
 text_rule_original = "({user.vocabulary} | <phrase>)+"
 text_rule = f"({'|'.join(text_rule_parts)})+"
 prose_role = f"({'|'.join(prose_rule_parts)})+"
@@ -202,7 +202,7 @@ def text_dragon(m) -> str:
 
 @ctx_dragon.capture(
     "user.prose",
-    rule="(<phrase> | {user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.prose_number> | <user.prose_percent> | <user.prose_modifier>)+",
+    rule="(<phrase> | {user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.prose_percent> | <user.prose_modifier>)+",
 )
 def prose_dragon(m) -> str:
     """Mixed words and punctuation, auto-spaced & capitalized."""
@@ -212,7 +212,7 @@ def prose_dragon(m) -> str:
 
 @ctx_dragon.capture(
     "user.raw_prose",
-    rule="(<phrase> | {user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.prose_number> | <user.prose_percent>)+",
+    rule="(<phrase> | {user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.prose_percent>)+",
 )
 def raw_prose_dragon(m) -> str:
     """Mixed words and punctuation, auto-spaced & capitalized, without quote straightening and commands (for use in dictation mode)."""

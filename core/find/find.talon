@@ -3,7 +3,7 @@ tag: user.find
 
 scout clip:                 edit.find(clip.text())
 scout$:                     key("ctrl-f")
-scout [{user.formatters}] <user.prose>$:
+scout [<user.formatters>] <user.prose>$:
     key("ctrl-f")
     user.insert_formatted(prose or "", formatters or "NOOP")
 scout phrase [<user.prose>]$:
@@ -13,7 +13,7 @@ scout <user.prose>$:
     key("ctrl-f")
     user.insert_formatted(prose or "", "NOOP")
 scout all$:                 key("ctrl-shift-f")
-scout all {user.formatters} <user.prose>$:
+scout all <user.formatters> <user.prose>$:
     key("ctrl-shift-f")
     user.insert_formatted(prose or "", formatters or "NOOP")
 scout all <user.prose>$:
