@@ -146,10 +146,8 @@ class Actions:
 
         actions.user.mouse_scroll_stop()
         if actions.user.mouse_is_dragging():
-            print("pop as drag end")
             actions.user.mouse_drag_end()
         else:
-            print("pop as click")
             actions.user.click()
 
     def on_shush_start():

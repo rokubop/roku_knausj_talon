@@ -450,7 +450,6 @@ def on_pop():
         # Allow pop to stop scroll
         stop_scroll()
     elif actions.user.mouse_is_dragging():
-        print("pop as drag end")
         actions.user.mouse_drag_end()
     else:
         # Otherwise respect the mouse_enable_pop_click setting
