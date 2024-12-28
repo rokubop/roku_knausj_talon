@@ -1,28 +1,4 @@
-from talon import Context, Module, app
-
-from ..user_settings import get_list_from_csv
-
-
-def setup_default_alphabet():
-    """set up common default alphabet.
-
-    no need to modify this here, change your alphabet using alphabet.csv"""
-    initial_default_alphabet = "air bat cap drum each fine gust harp sit jury crunch look made near odd pit quench red sun trap urge vest whale plex yank zip".split()
-    initial_letters_string = "abcdefghijklmnopqrstuvwxyz"
-    initial_default_alphabet_dict = dict(
-        zip(initial_default_alphabet, initial_letters_string)
-    )
-
-    return initial_default_alphabet_dict
-
-
-alphabet_list = get_list_from_csv(
-    "alphabet.csv", ("Letter", "Spoken Form"), setup_default_alphabet()
-)
-
-# used for number keys & function keys respectively
-digits = "zero one two three four five six seven eight nine".split()
-f_digits = "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
+from talon import Context, Module, actions, app
 
 mod = Module()
 mod.list("letter", desc="The spoken phonetic alphabet")
@@ -33,6 +9,7 @@ mod.list("numpad_key", desc="All numpad keys")
 mod.list("modifier_key", desc="All modifier keys")
 mod.list("function_key", desc="All function keys")
 mod.list("special_key", desc="All special keys")
+mod.list("keypad_key", desc="All keypad keys")
 mod.list("punctuation", desc="words for inserting punctuation into text")
 
 @mod.capture(rule="{self.modifier_key}+")
@@ -57,6 +34,12 @@ def arrow_keys(m) -> str:
 def number_key(m) -> str:
     "One number key"
     return m.number_key
+
+
+@mod.capture(rule="{self.keypad_key}")
+def keypad_key(m) -> str:
+    "One keypad key"
+    return m.keypad_key
 
 
 @mod.capture(rule="{self.letter}")
@@ -96,7 +79,7 @@ def any_alphanumeric_key(m) -> str:
 
 @mod.capture(
     rule="( <self.letter> | <self.number_key> | <self.symbol_key> "
-    "| <self.arrow_key> | <self.function_key> | <self.special_key> )"
+    "| <self.arrow_key> | <self.function_key> | <self.special_key> | <self.keypad_key>)"
 )
 def unmodified_key(m) -> str:
     "A single key with no modifiers"

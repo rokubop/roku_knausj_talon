@@ -4,6 +4,8 @@ from typing import Callable, Optional
 
 from talon import Context, Module, actions, grammar, settings, ui
 
+from ..numbers.numbers import get_spoken_form_under_one_hundred
+
 mod = Module()
 
 mod.setting(
@@ -16,6 +18,14 @@ mod.setting(
 mod.list("prose_modifiers", desc="Modifiers that can be used within prose")
 mod.list("prose_snippets", desc="Snippets that can be used within prose")
 mod.list("phrase_ender", "List of commands that can be used to end a phrase")
+mod.list("hours_twelve", desc="Names for hours up to 12")
+mod.list("hours", desc="Names for hours up to 24")
+mod.list("minutes", desc="Names for minutes, 01 up to 59")
+mod.list(
+    "currency",
+    desc="Currency types (e.g., dollars, euros) that can be used within prose",
+)
+
 ctx = Context()
 
 mod.list("phrase_ender", "List of commands that can be used to end a phrase")
@@ -111,14 +121,14 @@ def prose_modifier(m) -> Callable:
     return getattr(DictationFormat, m.prose_modifiers)
 
 
-@mod.capture(rule="(numb | numeral) <user.number_string>")
-def prose_simple_number(m) -> str:
-    return m.number_string
-
-
-@mod.capture(rule="(numb | numeral) <user.number_string> (dot | point) <digit_string>")
-def prose_number_with_dot(m) -> str:
-    return m.number_string + "." + m.digit_string
+@mod.capture(
+    rule="<user.number_string> [(dot | point) <digit_string>] percent [sign|sine]"
+)
+def prose_percent(m) -> str:
+    s = m.number_string
+    if hasattr(m, "digit_string"):
+        s += "." + m.digit_string
+    return s + "%"
 
 
 @mod.capture(rule="(numb | numeral) <user.number_string> colon <user.number_string>")
@@ -131,18 +141,37 @@ def abbreviation(m) -> str:
     return m.abbreviation
 
 @mod.capture(
-    rule="<user.prose_simple_number> | <user.prose_number_with_dot> | <user.prose_number_with_colon>"
+    rule="{user.hours} ({user.minutes} | o'clock | hundred hours) [<user.time_am_pm>]"
 )
-def prose_number(m) -> str:
+def prose_time_hours_minutes(m) -> str:
+    t = m.hours + ":"
+    if hasattr(m, "minutes"):
+        t += m.minutes
+    else:
+        t += "00"
+    if hasattr(m, "time_am_pm"):
+        t += m.time_am_pm
+    return t
+
+
+@mod.capture(rule="{user.hours_twelve} <user.time_am_pm>")
+def prose_time_hours_am_pm(m) -> str:
+    return m.hours_twelve + m.time_am_pm
+
+
+@mod.capture(rule="<user.prose_time_hours_minutes> | <user.prose_time_hours_am_pm>")
+def prose_time(m) -> str:
     return str(m)
 
 
-@mod.capture(rule="({user.vocabulary} | <word>)")
+@mod.capture(rule="({user.vocabulary} | <user.abbreviation> | <word>)")
 def word(m) -> str:
     """A single word, including user-defined vocabulary."""
-    try:
+    if hasattr(m, "vocabulary"):
         return m.vocabulary
-    except AttributeError:
+    elif hasattr(m, "abbreviation"):
+        return m.abbreviation
+    else:
         return " ".join(
             actions.dictate.replace_words(actions.dictate.parse_words(m.word))
         )
@@ -167,9 +196,35 @@ def prose(m) -> str:
 
 
 @mod.capture(
-    rule="({user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <phrase> | <user.prose_number>)+"
+    rule="({user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.number_prose_prefixed> | <user.prose_percent> | <user.abbreviation> | <phrase>)+"
 )
 def raw_prose(m) -> str:
+    """Mixed words and punctuation, auto-spaced & capitalized, without quote straightening and commands (for use in dictation mode)."""
+    return apply_formatting(m)
+
+
+# For dragon, omit support for abbreviations
+@ctx_dragon.capture("user.text", rule="({user.vocabulary} | <phrase>)+")
+def text_dragon(m) -> str:
+    """A sequence of words, including user-defined vocabulary."""
+    return format_phrase(m)
+
+
+@ctx_dragon.capture(
+    "user.prose",
+    rule="(<phrase> | {user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.prose_number> | <user.prose_percent> | <user.prose_modifier>)+",
+)
+def prose_dragon(m) -> str:
+    """Mixed words and punctuation, auto-spaced & capitalized."""
+    # Straighten curly quotes that were introduced to obtain proper spacing.
+    return apply_formatting(m).replace("“", '"').replace("”", '"')
+
+
+@ctx_dragon.capture(
+    "user.raw_prose",
+    rule="(<phrase> | {user.vocabulary} | {user.punctuation} | {user.prose_snippets} | <user.prose_currency> | <user.prose_time> | <user.prose_number> | <user.prose_percent>)+",
+)
+def raw_prose_dragon(m) -> str:
     """Mixed words and punctuation, auto-spaced & capitalized, without quote straightening and commands (for use in dictation mode)."""
     return apply_formatting(m)
 

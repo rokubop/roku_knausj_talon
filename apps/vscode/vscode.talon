@@ -5,6 +5,7 @@ tag(): user.line_commands
 tag(): user.multiple_cursors
 tag(): user.splits
 tag(): user.tabs
+tag(): user.command_search
 
 settings():
     key_wait = 4
@@ -28,16 +29,8 @@ show changes:               user.vscode_focus_changes()
 (show | focus) editor:      user.vscode("workbench.action.focusActiveEditorGroup")
 (show | focus | hide | toggle) bar: user.vscode("workbench.action.toggleSidebarVisibility")
 
-go view [<user.text>]:
-    user.vscode("workbench.action.openView")
-    insert(user.text or "")
-
 window close: user.vscode("workbench.action.closeWindow")
 #multiple_cursor.py support end
-
-please [<user.text>]:
-    user.vscode("workbench.action.showCommands")
-    insert(user.text or "")
 
 # Sidebar
 bar (show | open | yes):
